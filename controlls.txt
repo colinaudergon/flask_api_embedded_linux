@@ -1,0 +1,16 @@
+List of controlls to be communicated between C and python programm
+1. exit code  -> done
+2. 1 player
+3. joystick A/B
+4. btn press S400, S401, S402, S403
+5. led status (led name, status)   
+6.  
+7. 
+8. 
+9. 
+10. 
+
+s400: start
+s401: select
+s402: A 
+s403: B 
