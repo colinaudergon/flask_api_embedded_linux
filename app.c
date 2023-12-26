@@ -451,7 +451,7 @@ uint8_t readInputs()
         printf("Switch S403 active\n");
     }
     sleep_ms(10);
-    // printf("Inputs state: 0x%02X\n", inputStates);
+    printf("Inputs state: 0x%02X\n", inputStates);
     return inputState;
 }
 /*****************************************************************************/
