@@ -9,7 +9,7 @@ pathToPythonScript=""
 pathToCprogramm=""
 #compile C programm ?
 #error handling if C prog isnt compiled
-
+ #install python dependency
 
 #Run python programm
 # python $pathToPythonScript
