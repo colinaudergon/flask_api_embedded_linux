@@ -414,9 +414,9 @@ uint8_t readInputs()
         // isReading = false;
         return errorCode;
     }
+    adcValue = readAdcValue();
     printf("L/R Value: %d\n", adcValue);
 
-    adcValue = readAdcValue();
     if (adcValue == joystickRightReading)
     {
         inputState |= joystickRight;

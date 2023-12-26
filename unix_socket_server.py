@@ -35,7 +35,6 @@ def unix_socket_server(eventCallback):
 
     clientIsRunning = False
 
-    
     client, client_address = s.accept()
     print("Accepted connection from", client_address)
     clientIsRunning = True
