@@ -297,31 +297,51 @@ void cleanupRelease(void)
     }
 }
 
-// void *readInputThreadFunction(void *arg)
-// {
-    // bool isReading = true;
-    // while (isReading == true)
-    // {
-        // if (setUpAdcValue(JOYSTICK_A_LEFT_RIGHT) < 0)
-        // {
-        //     printf("Failed to configure ADC");
-        //     perror("Setup ADC");
-        //     // isReading = false;
-        // }
-        // adcValue = readAdcValue();
-        // printf("L/R Value: %d\n", adcValue);
-        // sleep_ms(20);
-        // if (setUpAdcValue(JOYSTICK_A_UP_DOWN) < 0)
-        // {
-        //     printf("Failed to configure ADC");
-        //     perror("Setup ADC");
-        //     // isReading = false;
-        // }
-        // adcValue = readAdcValue();
-        // printf("U/D Value: %d\n", adcValue);
-        // sleep_ms(20);
-    // }
-// }
+void *readInputThreadFunction(void *arg)
+{
+    bool isReading = true;
+    while (isReading == true)
+    {
+        if (setUpAdcValue(JOYSTICK_A_LEFT_RIGHT) < 0)
+        {
+            printf("Failed to configure ADC");
+            perror("Setup ADC");
+            // isReading = false;
+        }
+        adcValue = readAdcValue();
+        printf("L/R Value: %d\n", adcValue);
+        sleep_ms(20);
+        if (setUpAdcValue(JOYSTICK_A_UP_DOWN) < 0)
+        {
+            printf("Failed to configure ADC");
+            perror("Setup ADC");
+            // isReading = false;
+        }
+        adcValue = readAdcValue();
+        printf("U/D Value: %d\n", adcValue);
+        sleep_ms(20);
+
+        if (!readSwitch(retS0, reqS0))
+        {
+            printf("Switch S400 active\n");
+        }
+        if (!readSwitch(retS1, reqS1))
+        {
+
+            printf("Switch S401 active\n");
+        }
+        if (!readSwitch(retS2, reqS2))
+        {
+
+            printf("Switch S402 active\n");
+        }
+        if (!readSwitch(retS3, reqS3))
+        {
+            printf("Switch S403 active\n");
+        }
+    }
+    return NULL;
+}
 
 int readSwitch(int retSwitch, struct gpiohandle_request reqSwitch)
 {
@@ -330,7 +350,7 @@ int readSwitch(int retSwitch, struct gpiohandle_request reqSwitch)
     if (retSwitch == -1)
     {
         retSwitch = -errno;
-        fprintf(stderr, "Failed to get line values for S1 (%d)\n", retSwitch);
+        fprintf(stderr, "Failed to get line values for S (%d)\n", retSwitch);
     }
     return value_switch;
 }

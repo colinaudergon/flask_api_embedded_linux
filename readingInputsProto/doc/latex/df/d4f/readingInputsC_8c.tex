@@ -62,6 +62,10 @@ int \textbf{ set\+Up\+Adc\+Value} (uint8\+\_\+t setup)
 \item 
 int \textbf{ read\+Adc\+Value} ()
 \item 
+void $\ast$ \textbf{ read\+Input\+Thread\+Function} (void $\ast$arg)
+\item 
+int \textbf{ read\+Switch} (int ret\+Switch, struct gpiohandle\+\_\+request req\+Switch)
+\item 
 void \textbf{ sleep\+\_\+ms} (int milliseconds)
 \item 
 int \textbf{ main} (int argc, char $\ast$$\ast$argv)
@@ -86,6 +90,8 @@ int \textbf{ ret\+S2}
 int \textbf{ ret\+S3}
 \item 
 uint8\+\_\+t \textbf{ adc\+\_\+value}
+\item 
+pthread\+\_\+t \textbf{ read\+Input\+Thread}
 \item 
 static struct gpiohandle\+\_\+request \textbf{ req}
 \item 
@@ -154,7 +160,7 @@ Definition at line 1 of file reading\+Inputs\+C.\+c.
 
 
 
-Definition at line 22 of file reading\+Inputs\+C.\+c.
+Definition at line 17 of file reading\+Inputs\+C.\+c.
 
 \mbox{\label{readingInputsC_8c_a27998cbfa6ef2e33e4fbde027113e948}} 
 \index{readingInputsC.c@{readingInputsC.c}!DS401@{DS401}}
@@ -164,7 +170,7 @@ Definition at line 22 of file reading\+Inputs\+C.\+c.
 
 
 
-Definition at line 23 of file reading\+Inputs\+C.\+c.
+Definition at line 18 of file reading\+Inputs\+C.\+c.
 
 \mbox{\label{readingInputsC_8c_af27c1deb5033a798a9aa11e8d0b3571c}} 
 \index{readingInputsC.c@{readingInputsC.c}!DS402@{DS402}}
@@ -174,7 +180,7 @@ Definition at line 23 of file reading\+Inputs\+C.\+c.
 
 
 
-Definition at line 24 of file reading\+Inputs\+C.\+c.
+Definition at line 19 of file reading\+Inputs\+C.\+c.
 
 \mbox{\label{readingInputsC_8c_a5f1565bdbe9062be92c43bedaf410282}} 
 \index{readingInputsC.c@{readingInputsC.c}!DS403@{DS403}}
@@ -184,7 +190,7 @@ Definition at line 24 of file reading\+Inputs\+C.\+c.
 
 
 
-Definition at line 25 of file reading\+Inputs\+C.\+c.
+Definition at line 20 of file reading\+Inputs\+C.\+c.
 
 \mbox{\label{readingInputsC_8c_a4865b1861f7c5e444f1a6d28ba002efc}} 
 \index{readingInputsC.c@{readingInputsC.c}!JOYSTICK\_A\_LEFT\_RIGHT@{JOYSTICK\_A\_LEFT\_RIGHT}}
@@ -194,7 +200,7 @@ Definition at line 25 of file reading\+Inputs\+C.\+c.
 
 
 
-Definition at line 37 of file reading\+Inputs\+C.\+c.
+Definition at line 32 of file reading\+Inputs\+C.\+c.
 
 \mbox{\label{readingInputsC_8c_a44e0fa1b5281e183485fb5574943ff77}} 
 \index{readingInputsC.c@{readingInputsC.c}!JOYSTICK\_A\_UP\_DOWN@{JOYSTICK\_A\_UP\_DOWN}}
@@ -204,7 +210,7 @@ Definition at line 37 of file reading\+Inputs\+C.\+c.
 
 
 
-Definition at line 38 of file reading\+Inputs\+C.\+c.
+Definition at line 33 of file reading\+Inputs\+C.\+c.
 
 \mbox{\label{readingInputsC_8c_afd187e43d0c3ee3adedae6ea36c55b8b}} 
 \index{readingInputsC.c@{readingInputsC.c}!JOYSTICK\_ADDR@{JOYSTICK\_ADDR}}
@@ -214,7 +220,7 @@ Definition at line 38 of file reading\+Inputs\+C.\+c.
 
 
 
-Definition at line 32 of file reading\+Inputs\+C.\+c.
+Definition at line 27 of file reading\+Inputs\+C.\+c.
 
 \mbox{\label{readingInputsC_8c_a80fbbbb111c9537a2dbf0a8cf7eab620}} 
 \index{readingInputsC.c@{readingInputsC.c}!JOYSTICK\_b\_LEFT\_RIGHT@{JOYSTICK\_b\_LEFT\_RIGHT}}
@@ -224,7 +230,7 @@ Definition at line 32 of file reading\+Inputs\+C.\+c.
 
 
 
-Definition at line 34 of file reading\+Inputs\+C.\+c.
+Definition at line 29 of file reading\+Inputs\+C.\+c.
 
 \mbox{\label{readingInputsC_8c_a5933666075bfec66d650a2f9174e32a6}} 
 \index{readingInputsC.c@{readingInputsC.c}!JOYSTICK\_b\_UP\_DOWN@{JOYSTICK\_b\_UP\_DOWN}}
@@ -234,7 +240,7 @@ Definition at line 34 of file reading\+Inputs\+C.\+c.
 
 
 
-Definition at line 35 of file reading\+Inputs\+C.\+c.
+Definition at line 30 of file reading\+Inputs\+C.\+c.
 
 \mbox{\label{readingInputsC_8c_a2ed0e3bd148ecfdfbf67ec9e9e8dbf8d}} 
 \index{readingInputsC.c@{readingInputsC.c}!S400@{S400}}
@@ -244,7 +250,7 @@ Definition at line 35 of file reading\+Inputs\+C.\+c.
 
 
 
-Definition at line 27 of file reading\+Inputs\+C.\+c.
+Definition at line 22 of file reading\+Inputs\+C.\+c.
 
 \mbox{\label{readingInputsC_8c_a5097ce3d3160935fba79d32d6fb5850e}} 
 \index{readingInputsC.c@{readingInputsC.c}!S401@{S401}}
@@ -254,7 +260,7 @@ Definition at line 27 of file reading\+Inputs\+C.\+c.
 
 
 
-Definition at line 28 of file reading\+Inputs\+C.\+c.
+Definition at line 23 of file reading\+Inputs\+C.\+c.
 
 \mbox{\label{readingInputsC_8c_aef63ad3a9baec32a03ad7279fbd1d7d7}} 
 \index{readingInputsC.c@{readingInputsC.c}!S402@{S402}}
@@ -264,7 +270,7 @@ Definition at line 28 of file reading\+Inputs\+C.\+c.
 
 
 
-Definition at line 29 of file reading\+Inputs\+C.\+c.
+Definition at line 24 of file reading\+Inputs\+C.\+c.
 
 \mbox{\label{readingInputsC_8c_a8a894d4e3dad64313462cb446e9e3204}} 
 \index{readingInputsC.c@{readingInputsC.c}!S403@{S403}}
@@ -274,7 +280,7 @@ Definition at line 29 of file reading\+Inputs\+C.\+c.
 
 
 
-Definition at line 30 of file reading\+Inputs\+C.\+c.
+Definition at line 25 of file reading\+Inputs\+C.\+c.
 
 
 
@@ -287,36 +293,36 @@ Definition at line 30 of file reading\+Inputs\+C.\+c.
 
 
 
-Definition at line 291 of file reading\+Inputs\+C.\+c.
+Definition at line 272 of file reading\+Inputs\+C.\+c.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{292 \{}
-\DoxyCodeLine{293     ret0 = close(req0.fd);}
-\DoxyCodeLine{294     \textcolor{keywordflow}{if} (ret0 == -\/1)}
-\DoxyCodeLine{295     \{}
-\DoxyCodeLine{296         perror(\textcolor{stringliteral}{"{}Failed to close GPIO LINEHANDLE device file"{}});}
-\DoxyCodeLine{297         ret0 = -\/errno;}
-\DoxyCodeLine{298     \}}
-\DoxyCodeLine{299     ret1 = close(req1.fd);}
-\DoxyCodeLine{300     \textcolor{keywordflow}{if} (ret1 == -\/1)}
-\DoxyCodeLine{301     \{}
-\DoxyCodeLine{302         perror(\textcolor{stringliteral}{"{}Failed to close GPIO LINEHANDLE device file"{}});}
-\DoxyCodeLine{303         ret1 = -\/errno;}
-\DoxyCodeLine{304     \}}
-\DoxyCodeLine{305     ret2 = close(req2.fd);}
-\DoxyCodeLine{306     \textcolor{keywordflow}{if} (ret1 == -\/1)}
-\DoxyCodeLine{307     \{}
-\DoxyCodeLine{308         perror(\textcolor{stringliteral}{"{}Failed to close GPIO LINEHANDLE device file"{}});}
-\DoxyCodeLine{309         ret2 = -\/errno;}
-\DoxyCodeLine{310     \}}
-\DoxyCodeLine{311     ret3 = close(req3.fd);}
-\DoxyCodeLine{312     \textcolor{keywordflow}{if} (ret3 == -\/1)}
-\DoxyCodeLine{313     \{}
-\DoxyCodeLine{314         perror(\textcolor{stringliteral}{"{}Failed to close GPIO LINEHANDLE device file"{}});}
-\DoxyCodeLine{315         ret3 = -\/errno;}
-\DoxyCodeLine{316     \}}
-\DoxyCodeLine{317 \}}
+\DoxyCodeLine{273 \{}
+\DoxyCodeLine{274     ret0 = close(req0.fd);}
+\DoxyCodeLine{275     \textcolor{keywordflow}{if} (ret0 == -\/1)}
+\DoxyCodeLine{276     \{}
+\DoxyCodeLine{277         perror(\textcolor{stringliteral}{"{}Failed to close GPIO LINEHANDLE device file"{}});}
+\DoxyCodeLine{278         ret0 = -\/errno;}
+\DoxyCodeLine{279     \}}
+\DoxyCodeLine{280     ret1 = close(req1.fd);}
+\DoxyCodeLine{281     \textcolor{keywordflow}{if} (ret1 == -\/1)}
+\DoxyCodeLine{282     \{}
+\DoxyCodeLine{283         perror(\textcolor{stringliteral}{"{}Failed to close GPIO LINEHANDLE device file"{}});}
+\DoxyCodeLine{284         ret1 = -\/errno;}
+\DoxyCodeLine{285     \}}
+\DoxyCodeLine{286     ret2 = close(req2.fd);}
+\DoxyCodeLine{287     \textcolor{keywordflow}{if} (ret1 == -\/1)}
+\DoxyCodeLine{288     \{}
+\DoxyCodeLine{289         perror(\textcolor{stringliteral}{"{}Failed to close GPIO LINEHANDLE device file"{}});}
+\DoxyCodeLine{290         ret2 = -\/errno;}
+\DoxyCodeLine{291     \}}
+\DoxyCodeLine{292     ret3 = close(req3.fd);}
+\DoxyCodeLine{293     \textcolor{keywordflow}{if} (ret3 == -\/1)}
+\DoxyCodeLine{294     \{}
+\DoxyCodeLine{295         perror(\textcolor{stringliteral}{"{}Failed to close GPIO LINEHANDLE device file"{}});}
+\DoxyCodeLine{296         ret3 = -\/errno;}
+\DoxyCodeLine{297     \}}
+\DoxyCodeLine{298 \}}
 
 \end{DoxyCode}
 \mbox{\label{readingInputsC_8c_a4b3f54eba6a5cd705e8a85cf66b54fbb}} 
@@ -327,61 +333,61 @@ Definition at line 291 of file reading\+Inputs\+C.\+c.
 
 
 
-Definition at line 238 of file reading\+Inputs\+C.\+c.
+Definition at line 219 of file reading\+Inputs\+C.\+c.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{239 \{}
-\DoxyCodeLine{240 }
-\DoxyCodeLine{241     \textcolor{comment}{// Known working Input init:}}
-\DoxyCodeLine{242     \textcolor{comment}{// Open GPIO device}}
-\DoxyCodeLine{243     strcpy(chrdev\_name, gpio\_chip);}
-\DoxyCodeLine{244     fd = open(chrdev\_name, 0);}
-\DoxyCodeLine{245     \textcolor{keywordflow}{if} (fd == -\/1)}
-\DoxyCodeLine{246     \{}
-\DoxyCodeLine{247         ret = -\/errno;}
-\DoxyCodeLine{248         fprintf(stderr, \textcolor{stringliteral}{"{}Failed to open \%s\(\backslash\)n"{}}, chrdev\_name);}
-\DoxyCodeLine{249         \textcolor{keywordflow}{return} ret;}
-\DoxyCodeLine{250     \}}
-\DoxyCodeLine{251 }
-\DoxyCodeLine{252     \textcolor{comment}{// Setup variables for a request}}
-\DoxyCodeLine{253     \textcolor{keyword}{struct }gpiohandle\_request req;}
-\DoxyCodeLine{254     req.lineoffsets[0] = gpio\_line;}
-\DoxyCodeLine{255     req.flags = GPIOHANDLE\_REQUEST\_INPUT;}
-\DoxyCodeLine{256     snprintf(req.consumer\_label, \textcolor{keyword}{sizeof}(req.consumer\_label), \textcolor{stringliteral}{"{}btn\_\%u"{}}, gpio\_line);}
-\DoxyCodeLine{257     req.lines = 1;}
-\DoxyCodeLine{258 }
-\DoxyCodeLine{259     \textcolor{comment}{// Request GPIO line}}
-\DoxyCodeLine{260     ret = ioctl(fd, GPIO\_GET\_LINEHANDLE\_IOCTL, \&req);}
-\DoxyCodeLine{261     \textcolor{keywordflow}{if} (ret == -\/1)}
+\DoxyCodeLine{220 \{}
+\DoxyCodeLine{221 }
+\DoxyCodeLine{222     \textcolor{comment}{// Known working Input init:}}
+\DoxyCodeLine{223     \textcolor{comment}{// Open GPIO device}}
+\DoxyCodeLine{224     strcpy(chrdev\_name, gpio\_chip);}
+\DoxyCodeLine{225     fd = open(chrdev\_name, 0);}
+\DoxyCodeLine{226     \textcolor{keywordflow}{if} (fd == -\/1)}
+\DoxyCodeLine{227     \{}
+\DoxyCodeLine{228         ret = -\/errno;}
+\DoxyCodeLine{229         fprintf(stderr, \textcolor{stringliteral}{"{}Failed to open \%s\(\backslash\)n"{}}, chrdev\_name);}
+\DoxyCodeLine{230         \textcolor{keywordflow}{return} ret;}
+\DoxyCodeLine{231     \}}
+\DoxyCodeLine{232 }
+\DoxyCodeLine{233     \textcolor{comment}{// Setup variables for a request}}
+\DoxyCodeLine{234     \textcolor{keyword}{struct }gpiohandle\_request req;}
+\DoxyCodeLine{235     req.lineoffsets[0] = gpio\_line;}
+\DoxyCodeLine{236     req.flags = GPIOHANDLE\_REQUEST\_INPUT;}
+\DoxyCodeLine{237     snprintf(req.consumer\_label, \textcolor{keyword}{sizeof}(req.consumer\_label), \textcolor{stringliteral}{"{}btn\_\%u"{}}, gpio\_line);}
+\DoxyCodeLine{238     req.lines = 1;}
+\DoxyCodeLine{239 }
+\DoxyCodeLine{240     \textcolor{comment}{// Request GPIO line}}
+\DoxyCodeLine{241     ret = ioctl(fd, GPIO\_GET\_LINEHANDLE\_IOCTL, \&req);}
+\DoxyCodeLine{242     \textcolor{keywordflow}{if} (ret == -\/1)}
+\DoxyCodeLine{243     \{}
+\DoxyCodeLine{244         ret = -\/errno;}
+\DoxyCodeLine{245         fprintf(stderr, \textcolor{stringliteral}{"{}Failed to issue GET LINEHANDLE IOCTL (\%d)\(\backslash\)n"{}}, ret);}
+\DoxyCodeLine{246     \}}
+\DoxyCodeLine{247 }
+\DoxyCodeLine{248     \textcolor{comment}{// Store the file descriptor in the global req variable}}
+\DoxyCodeLine{249     \textcolor{keywordflow}{if} (gpio\_line == S400)}
+\DoxyCodeLine{250     \{}
+\DoxyCodeLine{251         reqS0 = req;}
+\DoxyCodeLine{252     \}}
+\DoxyCodeLine{253     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (gpio\_line == S401)}
+\DoxyCodeLine{254     \{}
+\DoxyCodeLine{255         reqS1 = req;}
+\DoxyCodeLine{256     \}}
+\DoxyCodeLine{257     \textcolor{keywordflow}{if} (gpio\_line == S402)}
+\DoxyCodeLine{258     \{}
+\DoxyCodeLine{259         reqS2 = req;}
+\DoxyCodeLine{260     \}}
+\DoxyCodeLine{261     \textcolor{keywordflow}{if} (gpio\_line == S403)}
 \DoxyCodeLine{262     \{}
-\DoxyCodeLine{263         ret = -\/errno;}
-\DoxyCodeLine{264         fprintf(stderr, \textcolor{stringliteral}{"{}Failed to issue GET LINEHANDLE IOCTL (\%d)\(\backslash\)n"{}}, ret);}
-\DoxyCodeLine{265     \}}
-\DoxyCodeLine{266 }
-\DoxyCodeLine{267     \textcolor{comment}{// Store the file descriptor in the global req variable}}
-\DoxyCodeLine{268     \textcolor{keywordflow}{if} (gpio\_line == S400)}
-\DoxyCodeLine{269     \{}
-\DoxyCodeLine{270         reqS0 = req;}
-\DoxyCodeLine{271     \}}
-\DoxyCodeLine{272     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (gpio\_line == S401)}
-\DoxyCodeLine{273     \{}
-\DoxyCodeLine{274         reqS1 = req;}
-\DoxyCodeLine{275     \}}
-\DoxyCodeLine{276     \textcolor{keywordflow}{if} (gpio\_line == S402)}
-\DoxyCodeLine{277     \{}
-\DoxyCodeLine{278         reqS2 = req;}
-\DoxyCodeLine{279     \}}
-\DoxyCodeLine{280     \textcolor{keywordflow}{if} (gpio\_line == S403)}
-\DoxyCodeLine{281     \{}
-\DoxyCodeLine{282         reqS3 = req;}
-\DoxyCodeLine{283     \}}
-\DoxyCodeLine{284     \textcolor{comment}{// Close GPIO device (not needed after acquiring the line handle)}}
-\DoxyCodeLine{285     \textcolor{keywordflow}{if} (close(fd) == -\/1)}
-\DoxyCodeLine{286         perror(\textcolor{stringliteral}{"{}Failed to close GPIO character device file"{}});}
-\DoxyCodeLine{287 }
-\DoxyCodeLine{288     \textcolor{keywordflow}{return} ret;}
-\DoxyCodeLine{289 \}}
+\DoxyCodeLine{263         reqS3 = req;}
+\DoxyCodeLine{264     \}}
+\DoxyCodeLine{265     \textcolor{comment}{// Close GPIO device (not needed after acquiring the line handle)}}
+\DoxyCodeLine{266     \textcolor{keywordflow}{if} (close(fd) == -\/1)}
+\DoxyCodeLine{267         perror(\textcolor{stringliteral}{"{}Failed to close GPIO character device file"{}});}
+\DoxyCodeLine{268 }
+\DoxyCodeLine{269     \textcolor{keywordflow}{return} ret;}
+\DoxyCodeLine{270 \}}
 
 \end{DoxyCode}
 \mbox{\label{readingInputsC_8c_ae66b1a7b21c462287d3fe2149c8d9a3d}} 
@@ -392,59 +398,59 @@ Definition at line 238 of file reading\+Inputs\+C.\+c.
 
 
 
-Definition at line 187 of file reading\+Inputs\+C.\+c.
+Definition at line 168 of file reading\+Inputs\+C.\+c.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{188 \{}
-\DoxyCodeLine{189     \textcolor{comment}{// /*  Open gpio device: gpiochipX */}}
-\DoxyCodeLine{190     strcpy(chrdev\_name, gpio\_chip);}
-\DoxyCodeLine{191     fd = open(chrdev\_name, 0);}
-\DoxyCodeLine{192     \textcolor{keywordflow}{if} (fd == -\/1)}
-\DoxyCodeLine{193     \{}
-\DoxyCodeLine{194         ret = -\/errno;}
-\DoxyCodeLine{195         fprintf(stderr, \textcolor{stringliteral}{"{}Failed to open \%s\(\backslash\)n"{}}, chrdev\_name);}
-\DoxyCodeLine{196 }
-\DoxyCodeLine{197         \textcolor{keywordflow}{return} ret;}
-\DoxyCodeLine{198     \}}
-\DoxyCodeLine{199 }
-\DoxyCodeLine{200     \textcolor{comment}{/* Setup variables for a request */}}
-\DoxyCodeLine{201     req.lineoffsets[0] = gpio\_line;}
-\DoxyCodeLine{202     req.flags = GPIOHANDLE\_REQUEST\_OUTPUT;}
-\DoxyCodeLine{203     memcpy(req.default\_values, \&data, \textcolor{keyword}{sizeof}(req.default\_values));}
-\DoxyCodeLine{204     snprintf(req.consumer\_label, \textcolor{keyword}{sizeof}(req.consumer\_label), \textcolor{stringliteral}{"{}led\_\%u"{}}, gpio\_line);}
-\DoxyCodeLine{205     req.lines = 1;}
-\DoxyCodeLine{206 }
-\DoxyCodeLine{207     \textcolor{comment}{/* Request GPIO line: GPIO\_H\_11 -\/-\/> LED-\/DS400 */}}
-\DoxyCodeLine{208     ret = ioctl(fd, GPIO\_GET\_LINEHANDLE\_IOCTL, \&req);}
-\DoxyCodeLine{209     \textcolor{keywordflow}{if} (ret == -\/1)}
-\DoxyCodeLine{210     \{}
-\DoxyCodeLine{211         ret = -\/errno;}
-\DoxyCodeLine{212         fprintf(stderr, \textcolor{stringliteral}{"{}Failed to issue GET LINEHANDLE IOCTL (\%d)\(\backslash\)n"{}},}
-\DoxyCodeLine{213                 ret);}
-\DoxyCodeLine{214     \}}
-\DoxyCodeLine{215     \textcolor{keywordflow}{if} (close(fd) == -\/1)}
-\DoxyCodeLine{216         perror(\textcolor{stringliteral}{"{}Failed to close GPIO character device file"{}});}
-\DoxyCodeLine{217 }
-\DoxyCodeLine{218     \textcolor{comment}{/* Store the file descriptor in the global req variable */}}
-\DoxyCodeLine{219     \textcolor{keywordflow}{if} (gpio\_line == DS400)}
-\DoxyCodeLine{220     \{}
-\DoxyCodeLine{221         req0 = req;}
-\DoxyCodeLine{222     \}}
-\DoxyCodeLine{223     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (gpio\_line == DS401)}
-\DoxyCodeLine{224     \{}
-\DoxyCodeLine{225         req1 = req;}
-\DoxyCodeLine{226     \}}
-\DoxyCodeLine{227     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (gpio\_line == DS402)}
-\DoxyCodeLine{228     \{}
-\DoxyCodeLine{229         req2 = req;}
-\DoxyCodeLine{230     \}}
-\DoxyCodeLine{231     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (gpio\_line == DS403)}
-\DoxyCodeLine{232     \{}
-\DoxyCodeLine{233         req3 = req;}
-\DoxyCodeLine{234     \}}
-\DoxyCodeLine{235     \textcolor{keywordflow}{return} ret;}
-\DoxyCodeLine{236 \}}
+\DoxyCodeLine{169 \{}
+\DoxyCodeLine{170     \textcolor{comment}{// /*  Open gpio device: gpiochipX */}}
+\DoxyCodeLine{171     strcpy(chrdev\_name, gpio\_chip);}
+\DoxyCodeLine{172     fd = open(chrdev\_name, 0);}
+\DoxyCodeLine{173     \textcolor{keywordflow}{if} (fd == -\/1)}
+\DoxyCodeLine{174     \{}
+\DoxyCodeLine{175         ret = -\/errno;}
+\DoxyCodeLine{176         fprintf(stderr, \textcolor{stringliteral}{"{}Failed to open \%s\(\backslash\)n"{}}, chrdev\_name);}
+\DoxyCodeLine{177 }
+\DoxyCodeLine{178         \textcolor{keywordflow}{return} ret;}
+\DoxyCodeLine{179     \}}
+\DoxyCodeLine{180 }
+\DoxyCodeLine{181     \textcolor{comment}{/* Setup variables for a request */}}
+\DoxyCodeLine{182     req.lineoffsets[0] = gpio\_line;}
+\DoxyCodeLine{183     req.flags = GPIOHANDLE\_REQUEST\_OUTPUT;}
+\DoxyCodeLine{184     memcpy(req.default\_values, \&data, \textcolor{keyword}{sizeof}(req.default\_values));}
+\DoxyCodeLine{185     snprintf(req.consumer\_label, \textcolor{keyword}{sizeof}(req.consumer\_label), \textcolor{stringliteral}{"{}led\_\%u"{}}, gpio\_line);}
+\DoxyCodeLine{186     req.lines = 1;}
+\DoxyCodeLine{187 }
+\DoxyCodeLine{188     \textcolor{comment}{/* Request GPIO line: GPIO\_H\_11 -\/-\/> LED-\/DS400 */}}
+\DoxyCodeLine{189     ret = ioctl(fd, GPIO\_GET\_LINEHANDLE\_IOCTL, \&req);}
+\DoxyCodeLine{190     \textcolor{keywordflow}{if} (ret == -\/1)}
+\DoxyCodeLine{191     \{}
+\DoxyCodeLine{192         ret = -\/errno;}
+\DoxyCodeLine{193         fprintf(stderr, \textcolor{stringliteral}{"{}Failed to issue GET LINEHANDLE IOCTL (\%d)\(\backslash\)n"{}},}
+\DoxyCodeLine{194                 ret);}
+\DoxyCodeLine{195     \}}
+\DoxyCodeLine{196     \textcolor{keywordflow}{if} (close(fd) == -\/1)}
+\DoxyCodeLine{197         perror(\textcolor{stringliteral}{"{}Failed to close GPIO character device file"{}});}
+\DoxyCodeLine{198 }
+\DoxyCodeLine{199     \textcolor{comment}{/* Store the file descriptor in the global req variable */}}
+\DoxyCodeLine{200     \textcolor{keywordflow}{if} (gpio\_line == DS400)}
+\DoxyCodeLine{201     \{}
+\DoxyCodeLine{202         req0 = req;}
+\DoxyCodeLine{203     \}}
+\DoxyCodeLine{204     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (gpio\_line == DS401)}
+\DoxyCodeLine{205     \{}
+\DoxyCodeLine{206         req1 = req;}
+\DoxyCodeLine{207     \}}
+\DoxyCodeLine{208     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (gpio\_line == DS402)}
+\DoxyCodeLine{209     \{}
+\DoxyCodeLine{210         req2 = req;}
+\DoxyCodeLine{211     \}}
+\DoxyCodeLine{212     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (gpio\_line == DS403)}
+\DoxyCodeLine{213     \{}
+\DoxyCodeLine{214         req3 = req;}
+\DoxyCodeLine{215     \}}
+\DoxyCodeLine{216     \textcolor{keywordflow}{return} ret;}
+\DoxyCodeLine{217 \}}
 
 \end{DoxyCode}
 \mbox{\label{readingInputsC_8c_a3c04138a5bfe5d72780bb7e82a18e627}} 
@@ -455,33 +461,34 @@ Definition at line 187 of file reading\+Inputs\+C.\+c.
 
 
 
-Definition at line 100 of file reading\+Inputs\+C.\+c.
+Definition at line 99 of file reading\+Inputs\+C.\+c.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{101 \{}
-\DoxyCodeLine{102     \textcolor{comment}{// signal(SIGIO, buttonHandler);}}
-\DoxyCodeLine{103 }
-\DoxyCodeLine{104     \textcolor{comment}{// LED Init}}
-\DoxyCodeLine{105     ret0 = initialize\_gpio\_output(GPIO\_BANK1, DS400, ret0);}
-\DoxyCodeLine{106     ret1 = initialize\_gpio\_output(GPIO\_BANK3, DS401, ret1);}
-\DoxyCodeLine{107     ret2 = initialize\_gpio\_output(GPIO\_BANK3, DS402, ret2);}
-\DoxyCodeLine{108     ret3 = initialize\_gpio\_output(GPIO\_BANK3, DS403, ret3);}
-\DoxyCodeLine{109 }
-\DoxyCodeLine{110     \textcolor{comment}{// Switch init}}
-\DoxyCodeLine{111     retS0 = initialize\_gpio\_input(GPIO\_BANK1, S400, retS0);}
-\DoxyCodeLine{112     retS1 = initialize\_gpio\_input(GPIO\_BANK1, S401, retS1);}
-\DoxyCodeLine{113     retS2 = initialize\_gpio\_input(GPIO\_BANK1, S402, retS2);}
-\DoxyCodeLine{114     retS3 = initialize\_gpio\_input(GPIO\_BANK3, S403, retS3);}
-\DoxyCodeLine{115 }
-\DoxyCodeLine{116     \textcolor{comment}{// I2c init}}
-\DoxyCodeLine{117     i2c\_fd = open(I2C\_DEVICE, O\_RDWR);}
-\DoxyCodeLine{118     \textcolor{keywordflow}{if} (i2c\_fd < 0)}
-\DoxyCodeLine{119     \{}
-\DoxyCodeLine{120         perror(\textcolor{stringliteral}{"{}i2cOpen"{}});}
-\DoxyCodeLine{121         printf(\textcolor{stringliteral}{"{}No such device found!\(\backslash\)n"{}});}
-\DoxyCodeLine{122         \textcolor{keywordflow}{return} -\/1;}
-\DoxyCodeLine{123     \}}
+\DoxyCodeLine{100 \{}
+\DoxyCodeLine{101     \textcolor{comment}{// signal(SIGIO, buttonHandler);}}
+\DoxyCodeLine{102 }
+\DoxyCodeLine{103     \textcolor{comment}{// LED Init}}
+\DoxyCodeLine{104     ret0 = initialize\_gpio\_output(GPIO\_BANK1, DS400, ret0);}
+\DoxyCodeLine{105     ret1 = initialize\_gpio\_output(GPIO\_BANK3, DS401, ret1);}
+\DoxyCodeLine{106     ret2 = initialize\_gpio\_output(GPIO\_BANK3, DS402, ret2);}
+\DoxyCodeLine{107     ret3 = initialize\_gpio\_output(GPIO\_BANK3, DS403, ret3);}
+\DoxyCodeLine{108 }
+\DoxyCodeLine{109     \textcolor{comment}{// Switch init}}
+\DoxyCodeLine{110     retS0 = initialize\_gpio\_input(GPIO\_BANK1, S400, retS0);}
+\DoxyCodeLine{111     retS1 = initialize\_gpio\_input(GPIO\_BANK1, S401, retS1);}
+\DoxyCodeLine{112     retS2 = initialize\_gpio\_input(GPIO\_BANK1, S402, retS2);}
+\DoxyCodeLine{113     retS3 = initialize\_gpio\_input(GPIO\_BANK3, S403, retS3);}
+\DoxyCodeLine{114 }
+\DoxyCodeLine{115     \textcolor{comment}{// I2c init}}
+\DoxyCodeLine{116     i2c\_fd = open(I2C\_DEVICE, O\_RDWR);}
+\DoxyCodeLine{117     \textcolor{keywordflow}{if} (i2c\_fd < 0)}
+\DoxyCodeLine{118     \{}
+\DoxyCodeLine{119         perror(\textcolor{stringliteral}{"{}i2cOpen"{}});}
+\DoxyCodeLine{120         printf(\textcolor{stringliteral}{"{}No such device found!\(\backslash\)n"{}});}
+\DoxyCodeLine{121         \textcolor{keywordflow}{return} -\/1;}
+\DoxyCodeLine{122     \}}
+\DoxyCodeLine{123     pthread\_create(\&readInputThread, NULL, readInputThreadFunction, NULL);}
 \DoxyCodeLine{124 }
 \DoxyCodeLine{125     \textcolor{comment}{/* Set the I2C slave address for all subsequent I2C device transfers */}}
 \DoxyCodeLine{126     \textcolor{keywordflow}{if} (ioctl(i2c\_fd, I2C\_SLAVE\_FORCE, JOYSTICK\_ADDR) < 0)}
@@ -493,28 +500,10 @@ Definition at line 100 of file reading\+Inputs\+C.\+c.
 \DoxyCodeLine{132 }
 \DoxyCodeLine{133     \textcolor{keywordflow}{while} (1)}
 \DoxyCodeLine{134     \{}
-\DoxyCodeLine{135         \textcolor{keywordflow}{if} (setUpAdcValue(JOYSTICK\_A\_LEFT\_RIGHT-\/1) < 0)}
-\DoxyCodeLine{136         \{}
-\DoxyCodeLine{137             printf(\textcolor{stringliteral}{"{}Failed to configure ADC"{}});}
-\DoxyCodeLine{138             perror(\textcolor{stringliteral}{"{}Setup ADC"{}});}
-\DoxyCodeLine{139             \textcolor{keywordflow}{return} -\/1;}
-\DoxyCodeLine{140         \}}
-\DoxyCodeLine{141         adcValue = readAdcValue();}
-\DoxyCodeLine{142         printf(\textcolor{stringliteral}{"{}L/R Value: \%d\(\backslash\)n"{}}, adcValue);}
-\DoxyCodeLine{143         sleep\_ms(20);}
-\DoxyCodeLine{144 }
-\DoxyCodeLine{145         \textcolor{keywordflow}{if} (setUpAdcValue(JOYSTICK\_A\_UP\_DOWN-\/1) < 0)}
-\DoxyCodeLine{146         \{}
-\DoxyCodeLine{147             printf(\textcolor{stringliteral}{"{}Failed to configure ADC"{}});}
-\DoxyCodeLine{148             perror(\textcolor{stringliteral}{"{}Setup ADC"{}});}
-\DoxyCodeLine{149             \textcolor{keywordflow}{return} -\/1;}
-\DoxyCodeLine{150         \}}
-\DoxyCodeLine{151         adcValue = readAdcValue();}
-\DoxyCodeLine{152         printf(\textcolor{stringliteral}{"{}U/D Value: \%d\(\backslash\)n"{}}, adcValue);}
-\DoxyCodeLine{153         sleep(1);}
-\DoxyCodeLine{154     \}}
-\DoxyCodeLine{155     close(i2c\_fd);}
-\DoxyCodeLine{156 \}}
+\DoxyCodeLine{135         sleep(1);}
+\DoxyCodeLine{136     \}}
+\DoxyCodeLine{137     \textcolor{comment}{// close(i2c\_fd);}}
+\DoxyCodeLine{138 \}}
 
 \end{DoxyCode}
 \mbox{\label{readingInputsC_8c_a5f42c4eb1231dcc9baaac8ff1bcc1a4e}} 
@@ -525,21 +514,103 @@ Definition at line 100 of file reading\+Inputs\+C.\+c.
 
 
 
-Definition at line 171 of file reading\+Inputs\+C.\+c.
+Definition at line 152 of file reading\+Inputs\+C.\+c.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{172 \{}
-\DoxyCodeLine{173     \textcolor{comment}{// i2cCommBuffer[0] = config;}}
-\DoxyCodeLine{174     \textcolor{keywordflow}{if} (read(i2c\_fd, i2cCommBuffer, 1) != 1)}
-\DoxyCodeLine{175     \{}
-\DoxyCodeLine{176         perror(\textcolor{stringliteral}{"{}read error"{}});}
-\DoxyCodeLine{177         close(i2c\_fd);}
-\DoxyCodeLine{178         \textcolor{keywordflow}{return} -\/1;}
-\DoxyCodeLine{179     \}}
-\DoxyCodeLine{180     uint8\_t value = i2cCommBuffer[0];}
-\DoxyCodeLine{181     \textcolor{keywordflow}{return} value;}
-\DoxyCodeLine{182 \}}
+\DoxyCodeLine{153 \{}
+\DoxyCodeLine{154     \textcolor{comment}{// i2cCommBuffer[0] = config;}}
+\DoxyCodeLine{155     \textcolor{keywordflow}{if} (read(i2c\_fd, i2cCommBuffer, 1) != 1)}
+\DoxyCodeLine{156     \{}
+\DoxyCodeLine{157         perror(\textcolor{stringliteral}{"{}read error"{}});}
+\DoxyCodeLine{158         close(i2c\_fd);}
+\DoxyCodeLine{159         \textcolor{keywordflow}{return} -\/1;}
+\DoxyCodeLine{160     \}}
+\DoxyCodeLine{161     uint8\_t value = i2cCommBuffer[0];}
+\DoxyCodeLine{162     \textcolor{keywordflow}{return} value;}
+\DoxyCodeLine{163 \}}
+
+\end{DoxyCode}
+\mbox{\label{readingInputsC_8c_ac35b5756a6e38580dc7734df970cff95}} 
+\index{readingInputsC.c@{readingInputsC.c}!readInputThreadFunction@{readInputThreadFunction}}
+\index{readInputThreadFunction@{readInputThreadFunction}!readingInputsC.c@{readingInputsC.c}}
+\doxysubsubsection{readInputThreadFunction()}
+{\footnotesize\ttfamily void $\ast$ read\+Input\+Thread\+Function (\begin{DoxyParamCaption}\item[{void $\ast$}]{arg }\end{DoxyParamCaption})}
+
+
+
+Definition at line 300 of file reading\+Inputs\+C.\+c.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{301 \{}
+\DoxyCodeLine{302     \textcolor{keywordtype}{bool} isReading = \textcolor{keyword}{true};}
+\DoxyCodeLine{303     \textcolor{keywordflow}{while} (isReading == \textcolor{keyword}{true})}
+\DoxyCodeLine{304     \{}
+\DoxyCodeLine{305         \textcolor{keywordflow}{if} (setUpAdcValue(JOYSTICK\_A\_LEFT\_RIGHT) < 0)}
+\DoxyCodeLine{306         \{}
+\DoxyCodeLine{307             printf(\textcolor{stringliteral}{"{}Failed to configure ADC"{}});}
+\DoxyCodeLine{308             perror(\textcolor{stringliteral}{"{}Setup ADC"{}});}
+\DoxyCodeLine{309             \textcolor{comment}{// isReading = false;}}
+\DoxyCodeLine{310         \}}
+\DoxyCodeLine{311         adcValue = readAdcValue();}
+\DoxyCodeLine{312         printf(\textcolor{stringliteral}{"{}L/R Value: \%d\(\backslash\)n"{}}, adcValue);}
+\DoxyCodeLine{313         sleep\_ms(20);}
+\DoxyCodeLine{314         \textcolor{keywordflow}{if} (setUpAdcValue(JOYSTICK\_A\_UP\_DOWN) < 0)}
+\DoxyCodeLine{315         \{}
+\DoxyCodeLine{316             printf(\textcolor{stringliteral}{"{}Failed to configure ADC"{}});}
+\DoxyCodeLine{317             perror(\textcolor{stringliteral}{"{}Setup ADC"{}});}
+\DoxyCodeLine{318             \textcolor{comment}{// isReading = false;}}
+\DoxyCodeLine{319         \}}
+\DoxyCodeLine{320         adcValue = readAdcValue();}
+\DoxyCodeLine{321         printf(\textcolor{stringliteral}{"{}U/D Value: \%d\(\backslash\)n"{}}, adcValue);}
+\DoxyCodeLine{322         sleep\_ms(20);}
+\DoxyCodeLine{323 }
+\DoxyCodeLine{324         \textcolor{keywordflow}{if} (!readSwitch(retS0, reqS0))}
+\DoxyCodeLine{325         \{}
+\DoxyCodeLine{326             printf(\textcolor{stringliteral}{"{}Switch S400 active\(\backslash\)n"{}});}
+\DoxyCodeLine{327         \}}
+\DoxyCodeLine{328         \textcolor{keywordflow}{if} (!readSwitch(retS1, reqS1))}
+\DoxyCodeLine{329         \{}
+\DoxyCodeLine{330 }
+\DoxyCodeLine{331             printf(\textcolor{stringliteral}{"{}Switch S401 active\(\backslash\)n"{}});}
+\DoxyCodeLine{332         \}}
+\DoxyCodeLine{333         \textcolor{keywordflow}{if} (!readSwitch(retS2, reqS2))}
+\DoxyCodeLine{334         \{}
+\DoxyCodeLine{335 }
+\DoxyCodeLine{336             printf(\textcolor{stringliteral}{"{}Switch S402 active\(\backslash\)n"{}});}
+\DoxyCodeLine{337         \}}
+\DoxyCodeLine{338         \textcolor{keywordflow}{if} (!readSwitch(retS3, reqS3))}
+\DoxyCodeLine{339         \{}
+\DoxyCodeLine{340             printf(\textcolor{stringliteral}{"{}Switch S403 active\(\backslash\)n"{}});}
+\DoxyCodeLine{341         \}}
+\DoxyCodeLine{342     \}}
+\DoxyCodeLine{343     \textcolor{keywordflow}{return} NULL;}
+\DoxyCodeLine{344 \}}
+
+\end{DoxyCode}
+\mbox{\label{readingInputsC_8c_aa35bd984a90f989bc3fab734e0ed6c59}} 
+\index{readingInputsC.c@{readingInputsC.c}!readSwitch@{readSwitch}}
+\index{readSwitch@{readSwitch}!readingInputsC.c@{readingInputsC.c}}
+\doxysubsubsection{readSwitch()}
+{\footnotesize\ttfamily int read\+Switch (\begin{DoxyParamCaption}\item[{int}]{ret\+Switch,  }\item[{struct gpiohandle\+\_\+request}]{req\+Switch }\end{DoxyParamCaption})}
+
+
+
+Definition at line 346 of file reading\+Inputs\+C.\+c.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{347 \{}
+\DoxyCodeLine{348     \textcolor{keywordtype}{int} value\_switch = 0;}
+\DoxyCodeLine{349     retSwitch = ioctl(reqSwitch.fd, GPIOHANDLE\_GET\_LINE\_VALUES\_IOCTL, \&value\_switch);}
+\DoxyCodeLine{350     \textcolor{keywordflow}{if} (retSwitch == -\/1)}
+\DoxyCodeLine{351     \{}
+\DoxyCodeLine{352         retSwitch = -\/errno;}
+\DoxyCodeLine{353         fprintf(stderr, \textcolor{stringliteral}{"{}Failed to get line values for S (\%d)\(\backslash\)n"{}}, retSwitch);}
+\DoxyCodeLine{354     \}}
+\DoxyCodeLine{355     \textcolor{keywordflow}{return} value\_switch;}
+\DoxyCodeLine{356 \}}
 
 \end{DoxyCode}
 \mbox{\label{readingInputsC_8c_a3ee6a36caaf11a81268ff9bf3d9e5b31}} 
@@ -550,20 +621,20 @@ Definition at line 171 of file reading\+Inputs\+C.\+c.
 
 
 
-Definition at line 158 of file reading\+Inputs\+C.\+c.
+Definition at line 140 of file reading\+Inputs\+C.\+c.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{159 \{}
-\DoxyCodeLine{160     i2cCommBuffer[0] = setup;}
-\DoxyCodeLine{161     \textcolor{keywordflow}{if} (write(i2c\_fd, i2cCommBuffer, 1) != 1)}
-\DoxyCodeLine{162     \{}
-\DoxyCodeLine{163         perror(\textcolor{stringliteral}{"{}write error!"{}});}
-\DoxyCodeLine{164         close(i2c\_fd);}
-\DoxyCodeLine{165         \textcolor{keywordflow}{return} -\/1;}
-\DoxyCodeLine{166     \}}
-\DoxyCodeLine{167     \textcolor{keywordflow}{return} 0;}
-\DoxyCodeLine{168 \}}
+\DoxyCodeLine{141 \{}
+\DoxyCodeLine{142     i2cCommBuffer[0] = setup;}
+\DoxyCodeLine{143     \textcolor{keywordflow}{if} (write(i2c\_fd, i2cCommBuffer, 1) != 1)}
+\DoxyCodeLine{144     \{}
+\DoxyCodeLine{145         perror(\textcolor{stringliteral}{"{}write error!"{}});}
+\DoxyCodeLine{146         close(i2c\_fd);}
+\DoxyCodeLine{147         \textcolor{keywordflow}{return} -\/1;}
+\DoxyCodeLine{148     \}}
+\DoxyCodeLine{149     \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{150 \}}
 
 \end{DoxyCode}
 \mbox{\label{readingInputsC_8c_a73a8d7e98be85f67961ca682c291033a}} 
@@ -574,13 +645,13 @@ Definition at line 158 of file reading\+Inputs\+C.\+c.
 
 
 
-Definition at line 318 of file reading\+Inputs\+C.\+c.
+Definition at line 358 of file reading\+Inputs\+C.\+c.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{319 \{}
-\DoxyCodeLine{320     usleep(milliseconds * 1000);}
-\DoxyCodeLine{321 \}}
+\DoxyCodeLine{359 \{}
+\DoxyCodeLine{360     usleep(milliseconds * 1000);}
+\DoxyCodeLine{361 \}}
 
 \end{DoxyCode}
 \mbox{\label{readingInputsC_8c_a4803ed941ce8669eebf52b1f123afdbe}} 
@@ -606,7 +677,7 @@ Definition at line 318 of file reading\+Inputs\+C.\+c.
 
 
 
-Definition at line 47 of file reading\+Inputs\+C.\+c.
+Definition at line 42 of file reading\+Inputs\+C.\+c.
 
 \mbox{\label{readingInputsC_8c_adac14eeb042819554c0790e52fd20378}} 
 \index{readingInputsC.c@{readingInputsC.c}!adcValue@{adcValue}}
@@ -616,7 +687,7 @@ Definition at line 47 of file reading\+Inputs\+C.\+c.
 
 
 
-Definition at line 82 of file reading\+Inputs\+C.\+c.
+Definition at line 78 of file reading\+Inputs\+C.\+c.
 
 \mbox{\label{readingInputsC_8c_ab793fe8290afe0eb36e4cea6b4dbf6fd}} 
 \index{readingInputsC.c@{readingInputsC.c}!chrdev\_name@{chrdev\_name}}
@@ -626,7 +697,7 @@ Definition at line 82 of file reading\+Inputs\+C.\+c.
 
 
 
-Definition at line 67 of file reading\+Inputs\+C.\+c.
+Definition at line 63 of file reading\+Inputs\+C.\+c.
 
 \mbox{\label{readingInputsC_8c_afd6205bf17ac7cea626e0a805afc73ff}} 
 \index{readingInputsC.c@{readingInputsC.c}!data@{data}}
@@ -636,7 +707,7 @@ Definition at line 67 of file reading\+Inputs\+C.\+c.
 
 
 
-Definition at line 47 of file reading\+Inputs\+C.\+c.
+Definition at line 43 of file reading\+Inputs\+C.\+c.
 
 \mbox{\label{readingInputsC_8c_abea449a895aa94f257f9208d671d4557}} 
 \index{readingInputsC.c@{readingInputsC.c}!devID@{devID}}
@@ -646,7 +717,7 @@ Definition at line 47 of file reading\+Inputs\+C.\+c.
 
 
 
-Definition at line 81 of file reading\+Inputs\+C.\+c.
+Definition at line 77 of file reading\+Inputs\+C.\+c.
 
 \mbox{\label{readingInputsC_8c_aadfde85da52843e83f540a3f2c9bb9bf}} 
 \index{readingInputsC.c@{readingInputsC.c}!event\_req@{event\_req}}
@@ -656,7 +727,7 @@ Definition at line 81 of file reading\+Inputs\+C.\+c.
 
 
 
-Definition at line 47 of file reading\+Inputs\+C.\+c.
+Definition at line 43 of file reading\+Inputs\+C.\+c.
 
 \mbox{\label{readingInputsC_8c_a6f8059414f0228f0256115e024eeed4b}} 
 \index{readingInputsC.c@{readingInputsC.c}!fd@{fd}}
@@ -666,7 +737,7 @@ Definition at line 47 of file reading\+Inputs\+C.\+c.
 
 
 
-Definition at line 84 of file reading\+Inputs\+C.\+c.
+Definition at line 80 of file reading\+Inputs\+C.\+c.
 
 \mbox{\label{readingInputsC_8c_a5b416045e596c49d45b0f20cf0d508ae}} 
 \index{readingInputsC.c@{readingInputsC.c}!GPIO\_BANK1@{GPIO\_BANK1}}
@@ -676,7 +747,7 @@ Definition at line 84 of file reading\+Inputs\+C.\+c.
 
 
 
-Definition at line 71 of file reading\+Inputs\+C.\+c.
+Definition at line 67 of file reading\+Inputs\+C.\+c.
 
 \mbox{\label{readingInputsC_8c_ae55b09b25a4ac5926b5c4a863d6d8f49}} 
 \index{readingInputsC.c@{readingInputsC.c}!GPIO\_BANK3@{GPIO\_BANK3}}
@@ -686,7 +757,7 @@ Definition at line 71 of file reading\+Inputs\+C.\+c.
 
 
 
-Definition at line 72 of file reading\+Inputs\+C.\+c.
+Definition at line 68 of file reading\+Inputs\+C.\+c.
 
 \mbox{\label{readingInputsC_8c_af00bbf8a436e5853c2bcf182ec7e67a3}} 
 \index{readingInputsC.c@{readingInputsC.c}!I2C\_DEVICE@{I2C\_DEVICE}}
@@ -696,7 +767,7 @@ Definition at line 72 of file reading\+Inputs\+C.\+c.
 
 
 
-Definition at line 74 of file reading\+Inputs\+C.\+c.
+Definition at line 70 of file reading\+Inputs\+C.\+c.
 
 \mbox{\label{readingInputsC_8c_a1c1c2753f354efefbda98508d811e6a9}} 
 \index{readingInputsC.c@{readingInputsC.c}!i2c\_fd@{i2c\_fd}}
@@ -706,7 +777,7 @@ Definition at line 74 of file reading\+Inputs\+C.\+c.
 
 
 
-Definition at line 77 of file reading\+Inputs\+C.\+c.
+Definition at line 73 of file reading\+Inputs\+C.\+c.
 
 \mbox{\label{readingInputsC_8c_a457fa3c034a80f5ea3581a0983b91b5b}} 
 \index{readingInputsC.c@{readingInputsC.c}!i2cCommBuffer@{i2cCommBuffer}}
@@ -716,7 +787,17 @@ Definition at line 77 of file reading\+Inputs\+C.\+c.
 
 
 
-Definition at line 80 of file reading\+Inputs\+C.\+c.
+Definition at line 76 of file reading\+Inputs\+C.\+c.
+
+\mbox{\label{readingInputsC_8c_a3a2ad1ef4b76f12f363a3ff3cd38382e}} 
+\index{readingInputsC.c@{readingInputsC.c}!readInputThread@{readInputThread}}
+\index{readInputThread@{readInputThread}!readingInputsC.c@{readingInputsC.c}}
+\doxysubsubsection{readInputThread}
+{\footnotesize\ttfamily pthread\+\_\+t read\+Input\+Thread}
+
+
+
+Definition at line 43 of file reading\+Inputs\+C.\+c.
 
 \mbox{\label{readingInputsC_8c_a19b25afcc7d7ee23eed01279987f8d9e}} 
 \index{readingInputsC.c@{readingInputsC.c}!req@{req}}
@@ -726,7 +807,7 @@ Definition at line 80 of file reading\+Inputs\+C.\+c.
 
 
 
-Definition at line 47 of file reading\+Inputs\+C.\+c.
+Definition at line 43 of file reading\+Inputs\+C.\+c.
 
 \mbox{\label{readingInputsC_8c_ae61be9679b3a4237613a1b8cd5b471bb}} 
 \index{readingInputsC.c@{readingInputsC.c}!req0@{req0}}
@@ -736,7 +817,7 @@ Definition at line 47 of file reading\+Inputs\+C.\+c.
 
 
 
-Definition at line 47 of file reading\+Inputs\+C.\+c.
+Definition at line 43 of file reading\+Inputs\+C.\+c.
 
 \mbox{\label{readingInputsC_8c_aa7fa68a569ae8b1feaa94a5431c82774}} 
 \index{readingInputsC.c@{readingInputsC.c}!req1@{req1}}
@@ -746,7 +827,7 @@ Definition at line 47 of file reading\+Inputs\+C.\+c.
 
 
 
-Definition at line 47 of file reading\+Inputs\+C.\+c.
+Definition at line 43 of file reading\+Inputs\+C.\+c.
 
 \mbox{\label{readingInputsC_8c_adb2fdf57d9e195099bb3360ed72c5787}} 
 \index{readingInputsC.c@{readingInputsC.c}!req2@{req2}}
@@ -756,7 +837,7 @@ Definition at line 47 of file reading\+Inputs\+C.\+c.
 
 
 
-Definition at line 47 of file reading\+Inputs\+C.\+c.
+Definition at line 43 of file reading\+Inputs\+C.\+c.
 
 \mbox{\label{readingInputsC_8c_a133e347584d0af9596ff6ce9c220ba75}} 
 \index{readingInputsC.c@{readingInputsC.c}!req3@{req3}}
@@ -766,7 +847,7 @@ Definition at line 47 of file reading\+Inputs\+C.\+c.
 
 
 
-Definition at line 47 of file reading\+Inputs\+C.\+c.
+Definition at line 43 of file reading\+Inputs\+C.\+c.
 
 \mbox{\label{readingInputsC_8c_a52724f44282cf6a425b15ec02a716ec9}} 
 \index{readingInputsC.c@{readingInputsC.c}!reqS0@{reqS0}}
@@ -776,7 +857,7 @@ Definition at line 47 of file reading\+Inputs\+C.\+c.
 
 
 
-Definition at line 47 of file reading\+Inputs\+C.\+c.
+Definition at line 43 of file reading\+Inputs\+C.\+c.
 
 \mbox{\label{readingInputsC_8c_a3f61826d0ac847bee3b17aa3ce11950f}} 
 \index{readingInputsC.c@{readingInputsC.c}!reqS1@{reqS1}}
@@ -786,7 +867,7 @@ Definition at line 47 of file reading\+Inputs\+C.\+c.
 
 
 
-Definition at line 47 of file reading\+Inputs\+C.\+c.
+Definition at line 43 of file reading\+Inputs\+C.\+c.
 
 \mbox{\label{readingInputsC_8c_a311f75b04028ff7ab40f963cb0361885}} 
 \index{readingInputsC.c@{readingInputsC.c}!reqS2@{reqS2}}
@@ -796,7 +877,7 @@ Definition at line 47 of file reading\+Inputs\+C.\+c.
 
 
 
-Definition at line 47 of file reading\+Inputs\+C.\+c.
+Definition at line 43 of file reading\+Inputs\+C.\+c.
 
 \mbox{\label{readingInputsC_8c_af7dde79f387792b382fe50b303e68d9a}} 
 \index{readingInputsC.c@{readingInputsC.c}!reqS3@{reqS3}}
@@ -806,7 +887,7 @@ Definition at line 47 of file reading\+Inputs\+C.\+c.
 
 
 
-Definition at line 47 of file reading\+Inputs\+C.\+c.
+Definition at line 43 of file reading\+Inputs\+C.\+c.
 
 \mbox{\label{readingInputsC_8c_a6cbc997c595b50a10c2dfd354d3334db}} 
 \index{readingInputsC.c@{readingInputsC.c}!ret0@{ret0}}
@@ -816,7 +897,7 @@ Definition at line 47 of file reading\+Inputs\+C.\+c.
 
 
 
-Definition at line 44 of file reading\+Inputs\+C.\+c.
+Definition at line 39 of file reading\+Inputs\+C.\+c.
 
 \mbox{\label{readingInputsC_8c_a2493e3eb14a7d819fb6017fbf4e5df0b}} 
 \index{readingInputsC.c@{readingInputsC.c}!ret1@{ret1}}
@@ -826,7 +907,7 @@ Definition at line 44 of file reading\+Inputs\+C.\+c.
 
 
 
-Definition at line 44 of file reading\+Inputs\+C.\+c.
+Definition at line 39 of file reading\+Inputs\+C.\+c.
 
 \mbox{\label{readingInputsC_8c_aab485ad1d02aa42b067b244b1506027b}} 
 \index{readingInputsC.c@{readingInputsC.c}!ret2@{ret2}}
@@ -836,7 +917,7 @@ Definition at line 44 of file reading\+Inputs\+C.\+c.
 
 
 
-Definition at line 44 of file reading\+Inputs\+C.\+c.
+Definition at line 39 of file reading\+Inputs\+C.\+c.
 
 \mbox{\label{readingInputsC_8c_aaa4b3bcdfdf2d0fbc48bb421941e460f}} 
 \index{readingInputsC.c@{readingInputsC.c}!ret3@{ret3}}
@@ -846,7 +927,7 @@ Definition at line 44 of file reading\+Inputs\+C.\+c.
 
 
 
-Definition at line 44 of file reading\+Inputs\+C.\+c.
+Definition at line 39 of file reading\+Inputs\+C.\+c.
 
 \mbox{\label{readingInputsC_8c_ac33b4df95e7ca80aca7afd3c362218f2}} 
 \index{readingInputsC.c@{readingInputsC.c}!retS0@{retS0}}
@@ -856,7 +937,7 @@ Definition at line 44 of file reading\+Inputs\+C.\+c.
 
 
 
-Definition at line 45 of file reading\+Inputs\+C.\+c.
+Definition at line 40 of file reading\+Inputs\+C.\+c.
 
 \mbox{\label{readingInputsC_8c_a0421a3069f6e5bc5d5d138c52a6ee8ec}} 
 \index{readingInputsC.c@{readingInputsC.c}!retS1@{retS1}}
@@ -866,7 +947,7 @@ Definition at line 45 of file reading\+Inputs\+C.\+c.
 
 
 
-Definition at line 45 of file reading\+Inputs\+C.\+c.
+Definition at line 40 of file reading\+Inputs\+C.\+c.
 
 \mbox{\label{readingInputsC_8c_a06da0c129294bd80f14dc62c260df139}} 
 \index{readingInputsC.c@{readingInputsC.c}!retS2@{retS2}}
@@ -876,7 +957,7 @@ Definition at line 45 of file reading\+Inputs\+C.\+c.
 
 
 
-Definition at line 45 of file reading\+Inputs\+C.\+c.
+Definition at line 40 of file reading\+Inputs\+C.\+c.
 
 \mbox{\label{readingInputsC_8c_a423dbe36dd37cc4a20302619413918d0}} 
 \index{readingInputsC.c@{readingInputsC.c}!retS3@{retS3}}
@@ -886,7 +967,7 @@ Definition at line 45 of file reading\+Inputs\+C.\+c.
 
 
 
-Definition at line 45 of file reading\+Inputs\+C.\+c.
+Definition at line 40 of file reading\+Inputs\+C.\+c.
 
 \mbox{\label{readingInputsC_8c_a6778c8d1b94a7eac00f523ade51530c0}} 
 \index{readingInputsC.c@{readingInputsC.c}!revID@{revID}}
@@ -896,7 +977,7 @@ Definition at line 45 of file reading\+Inputs\+C.\+c.
 
 
 
-Definition at line 81 of file reading\+Inputs\+C.\+c.
+Definition at line 77 of file reading\+Inputs\+C.\+c.
 
 \mbox{\label{readingInputsC_8c_a36f7b6be7108281af77939ceaec42fd6}} 
 \index{readingInputsC.c@{readingInputsC.c}!running@{running}}
@@ -906,7 +987,7 @@ Definition at line 81 of file reading\+Inputs\+C.\+c.
 
 
 
-Definition at line 68 of file reading\+Inputs\+C.\+c.
+Definition at line 64 of file reading\+Inputs\+C.\+c.
 
 \mbox{\label{readingInputsC_8c_a89afbc18af45d9df325ffaff374624c5}} 
 \index{readingInputsC.c@{readingInputsC.c}!sense@{sense}}
@@ -916,5 +997,5 @@ Definition at line 68 of file reading\+Inputs\+C.\+c.
 
 
 
-Definition at line 69 of file reading\+Inputs\+C.\+c.
+Definition at line 65 of file reading\+Inputs\+C.\+c.
 

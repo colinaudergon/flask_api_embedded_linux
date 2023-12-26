@@ -1,0 +1,1166 @@
+\doxysection{src/app.c File Reference}
+\label{app_8c}\index{src/app.c@{src/app.c}}
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+{\ttfamily \#include $<$sys/ioctl.\+h$>$}\newline
+{\ttfamily \#include $<$unistd.\+h$>$}\newline
+{\ttfamily \#include $<$signal.\+h$>$}\newline
+{\ttfamily \#include $<$time.\+h$>$}\newline
+{\ttfamily \#include $<$pthread.\+h$>$}\newline
+{\ttfamily \#include $<$errno.\+h$>$}\newline
+{\ttfamily \#include $<$fcntl.\+h$>$}\newline
+{\ttfamily \#include $<$linux/gpio.\+h$>$}\newline
+{\ttfamily \#include $<$linux/i2c-\/dev.\+h$>$}\newline
+{\ttfamily \#include $<$sys/socket.\+h$>$}\newline
+{\ttfamily \#include $<$sys/un.\+h$>$}\newline
+{\ttfamily \#include $<$netinet/in.\+h$>$}\newline
+{\ttfamily \#include $<$sys/types.\+h$>$}\newline
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \textbf{ \+\_\+\+DEFAULT\+\_\+\+SOURCE}
+\item 
+\#define \textbf{ DS400}~11
+\item 
+\#define \textbf{ DS401}~14
+\item 
+\#define \textbf{ DS402}~13
+\item 
+\#define \textbf{ DS403}~4
+\item 
+\#define \textbf{ S400}~10
+\item 
+\#define \textbf{ S401}~31
+\item 
+\#define \textbf{ S402}~15
+\item 
+\#define \textbf{ S403}~7
+\item 
+\#define \textbf{ JOYSTICK\+\_\+\+ADDR}~0x34
+\item 
+\#define \textbf{ JOYSTICK\+\_\+b\+\_\+\+LEFT\+\_\+\+RIGHT}~0x21
+\item 
+\#define \textbf{ JOYSTICK\+\_\+b\+\_\+\+UP\+\_\+\+DOWN}~0x23
+\item 
+\#define \textbf{ JOYSTICK\+\_\+\+A\+\_\+\+LEFT\+\_\+\+RIGHT}~0x25
+\item 
+\#define \textbf{ JOYSTICK\+\_\+\+A\+\_\+\+UP\+\_\+\+DOWN}~0x27
+\item 
+\#define \textbf{ UNIX\+\_\+\+PATH\+\_\+\+MAX}~108
+\item 
+\#define \textbf{ PORT}~5050
+\item 
+\#define \textbf{ SOCKET\+\_\+\+READY}~0x\+FF
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \textbf{ initialize\+\_\+gpio\+\_\+output} (const char $\ast$gpio\+\_\+chip, unsigned int gpio\+\_\+line, int ret)
+\item 
+int \textbf{ initialize\+\_\+gpio\+\_\+input} (const char $\ast$gpio\+\_\+chip, unsigned int gpio\+\_\+line, int ret)
+\item 
+void \textbf{ turn\+On\+Led} (int led\+Indice)
+\item 
+void \textbf{ turn\+Off\+Led} (int led\+Indice)
+\item 
+void \textbf{ cleanup\+Release} (void)
+\item 
+int \textbf{ set\+Up\+Adc\+Value} (uint8\+\_\+t setup)
+\item 
+int \textbf{ read\+Adc\+Value} ()
+\item 
+uint8\+\_\+t \textbf{ read\+Inputs} ()
+\item 
+int \textbf{ read\+Switch} (int ret\+Switch, struct gpiohandle\+\_\+request req\+Switch)
+\item 
+void \textbf{ sleep\+\_\+ms} (int milliseconds)
+\item 
+bool \textbf{ establish\+Connection} ()
+\item 
+int \textbf{ main} (int argc, char $\ast$$\ast$argv)
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+int \textbf{ ret0}
+\item 
+int \textbf{ ret1}
+\item 
+int \textbf{ ret2}
+\item 
+int \textbf{ ret3}
+\item 
+int \textbf{ ret\+S0}
+\item 
+int \textbf{ ret\+S1}
+\item 
+int \textbf{ ret\+S2}
+\item 
+int \textbf{ ret\+S3}
+\item 
+pthread\+\_\+t \textbf{ read\+Input\+Thread}
+\item 
+struct sockaddr\+\_\+un \textbf{ address}
+\item 
+int \textbf{ socket\+\_\+fd}
+\item 
+bool \textbf{ run\+Socket} = true
+\item 
+static struct gpiohandle\+\_\+request \textbf{ req}
+\item 
+struct gpiohandle\+\_\+request \textbf{ req0}
+\item 
+struct gpiohandle\+\_\+request \textbf{ req1}
+\item 
+struct gpiohandle\+\_\+request \textbf{ req2}
+\item 
+struct gpiohandle\+\_\+request \textbf{ req3}
+\item 
+struct gpiohandle\+\_\+request \textbf{ req\+S0}
+\item 
+struct gpiohandle\+\_\+request \textbf{ req\+S1}
+\item 
+struct gpiohandle\+\_\+request \textbf{ req\+S2}
+\item 
+struct gpiohandle\+\_\+request \textbf{ req\+S3}
+\item 
+static struct gpiohandle\+\_\+data \textbf{ data}
+\item 
+struct gpioevent\+\_\+request \textbf{ event\+\_\+req}
+\item 
+static char \textbf{ chrdev\+\_\+name} [20]
+\item 
+static bool \textbf{ running} = true
+\item 
+static const char \textbf{ GPIO\+\_\+\+BANK1} [$\,$] = \char`\"{}/dev/gpiochip1\char`\"{}
+\item 
+static const char \textbf{ GPIO\+\_\+\+BANK3} [$\,$] = \char`\"{}/dev/gpiochip3\char`\"{}
+\item 
+const char \textbf{ I2\+C\+\_\+\+DEVICE} [$\,$] = \char`\"{}/dev/i2c-\/0\char`\"{}
+\item 
+static int32\+\_\+t \textbf{ i2c\+\_\+fd}
+\item 
+static uint8\+\_\+t \textbf{ i2c\+Comm\+Buffer} [8]
+\item 
+static uint8\+\_\+t \textbf{ rev\+ID}
+\item 
+static uint8\+\_\+t \textbf{ dev\+ID}
+\item 
+static int \textbf{ fd}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\label{app_8c_a8fb447618db946a9e2a596d9ea18763f}} 
+\index{app.c@{app.c}!\_DEFAULT\_SOURCE@{\_DEFAULT\_SOURCE}}
+\index{\_DEFAULT\_SOURCE@{\_DEFAULT\_SOURCE}!app.c@{app.c}}
+\doxysubsubsection{\_DEFAULT\_SOURCE}
+{\footnotesize\ttfamily \#define \+\_\+\+DEFAULT\+\_\+\+SOURCE}
+
+
+
+Definition at line 1 of file app.\+c.
+
+\mbox{\label{app_8c_afdd419901c307915cd19a9e269a10933}} 
+\index{app.c@{app.c}!DS400@{DS400}}
+\index{DS400@{DS400}!app.c@{app.c}}
+\doxysubsubsection{DS400}
+{\footnotesize\ttfamily \#define DS400~11}
+
+
+
+Definition at line 21 of file app.\+c.
+
+\mbox{\label{app_8c_a27998cbfa6ef2e33e4fbde027113e948}} 
+\index{app.c@{app.c}!DS401@{DS401}}
+\index{DS401@{DS401}!app.c@{app.c}}
+\doxysubsubsection{DS401}
+{\footnotesize\ttfamily \#define DS401~14}
+
+
+
+Definition at line 22 of file app.\+c.
+
+\mbox{\label{app_8c_af27c1deb5033a798a9aa11e8d0b3571c}} 
+\index{app.c@{app.c}!DS402@{DS402}}
+\index{DS402@{DS402}!app.c@{app.c}}
+\doxysubsubsection{DS402}
+{\footnotesize\ttfamily \#define DS402~13}
+
+
+
+Definition at line 23 of file app.\+c.
+
+\mbox{\label{app_8c_a5f1565bdbe9062be92c43bedaf410282}} 
+\index{app.c@{app.c}!DS403@{DS403}}
+\index{DS403@{DS403}!app.c@{app.c}}
+\doxysubsubsection{DS403}
+{\footnotesize\ttfamily \#define DS403~4}
+
+
+
+Definition at line 24 of file app.\+c.
+
+\mbox{\label{app_8c_a4865b1861f7c5e444f1a6d28ba002efc}} 
+\index{app.c@{app.c}!JOYSTICK\_A\_LEFT\_RIGHT@{JOYSTICK\_A\_LEFT\_RIGHT}}
+\index{JOYSTICK\_A\_LEFT\_RIGHT@{JOYSTICK\_A\_LEFT\_RIGHT}!app.c@{app.c}}
+\doxysubsubsection{JOYSTICK\_A\_LEFT\_RIGHT}
+{\footnotesize\ttfamily \#define JOYSTICK\+\_\+\+A\+\_\+\+LEFT\+\_\+\+RIGHT~0x25}
+
+
+
+Definition at line 36 of file app.\+c.
+
+\mbox{\label{app_8c_a44e0fa1b5281e183485fb5574943ff77}} 
+\index{app.c@{app.c}!JOYSTICK\_A\_UP\_DOWN@{JOYSTICK\_A\_UP\_DOWN}}
+\index{JOYSTICK\_A\_UP\_DOWN@{JOYSTICK\_A\_UP\_DOWN}!app.c@{app.c}}
+\doxysubsubsection{JOYSTICK\_A\_UP\_DOWN}
+{\footnotesize\ttfamily \#define JOYSTICK\+\_\+\+A\+\_\+\+UP\+\_\+\+DOWN~0x27}
+
+
+
+Definition at line 37 of file app.\+c.
+
+\mbox{\label{app_8c_afd187e43d0c3ee3adedae6ea36c55b8b}} 
+\index{app.c@{app.c}!JOYSTICK\_ADDR@{JOYSTICK\_ADDR}}
+\index{JOYSTICK\_ADDR@{JOYSTICK\_ADDR}!app.c@{app.c}}
+\doxysubsubsection{JOYSTICK\_ADDR}
+{\footnotesize\ttfamily \#define JOYSTICK\+\_\+\+ADDR~0x34}
+
+
+
+Definition at line 31 of file app.\+c.
+
+\mbox{\label{app_8c_a80fbbbb111c9537a2dbf0a8cf7eab620}} 
+\index{app.c@{app.c}!JOYSTICK\_b\_LEFT\_RIGHT@{JOYSTICK\_b\_LEFT\_RIGHT}}
+\index{JOYSTICK\_b\_LEFT\_RIGHT@{JOYSTICK\_b\_LEFT\_RIGHT}!app.c@{app.c}}
+\doxysubsubsection{JOYSTICK\_b\_LEFT\_RIGHT}
+{\footnotesize\ttfamily \#define JOYSTICK\+\_\+b\+\_\+\+LEFT\+\_\+\+RIGHT~0x21}
+
+
+
+Definition at line 33 of file app.\+c.
+
+\mbox{\label{app_8c_a5933666075bfec66d650a2f9174e32a6}} 
+\index{app.c@{app.c}!JOYSTICK\_b\_UP\_DOWN@{JOYSTICK\_b\_UP\_DOWN}}
+\index{JOYSTICK\_b\_UP\_DOWN@{JOYSTICK\_b\_UP\_DOWN}!app.c@{app.c}}
+\doxysubsubsection{JOYSTICK\_b\_UP\_DOWN}
+{\footnotesize\ttfamily \#define JOYSTICK\+\_\+b\+\_\+\+UP\+\_\+\+DOWN~0x23}
+
+
+
+Definition at line 34 of file app.\+c.
+
+\mbox{\label{app_8c_a614217d263be1fb1a5f76e2ff7be19a2}} 
+\index{app.c@{app.c}!PORT@{PORT}}
+\index{PORT@{PORT}!app.c@{app.c}}
+\doxysubsubsection{PORT}
+{\footnotesize\ttfamily \#define PORT~5050}
+
+
+
+Definition at line 41 of file app.\+c.
+
+\mbox{\label{app_8c_a2ed0e3bd148ecfdfbf67ec9e9e8dbf8d}} 
+\index{app.c@{app.c}!S400@{S400}}
+\index{S400@{S400}!app.c@{app.c}}
+\doxysubsubsection{S400}
+{\footnotesize\ttfamily \#define S400~10}
+
+
+
+Definition at line 26 of file app.\+c.
+
+\mbox{\label{app_8c_a5097ce3d3160935fba79d32d6fb5850e}} 
+\index{app.c@{app.c}!S401@{S401}}
+\index{S401@{S401}!app.c@{app.c}}
+\doxysubsubsection{S401}
+{\footnotesize\ttfamily \#define S401~31}
+
+
+
+Definition at line 27 of file app.\+c.
+
+\mbox{\label{app_8c_aef63ad3a9baec32a03ad7279fbd1d7d7}} 
+\index{app.c@{app.c}!S402@{S402}}
+\index{S402@{S402}!app.c@{app.c}}
+\doxysubsubsection{S402}
+{\footnotesize\ttfamily \#define S402~15}
+
+
+
+Definition at line 28 of file app.\+c.
+
+\mbox{\label{app_8c_a8a894d4e3dad64313462cb446e9e3204}} 
+\index{app.c@{app.c}!S403@{S403}}
+\index{S403@{S403}!app.c@{app.c}}
+\doxysubsubsection{S403}
+{\footnotesize\ttfamily \#define S403~7}
+
+
+
+Definition at line 29 of file app.\+c.
+
+\mbox{\label{app_8c_a8026f6e905b29a28dcfbd0b6bd1fcf83}} 
+\index{app.c@{app.c}!SOCKET\_READY@{SOCKET\_READY}}
+\index{SOCKET\_READY@{SOCKET\_READY}!app.c@{app.c}}
+\doxysubsubsection{SOCKET\_READY}
+{\footnotesize\ttfamily \#define SOCKET\+\_\+\+READY~0x\+FF}
+
+
+
+Definition at line 42 of file app.\+c.
+
+\mbox{\label{app_8c_a7baab2aa5bf8eb14b6128e0f16634837}} 
+\index{app.c@{app.c}!UNIX\_PATH\_MAX@{UNIX\_PATH\_MAX}}
+\index{UNIX\_PATH\_MAX@{UNIX\_PATH\_MAX}!app.c@{app.c}}
+\doxysubsubsection{UNIX\_PATH\_MAX}
+{\footnotesize\ttfamily \#define UNIX\+\_\+\+PATH\+\_\+\+MAX~108}
+
+
+
+Definition at line 40 of file app.\+c.
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\label{app_8c_adabfe055b426c21a1acd1c7a7eb6537f}} 
+\index{app.c@{app.c}!cleanupRelease@{cleanupRelease}}
+\index{cleanupRelease@{cleanupRelease}!app.c@{app.c}}
+\doxysubsubsection{cleanupRelease()}
+{\footnotesize\ttfamily void cleanup\+Release (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 340 of file app.\+c.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{341 \{}
+\DoxyCodeLine{342     close(i2c\_fd);}
+\DoxyCodeLine{343     ret0 = close(req0.fd);}
+\DoxyCodeLine{344     \textcolor{keywordflow}{if} (ret0 == -\/1)}
+\DoxyCodeLine{345     \{}
+\DoxyCodeLine{346         perror(\textcolor{stringliteral}{"{}Failed to close GPIO LINEHANDLE device file"{}});}
+\DoxyCodeLine{347         ret0 = -\/errno;}
+\DoxyCodeLine{348     \}}
+\DoxyCodeLine{349     ret1 = close(req1.fd);}
+\DoxyCodeLine{350     \textcolor{keywordflow}{if} (ret1 == -\/1)}
+\DoxyCodeLine{351     \{}
+\DoxyCodeLine{352         perror(\textcolor{stringliteral}{"{}Failed to close GPIO LINEHANDLE device file"{}});}
+\DoxyCodeLine{353         ret1 = -\/errno;}
+\DoxyCodeLine{354     \}}
+\DoxyCodeLine{355     ret2 = close(req2.fd);}
+\DoxyCodeLine{356     \textcolor{keywordflow}{if} (ret1 == -\/1)}
+\DoxyCodeLine{357     \{}
+\DoxyCodeLine{358         perror(\textcolor{stringliteral}{"{}Failed to close GPIO LINEHANDLE device file"{}});}
+\DoxyCodeLine{359         ret2 = -\/errno;}
+\DoxyCodeLine{360     \}}
+\DoxyCodeLine{361     ret3 = close(req3.fd);}
+\DoxyCodeLine{362     \textcolor{keywordflow}{if} (ret3 == -\/1)}
+\DoxyCodeLine{363     \{}
+\DoxyCodeLine{364         perror(\textcolor{stringliteral}{"{}Failed to close GPIO LINEHANDLE device file"{}});}
+\DoxyCodeLine{365         ret3 = -\/errno;}
+\DoxyCodeLine{366     \}}
+\DoxyCodeLine{367 \}}
+
+\end{DoxyCode}
+\mbox{\label{app_8c_ac45745b95987f15be546be17fb7f18b1}} 
+\index{app.c@{app.c}!establishConnection@{establishConnection}}
+\index{establishConnection@{establishConnection}!app.c@{app.c}}
+\doxysubsubsection{establishConnection()}
+{\footnotesize\ttfamily bool establish\+Connection (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 488 of file app.\+c.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{489 \{}
+\DoxyCodeLine{490     \textcolor{keywordtype}{int} max\_connection\_attempts = 10;}
+\DoxyCodeLine{491     socket\_fd = socket(AF\_INET, SOCK\_STREAM, 0);}
+\DoxyCodeLine{492     \textcolor{keywordflow}{if} (socket\_fd == -\/1)}
+\DoxyCodeLine{493     \{}
+\DoxyCodeLine{494         perror(\textcolor{stringliteral}{"{}Error creating socket"{}});}
+\DoxyCodeLine{495         \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{496     \}}
+\DoxyCodeLine{497 }
+\DoxyCodeLine{498     \textcolor{keywordflow}{while} (max\_connection\_attempts > 0)}
+\DoxyCodeLine{499     \{}
+\DoxyCodeLine{500         \textcolor{keywordflow}{if} (connect(socket\_fd, (\textcolor{keyword}{struct} sockaddr *)\&address, \textcolor{keyword}{sizeof}(address)) == 0)}
+\DoxyCodeLine{501         \{}
+\DoxyCodeLine{502             printf(\textcolor{stringliteral}{"{}Connected to the server\(\backslash\)n"{}});}
+\DoxyCodeLine{503             \textcolor{keywordflow}{return} \textcolor{keyword}{true}; \textcolor{comment}{// Exit the function with success}}
+\DoxyCodeLine{504         \}}
+\DoxyCodeLine{505         \textcolor{keywordflow}{else}}
+\DoxyCodeLine{506         \{}
+\DoxyCodeLine{507             perror(\textcolor{stringliteral}{"{}Error connecting to the server"{}});}
+\DoxyCodeLine{508             max\_connection\_attempts-\/-\/;}
+\DoxyCodeLine{509 }
+\DoxyCodeLine{510             \textcolor{comment}{// Wait for a short duration before retrying}}
+\DoxyCodeLine{511             sleep(1);}
+\DoxyCodeLine{512         \}}
+\DoxyCodeLine{513     \}}
+\DoxyCodeLine{514 }
+\DoxyCodeLine{515     \textcolor{comment}{// Connection attempts exhausted, handle the error as needed}}
+\DoxyCodeLine{516     fprintf(stderr, \textcolor{stringliteral}{"{}Failed to establish a connection\(\backslash\)n"{}});}
+\DoxyCodeLine{517     close(socket\_fd); \textcolor{comment}{// Close the socket if connection fails}}
+\DoxyCodeLine{518     \textcolor{keywordflow}{return} \textcolor{keyword}{false};     \textcolor{comment}{// Exit the function with failure}}
+\DoxyCodeLine{519 \}}
+
+\end{DoxyCode}
+\mbox{\label{app_8c_a4b3f54eba6a5cd705e8a85cf66b54fbb}} 
+\index{app.c@{app.c}!initialize\_gpio\_input@{initialize\_gpio\_input}}
+\index{initialize\_gpio\_input@{initialize\_gpio\_input}!app.c@{app.c}}
+\doxysubsubsection{initialize\_gpio\_input()}
+{\footnotesize\ttfamily int initialize\+\_\+gpio\+\_\+input (\begin{DoxyParamCaption}\item[{const char $\ast$}]{gpio\+\_\+chip,  }\item[{unsigned int}]{gpio\+\_\+line,  }\item[{int}]{ret }\end{DoxyParamCaption})}
+
+
+
+Definition at line 257 of file app.\+c.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{258 \{}
+\DoxyCodeLine{259 }
+\DoxyCodeLine{260     \textcolor{comment}{// Known working Input init:}}
+\DoxyCodeLine{261     \textcolor{comment}{// Open GPIO device}}
+\DoxyCodeLine{262     strcpy(chrdev\_name, gpio\_chip);}
+\DoxyCodeLine{263     fd = open(chrdev\_name, 0);}
+\DoxyCodeLine{264     \textcolor{keywordflow}{if} (fd == -\/1)}
+\DoxyCodeLine{265     \{}
+\DoxyCodeLine{266         ret = -\/errno;}
+\DoxyCodeLine{267         fprintf(stderr, \textcolor{stringliteral}{"{}Failed to open \%s\(\backslash\)n"{}}, chrdev\_name);}
+\DoxyCodeLine{268         \textcolor{keywordflow}{return} ret;}
+\DoxyCodeLine{269     \}}
+\DoxyCodeLine{270 }
+\DoxyCodeLine{271     \textcolor{comment}{// Setup variables for a request}}
+\DoxyCodeLine{272     \textcolor{comment}{// struct gpiohandle\_request req;}}
+\DoxyCodeLine{273     req.lineoffsets[0] = gpio\_line;}
+\DoxyCodeLine{274     req.flags = GPIOHANDLE\_REQUEST\_INPUT;}
+\DoxyCodeLine{275     snprintf(req.consumer\_label, \textcolor{keyword}{sizeof}(req.consumer\_label), \textcolor{stringliteral}{"{}btn\_\%u"{}}, gpio\_line);}
+\DoxyCodeLine{276     req.lines = 1;}
+\DoxyCodeLine{277 }
+\DoxyCodeLine{278     \textcolor{comment}{// Request GPIO line}}
+\DoxyCodeLine{279     ret = ioctl(fd, GPIO\_GET\_LINEHANDLE\_IOCTL, \&req);}
+\DoxyCodeLine{280     \textcolor{keywordflow}{if} (ret == -\/1)}
+\DoxyCodeLine{281     \{}
+\DoxyCodeLine{282         ret = -\/errno;}
+\DoxyCodeLine{283         fprintf(stderr, \textcolor{stringliteral}{"{}Failed to issue GET LINEHANDLE IOCTL (\%d)\(\backslash\)n"{}}, ret);}
+\DoxyCodeLine{284     \}}
+\DoxyCodeLine{285 }
+\DoxyCodeLine{286     \textcolor{comment}{// Store the file descriptor in the global req variable}}
+\DoxyCodeLine{287     \textcolor{keywordflow}{if} (gpio\_line == S400)}
+\DoxyCodeLine{288     \{}
+\DoxyCodeLine{289         reqS0 = req;}
+\DoxyCodeLine{290     \}}
+\DoxyCodeLine{291     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (gpio\_line == S401)}
+\DoxyCodeLine{292     \{}
+\DoxyCodeLine{293         reqS1 = req;}
+\DoxyCodeLine{294     \}}
+\DoxyCodeLine{295     \textcolor{keywordflow}{if} (gpio\_line == S402)}
+\DoxyCodeLine{296     \{}
+\DoxyCodeLine{297         reqS2 = req;}
+\DoxyCodeLine{298     \}}
+\DoxyCodeLine{299     \textcolor{keywordflow}{if} (gpio\_line == S403)}
+\DoxyCodeLine{300     \{}
+\DoxyCodeLine{301         reqS3 = req;}
+\DoxyCodeLine{302     \}}
+\DoxyCodeLine{303     \textcolor{comment}{// Close GPIO device (not needed after acquiring the line handle)}}
+\DoxyCodeLine{304     \textcolor{keywordflow}{if} (close(fd) == -\/1)}
+\DoxyCodeLine{305         perror(\textcolor{stringliteral}{"{}Failed to close GPIO character device file"{}});}
+\DoxyCodeLine{306 }
+\DoxyCodeLine{307     \textcolor{keywordflow}{return} ret;}
+\DoxyCodeLine{308 \}}
+
+\end{DoxyCode}
+\mbox{\label{app_8c_ae66b1a7b21c462287d3fe2149c8d9a3d}} 
+\index{app.c@{app.c}!initialize\_gpio\_output@{initialize\_gpio\_output}}
+\index{initialize\_gpio\_output@{initialize\_gpio\_output}!app.c@{app.c}}
+\doxysubsubsection{initialize\_gpio\_output()}
+{\footnotesize\ttfamily int initialize\+\_\+gpio\+\_\+output (\begin{DoxyParamCaption}\item[{const char $\ast$}]{gpio\+\_\+chip,  }\item[{unsigned int}]{gpio\+\_\+line,  }\item[{int}]{ret }\end{DoxyParamCaption})}
+
+
+
+Definition at line 203 of file app.\+c.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{204 \{}
+\DoxyCodeLine{205     \textcolor{comment}{// /*  Open gpio device: gpiochipX */}}
+\DoxyCodeLine{206     strcpy(chrdev\_name, gpio\_chip);}
+\DoxyCodeLine{207     fd = open(chrdev\_name, 0);}
+\DoxyCodeLine{208     \textcolor{keywordflow}{if} (fd == -\/1)}
+\DoxyCodeLine{209     \{}
+\DoxyCodeLine{210         ret = -\/errno;}
+\DoxyCodeLine{211         fprintf(stderr, \textcolor{stringliteral}{"{}Failed to open \%s\(\backslash\)n"{}}, chrdev\_name);}
+\DoxyCodeLine{212 }
+\DoxyCodeLine{213         \textcolor{keywordflow}{return} ret;}
+\DoxyCodeLine{214     \}}
+\DoxyCodeLine{215 }
+\DoxyCodeLine{216     \textcolor{comment}{/* Setup variables for a request */}}
+\DoxyCodeLine{217     req.lineoffsets[0] = gpio\_line;}
+\DoxyCodeLine{218     req.flags = GPIOHANDLE\_REQUEST\_OUTPUT;}
+\DoxyCodeLine{219     memcpy(req.default\_values, \&data, \textcolor{keyword}{sizeof}(req.default\_values));}
+\DoxyCodeLine{220     snprintf(req.consumer\_label, \textcolor{keyword}{sizeof}(req.consumer\_label), \textcolor{stringliteral}{"{}led\_\%u"{}}, gpio\_line);}
+\DoxyCodeLine{221     req.lines = 1;}
+\DoxyCodeLine{222 }
+\DoxyCodeLine{223     \textcolor{comment}{/* Request GPIO line: GPIO\_H\_11 -\/-\/> LED-\/DS400 */}}
+\DoxyCodeLine{224     ret = ioctl(fd, GPIO\_GET\_LINEHANDLE\_IOCTL, \&req);}
+\DoxyCodeLine{225     \textcolor{keywordflow}{if} (ret == -\/1)}
+\DoxyCodeLine{226     \{}
+\DoxyCodeLine{227         ret = -\/errno;}
+\DoxyCodeLine{228         fprintf(stderr, \textcolor{stringliteral}{"{}Failed to issue GET LINEHANDLE IOCTL (\%d)\(\backslash\)n"{}},}
+\DoxyCodeLine{229                 ret);}
+\DoxyCodeLine{230     \}}
+\DoxyCodeLine{231     \textcolor{keywordflow}{if} (close(fd) == -\/1)}
+\DoxyCodeLine{232         perror(\textcolor{stringliteral}{"{}Failed to close GPIO character device file"{}});}
+\DoxyCodeLine{233 }
+\DoxyCodeLine{234     \textcolor{comment}{/* Store the file descriptor in the global req variable */}}
+\DoxyCodeLine{235     \textcolor{keywordflow}{if} (gpio\_line == DS400)}
+\DoxyCodeLine{236     \{}
+\DoxyCodeLine{237         req0 = req;}
+\DoxyCodeLine{238     \}}
+\DoxyCodeLine{239     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (gpio\_line == DS401)}
+\DoxyCodeLine{240     \{}
+\DoxyCodeLine{241         req1 = req;}
+\DoxyCodeLine{242     \}}
+\DoxyCodeLine{243     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (gpio\_line == DS402)}
+\DoxyCodeLine{244     \{}
+\DoxyCodeLine{245         req2 = req;}
+\DoxyCodeLine{246     \}}
+\DoxyCodeLine{247     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (gpio\_line == DS403)}
+\DoxyCodeLine{248     \{}
+\DoxyCodeLine{249         req3 = req;}
+\DoxyCodeLine{250     \}}
+\DoxyCodeLine{251     \textcolor{keywordflow}{return} ret;}
+\DoxyCodeLine{252 \}}
+
+\end{DoxyCode}
+\mbox{\label{app_8c_a3c04138a5bfe5d72780bb7e82a18e627}} 
+\index{app.c@{app.c}!main@{main}}
+\index{main@{main}!app.c@{app.c}}
+\doxysubsubsection{main()}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv }\end{DoxyParamCaption})}
+
+
+
+Definition at line 120 of file app.\+c.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{121 \{}
+\DoxyCodeLine{122     \textcolor{comment}{// GPIO reading}}
+\DoxyCodeLine{123     uint8\_t inputState = 0x00;}
+\DoxyCodeLine{124 }
+\DoxyCodeLine{125     \textcolor{comment}{// LED Init}}
+\DoxyCodeLine{126     ret0 = initialize\_gpio\_output(GPIO\_BANK1, DS400, ret0);}
+\DoxyCodeLine{127     ret1 = initialize\_gpio\_output(GPIO\_BANK3, DS401, ret1);}
+\DoxyCodeLine{128     ret2 = initialize\_gpio\_output(GPIO\_BANK3, DS402, ret2);}
+\DoxyCodeLine{129     ret3 = initialize\_gpio\_output(GPIO\_BANK3, DS403, ret3);}
+\DoxyCodeLine{130 }
+\DoxyCodeLine{131     \textcolor{comment}{// Switch init}}
+\DoxyCodeLine{132     retS0 = initialize\_gpio\_input(GPIO\_BANK1, S400, retS0);}
+\DoxyCodeLine{133     retS1 = initialize\_gpio\_input(GPIO\_BANK1, S401, retS1);}
+\DoxyCodeLine{134     retS2 = initialize\_gpio\_input(GPIO\_BANK1, S402, retS2);}
+\DoxyCodeLine{135     retS3 = initialize\_gpio\_input(GPIO\_BANK3, S403, retS3);}
+\DoxyCodeLine{136 }
+\DoxyCodeLine{137     \textcolor{comment}{// I2c init}}
+\DoxyCodeLine{138     i2c\_fd = open(I2C\_DEVICE, O\_RDWR);}
+\DoxyCodeLine{139     \textcolor{keywordflow}{if} (i2c\_fd < 0)}
+\DoxyCodeLine{140     \{}
+\DoxyCodeLine{141         perror(\textcolor{stringliteral}{"{}i2cOpen"{}});}
+\DoxyCodeLine{142         printf(\textcolor{stringliteral}{"{}No such device found!\(\backslash\)n"{}});}
+\DoxyCodeLine{143         \textcolor{keywordflow}{return} -\/1;}
+\DoxyCodeLine{144     \}}
+\DoxyCodeLine{145 }
+\DoxyCodeLine{146     \textcolor{comment}{/* Set the I2C slave address for all subsequent I2C device transfers */}}
+\DoxyCodeLine{147     \textcolor{keywordflow}{if} (ioctl(i2c\_fd, I2C\_SLAVE\_FORCE, JOYSTICK\_ADDR) < 0)}
+\DoxyCodeLine{148     \{}
+\DoxyCodeLine{149         perror(\textcolor{stringliteral}{"{}i2cSetAddress"{}});}
+\DoxyCodeLine{150         \textcolor{keywordflow}{return} -\/1;}
+\DoxyCodeLine{151     \}}
+\DoxyCodeLine{152 }
+\DoxyCodeLine{153     \textcolor{comment}{// Socket}}
+\DoxyCodeLine{154     \textcolor{comment}{// Specify the socket file path for real application}}
+\DoxyCodeLine{155     \textcolor{keyword}{const} \textcolor{keywordtype}{char} *socket\_path = \textcolor{stringliteral}{"{}/tmp/socket"{}};}
+\DoxyCodeLine{156     memset(\&address, 0, \textcolor{keyword}{sizeof}(address));}
+\DoxyCodeLine{157     address.sun\_family = AF\_UNIX;}
+\DoxyCodeLine{158     strncpy(address.sun\_path, socket\_path, UNIX\_PATH\_MAX -\/ 1);}
+\DoxyCodeLine{159 }
+\DoxyCodeLine{160     uint8\_t valueToSend;}
+\DoxyCodeLine{161     \textcolor{keywordtype}{int} n;}
+\DoxyCodeLine{162     \textcolor{comment}{// Call the function to establish the connection}}
+\DoxyCodeLine{163     \textcolor{keywordflow}{if} (!establishConnection())}
+\DoxyCodeLine{164     \{}
+\DoxyCodeLine{165         \textcolor{comment}{// Handle the failure appropriately}}
+\DoxyCodeLine{166         cleanupRelease();}
+\DoxyCodeLine{167         \textcolor{keywordflow}{return} 1;}
+\DoxyCodeLine{168     \}}
+\DoxyCodeLine{169     \textcolor{keywordflow}{else}}
+\DoxyCodeLine{170     \{}
+\DoxyCodeLine{171         runSocket = \textcolor{keyword}{true};}
+\DoxyCodeLine{172         valueToSend = SOCKET\_READY;}
+\DoxyCodeLine{173     \}}
+\DoxyCodeLine{174     \textcolor{comment}{// Send 8-\/bit integer}}
+\DoxyCodeLine{175     n = write(socket\_fd, \&valueToSend, \textcolor{keyword}{sizeof}(valueToSend));}
+\DoxyCodeLine{176     \textcolor{keywordflow}{if} (n < 0)}
+\DoxyCodeLine{177     \{}
+\DoxyCodeLine{178         perror(\textcolor{stringliteral}{"{}ERROR writing to socket"{}});}
+\DoxyCodeLine{179         \textcolor{keywordflow}{return} 1;}
+\DoxyCodeLine{180     \}}
+\DoxyCodeLine{181 }
+\DoxyCodeLine{182     \textcolor{keywordflow}{while} (1)}
+\DoxyCodeLine{183     \{}
+\DoxyCodeLine{184         inputState = readInputs();}
+\DoxyCodeLine{185         \textcolor{comment}{// Send 8-\/bit integer}}
+\DoxyCodeLine{186         n = write(socket\_fd, \&inputState, \textcolor{keyword}{sizeof}(valueToSend));}
+\DoxyCodeLine{187         \textcolor{keywordflow}{if} (n < 0)}
+\DoxyCodeLine{188         \{}
+\DoxyCodeLine{189             perror(\textcolor{stringliteral}{"{}ERROR writing to socket"{}});}
+\DoxyCodeLine{190             \textcolor{keywordflow}{return} 1;}
+\DoxyCodeLine{191         \}}
+\DoxyCodeLine{192         printf(\textcolor{stringliteral}{"{}input state: 0x\%02X"{}}, inputState);}
+\DoxyCodeLine{193         sleep(1);}
+\DoxyCodeLine{194     \}}
+\DoxyCodeLine{195 }
+\DoxyCodeLine{196     cleanupRelease();}
+\DoxyCodeLine{197     \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{198 \}}
+
+\end{DoxyCode}
+\mbox{\label{app_8c_a5f42c4eb1231dcc9baaac8ff1bcc1a4e}} 
+\index{app.c@{app.c}!readAdcValue@{readAdcValue}}
+\index{readAdcValue@{readAdcValue}!app.c@{app.c}}
+\doxysubsubsection{readAdcValue()}
+{\footnotesize\ttfamily int read\+Adc\+Value (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 326 of file app.\+c.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{327 \{}
+\DoxyCodeLine{328     \textcolor{keywordflow}{if} (read(i2c\_fd, i2cCommBuffer, 1) != 1)}
+\DoxyCodeLine{329     \{}
+\DoxyCodeLine{330         perror(\textcolor{stringliteral}{"{}read error"{}});}
+\DoxyCodeLine{331         close(i2c\_fd);}
+\DoxyCodeLine{332         \textcolor{keywordflow}{return} -\/1;}
+\DoxyCodeLine{333     \}}
+\DoxyCodeLine{334     uint8\_t value = i2cCommBuffer[0];}
+\DoxyCodeLine{335     \textcolor{keywordflow}{return} value;}
+\DoxyCodeLine{336 \}}
+
+\end{DoxyCode}
+\mbox{\label{app_8c_ace04a5631c0f7a1fb6babdb70efbc815}} 
+\index{app.c@{app.c}!readInputs@{readInputs}}
+\index{readInputs@{readInputs}!app.c@{app.c}}
+\doxysubsubsection{readInputs()}
+{\footnotesize\ttfamily uint8\+\_\+t read\+Inputs (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 376 of file app.\+c.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{377 \{}
+\DoxyCodeLine{378     uint8\_t adcValue;}
+\DoxyCodeLine{379     int8\_t inputState = 0x00;}
+\DoxyCodeLine{380 }
+\DoxyCodeLine{381     uint8\_t joystickUpReading = 0xFC;    \textcolor{comment}{// 252}}
+\DoxyCodeLine{382     uint8\_t joystickDownReading = 0xF1;  \textcolor{comment}{// 241}}
+\DoxyCodeLine{383     uint8\_t joystickRightReading = 0xFC; \textcolor{comment}{// 252}}
+\DoxyCodeLine{384     uint8\_t joystickLeftReading = 0xF2;  \textcolor{comment}{// 242}}
+\DoxyCodeLine{385 }
+\DoxyCodeLine{386     uint8\_t joystickUp = 0x08;}
+\DoxyCodeLine{387     uint8\_t joystickDown = 0x04;}
+\DoxyCodeLine{388     uint8\_t joystickRight = 0x02;}
+\DoxyCodeLine{389     uint8\_t joystickLeft = 0x01;}
+\DoxyCodeLine{390 }
+\DoxyCodeLine{391     uint8\_t startPressed = 0x80;}
+\DoxyCodeLine{392     uint8\_t selectPressed = 0x40;}
+\DoxyCodeLine{393     uint8\_t aPressed = 0x20;}
+\DoxyCodeLine{394     uint8\_t bPressed = 0x10;}
+\DoxyCodeLine{395 }
+\DoxyCodeLine{396     \textcolor{keywordflow}{if} (setUpAdcValue(JOYSTICK\_A\_UP\_DOWN) < 0)}
+\DoxyCodeLine{397     \{}
+\DoxyCodeLine{398         printf(\textcolor{stringliteral}{"{}Failed to configure ADC"{}});}
+\DoxyCodeLine{399         perror(\textcolor{stringliteral}{"{}Setup ADC"{}});}
+\DoxyCodeLine{400         \textcolor{comment}{// isReading = false;}}
+\DoxyCodeLine{401     \}}
+\DoxyCodeLine{402     adcValue = readAdcValue();}
+\DoxyCodeLine{403     printf(\textcolor{stringliteral}{"{}U/D Value: \%d\(\backslash\)n"{}}, adcValue);}
+\DoxyCodeLine{404 }
+\DoxyCodeLine{405     \textcolor{keywordflow}{if} (adcValue == joystickUpReading)}
+\DoxyCodeLine{406     \{}
+\DoxyCodeLine{407         inputState |= joystickUp;}
+\DoxyCodeLine{408     \}}
+\DoxyCodeLine{409     \textcolor{keywordflow}{if} (adcValue == joystickLeftReading)}
+\DoxyCodeLine{410     \{}
+\DoxyCodeLine{411         inputState |= joystickDown;}
+\DoxyCodeLine{412     \}}
+\DoxyCodeLine{413 }
+\DoxyCodeLine{414     sleep\_ms(20);}
+\DoxyCodeLine{415     \textcolor{keywordflow}{if} (setUpAdcValue(JOYSTICK\_A\_LEFT\_RIGHT) < 0)}
+\DoxyCodeLine{416     \{}
+\DoxyCodeLine{417         printf(\textcolor{stringliteral}{"{}Failed to configure ADC"{}});}
+\DoxyCodeLine{418         perror(\textcolor{stringliteral}{"{}Setup ADC"{}});}
+\DoxyCodeLine{419         \textcolor{comment}{// isReading = false;}}
+\DoxyCodeLine{420     \}}
+\DoxyCodeLine{421     printf(\textcolor{stringliteral}{"{}L/R Value: \%d\(\backslash\)n"{}}, adcValue);}
+\DoxyCodeLine{422 }
+\DoxyCodeLine{423     adcValue = readAdcValue();}
+\DoxyCodeLine{424     \textcolor{keywordflow}{if} (adcValue == joystickRightReading)}
+\DoxyCodeLine{425     \{}
+\DoxyCodeLine{426         inputState |= joystickRight;}
+\DoxyCodeLine{427     \}}
+\DoxyCodeLine{428     \textcolor{keywordflow}{if} (adcValue == joystickLeftReading)}
+\DoxyCodeLine{429     \{}
+\DoxyCodeLine{430         inputState |= joystickLeft;}
+\DoxyCodeLine{431     \}}
+\DoxyCodeLine{432 }
+\DoxyCodeLine{433     printf(\textcolor{stringliteral}{"{}U/D Value: \%d\(\backslash\)n"{}}, adcValue);}
+\DoxyCodeLine{434     sleep\_ms(10);}
+\DoxyCodeLine{435 }
+\DoxyCodeLine{436     \textcolor{keywordflow}{if} (!readSwitch(retS0, reqS0))}
+\DoxyCodeLine{437     \{}
+\DoxyCodeLine{438         inputState |= startPressed;}
+\DoxyCodeLine{439         printf(\textcolor{stringliteral}{"{}Switch S400 active\(\backslash\)n"{}});}
+\DoxyCodeLine{440     \}}
+\DoxyCodeLine{441     \textcolor{keywordflow}{if} (!readSwitch(retS1, reqS1))}
+\DoxyCodeLine{442     \{}
+\DoxyCodeLine{443         inputState |= selectPressed;}
+\DoxyCodeLine{444         printf(\textcolor{stringliteral}{"{}Switch S401 active\(\backslash\)n"{}});}
+\DoxyCodeLine{445     \}}
+\DoxyCodeLine{446     \textcolor{keywordflow}{if} (!readSwitch(retS2, reqS2))}
+\DoxyCodeLine{447     \{}
+\DoxyCodeLine{448         inputState |= aPressed;}
+\DoxyCodeLine{449         printf(\textcolor{stringliteral}{"{}Switch S402 active\(\backslash\)n"{}});}
+\DoxyCodeLine{450     \}}
+\DoxyCodeLine{451     \textcolor{keywordflow}{if} (!readSwitch(retS3, reqS3))}
+\DoxyCodeLine{452     \{}
+\DoxyCodeLine{453         inputState |= bPressed;}
+\DoxyCodeLine{454         printf(\textcolor{stringliteral}{"{}Switch S403 active\(\backslash\)n"{}});}
+\DoxyCodeLine{455     \}}
+\DoxyCodeLine{456     sleep\_ms(10);}
+\DoxyCodeLine{457     \textcolor{comment}{// printf("{}Inputs state: 0x\%02X\(\backslash\)n"{}, inputStates);}}
+\DoxyCodeLine{458     \textcolor{keywordflow}{return} inputState;}
+\DoxyCodeLine{459 \}}
+
+\end{DoxyCode}
+\mbox{\label{app_8c_aa35bd984a90f989bc3fab734e0ed6c59}} 
+\index{app.c@{app.c}!readSwitch@{readSwitch}}
+\index{readSwitch@{readSwitch}!app.c@{app.c}}
+\doxysubsubsection{readSwitch()}
+{\footnotesize\ttfamily int read\+Switch (\begin{DoxyParamCaption}\item[{int}]{ret\+Switch,  }\item[{struct gpiohandle\+\_\+request}]{req\+Switch }\end{DoxyParamCaption})}
+
+
+
+Definition at line 463 of file app.\+c.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{464 \{}
+\DoxyCodeLine{465     \textcolor{keywordtype}{int} value\_switch = 0;}
+\DoxyCodeLine{466     retSwitch = ioctl(reqSwitch.fd, GPIOHANDLE\_GET\_LINE\_VALUES\_IOCTL, \&value\_switch);}
+\DoxyCodeLine{467     \textcolor{keywordflow}{if} (retSwitch == -\/1)}
+\DoxyCodeLine{468     \{}
+\DoxyCodeLine{469         retSwitch = -\/errno;}
+\DoxyCodeLine{470         fprintf(stderr, \textcolor{stringliteral}{"{}Failed to get line values for S (\%d)\(\backslash\)n"{}}, retSwitch);}
+\DoxyCodeLine{471     \}}
+\DoxyCodeLine{472     \textcolor{keywordflow}{return} value\_switch;}
+\DoxyCodeLine{473 \}}
+
+\end{DoxyCode}
+\mbox{\label{app_8c_a3ee6a36caaf11a81268ff9bf3d9e5b31}} 
+\index{app.c@{app.c}!setUpAdcValue@{setUpAdcValue}}
+\index{setUpAdcValue@{setUpAdcValue}!app.c@{app.c}}
+\doxysubsubsection{setUpAdcValue()}
+{\footnotesize\ttfamily int set\+Up\+Adc\+Value (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{setup }\end{DoxyParamCaption})}
+
+
+
+Definition at line 312 of file app.\+c.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{313 \{}
+\DoxyCodeLine{314     i2cCommBuffer[0] = setup;}
+\DoxyCodeLine{315     \textcolor{keywordflow}{if} (write(i2c\_fd, i2cCommBuffer, 1) != 1)}
+\DoxyCodeLine{316     \{}
+\DoxyCodeLine{317         perror(\textcolor{stringliteral}{"{}write error!"{}});}
+\DoxyCodeLine{318         close(i2c\_fd);}
+\DoxyCodeLine{319         \textcolor{keywordflow}{return} -\/1;}
+\DoxyCodeLine{320     \}}
+\DoxyCodeLine{321     \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{322 \}}
+
+\end{DoxyCode}
+\mbox{\label{app_8c_a73a8d7e98be85f67961ca682c291033a}} 
+\index{app.c@{app.c}!sleep\_ms@{sleep\_ms}}
+\index{sleep\_ms@{sleep\_ms}!app.c@{app.c}}
+\doxysubsubsection{sleep\_ms()}
+{\footnotesize\ttfamily void sleep\+\_\+ms (\begin{DoxyParamCaption}\item[{int}]{milliseconds }\end{DoxyParamCaption})}
+
+
+
+Definition at line 477 of file app.\+c.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{478 \{}
+\DoxyCodeLine{479     usleep(milliseconds * 1000);}
+\DoxyCodeLine{480 \}}
+
+\end{DoxyCode}
+\mbox{\label{app_8c_a4803ed941ce8669eebf52b1f123afdbe}} 
+\index{app.c@{app.c}!turnOffLed@{turnOffLed}}
+\index{turnOffLed@{turnOffLed}!app.c@{app.c}}
+\doxysubsubsection{turnOffLed()}
+{\footnotesize\ttfamily void turn\+Off\+Led (\begin{DoxyParamCaption}\item[{int}]{led\+Indice }\end{DoxyParamCaption})}
+
+\mbox{\label{app_8c_a84300b4b0180ece34d38082e8e338971}} 
+\index{app.c@{app.c}!turnOnLed@{turnOnLed}}
+\index{turnOnLed@{turnOnLed}!app.c@{app.c}}
+\doxysubsubsection{turnOnLed()}
+{\footnotesize\ttfamily void turn\+On\+Led (\begin{DoxyParamCaption}\item[{int}]{led\+Indice }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\label{app_8c_ab78b105450f938524655ee31739376d8}} 
+\index{app.c@{app.c}!address@{address}}
+\index{address@{address}!app.c@{app.c}}
+\doxysubsubsection{address}
+{\footnotesize\ttfamily struct sockaddr\+\_\+un address}
+
+
+
+Definition at line 56 of file app.\+c.
+
+\mbox{\label{app_8c_ab793fe8290afe0eb36e4cea6b4dbf6fd}} 
+\index{app.c@{app.c}!chrdev\_name@{chrdev\_name}}
+\index{chrdev\_name@{chrdev\_name}!app.c@{app.c}}
+\doxysubsubsection{chrdev\_name}
+{\footnotesize\ttfamily char chrdev\+\_\+name[20]\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 82 of file app.\+c.
+
+\mbox{\label{app_8c_afd6205bf17ac7cea626e0a805afc73ff}} 
+\index{app.c@{app.c}!data@{data}}
+\index{data@{data}!app.c@{app.c}}
+\doxysubsubsection{data}
+{\footnotesize\ttfamily struct gpiohandle\+\_\+data data\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 61 of file app.\+c.
+
+\mbox{\label{app_8c_abea449a895aa94f257f9208d671d4557}} 
+\index{app.c@{app.c}!devID@{devID}}
+\index{devID@{devID}!app.c@{app.c}}
+\doxysubsubsection{devID}
+{\footnotesize\ttfamily uint8\+\_\+t dev\+ID\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 95 of file app.\+c.
+
+\mbox{\label{app_8c_aadfde85da52843e83f540a3f2c9bb9bf}} 
+\index{app.c@{app.c}!event\_req@{event\_req}}
+\index{event\_req@{event\_req}!app.c@{app.c}}
+\doxysubsubsection{event\_req}
+{\footnotesize\ttfamily struct gpioevent\+\_\+request event\+\_\+req}
+
+
+
+Definition at line 61 of file app.\+c.
+
+\mbox{\label{app_8c_a6f8059414f0228f0256115e024eeed4b}} 
+\index{app.c@{app.c}!fd@{fd}}
+\index{fd@{fd}!app.c@{app.c}}
+\doxysubsubsection{fd}
+{\footnotesize\ttfamily int fd\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 97 of file app.\+c.
+
+\mbox{\label{app_8c_a5b416045e596c49d45b0f20cf0d508ae}} 
+\index{app.c@{app.c}!GPIO\_BANK1@{GPIO\_BANK1}}
+\index{GPIO\_BANK1@{GPIO\_BANK1}!app.c@{app.c}}
+\doxysubsubsection{GPIO\_BANK1}
+{\footnotesize\ttfamily const char GPIO\+\_\+\+BANK1[$\,$] = \char`\"{}/dev/gpiochip1\char`\"{}\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 85 of file app.\+c.
+
+\mbox{\label{app_8c_ae55b09b25a4ac5926b5c4a863d6d8f49}} 
+\index{app.c@{app.c}!GPIO\_BANK3@{GPIO\_BANK3}}
+\index{GPIO\_BANK3@{GPIO\_BANK3}!app.c@{app.c}}
+\doxysubsubsection{GPIO\_BANK3}
+{\footnotesize\ttfamily const char GPIO\+\_\+\+BANK3[$\,$] = \char`\"{}/dev/gpiochip3\char`\"{}\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 86 of file app.\+c.
+
+\mbox{\label{app_8c_af00bbf8a436e5853c2bcf182ec7e67a3}} 
+\index{app.c@{app.c}!I2C\_DEVICE@{I2C\_DEVICE}}
+\index{I2C\_DEVICE@{I2C\_DEVICE}!app.c@{app.c}}
+\doxysubsubsection{I2C\_DEVICE}
+{\footnotesize\ttfamily const char I2\+C\+\_\+\+DEVICE[$\,$] = \char`\"{}/dev/i2c-\/0\char`\"{}}
+
+
+
+Definition at line 88 of file app.\+c.
+
+\mbox{\label{app_8c_a1c1c2753f354efefbda98508d811e6a9}} 
+\index{app.c@{app.c}!i2c\_fd@{i2c\_fd}}
+\index{i2c\_fd@{i2c\_fd}!app.c@{app.c}}
+\doxysubsubsection{i2c\_fd}
+{\footnotesize\ttfamily int32\+\_\+t i2c\+\_\+fd\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 91 of file app.\+c.
+
+\mbox{\label{app_8c_a457fa3c034a80f5ea3581a0983b91b5b}} 
+\index{app.c@{app.c}!i2cCommBuffer@{i2cCommBuffer}}
+\index{i2cCommBuffer@{i2cCommBuffer}!app.c@{app.c}}
+\doxysubsubsection{i2cCommBuffer}
+{\footnotesize\ttfamily uint8\+\_\+t i2c\+Comm\+Buffer[8]\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 94 of file app.\+c.
+
+\mbox{\label{app_8c_a3a2ad1ef4b76f12f363a3ff3cd38382e}} 
+\index{app.c@{app.c}!readInputThread@{readInputThread}}
+\index{readInputThread@{readInputThread}!app.c@{app.c}}
+\doxysubsubsection{readInputThread}
+{\footnotesize\ttfamily pthread\+\_\+t read\+Input\+Thread}
+
+
+
+Definition at line 56 of file app.\+c.
+
+\mbox{\label{app_8c_a19b25afcc7d7ee23eed01279987f8d9e}} 
+\index{app.c@{app.c}!req@{req}}
+\index{req@{req}!app.c@{app.c}}
+\doxysubsubsection{req}
+{\footnotesize\ttfamily struct gpiohandle\+\_\+request req\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 61 of file app.\+c.
+
+\mbox{\label{app_8c_ae61be9679b3a4237613a1b8cd5b471bb}} 
+\index{app.c@{app.c}!req0@{req0}}
+\index{req0@{req0}!app.c@{app.c}}
+\doxysubsubsection{req0}
+{\footnotesize\ttfamily struct gpiohandle\+\_\+request req0}
+
+
+
+Definition at line 61 of file app.\+c.
+
+\mbox{\label{app_8c_aa7fa68a569ae8b1feaa94a5431c82774}} 
+\index{app.c@{app.c}!req1@{req1}}
+\index{req1@{req1}!app.c@{app.c}}
+\doxysubsubsection{req1}
+{\footnotesize\ttfamily struct gpiohandle\+\_\+request req1}
+
+
+
+Definition at line 61 of file app.\+c.
+
+\mbox{\label{app_8c_adb2fdf57d9e195099bb3360ed72c5787}} 
+\index{app.c@{app.c}!req2@{req2}}
+\index{req2@{req2}!app.c@{app.c}}
+\doxysubsubsection{req2}
+{\footnotesize\ttfamily struct gpiohandle\+\_\+request req2}
+
+
+
+Definition at line 61 of file app.\+c.
+
+\mbox{\label{app_8c_a133e347584d0af9596ff6ce9c220ba75}} 
+\index{app.c@{app.c}!req3@{req3}}
+\index{req3@{req3}!app.c@{app.c}}
+\doxysubsubsection{req3}
+{\footnotesize\ttfamily struct gpiohandle\+\_\+request req3}
+
+
+
+Definition at line 61 of file app.\+c.
+
+\mbox{\label{app_8c_a52724f44282cf6a425b15ec02a716ec9}} 
+\index{app.c@{app.c}!reqS0@{reqS0}}
+\index{reqS0@{reqS0}!app.c@{app.c}}
+\doxysubsubsection{reqS0}
+{\footnotesize\ttfamily struct gpiohandle\+\_\+request req\+S0}
+
+
+
+Definition at line 61 of file app.\+c.
+
+\mbox{\label{app_8c_a3f61826d0ac847bee3b17aa3ce11950f}} 
+\index{app.c@{app.c}!reqS1@{reqS1}}
+\index{reqS1@{reqS1}!app.c@{app.c}}
+\doxysubsubsection{reqS1}
+{\footnotesize\ttfamily struct gpiohandle\+\_\+request req\+S1}
+
+
+
+Definition at line 61 of file app.\+c.
+
+\mbox{\label{app_8c_a311f75b04028ff7ab40f963cb0361885}} 
+\index{app.c@{app.c}!reqS2@{reqS2}}
+\index{reqS2@{reqS2}!app.c@{app.c}}
+\doxysubsubsection{reqS2}
+{\footnotesize\ttfamily struct gpiohandle\+\_\+request req\+S2}
+
+
+
+Definition at line 61 of file app.\+c.
+
+\mbox{\label{app_8c_af7dde79f387792b382fe50b303e68d9a}} 
+\index{app.c@{app.c}!reqS3@{reqS3}}
+\index{reqS3@{reqS3}!app.c@{app.c}}
+\doxysubsubsection{reqS3}
+{\footnotesize\ttfamily struct gpiohandle\+\_\+request req\+S3}
+
+
+
+Definition at line 61 of file app.\+c.
+
+\mbox{\label{app_8c_a6cbc997c595b50a10c2dfd354d3334db}} 
+\index{app.c@{app.c}!ret0@{ret0}}
+\index{ret0@{ret0}!app.c@{app.c}}
+\doxysubsubsection{ret0}
+{\footnotesize\ttfamily int ret0}
+
+
+
+Definition at line 53 of file app.\+c.
+
+\mbox{\label{app_8c_a2493e3eb14a7d819fb6017fbf4e5df0b}} 
+\index{app.c@{app.c}!ret1@{ret1}}
+\index{ret1@{ret1}!app.c@{app.c}}
+\doxysubsubsection{ret1}
+{\footnotesize\ttfamily int ret1}
+
+
+
+Definition at line 53 of file app.\+c.
+
+\mbox{\label{app_8c_aab485ad1d02aa42b067b244b1506027b}} 
+\index{app.c@{app.c}!ret2@{ret2}}
+\index{ret2@{ret2}!app.c@{app.c}}
+\doxysubsubsection{ret2}
+{\footnotesize\ttfamily int ret2}
+
+
+
+Definition at line 53 of file app.\+c.
+
+\mbox{\label{app_8c_aaa4b3bcdfdf2d0fbc48bb421941e460f}} 
+\index{app.c@{app.c}!ret3@{ret3}}
+\index{ret3@{ret3}!app.c@{app.c}}
+\doxysubsubsection{ret3}
+{\footnotesize\ttfamily int ret3}
+
+
+
+Definition at line 53 of file app.\+c.
+
+\mbox{\label{app_8c_ac33b4df95e7ca80aca7afd3c362218f2}} 
+\index{app.c@{app.c}!retS0@{retS0}}
+\index{retS0@{retS0}!app.c@{app.c}}
+\doxysubsubsection{retS0}
+{\footnotesize\ttfamily int ret\+S0}
+
+
+
+Definition at line 54 of file app.\+c.
+
+\mbox{\label{app_8c_a0421a3069f6e5bc5d5d138c52a6ee8ec}} 
+\index{app.c@{app.c}!retS1@{retS1}}
+\index{retS1@{retS1}!app.c@{app.c}}
+\doxysubsubsection{retS1}
+{\footnotesize\ttfamily int ret\+S1}
+
+
+
+Definition at line 54 of file app.\+c.
+
+\mbox{\label{app_8c_a06da0c129294bd80f14dc62c260df139}} 
+\index{app.c@{app.c}!retS2@{retS2}}
+\index{retS2@{retS2}!app.c@{app.c}}
+\doxysubsubsection{retS2}
+{\footnotesize\ttfamily int ret\+S2}
+
+
+
+Definition at line 54 of file app.\+c.
+
+\mbox{\label{app_8c_a423dbe36dd37cc4a20302619413918d0}} 
+\index{app.c@{app.c}!retS3@{retS3}}
+\index{retS3@{retS3}!app.c@{app.c}}
+\doxysubsubsection{retS3}
+{\footnotesize\ttfamily int ret\+S3}
+
+
+
+Definition at line 54 of file app.\+c.
+
+\mbox{\label{app_8c_a6778c8d1b94a7eac00f523ade51530c0}} 
+\index{app.c@{app.c}!revID@{revID}}
+\index{revID@{revID}!app.c@{app.c}}
+\doxysubsubsection{revID}
+{\footnotesize\ttfamily uint8\+\_\+t rev\+ID\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 95 of file app.\+c.
+
+\mbox{\label{app_8c_a36f7b6be7108281af77939ceaec42fd6}} 
+\index{app.c@{app.c}!running@{running}}
+\index{running@{running}!app.c@{app.c}}
+\doxysubsubsection{running}
+{\footnotesize\ttfamily bool running = true\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 83 of file app.\+c.
+
+\mbox{\label{app_8c_a54eecd224ad5e4dbd5ec95e7e3f339ea}} 
+\index{app.c@{app.c}!runSocket@{runSocket}}
+\index{runSocket@{runSocket}!app.c@{app.c}}
+\doxysubsubsection{runSocket}
+{\footnotesize\ttfamily bool run\+Socket = true}
+
+
+
+Definition at line 61 of file app.\+c.
+
+\mbox{\label{app_8c_ad02424c03e4b1b3ddbdb78d829489ac3}} 
+\index{app.c@{app.c}!socket\_fd@{socket\_fd}}
+\index{socket\_fd@{socket\_fd}!app.c@{app.c}}
+\doxysubsubsection{socket\_fd}
+{\footnotesize\ttfamily int socket\+\_\+fd}
+
+
+
+Definition at line 60 of file app.\+c.
+

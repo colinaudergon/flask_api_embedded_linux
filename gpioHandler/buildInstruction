@@ -1,0 +1,9 @@
+ cmake .. -DCMAKE_TOOLCHAIN_FILE=../arm-none-linux-aarch64-gcc.cmake
+make 
+(sudo mount -a)
+make install
+
+mincom rock5b
+login (student, ubuntu)
+cd /Apps
+./readingInputs

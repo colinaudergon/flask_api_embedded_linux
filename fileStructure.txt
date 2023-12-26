@@ -1,0 +1,11 @@
+File structure description:
+
+rock5b webBoy
+- app.py | main server application, provides static html web page, opens sockets with web client, handles socket connection from gpiohandler C programm
+- /tmp/ folder containig socket location
+-app.c, must be in the same location as app.py
+
+- gpiohandler 
+    - CMakeLists.txt
+    - build
+    - src

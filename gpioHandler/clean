@@ -1,0 +1,6 @@
+#!/bin/bash
+
+# Clean cmake build
+rm -r build 2> /dev/null || true
+rm -r doc 2> /dev/null || true
+

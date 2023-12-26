@@ -1,0 +1,9 @@
+/home/colin/Documents/flask_api_embedded_linux/gpioHandler/build/CMakeFiles/gpioHandler.dir
+/home/colin/Documents/flask_api_embedded_linux/gpioHandler/build/CMakeFiles/apidoc.dir
+/home/colin/Documents/flask_api_embedded_linux/gpioHandler/build/CMakeFiles/apidoc_forced.dir
+/home/colin/Documents/flask_api_embedded_linux/gpioHandler/build/CMakeFiles/edit_cache.dir
+/home/colin/Documents/flask_api_embedded_linux/gpioHandler/build/CMakeFiles/rebuild_cache.dir
+/home/colin/Documents/flask_api_embedded_linux/gpioHandler/build/CMakeFiles/list_install_components.dir
+/home/colin/Documents/flask_api_embedded_linux/gpioHandler/build/CMakeFiles/install.dir
+/home/colin/Documents/flask_api_embedded_linux/gpioHandler/build/CMakeFiles/install/local.dir
+/home/colin/Documents/flask_api_embedded_linux/gpioHandler/build/CMakeFiles/install/strip.dir

@@ -1,13 +1,15 @@
 import socket
-import subprocess
 import os
-import time
+import struct
+
+error_code = 255
 
 
-current_directory = os.getcwd()
-print(current_directory)
+# Create a new Unix domain socket
+s = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
 
-socket_path = "/tmp/demo_socket"
+# Specify the socket file path
+socket_path = "/tmp/socket"
 
 # Attempt to unlink the existing socket file
 try:
@@ -17,9 +19,6 @@ except OSError:
     print("Socket file does not exist or failed to unlink")
     pass
 
-# Create a new socket
-s = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
-
 # Bind the socket to the specified path
 try:
     s.bind(socket_path)
@@ -28,36 +27,22 @@ except OSError as e:
     print(f"Failed to bind socket: {e}")
     # Handle the error appropriately, possibly by exiting the script
 
-
-# #calls C function
-# c_program_path = os.path.join(current_directory, "pythonToCcommunicationTest", "socketC")
-# subprocess.call(c_program_path)
 # Listen for incoming connections
 s.listen(5)
 print("Server listening on", s)
 
-
-# c_program_path = os.path.join(current_directory, "pythonToCcommunicationTest","helloPython", "hellopython")
-
-
-exitCode="exit"
-connection=True
-
+clientIsRunning = False
 
 while True:
     client, client_address = s.accept()
     print("Accepted connection from", client_address)
-
-    while connection:
-        # print("looping!")
-        # Receive and send back data
-        data = client.recv(1024)
-        # print(f"Connection state: ",connection)
+    clientIsRunning = True
+    while clientIsRunning:
+        data = client.recv(1)  # Assuming the C client sends 1 byte at a time
         if data:
-            decoded = data.decode()
-            print("Received data:", decoded)
-            if(decoded != exitCode):
-                print("Received data:", decoded)            
-            else:
-                connection = False
-    client.close()
+            value_received = struct.unpack('B', data)[0]
+            print("Received data:", value_received)
+            if value_received == error_code:
+                print("Error handling data")
+                # clientIsRunning = False
+                #Add a program break here, close all threads and exit application
