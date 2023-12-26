@@ -39,11 +39,7 @@
 // Socket
 #define UNIX_PATH_MAX 108 // UNIX LIKE SOCKET (unused atm)
 #define PORT 5050
-#define SOCKET_READY 0xFF
-
-// #define SOCKET_SEND_INPU_DATA 0x0000 // Not sure that itll be used
-
-// #define EXIT_CODE 0xFF
+// #define SOCKET_READY 0xFF
 
 /*****************************************************************************/
 /* Global Variables						             						 */
@@ -55,6 +51,9 @@ int retS0, retS1, retS2, retS3;
 
 pthread_t readInputThread;
 
+unsigned int led_lines[] = {DS400, DS401, DS402, DS403};
+unsigned int ledOnOff[] = {0, 0, 0, 0};
+int num_leds = sizeof(led_lines) / sizeof(led_lines[0]);
 // Socket
 struct sockaddr_un address;
 int socket_fd;
@@ -157,7 +156,6 @@ int main(int argc, char **argv)
     address.sun_family = AF_UNIX;
     strncpy(address.sun_path, socket_path, UNIX_PATH_MAX - 1);
 
-    
     int n;
     // Call the function to establish the connection
     if (!establishConnection())
@@ -170,7 +168,7 @@ int main(int argc, char **argv)
     {
         runSocket = true;
     }
-    
+
     while (1)
     {
         inputState = readInputs();
@@ -384,11 +382,13 @@ uint8_t readInputs()
     uint8_t selectPressed = 0x40;
     uint8_t aPressed = 0x20;
     uint8_t bPressed = 0x10;
+    uint8_t errorCode = 0xFF;
 
     if (setUpAdcValue(JOYSTICK_A_UP_DOWN) < 0)
     {
         printf("Failed to configure ADC");
         perror("Setup ADC");
+        return errorCode;
         // isReading = false;
     }
     adcValue = readAdcValue();
@@ -409,6 +409,7 @@ uint8_t readInputs()
         printf("Failed to configure ADC");
         perror("Setup ADC");
         // isReading = false;
+        return errorCode;
     }
     printf("L/R Value: %d\n", adcValue);
 
@@ -428,21 +429,25 @@ uint8_t readInputs()
     if (!readSwitch(retS0, reqS0))
     {
         inputState |= startPressed;
+        pulseLed(0);
         printf("Switch S400 active\n");
     }
     if (!readSwitch(retS1, reqS1))
     {
         inputState |= selectPressed;
+        pulseLed(1);
         printf("Switch S401 active\n");
     }
     if (!readSwitch(retS2, reqS2))
     {
         inputState |= aPressed;
+        pulseLed(2);
         printf("Switch S402 active\n");
     }
     if (!readSwitch(retS3, reqS3))
     {
         inputState |= bPressed;
+        pulseLed(3);
         printf("Switch S403 active\n");
     }
     sleep_ms(10);
@@ -463,6 +468,29 @@ int readSwitch(int retSwitch, struct gpiohandle_request reqSwitch)
     }
     return value_switch;
 }
+
+/*****************************************************************************/
+/* Pulse a led for 10ms											 */
+/*****************************************************************************/
+void pulseLed(int ledIndice)
+{
+    // Turn on the specified LED
+    ledOnOff[ledIndice] = 1;
+    ret0 = ioctl(req0.fd, GPIOHANDLE_SET_LINE_VALUES_IOCTL, &ledOnOff[0]);
+    ret1 = ioctl(req1.fd, GPIOHANDLE_SET_LINE_VALUES_IOCTL, &ledOnOff[1]);
+    ret2 = ioctl(req2.fd, GPIOHANDLE_SET_LINE_VALUES_IOCTL, &ledOnOff[2]);
+    ret3 = ioctl(req3.fd, GPIOHANDLE_SET_LINE_VALUES_IOCTL, &ledOnOff[3]);
+
+    sleep_ms(10); // Wait for a short duration
+
+    // Turn off the specified LED
+    ledOnOff[ledIndice] = 0;
+    ret0 = ioctl(req0.fd, GPIOHANDLE_SET_LINE_VALUES_IOCTL, &ledOnOff[0]);
+    ret1 = ioctl(req1.fd, GPIOHANDLE_SET_LINE_VALUES_IOCTL, &ledOnOff[1]);
+    ret2 = ioctl(req2.fd, GPIOHANDLE_SET_LINE_VALUES_IOCTL, &ledOnOff[2]);
+    ret3 = ioctl(req3.fd, GPIOHANDLE_SET_LINE_VALUES_IOCTL, &ledOnOff[3]);
+}
+
 /*****************************************************************************/
 /* Sleep in ms Function											 */
 /*****************************************************************************/
