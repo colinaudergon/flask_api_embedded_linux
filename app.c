@@ -510,7 +510,7 @@ void sleep_ms(int milliseconds)
 bool establishConnection()
 {
     int max_connection_attempts = 10;
-    socket_fd = socket(AF_INET, SOCK_STREAM, 0);
+    socket_fd = socket(AF_UNIX, SOCK_STREAM, 0);
     if (socket_fd == -1)
     {
         perror("Error creating socket");
