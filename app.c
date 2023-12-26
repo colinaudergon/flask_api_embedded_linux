@@ -426,31 +426,31 @@ uint8_t readInputs()
     //     inputState |= joystickLeft;
     // }
 
-    // if (!readSwitch(retS0, reqS0))
-    // {
-    //     inputState |= startPressed;
-    //     pulseLed(0);
-    //     printf("Switch S400 active\n");
-    // }
-    // if (!readSwitch(retS1, reqS1))
-    // {
-    //     inputState |= selectPressed;
-    //     pulseLed(1);
-    //     printf("Switch S401 active\n");
-    // }
-    // if (!readSwitch(retS2, reqS2))
-    // {
-    //     inputState |= aPressed;
-    //     pulseLed(2);
-    //     printf("Switch S402 active\n");
-    // }
-    // if (!readSwitch(retS3, reqS3))
-    // {
-    //     inputState |= bPressed;
-    //     pulseLed(3);
-    //     printf("Switch S403 active\n");
-    // }
-    // sleep_ms(10);
+    if (!readSwitch(retS0, reqS0))
+    {
+        inputState |= startPressed;
+        pulseLed(0);
+        printf("Switch S400 active\n");
+    }
+    if (!readSwitch(retS1, reqS1))
+    {
+        inputState |= selectPressed;
+        pulseLed(1);
+        printf("Switch S401 active\n");
+    }
+    if (!readSwitch(retS2, reqS2))
+    {
+        inputState |= aPressed;
+        pulseLed(2);
+        printf("Switch S402 active\n");
+    }
+    if (!readSwitch(retS3, reqS3))
+    {
+        inputState |= bPressed;
+        pulseLed(3);
+        printf("Switch S403 active\n");
+    }
+    sleep_ms(10);
     printf("Inputs state: 0x%02X\n", inputState);
     return inputState;
 }
