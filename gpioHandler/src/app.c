@@ -110,6 +110,7 @@ int readAdcValue();
 
 uint8_t readInputs();
 int readSwitch(int retSwitch, struct gpiohandle_request reqSwitch);
+void pulseLed(int ledIndice);
 
 void sleep_ms(int milliseconds);
 
