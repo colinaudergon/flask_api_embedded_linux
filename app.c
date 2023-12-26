@@ -426,9 +426,6 @@ uint8_t readInputs()
         inputState |= joystickLeft;
     }
 
-    printf("U/D Value: %d\n", adcValue);
-    sleep_ms(10);
-
     if (!readSwitch(retS0, reqS0))
     {
         inputState |= startPressed;
