@@ -1,6 +1,8 @@
 import socket
 import os
 import struct
+import subprocess
+
 error_code=255
 def unix_socket_server(eventCallback):
     print("Currently in the unix socket thread")
@@ -26,8 +28,8 @@ def unix_socket_server(eventCallback):
     except OSError as e:
         print(f"Failed to bind socket: {e}")
         # Handle the error appropriately, possibly by exiting the script
-
     # Listen for incoming connections
+    c_program_process = subprocess.Popen(["./app_executable"])
     s.listen(5)
     print("Server listening on", s)
 

@@ -23,4 +23,4 @@ fi
 python $pathToPythonScript
 
 # Run compiled C program
-./app_executable
+# ./app_executable
