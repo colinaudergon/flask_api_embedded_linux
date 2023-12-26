@@ -119,6 +119,7 @@ bool establishConnection();
 
 int main(int argc, char **argv)
 {
+    printf("Hello Python!\n");
     // GPIO reading
     uint8_t inputState = 0x00;
 
