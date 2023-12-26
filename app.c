@@ -426,6 +426,7 @@ uint8_t readInputs()
     //     inputState |= joystickLeft;
     // }
 
+//SMACK STASH HERE SOMEWHERE
     if (!readSwitch(retS0, reqS0))
     {
         inputState |= startPressed;
