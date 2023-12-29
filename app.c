@@ -427,6 +427,7 @@ uint8_t readInputs()
     // }
 
 //SMACK STASH HERE SOMEWHERE
+//prob led pulse?
     if (!readSwitch(retS0, reqS0))
     {
         inputState |= startPressed;
