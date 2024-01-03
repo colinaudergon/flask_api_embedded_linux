@@ -263,6 +263,7 @@ async function launchGame(gametoRun) {
 
         // Send a message to the server indicating that the game is launched
         socket.emit('gameLaunched', { gameName: gametoRun });
+        console.log("trying to run the game!");
 
     } catch (error) {
         console.error('Error launching the game:', error);
