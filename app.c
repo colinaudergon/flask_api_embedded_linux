@@ -366,6 +366,8 @@ b7  |b6  |b5  |b4  |b3| b2 | b1 | b0
 S400|S401|S402|S403|up|down|left|right
 TODO: add range for joystic input
 */
+
+//Use readingInputs, works without overflow
 uint8_t readInputs()
 {
     uint8_t adcValue;

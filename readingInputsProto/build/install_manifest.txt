@@ -1,1 +1,1 @@
-/opt/embedded/rootfs-rock5b/home/student/Apps/inputReading
+/opt/embedded/rootfs-rock5b/home/student/Apps/inputReading_2

@@ -43,29 +43,29 @@ if(NOT DEFINED CMAKE_OBJDUMP)
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  if(EXISTS "$ENV{DESTDIR}/opt/embedded/rootfs-rock5b/home/student/Apps/inputReading" AND
-     NOT IS_SYMLINK "$ENV{DESTDIR}/opt/embedded/rootfs-rock5b/home/student/Apps/inputReading")
+  if(EXISTS "$ENV{DESTDIR}/opt/embedded/rootfs-rock5b/home/student/Apps/inputReading_2" AND
+     NOT IS_SYMLINK "$ENV{DESTDIR}/opt/embedded/rootfs-rock5b/home/student/Apps/inputReading_2")
     file(RPATH_CHECK
-         FILE "$ENV{DESTDIR}/opt/embedded/rootfs-rock5b/home/student/Apps/inputReading"
+         FILE "$ENV{DESTDIR}/opt/embedded/rootfs-rock5b/home/student/Apps/inputReading_2"
          RPATH "")
   endif()
   list(APPEND CMAKE_ABSOLUTE_DESTINATION_FILES
-   "/opt/embedded/rootfs-rock5b/home/student/Apps/inputReading")
+   "/opt/embedded/rootfs-rock5b/home/student/Apps/inputReading_2")
   if(CMAKE_WARN_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(WARNING "ABSOLUTE path INSTALL DESTINATION : ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
   if(CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
-  file(INSTALL DESTINATION "/opt/embedded/rootfs-rock5b/home/student/Apps" TYPE EXECUTABLE FILES "/home/colin/Documents/flask_api_embedded_linux/readingInputsProto/build/inputReading")
-  if(EXISTS "$ENV{DESTDIR}/opt/embedded/rootfs-rock5b/home/student/Apps/inputReading" AND
-     NOT IS_SYMLINK "$ENV{DESTDIR}/opt/embedded/rootfs-rock5b/home/student/Apps/inputReading")
+  file(INSTALL DESTINATION "/opt/embedded/rootfs-rock5b/home/student/Apps" TYPE EXECUTABLE FILES "/home/colin/Documents/flask_api_embedded_linux/readingInputsProto/build/inputReading_2")
+  if(EXISTS "$ENV{DESTDIR}/opt/embedded/rootfs-rock5b/home/student/Apps/inputReading_2" AND
+     NOT IS_SYMLINK "$ENV{DESTDIR}/opt/embedded/rootfs-rock5b/home/student/Apps/inputReading_2")
     file(RPATH_CHANGE
-         FILE "$ENV{DESTDIR}/opt/embedded/rootfs-rock5b/home/student/Apps/inputReading"
+         FILE "$ENV{DESTDIR}/opt/embedded/rootfs-rock5b/home/student/Apps/inputReading_2"
          OLD_RPATH "/opt/embedded/sysroot/arm-64/ubuntu-22.04-arm64/usr/lib:/opt/embedded/sysroot/arm-64/ubuntu-22.04-arm64/usr/lib/aarch64-none-linux-gnu:/opt/embedded/sysroot/arm-64/ubuntu-22.04-arm64/usr/local/qt5-arm64/lib:"
          NEW_RPATH "")
     if(CMAKE_INSTALL_DO_STRIP)
-      execute_process(COMMAND "/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/aarch64-none-linux-gnu-strip" "$ENV{DESTDIR}/opt/embedded/rootfs-rock5b/home/student/Apps/inputReading")
+      execute_process(COMMAND "/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/aarch64-none-linux-gnu-strip" "$ENV{DESTDIR}/opt/embedded/rootfs-rock5b/home/student/Apps/inputReading_2")
     endif()
   endif()
 endif()

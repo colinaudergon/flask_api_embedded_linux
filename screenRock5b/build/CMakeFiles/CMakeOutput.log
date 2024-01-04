@@ -1,0 +1,294 @@
+The target system is: Linux - 1 - arm64
+The host system is: Linux - 6.2.0-39-generic - x86_64
+Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
+Compiler: /opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/aarch64-none-linux-gnu-gcc 
+Build flags: -Wno-unused-parameter;-Wno-unused-variable
+Id flags:  
+
+The output was:
+0
+
+
+Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "a.out"
+
+The C compiler identification is GNU, found in "/home/colin/Documents/flask_api_embedded_linux/screenRock5b/build/CMakeFiles/3.25.1/CompilerIdC/a.out"
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
+Compiler: /opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/aarch64-none-linux-gnu-g++ 
+Build flags: -Wno-unused-parameter;-Wno-unused-variable
+Id flags:  
+
+The output was:
+0
+
+
+Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "a.out"
+
+The CXX compiler identification is GNU, found in "/home/colin/Documents/flask_api_embedded_linux/screenRock5b/build/CMakeFiles/3.25.1/CompilerIdCXX/a.out"
+
+Detecting C compiler ABI info compiled with the following output:
+Change Dir: /home/colin/Documents/flask_api_embedded_linux/screenRock5b/build/CMakeFiles/CMakeScratch/TryCompile-t5zu5P
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_09ea9/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_09ea9.dir/build.make CMakeFiles/cmTC_09ea9.dir/build
+gmake[1]: Entering directory '/home/colin/Documents/flask_api_embedded_linux/screenRock5b/build/CMakeFiles/CMakeScratch/TryCompile-t5zu5P'
+Building C object CMakeFiles/cmTC_09ea9.dir/CMakeCCompilerABI.c.o
+/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/aarch64-none-linux-gnu-gcc   -Wno-unused-parameter -Wno-unused-variable    -std=c99 -v -o CMakeFiles/cmTC_09ea9.dir/CMakeCCompilerABI.c.o -c /usr/share/cmake-3.25/Modules/CMakeCCompilerABI.c
+Using built-in specs.
+COLLECT_GCC=/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/aarch64-none-linux-gnu-gcc
+Target: aarch64-none-linux-gnu
+Configured with: /data/jenkins/workspace/GNU-toolchain/arm-11/src/gcc/configure --target=aarch64-none-linux-gnu --prefix= --with-sysroot=/aarch64-none-linux-gnu/libc --with-build-sysroot=/data/jenkins/workspace/GNU-toolchain/arm-11/build-aarch64-none-linux-gnu/install//aarch64-none-linux-gnu/libc --with-bugurl=https://bugs.linaro.org/ --enable-gnu-indirect-function --enable-shared --disable-libssp --disable-libmudflap --enable-checking=release --enable-languages=c,c++,fortran --with-gmp=/data/jenkins/workspace/GNU-toolchain/arm-11/build-aarch64-none-linux-gnu/host-tools --with-mpfr=/data/jenkins/workspace/GNU-toolchain/arm-11/build-aarch64-none-linux-gnu/host-tools --with-mpc=/data/jenkins/workspace/GNU-toolchain/arm-11/build-aarch64-none-linux-gnu/host-tools --with-isl=/data/jenkins/workspace/GNU-toolchain/arm-11/build-aarch64-none-linux-gnu/host-tools --enable-fix-cortex-a53-843419 --with-pkgversion='GNU Toolchain for the Arm Architecture 11.2-2022.02 (arm-11.14)'
+Thread model: posix
+Supported LTO compression algorithms: zlib
+gcc version 11.2.1 20220111 (GNU Toolchain for the Arm Architecture 11.2-2022.02 (arm-11.14)) 
+COLLECT_GCC_OPTIONS='-Wno-unused-parameter' '-Wno-unused-variable' '-std=c99' '-v' '-o' 'CMakeFiles/cmTC_09ea9.dir/CMakeCCompilerABI.c.o' '-c' '-mlittle-endian' '-mabi=lp64' '-dumpdir' 'CMakeFiles/cmTC_09ea9.dir/'
+ /opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../libexec/gcc/aarch64-none-linux-gnu/11.2.1/cc1 -quiet -v -iprefix /opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../lib/gcc/aarch64-none-linux-gnu/11.2.1/ -isysroot /opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../aarch64-none-linux-gnu/libc /usr/share/cmake-3.25/Modules/CMakeCCompilerABI.c -quiet -dumpdir CMakeFiles/cmTC_09ea9.dir/ -dumpbase CMakeCCompilerABI.c.c -dumpbase-ext .c -mlittle-endian -mabi=lp64 -Wno-unused-parameter -Wno-unused-variable -std=c99 -version -o /tmp/ccGTjy1i.s
+GNU C99 (GNU Toolchain for the Arm Architecture 11.2-2022.02 (arm-11.14)) version 11.2.1 20220111 (aarch64-none-linux-gnu)
+	compiled by GNU C version 4.8.5 20150623 (Red Hat 4.8.5-44), GMP version 6.2.1, MPFR version 3.1.6, MPC version 1.0.3, isl version isl-0.15-1-g835ea3a-GMP
+
+GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+ignoring duplicate directory "/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../lib/gcc/../../lib/gcc/aarch64-none-linux-gnu/11.2.1/include"
+ignoring nonexistent directory "/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../aarch64-none-linux-gnu/libc/usr/local/include"
+ignoring duplicate directory "/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../lib/gcc/../../lib/gcc/aarch64-none-linux-gnu/11.2.1/include-fixed"
+ignoring duplicate directory "/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../lib/gcc/../../lib/gcc/aarch64-none-linux-gnu/11.2.1/../../../../aarch64-none-linux-gnu/include"
+#include "..." search starts here:
+#include <...> search starts here:
+ /opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../lib/gcc/aarch64-none-linux-gnu/11.2.1/include
+ /opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../lib/gcc/aarch64-none-linux-gnu/11.2.1/include-fixed
+ /opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../lib/gcc/aarch64-none-linux-gnu/11.2.1/../../../../aarch64-none-linux-gnu/include
+ /opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../aarch64-none-linux-gnu/libc/usr/include
+End of search list.
+GNU C99 (GNU Toolchain for the Arm Architecture 11.2-2022.02 (arm-11.14)) version 11.2.1 20220111 (aarch64-none-linux-gnu)
+	compiled by GNU C version 4.8.5 20150623 (Red Hat 4.8.5-44), GMP version 6.2.1, MPFR version 3.1.6, MPC version 1.0.3, isl version isl-0.15-1-g835ea3a-GMP
+
+GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+Compiler executable checksum: 828328e97aaac243e4f3ffd92b3aef1b
+COLLECT_GCC_OPTIONS='-Wno-unused-parameter' '-Wno-unused-variable' '-std=c99' '-v' '-o' 'CMakeFiles/cmTC_09ea9.dir/CMakeCCompilerABI.c.o' '-c' '-mlittle-endian' '-mabi=lp64' '-dumpdir' 'CMakeFiles/cmTC_09ea9.dir/'
+ /opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../lib/gcc/aarch64-none-linux-gnu/11.2.1/../../../../aarch64-none-linux-gnu/bin/as -v -EL -mabi=lp64 -o CMakeFiles/cmTC_09ea9.dir/CMakeCCompilerABI.c.o /tmp/ccGTjy1i.s
+GNU assembler version 2.37 (aarch64-none-linux-gnu) using BFD version (GNU Toolchain for the Arm Architecture 11.2-2022.02 (arm-11.14)) 2.37.20220122
+COMPILER_PATH=/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../libexec/gcc/aarch64-none-linux-gnu/11.2.1/:/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../libexec/gcc/:/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../lib/gcc/aarch64-none-linux-gnu/11.2.1/../../../../aarch64-none-linux-gnu/bin/
+LIBRARY_PATH=/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../lib/gcc/aarch64-none-linux-gnu/11.2.1/:/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../lib/gcc/:/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../lib/gcc/aarch64-none-linux-gnu/11.2.1/../../../../aarch64-none-linux-gnu/lib/../lib64/:/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../aarch64-none-linux-gnu/libc/lib/../lib64/:/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../aarch64-none-linux-gnu/libc/usr/lib/../lib64/:/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../lib/gcc/aarch64-none-linux-gnu/11.2.1/../../../../aarch64-none-linux-gnu/lib/:/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../aarch64-none-linux-gnu/libc/lib/:/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../aarch64-none-linux-gnu/libc/usr/lib/
+COLLECT_GCC_OPTIONS='-Wno-unused-parameter' '-Wno-unused-variable' '-std=c99' '-v' '-o' 'CMakeFiles/cmTC_09ea9.dir/CMakeCCompilerABI.c.o' '-c' '-mlittle-endian' '-mabi=lp64' '-dumpdir' 'CMakeFiles/cmTC_09ea9.dir/CMakeCCompilerABI.c.'
+Linking C static library libcmTC_09ea9.a
+/usr/bin/cmake -P CMakeFiles/cmTC_09ea9.dir/cmake_clean_target.cmake
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_09ea9.dir/link.txt --verbose=1
+/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/aarch64-none-linux-gnu-ar qc libcmTC_09ea9.a CMakeFiles/cmTC_09ea9.dir/CMakeCCompilerABI.c.o
+/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/aarch64-none-linux-gnu-ranlib libcmTC_09ea9.a
+gmake[1]: Leaving directory '/home/colin/Documents/flask_api_embedded_linux/screenRock5b/build/CMakeFiles/CMakeScratch/TryCompile-t5zu5P'
+
+
+
+Parsed C implicit include dir info from above output: rv=done
+  found start of include info
+  found start of implicit include info
+    add: [/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../lib/gcc/aarch64-none-linux-gnu/11.2.1/include]
+    add: [/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../lib/gcc/aarch64-none-linux-gnu/11.2.1/include-fixed]
+    add: [/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../lib/gcc/aarch64-none-linux-gnu/11.2.1/../../../../aarch64-none-linux-gnu/include]
+    add: [/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../aarch64-none-linux-gnu/libc/usr/include]
+  end of search list found
+  collapse include dir [/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../lib/gcc/aarch64-none-linux-gnu/11.2.1/include] ==> [/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/lib/gcc/aarch64-none-linux-gnu/11.2.1/include]
+  collapse include dir [/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../lib/gcc/aarch64-none-linux-gnu/11.2.1/include-fixed] ==> [/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/lib/gcc/aarch64-none-linux-gnu/11.2.1/include-fixed]
+  collapse include dir [/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../lib/gcc/aarch64-none-linux-gnu/11.2.1/../../../../aarch64-none-linux-gnu/include] ==> [/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/aarch64-none-linux-gnu/include]
+  collapse include dir [/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../aarch64-none-linux-gnu/libc/usr/include] ==> [/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/aarch64-none-linux-gnu/libc/usr/include]
+  implicit include dirs: [/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/lib/gcc/aarch64-none-linux-gnu/11.2.1/include;/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/lib/gcc/aarch64-none-linux-gnu/11.2.1/include-fixed;/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/aarch64-none-linux-gnu/include;/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/aarch64-none-linux-gnu/libc/usr/include]
+
+
+Parsed C implicit link information from above output:
+  link line regex: [^( *|.*[/\])(aarch64-none-linux-gnu-ld|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\]+-)?ld|collect2)[^/\]*( |$)]
+  ignore line: [Change Dir: /home/colin/Documents/flask_api_embedded_linux/screenRock5b/build/CMakeFiles/CMakeScratch/TryCompile-t5zu5P]
+  ignore line: []
+  ignore line: [Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_09ea9/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_09ea9.dir/build.make CMakeFiles/cmTC_09ea9.dir/build]
+  ignore line: [gmake[1]: Entering directory '/home/colin/Documents/flask_api_embedded_linux/screenRock5b/build/CMakeFiles/CMakeScratch/TryCompile-t5zu5P']
+  ignore line: [Building C object CMakeFiles/cmTC_09ea9.dir/CMakeCCompilerABI.c.o]
+  ignore line: [/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/aarch64-none-linux-gnu-gcc   -Wno-unused-parameter -Wno-unused-variable    -std=c99 -v -o CMakeFiles/cmTC_09ea9.dir/CMakeCCompilerABI.c.o -c /usr/share/cmake-3.25/Modules/CMakeCCompilerABI.c]
+  ignore line: [Using built-in specs.]
+  ignore line: [COLLECT_GCC=/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/aarch64-none-linux-gnu-gcc]
+  ignore line: [Target: aarch64-none-linux-gnu]
+  ignore line: [Configured with: /data/jenkins/workspace/GNU-toolchain/arm-11/src/gcc/configure --target=aarch64-none-linux-gnu --prefix= --with-sysroot=/aarch64-none-linux-gnu/libc --with-build-sysroot=/data/jenkins/workspace/GNU-toolchain/arm-11/build-aarch64-none-linux-gnu/install//aarch64-none-linux-gnu/libc --with-bugurl=https://bugs.linaro.org/ --enable-gnu-indirect-function --enable-shared --disable-libssp --disable-libmudflap --enable-checking=release --enable-languages=c c++ fortran --with-gmp=/data/jenkins/workspace/GNU-toolchain/arm-11/build-aarch64-none-linux-gnu/host-tools --with-mpfr=/data/jenkins/workspace/GNU-toolchain/arm-11/build-aarch64-none-linux-gnu/host-tools --with-mpc=/data/jenkins/workspace/GNU-toolchain/arm-11/build-aarch64-none-linux-gnu/host-tools --with-isl=/data/jenkins/workspace/GNU-toolchain/arm-11/build-aarch64-none-linux-gnu/host-tools --enable-fix-cortex-a53-843419 --with-pkgversion='GNU Toolchain for the Arm Architecture 11.2-2022.02 (arm-11.14)']
+  ignore line: [Thread model: posix]
+  ignore line: [Supported LTO compression algorithms: zlib]
+  ignore line: [gcc version 11.2.1 20220111 (GNU Toolchain for the Arm Architecture 11.2-2022.02 (arm-11.14)) ]
+  ignore line: [COLLECT_GCC_OPTIONS='-Wno-unused-parameter' '-Wno-unused-variable' '-std=c99' '-v' '-o' 'CMakeFiles/cmTC_09ea9.dir/CMakeCCompilerABI.c.o' '-c' '-mlittle-endian' '-mabi=lp64' '-dumpdir' 'CMakeFiles/cmTC_09ea9.dir/']
+  ignore line: [ /opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../libexec/gcc/aarch64-none-linux-gnu/11.2.1/cc1 -quiet -v -iprefix /opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../lib/gcc/aarch64-none-linux-gnu/11.2.1/ -isysroot /opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../aarch64-none-linux-gnu/libc /usr/share/cmake-3.25/Modules/CMakeCCompilerABI.c -quiet -dumpdir CMakeFiles/cmTC_09ea9.dir/ -dumpbase CMakeCCompilerABI.c.c -dumpbase-ext .c -mlittle-endian -mabi=lp64 -Wno-unused-parameter -Wno-unused-variable -std=c99 -version -o /tmp/ccGTjy1i.s]
+  ignore line: [GNU C99 (GNU Toolchain for the Arm Architecture 11.2-2022.02 (arm-11.14)) version 11.2.1 20220111 (aarch64-none-linux-gnu)]
+  ignore line: [	compiled by GNU C version 4.8.5 20150623 (Red Hat 4.8.5-44)  GMP version 6.2.1  MPFR version 3.1.6  MPC version 1.0.3  isl version isl-0.15-1-g835ea3a-GMP]
+  ignore line: []
+  ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
+  ignore line: [ignoring duplicate directory "/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../lib/gcc/../../lib/gcc/aarch64-none-linux-gnu/11.2.1/include"]
+  ignore line: [ignoring nonexistent directory "/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../aarch64-none-linux-gnu/libc/usr/local/include"]
+  ignore line: [ignoring duplicate directory "/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../lib/gcc/../../lib/gcc/aarch64-none-linux-gnu/11.2.1/include-fixed"]
+  ignore line: [ignoring duplicate directory "/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../lib/gcc/../../lib/gcc/aarch64-none-linux-gnu/11.2.1/../../../../aarch64-none-linux-gnu/include"]
+  ignore line: [#include "..." search starts here:]
+  ignore line: [#include <...> search starts here:]
+  ignore line: [ /opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../lib/gcc/aarch64-none-linux-gnu/11.2.1/include]
+  ignore line: [ /opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../lib/gcc/aarch64-none-linux-gnu/11.2.1/include-fixed]
+  ignore line: [ /opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../lib/gcc/aarch64-none-linux-gnu/11.2.1/../../../../aarch64-none-linux-gnu/include]
+  ignore line: [ /opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../aarch64-none-linux-gnu/libc/usr/include]
+  ignore line: [End of search list.]
+  ignore line: [GNU C99 (GNU Toolchain for the Arm Architecture 11.2-2022.02 (arm-11.14)) version 11.2.1 20220111 (aarch64-none-linux-gnu)]
+  ignore line: [	compiled by GNU C version 4.8.5 20150623 (Red Hat 4.8.5-44)  GMP version 6.2.1  MPFR version 3.1.6  MPC version 1.0.3  isl version isl-0.15-1-g835ea3a-GMP]
+  ignore line: []
+  ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
+  ignore line: [Compiler executable checksum: 828328e97aaac243e4f3ffd92b3aef1b]
+  ignore line: [COLLECT_GCC_OPTIONS='-Wno-unused-parameter' '-Wno-unused-variable' '-std=c99' '-v' '-o' 'CMakeFiles/cmTC_09ea9.dir/CMakeCCompilerABI.c.o' '-c' '-mlittle-endian' '-mabi=lp64' '-dumpdir' 'CMakeFiles/cmTC_09ea9.dir/']
+  ignore line: [ /opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../lib/gcc/aarch64-none-linux-gnu/11.2.1/../../../../aarch64-none-linux-gnu/bin/as -v -EL -mabi=lp64 -o CMakeFiles/cmTC_09ea9.dir/CMakeCCompilerABI.c.o /tmp/ccGTjy1i.s]
+  ignore line: [GNU assembler version 2.37 (aarch64-none-linux-gnu) using BFD version (GNU Toolchain for the Arm Architecture 11.2-2022.02 (arm-11.14)) 2.37.20220122]
+  ignore line: [COMPILER_PATH=/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../libexec/gcc/aarch64-none-linux-gnu/11.2.1/:/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../libexec/gcc/:/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../lib/gcc/aarch64-none-linux-gnu/11.2.1/../../../../aarch64-none-linux-gnu/bin/]
+  ignore line: [LIBRARY_PATH=/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../lib/gcc/aarch64-none-linux-gnu/11.2.1/:/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../lib/gcc/:/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../lib/gcc/aarch64-none-linux-gnu/11.2.1/../../../../aarch64-none-linux-gnu/lib/../lib64/:/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../aarch64-none-linux-gnu/libc/lib/../lib64/:/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../aarch64-none-linux-gnu/libc/usr/lib/../lib64/:/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../lib/gcc/aarch64-none-linux-gnu/11.2.1/../../../../aarch64-none-linux-gnu/lib/:/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../aarch64-none-linux-gnu/libc/lib/:/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../aarch64-none-linux-gnu/libc/usr/lib/]
+  ignore line: [COLLECT_GCC_OPTIONS='-Wno-unused-parameter' '-Wno-unused-variable' '-std=c99' '-v' '-o' 'CMakeFiles/cmTC_09ea9.dir/CMakeCCompilerABI.c.o' '-c' '-mlittle-endian' '-mabi=lp64' '-dumpdir' 'CMakeFiles/cmTC_09ea9.dir/CMakeCCompilerABI.c.']
+  ignore line: [Linking C static library libcmTC_09ea9.a]
+  ignore line: [/usr/bin/cmake -P CMakeFiles/cmTC_09ea9.dir/cmake_clean_target.cmake]
+  ignore line: [/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_09ea9.dir/link.txt --verbose=1]
+  ignore line: [/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/aarch64-none-linux-gnu-ar qc libcmTC_09ea9.a CMakeFiles/cmTC_09ea9.dir/CMakeCCompilerABI.c.o]
+  ignore line: [/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/aarch64-none-linux-gnu-ranlib libcmTC_09ea9.a]
+  ignore line: [gmake[1]: Leaving directory '/home/colin/Documents/flask_api_embedded_linux/screenRock5b/build/CMakeFiles/CMakeScratch/TryCompile-t5zu5P']
+  ignore line: []
+  ignore line: []
+  implicit libs: []
+  implicit objs: []
+  implicit dirs: []
+  implicit fwks: []
+
+
+Detecting CXX compiler ABI info compiled with the following output:
+Change Dir: /home/colin/Documents/flask_api_embedded_linux/screenRock5b/build/CMakeFiles/CMakeScratch/TryCompile-OB5rES
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_121ab/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_121ab.dir/build.make CMakeFiles/cmTC_121ab.dir/build
+gmake[1]: Entering directory '/home/colin/Documents/flask_api_embedded_linux/screenRock5b/build/CMakeFiles/CMakeScratch/TryCompile-OB5rES'
+Building CXX object CMakeFiles/cmTC_121ab.dir/CMakeCXXCompilerABI.cpp.o
+/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/aarch64-none-linux-gnu-g++   -Wno-unused-parameter -Wno-unused-variable    -std=c99 -v -o CMakeFiles/cmTC_121ab.dir/CMakeCXXCompilerABI.cpp.o -c /usr/share/cmake-3.25/Modules/CMakeCXXCompilerABI.cpp
+Using built-in specs.
+COLLECT_GCC=/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/aarch64-none-linux-gnu-g++
+Target: aarch64-none-linux-gnu
+Configured with: /data/jenkins/workspace/GNU-toolchain/arm-11/src/gcc/configure --target=aarch64-none-linux-gnu --prefix= --with-sysroot=/aarch64-none-linux-gnu/libc --with-build-sysroot=/data/jenkins/workspace/GNU-toolchain/arm-11/build-aarch64-none-linux-gnu/install//aarch64-none-linux-gnu/libc --with-bugurl=https://bugs.linaro.org/ --enable-gnu-indirect-function --enable-shared --disable-libssp --disable-libmudflap --enable-checking=release --enable-languages=c,c++,fortran --with-gmp=/data/jenkins/workspace/GNU-toolchain/arm-11/build-aarch64-none-linux-gnu/host-tools --with-mpfr=/data/jenkins/workspace/GNU-toolchain/arm-11/build-aarch64-none-linux-gnu/host-tools --with-mpc=/data/jenkins/workspace/GNU-toolchain/arm-11/build-aarch64-none-linux-gnu/host-tools --with-isl=/data/jenkins/workspace/GNU-toolchain/arm-11/build-aarch64-none-linux-gnu/host-tools --enable-fix-cortex-a53-843419 --with-pkgversion='GNU Toolchain for the Arm Architecture 11.2-2022.02 (arm-11.14)'
+Thread model: posix
+Supported LTO compression algorithms: zlib
+gcc version 11.2.1 20220111 (GNU Toolchain for the Arm Architecture 11.2-2022.02 (arm-11.14)) 
+COLLECT_GCC_OPTIONS='-Wno-unused-parameter' '-Wno-unused-variable' '-std=c99' '-v' '-o' 'CMakeFiles/cmTC_121ab.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mlittle-endian' '-mabi=lp64' '-dumpdir' 'CMakeFiles/cmTC_121ab.dir/'
+ /opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../libexec/gcc/aarch64-none-linux-gnu/11.2.1/cc1plus -quiet -v -iprefix /opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../lib/gcc/aarch64-none-linux-gnu/11.2.1/ -isysroot /opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../aarch64-none-linux-gnu/libc -D_GNU_SOURCE /usr/share/cmake-3.25/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpdir CMakeFiles/cmTC_121ab.dir/ -dumpbase CMakeCXXCompilerABI.cpp.cpp -dumpbase-ext .cpp -mlittle-endian -mabi=lp64 -Wno-unused-parameter -Wno-unused-variable -std=c99 -version -o /tmp/cc16DCij.s
+cc1plus: warning: command-line option '-std=c99' is valid for C/ObjC but not for C++
+GNU C++17 (GNU Toolchain for the Arm Architecture 11.2-2022.02 (arm-11.14)) version 11.2.1 20220111 (aarch64-none-linux-gnu)
+	compiled by GNU C version 4.8.5 20150623 (Red Hat 4.8.5-44), GMP version 6.2.1, MPFR version 3.1.6, MPC version 1.0.3, isl version isl-0.15-1-g835ea3a-GMP
+
+GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+ignoring duplicate directory "/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../lib/gcc/../../lib/gcc/aarch64-none-linux-gnu/11.2.1/../../../../aarch64-none-linux-gnu/include/c++/11.2.1"
+ignoring duplicate directory "/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../lib/gcc/../../lib/gcc/aarch64-none-linux-gnu/11.2.1/../../../../aarch64-none-linux-gnu/include/c++/11.2.1/aarch64-none-linux-gnu"
+ignoring duplicate directory "/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../lib/gcc/../../lib/gcc/aarch64-none-linux-gnu/11.2.1/../../../../aarch64-none-linux-gnu/include/c++/11.2.1/backward"
+ignoring duplicate directory "/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../lib/gcc/../../lib/gcc/aarch64-none-linux-gnu/11.2.1/include"
+ignoring nonexistent directory "/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../aarch64-none-linux-gnu/libc/usr/local/include"
+ignoring duplicate directory "/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../lib/gcc/../../lib/gcc/aarch64-none-linux-gnu/11.2.1/include-fixed"
+ignoring duplicate directory "/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../lib/gcc/../../lib/gcc/aarch64-none-linux-gnu/11.2.1/../../../../aarch64-none-linux-gnu/include"
+#include "..." search starts here:
+#include <...> search starts here:
+ /opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../lib/gcc/aarch64-none-linux-gnu/11.2.1/../../../../aarch64-none-linux-gnu/include/c++/11.2.1
+ /opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../lib/gcc/aarch64-none-linux-gnu/11.2.1/../../../../aarch64-none-linux-gnu/include/c++/11.2.1/aarch64-none-linux-gnu
+ /opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../lib/gcc/aarch64-none-linux-gnu/11.2.1/../../../../aarch64-none-linux-gnu/include/c++/11.2.1/backward
+ /opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../lib/gcc/aarch64-none-linux-gnu/11.2.1/include
+ /opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../lib/gcc/aarch64-none-linux-gnu/11.2.1/include-fixed
+ /opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../lib/gcc/aarch64-none-linux-gnu/11.2.1/../../../../aarch64-none-linux-gnu/include
+ /opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../aarch64-none-linux-gnu/libc/usr/include
+End of search list.
+GNU C++17 (GNU Toolchain for the Arm Architecture 11.2-2022.02 (arm-11.14)) version 11.2.1 20220111 (aarch64-none-linux-gnu)
+	compiled by GNU C version 4.8.5 20150623 (Red Hat 4.8.5-44), GMP version 6.2.1, MPFR version 3.1.6, MPC version 1.0.3, isl version isl-0.15-1-g835ea3a-GMP
+
+GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+Compiler executable checksum: c2d3e3a1b4f244c169287df7385bdbbb
+COLLECT_GCC_OPTIONS='-Wno-unused-parameter' '-Wno-unused-variable' '-std=c99' '-v' '-o' 'CMakeFiles/cmTC_121ab.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mlittle-endian' '-mabi=lp64' '-dumpdir' 'CMakeFiles/cmTC_121ab.dir/'
+ /opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../lib/gcc/aarch64-none-linux-gnu/11.2.1/../../../../aarch64-none-linux-gnu/bin/as -v -EL -mabi=lp64 -o CMakeFiles/cmTC_121ab.dir/CMakeCXXCompilerABI.cpp.o /tmp/cc16DCij.s
+GNU assembler version 2.37 (aarch64-none-linux-gnu) using BFD version (GNU Toolchain for the Arm Architecture 11.2-2022.02 (arm-11.14)) 2.37.20220122
+COMPILER_PATH=/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../libexec/gcc/aarch64-none-linux-gnu/11.2.1/:/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../libexec/gcc/:/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../lib/gcc/aarch64-none-linux-gnu/11.2.1/../../../../aarch64-none-linux-gnu/bin/
+LIBRARY_PATH=/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../lib/gcc/aarch64-none-linux-gnu/11.2.1/:/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../lib/gcc/:/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../lib/gcc/aarch64-none-linux-gnu/11.2.1/../../../../aarch64-none-linux-gnu/lib/../lib64/:/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../aarch64-none-linux-gnu/libc/lib/../lib64/:/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../aarch64-none-linux-gnu/libc/usr/lib/../lib64/:/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../lib/gcc/aarch64-none-linux-gnu/11.2.1/../../../../aarch64-none-linux-gnu/lib/:/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../aarch64-none-linux-gnu/libc/lib/:/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../aarch64-none-linux-gnu/libc/usr/lib/
+COLLECT_GCC_OPTIONS='-Wno-unused-parameter' '-Wno-unused-variable' '-std=c99' '-v' '-o' 'CMakeFiles/cmTC_121ab.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mlittle-endian' '-mabi=lp64' '-dumpdir' 'CMakeFiles/cmTC_121ab.dir/CMakeCXXCompilerABI.cpp.'
+Linking CXX static library libcmTC_121ab.a
+/usr/bin/cmake -P CMakeFiles/cmTC_121ab.dir/cmake_clean_target.cmake
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_121ab.dir/link.txt --verbose=1
+/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/aarch64-none-linux-gnu-ar qc libcmTC_121ab.a CMakeFiles/cmTC_121ab.dir/CMakeCXXCompilerABI.cpp.o
+/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/aarch64-none-linux-gnu-ranlib libcmTC_121ab.a
+gmake[1]: Leaving directory '/home/colin/Documents/flask_api_embedded_linux/screenRock5b/build/CMakeFiles/CMakeScratch/TryCompile-OB5rES'
+
+
+
+Parsed CXX implicit include dir info from above output: rv=done
+  found start of include info
+  found start of implicit include info
+    add: [/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../lib/gcc/aarch64-none-linux-gnu/11.2.1/../../../../aarch64-none-linux-gnu/include/c++/11.2.1]
+    add: [/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../lib/gcc/aarch64-none-linux-gnu/11.2.1/../../../../aarch64-none-linux-gnu/include/c++/11.2.1/aarch64-none-linux-gnu]
+    add: [/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../lib/gcc/aarch64-none-linux-gnu/11.2.1/../../../../aarch64-none-linux-gnu/include/c++/11.2.1/backward]
+    add: [/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../lib/gcc/aarch64-none-linux-gnu/11.2.1/include]
+    add: [/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../lib/gcc/aarch64-none-linux-gnu/11.2.1/include-fixed]
+    add: [/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../lib/gcc/aarch64-none-linux-gnu/11.2.1/../../../../aarch64-none-linux-gnu/include]
+    add: [/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../aarch64-none-linux-gnu/libc/usr/include]
+  end of search list found
+  collapse include dir [/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../lib/gcc/aarch64-none-linux-gnu/11.2.1/../../../../aarch64-none-linux-gnu/include/c++/11.2.1] ==> [/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/aarch64-none-linux-gnu/include/c++/11.2.1]
+  collapse include dir [/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../lib/gcc/aarch64-none-linux-gnu/11.2.1/../../../../aarch64-none-linux-gnu/include/c++/11.2.1/aarch64-none-linux-gnu] ==> [/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/aarch64-none-linux-gnu/include/c++/11.2.1/aarch64-none-linux-gnu]
+  collapse include dir [/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../lib/gcc/aarch64-none-linux-gnu/11.2.1/../../../../aarch64-none-linux-gnu/include/c++/11.2.1/backward] ==> [/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/aarch64-none-linux-gnu/include/c++/11.2.1/backward]
+  collapse include dir [/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../lib/gcc/aarch64-none-linux-gnu/11.2.1/include] ==> [/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/lib/gcc/aarch64-none-linux-gnu/11.2.1/include]
+  collapse include dir [/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../lib/gcc/aarch64-none-linux-gnu/11.2.1/include-fixed] ==> [/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/lib/gcc/aarch64-none-linux-gnu/11.2.1/include-fixed]
+  collapse include dir [/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../lib/gcc/aarch64-none-linux-gnu/11.2.1/../../../../aarch64-none-linux-gnu/include] ==> [/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/aarch64-none-linux-gnu/include]
+  collapse include dir [/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../aarch64-none-linux-gnu/libc/usr/include] ==> [/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/aarch64-none-linux-gnu/libc/usr/include]
+  implicit include dirs: [/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/aarch64-none-linux-gnu/include/c++/11.2.1;/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/aarch64-none-linux-gnu/include/c++/11.2.1/aarch64-none-linux-gnu;/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/aarch64-none-linux-gnu/include/c++/11.2.1/backward;/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/lib/gcc/aarch64-none-linux-gnu/11.2.1/include;/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/lib/gcc/aarch64-none-linux-gnu/11.2.1/include-fixed;/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/aarch64-none-linux-gnu/include;/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/aarch64-none-linux-gnu/libc/usr/include]
+
+
+Parsed CXX implicit link information from above output:
+  link line regex: [^( *|.*[/\])(aarch64-none-linux-gnu-ld|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\]+-)?ld|collect2)[^/\]*( |$)]
+  ignore line: [Change Dir: /home/colin/Documents/flask_api_embedded_linux/screenRock5b/build/CMakeFiles/CMakeScratch/TryCompile-OB5rES]
+  ignore line: []
+  ignore line: [Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_121ab/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_121ab.dir/build.make CMakeFiles/cmTC_121ab.dir/build]
+  ignore line: [gmake[1]: Entering directory '/home/colin/Documents/flask_api_embedded_linux/screenRock5b/build/CMakeFiles/CMakeScratch/TryCompile-OB5rES']
+  ignore line: [Building CXX object CMakeFiles/cmTC_121ab.dir/CMakeCXXCompilerABI.cpp.o]
+  ignore line: [/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/aarch64-none-linux-gnu-g++   -Wno-unused-parameter -Wno-unused-variable    -std=c99 -v -o CMakeFiles/cmTC_121ab.dir/CMakeCXXCompilerABI.cpp.o -c /usr/share/cmake-3.25/Modules/CMakeCXXCompilerABI.cpp]
+  ignore line: [Using built-in specs.]
+  ignore line: [COLLECT_GCC=/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/aarch64-none-linux-gnu-g++]
+  ignore line: [Target: aarch64-none-linux-gnu]
+  ignore line: [Configured with: /data/jenkins/workspace/GNU-toolchain/arm-11/src/gcc/configure --target=aarch64-none-linux-gnu --prefix= --with-sysroot=/aarch64-none-linux-gnu/libc --with-build-sysroot=/data/jenkins/workspace/GNU-toolchain/arm-11/build-aarch64-none-linux-gnu/install//aarch64-none-linux-gnu/libc --with-bugurl=https://bugs.linaro.org/ --enable-gnu-indirect-function --enable-shared --disable-libssp --disable-libmudflap --enable-checking=release --enable-languages=c c++ fortran --with-gmp=/data/jenkins/workspace/GNU-toolchain/arm-11/build-aarch64-none-linux-gnu/host-tools --with-mpfr=/data/jenkins/workspace/GNU-toolchain/arm-11/build-aarch64-none-linux-gnu/host-tools --with-mpc=/data/jenkins/workspace/GNU-toolchain/arm-11/build-aarch64-none-linux-gnu/host-tools --with-isl=/data/jenkins/workspace/GNU-toolchain/arm-11/build-aarch64-none-linux-gnu/host-tools --enable-fix-cortex-a53-843419 --with-pkgversion='GNU Toolchain for the Arm Architecture 11.2-2022.02 (arm-11.14)']
+  ignore line: [Thread model: posix]
+  ignore line: [Supported LTO compression algorithms: zlib]
+  ignore line: [gcc version 11.2.1 20220111 (GNU Toolchain for the Arm Architecture 11.2-2022.02 (arm-11.14)) ]
+  ignore line: [COLLECT_GCC_OPTIONS='-Wno-unused-parameter' '-Wno-unused-variable' '-std=c99' '-v' '-o' 'CMakeFiles/cmTC_121ab.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mlittle-endian' '-mabi=lp64' '-dumpdir' 'CMakeFiles/cmTC_121ab.dir/']
+  ignore line: [ /opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../libexec/gcc/aarch64-none-linux-gnu/11.2.1/cc1plus -quiet -v -iprefix /opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../lib/gcc/aarch64-none-linux-gnu/11.2.1/ -isysroot /opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../aarch64-none-linux-gnu/libc -D_GNU_SOURCE /usr/share/cmake-3.25/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpdir CMakeFiles/cmTC_121ab.dir/ -dumpbase CMakeCXXCompilerABI.cpp.cpp -dumpbase-ext .cpp -mlittle-endian -mabi=lp64 -Wno-unused-parameter -Wno-unused-variable -std=c99 -version -o /tmp/cc16DCij.s]
+  ignore line: [cc1plus: warning: command-line option '-std=c99' is valid for C/ObjC but not for C++]
+  ignore line: [GNU C++17 (GNU Toolchain for the Arm Architecture 11.2-2022.02 (arm-11.14)) version 11.2.1 20220111 (aarch64-none-linux-gnu)]
+  ignore line: [	compiled by GNU C version 4.8.5 20150623 (Red Hat 4.8.5-44)  GMP version 6.2.1  MPFR version 3.1.6  MPC version 1.0.3  isl version isl-0.15-1-g835ea3a-GMP]
+  ignore line: []
+  ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
+  ignore line: [ignoring duplicate directory "/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../lib/gcc/../../lib/gcc/aarch64-none-linux-gnu/11.2.1/../../../../aarch64-none-linux-gnu/include/c++/11.2.1"]
+  ignore line: [ignoring duplicate directory "/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../lib/gcc/../../lib/gcc/aarch64-none-linux-gnu/11.2.1/../../../../aarch64-none-linux-gnu/include/c++/11.2.1/aarch64-none-linux-gnu"]
+  ignore line: [ignoring duplicate directory "/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../lib/gcc/../../lib/gcc/aarch64-none-linux-gnu/11.2.1/../../../../aarch64-none-linux-gnu/include/c++/11.2.1/backward"]
+  ignore line: [ignoring duplicate directory "/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../lib/gcc/../../lib/gcc/aarch64-none-linux-gnu/11.2.1/include"]
+  ignore line: [ignoring nonexistent directory "/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../aarch64-none-linux-gnu/libc/usr/local/include"]
+  ignore line: [ignoring duplicate directory "/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../lib/gcc/../../lib/gcc/aarch64-none-linux-gnu/11.2.1/include-fixed"]
+  ignore line: [ignoring duplicate directory "/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../lib/gcc/../../lib/gcc/aarch64-none-linux-gnu/11.2.1/../../../../aarch64-none-linux-gnu/include"]
+  ignore line: [#include "..." search starts here:]
+  ignore line: [#include <...> search starts here:]
+  ignore line: [ /opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../lib/gcc/aarch64-none-linux-gnu/11.2.1/../../../../aarch64-none-linux-gnu/include/c++/11.2.1]
+  ignore line: [ /opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../lib/gcc/aarch64-none-linux-gnu/11.2.1/../../../../aarch64-none-linux-gnu/include/c++/11.2.1/aarch64-none-linux-gnu]
+  ignore line: [ /opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../lib/gcc/aarch64-none-linux-gnu/11.2.1/../../../../aarch64-none-linux-gnu/include/c++/11.2.1/backward]
+  ignore line: [ /opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../lib/gcc/aarch64-none-linux-gnu/11.2.1/include]
+  ignore line: [ /opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../lib/gcc/aarch64-none-linux-gnu/11.2.1/include-fixed]
+  ignore line: [ /opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../lib/gcc/aarch64-none-linux-gnu/11.2.1/../../../../aarch64-none-linux-gnu/include]
+  ignore line: [ /opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../aarch64-none-linux-gnu/libc/usr/include]
+  ignore line: [End of search list.]
+  ignore line: [GNU C++17 (GNU Toolchain for the Arm Architecture 11.2-2022.02 (arm-11.14)) version 11.2.1 20220111 (aarch64-none-linux-gnu)]
+  ignore line: [	compiled by GNU C version 4.8.5 20150623 (Red Hat 4.8.5-44)  GMP version 6.2.1  MPFR version 3.1.6  MPC version 1.0.3  isl version isl-0.15-1-g835ea3a-GMP]
+  ignore line: []
+  ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
+  ignore line: [Compiler executable checksum: c2d3e3a1b4f244c169287df7385bdbbb]
+  ignore line: [COLLECT_GCC_OPTIONS='-Wno-unused-parameter' '-Wno-unused-variable' '-std=c99' '-v' '-o' 'CMakeFiles/cmTC_121ab.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mlittle-endian' '-mabi=lp64' '-dumpdir' 'CMakeFiles/cmTC_121ab.dir/']
+  ignore line: [ /opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../lib/gcc/aarch64-none-linux-gnu/11.2.1/../../../../aarch64-none-linux-gnu/bin/as -v -EL -mabi=lp64 -o CMakeFiles/cmTC_121ab.dir/CMakeCXXCompilerABI.cpp.o /tmp/cc16DCij.s]
+  ignore line: [GNU assembler version 2.37 (aarch64-none-linux-gnu) using BFD version (GNU Toolchain for the Arm Architecture 11.2-2022.02 (arm-11.14)) 2.37.20220122]
+  ignore line: [COMPILER_PATH=/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../libexec/gcc/aarch64-none-linux-gnu/11.2.1/:/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../libexec/gcc/:/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../lib/gcc/aarch64-none-linux-gnu/11.2.1/../../../../aarch64-none-linux-gnu/bin/]
+  ignore line: [LIBRARY_PATH=/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../lib/gcc/aarch64-none-linux-gnu/11.2.1/:/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../lib/gcc/:/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../lib/gcc/aarch64-none-linux-gnu/11.2.1/../../../../aarch64-none-linux-gnu/lib/../lib64/:/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../aarch64-none-linux-gnu/libc/lib/../lib64/:/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../aarch64-none-linux-gnu/libc/usr/lib/../lib64/:/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../lib/gcc/aarch64-none-linux-gnu/11.2.1/../../../../aarch64-none-linux-gnu/lib/:/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../aarch64-none-linux-gnu/libc/lib/:/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/../aarch64-none-linux-gnu/libc/usr/lib/]
+  ignore line: [COLLECT_GCC_OPTIONS='-Wno-unused-parameter' '-Wno-unused-variable' '-std=c99' '-v' '-o' 'CMakeFiles/cmTC_121ab.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mlittle-endian' '-mabi=lp64' '-dumpdir' 'CMakeFiles/cmTC_121ab.dir/CMakeCXXCompilerABI.cpp.']
+  ignore line: [Linking CXX static library libcmTC_121ab.a]
+  ignore line: [/usr/bin/cmake -P CMakeFiles/cmTC_121ab.dir/cmake_clean_target.cmake]
+  ignore line: [/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_121ab.dir/link.txt --verbose=1]
+  ignore line: [/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/aarch64-none-linux-gnu-ar qc libcmTC_121ab.a CMakeFiles/cmTC_121ab.dir/CMakeCXXCompilerABI.cpp.o]
+  ignore line: [/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/aarch64-none-linux-gnu-ranlib libcmTC_121ab.a]
+  ignore line: [gmake[1]: Leaving directory '/home/colin/Documents/flask_api_embedded_linux/screenRock5b/build/CMakeFiles/CMakeScratch/TryCompile-OB5rES']
+  ignore line: []
+  ignore line: []
+  implicit libs: []
+  implicit objs: []
+  implicit dirs: []
+  implicit fwks: []
+
+

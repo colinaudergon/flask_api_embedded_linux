@@ -162,17 +162,17 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named inputReading
+# Target rules for targets named inputReading_2
 
 # Build rule for target.
-inputReading: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 inputReading
-.PHONY : inputReading
+inputReading_2: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 inputReading_2
+.PHONY : inputReading_2
 
 # fast build rule for target.
-inputReading/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/inputReading.dir/build.make CMakeFiles/inputReading.dir/build
-.PHONY : inputReading/fast
+inputReading_2/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/inputReading_2.dir/build.make CMakeFiles/inputReading_2.dir/build
+.PHONY : inputReading_2/fast
 
 #=============================================================================
 # Target rules for targets named apidoc
@@ -205,7 +205,7 @@ src/readingInputsC.o: src/readingInputsC.c.o
 
 # target to build an object file
 src/readingInputsC.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/inputReading.dir/build.make CMakeFiles/inputReading.dir/src/readingInputsC.c.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/inputReading_2.dir/build.make CMakeFiles/inputReading_2.dir/src/readingInputsC.c.o
 .PHONY : src/readingInputsC.c.o
 
 src/readingInputsC.i: src/readingInputsC.c.i
@@ -213,7 +213,7 @@ src/readingInputsC.i: src/readingInputsC.c.i
 
 # target to preprocess a source file
 src/readingInputsC.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/inputReading.dir/build.make CMakeFiles/inputReading.dir/src/readingInputsC.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/inputReading_2.dir/build.make CMakeFiles/inputReading_2.dir/src/readingInputsC.c.i
 .PHONY : src/readingInputsC.c.i
 
 src/readingInputsC.s: src/readingInputsC.c.s
@@ -221,7 +221,7 @@ src/readingInputsC.s: src/readingInputsC.c.s
 
 # target to generate assembly for a file
 src/readingInputsC.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/inputReading.dir/build.make CMakeFiles/inputReading.dir/src/readingInputsC.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/inputReading_2.dir/build.make CMakeFiles/inputReading_2.dir/src/readingInputsC.c.s
 .PHONY : src/readingInputsC.c.s
 
 # Help Target
@@ -238,7 +238,7 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... apidoc"
 	@echo "... apidoc_forced"
-	@echo "... inputReading"
+	@echo "... inputReading_2"
 	@echo "... src/readingInputsC.o"
 	@echo "... src/readingInputsC.i"
 	@echo "... src/readingInputsC.s"

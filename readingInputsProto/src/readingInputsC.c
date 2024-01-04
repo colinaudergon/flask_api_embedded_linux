@@ -13,6 +13,10 @@
 #include <fcntl.h>
 #include <linux/gpio.h>
 #include <linux/i2c-dev.h>
+#include <sys/socket.h>
+#include <sys/un.h>
+#include <netinet/in.h>
+#include <sys/types.h>
 
 #define DS400 11 // chipbank 1
 #define DS401 14 // chipbank 3
@@ -32,19 +36,40 @@
 #define JOYSTICK_A_LEFT_RIGHT 0x25
 #define JOYSTICK_A_UP_DOWN 0x27
 
+// #define SOCKET_READY 0xFF
+
 /*****************************************************************************/
 /* Global Variables						             						 */
 /*****************************************************************************/
 
+// GPIO reading
 int ret0, ret1, ret2, ret3;
 int retS0, retS1, retS2, retS3;
 
-uint8_t adc_value;
-pthread_t readInputThread;
+uint8_t joystickUpReading = 0xFA;    // 250
+uint8_t joystickDownReading = 0xF4;  // 244
+uint8_t joystickRightReading = 0xFA; // 252
+uint8_t joystickLeftReading = 0xF4;  // 244
+
+uint8_t joystickUp = 0x08;
+uint8_t joystickDown = 0x04;
+uint8_t joystickRight = 0x02;
+uint8_t joystickLeft = 0x01;
+
+uint8_t startPressed = 0x80;
+uint8_t selectPressed = 0x40;
+uint8_t aPressed = 0x20;
+uint8_t bPressed = 0x10;
+uint8_t errorCode = 0xFF;
+
+unsigned int led_lines[] = {DS400, DS401, DS402, DS403};
+unsigned int ledOnOff[] = {0, 0, 0, 0};
+int num_leds = sizeof(led_lines) / sizeof(led_lines[0]);
 
 /*****************************************************************************/
 /* Static Variables (Module variable)				             	         */
 /*****************************************************************************/
+// GPIO reading
 static struct gpiohandle_request req;
 struct gpiohandle_request req0;
 struct gpiohandle_request req1;
@@ -62,7 +87,6 @@ struct gpioevent_request event_req;
 
 static char chrdev_name[20];
 static bool running = true;
-static bool sense = true;
 
 static const char GPIO_BANK1[] = "/dev/gpiochip1";
 static const char GPIO_BANK3[] = "/dev/gpiochip3";
@@ -75,36 +99,47 @@ static int32_t i2c_fd;
 /* i2c communication buffer */
 static uint8_t i2cCommBuffer[8];
 static uint8_t revID, devID;
-static uint8_t adcValue;
 
 static int fd;
 
 /*******************************************************************************/
 /* Function prototype							       						   */
 /*******************************************************************************/
+// GPIO reading
 int initialize_gpio_output(const char *gpio_chip, unsigned int gpio_line, int ret);
 int initialize_gpio_input(const char *gpio_chip, unsigned int gpio_line, int ret);
-void turnOnLed(int ledIndice);
-void turnOffLed(int ledIndice);
+
+void turnLedOn(int ledIndice);
+void turnLedOff(int ledIndice);
+void updateLedStatus(int ledIndice, int status);
+
 void cleanupRelease(void);
 
 int setUpAdcValue(uint8_t setup);
 int readAdcValue();
 
-void *readInputThreadFunction(void *arg);
+uint8_t readADCInputs();
 int readSwitch(int retSwitch, struct gpiohandle_request reqSwitch);
 
 void sleep_ms(int milliseconds);
 
 int main(int argc, char **argv)
 {
-    // signal(SIGIO, buttonHandler);
+    printf("Hello Python!\n");
+    // GPIO reading
+    uint8_t inputState = 0x00;
 
     // LED Init
     ret0 = initialize_gpio_output(GPIO_BANK1, DS400, ret0);
     ret1 = initialize_gpio_output(GPIO_BANK3, DS401, ret1);
     ret2 = initialize_gpio_output(GPIO_BANK3, DS402, ret2);
     ret3 = initialize_gpio_output(GPIO_BANK3, DS403, ret3);
+
+    // led status
+    int statDS400 = 0;
+    int statDS401 = 0;
+    int statDS402 = 0;
+    int statDS403 = 0;
 
     // Switch init
     retS0 = initialize_gpio_input(GPIO_BANK1, S400, retS0);
@@ -120,50 +155,72 @@ int main(int argc, char **argv)
         printf("No such device found!\n");
         return -1;
     }
-    pthread_create(&readInputThread, NULL, readInputThreadFunction, NULL);
-
     /* Set the I2C slave address for all subsequent I2C device transfers */
     if (ioctl(i2c_fd, I2C_SLAVE_FORCE, JOYSTICK_ADDR) < 0)
     {
         perror("i2cSetAddress");
         return -1;
     }
-    // i2cCommBuffer[0] = 0x62;
 
     while (1)
     {
-        sleep(1);
-    }
-    // close(i2c_fd);
-}
+        inputState = readADCInputs();
+        if (!readSwitch(retS0, reqS0))
+        {
+            inputState |= startPressed;
+            statDS403 = 1;
+            printf("Switch S400 active\n");
+        }
+        else
+        {
+            statDS403 = 0;
+        }
+        if (!readSwitch(retS1, reqS1))
+        {
+            inputState |= selectPressed;
+            statDS402 = 1;
+            printf("Switch S401 active\n");
+        }
+        else
+        {
+            statDS402 = 0;
+        }
 
-int setUpAdcValue(uint8_t setup)
-{
-    i2cCommBuffer[0] = setup;
-    if (write(i2c_fd, i2cCommBuffer, 1) != 1)
-    {
-        perror("write error!");
-        close(i2c_fd);
-        return -1;
+        if (!readSwitch(retS2, reqS2))
+        {
+            statDS401 = 1;
+            printf("Switch S402 active\n");
+        }
+
+        else
+        {
+            statDS401 = 0;
+        }
+        if (!readSwitch(retS3, reqS3))
+        {
+            inputState |= bPressed;
+            statDS400 = 1;
+            printf("Switch S403 active\n");
+        }
+
+        else
+        {
+            statDS400 = 0;
+        }
+
+        printf("input state: 0x%02X\n", inputState);
+
+        updateLedStatus(0, statDS400);
+        updateLedStatus(1, statDS401);
+        updateLedStatus(2, statDS402);
+        updateLedStatus(3, statDS403);
     }
+    cleanupRelease();
     return 0;
 }
 
-int readAdcValue()
-{
-    // i2cCommBuffer[0] = config;
-    if (read(i2c_fd, i2cCommBuffer, 1) != 1)
-    {
-        perror("read error");
-        close(i2c_fd);
-        return -1;
-    }
-    uint8_t value = i2cCommBuffer[0];
-    return value;
-}
-
 /*****************************************************************************/
-/* GPIO Initialization Functions											 */
+/* GPIO output Initialization Function											 */
 /*****************************************************************************/
 int initialize_gpio_output(const char *gpio_chip, unsigned int gpio_line, int ret)
 {
@@ -216,9 +273,11 @@ int initialize_gpio_output(const char *gpio_chip, unsigned int gpio_line, int re
     return ret;
 }
 
+/*****************************************************************************/
+/* GPIO input Initialization Function											 */
+/*****************************************************************************/
 int initialize_gpio_input(const char *gpio_chip, unsigned int gpio_line, int ret)
 {
-
     // Known working Input init:
     // Open GPIO device
     strcpy(chrdev_name, gpio_chip);
@@ -268,9 +327,41 @@ int initialize_gpio_input(const char *gpio_chip, unsigned int gpio_line, int ret
 
     return ret;
 }
+/*****************************************************************************/
+/*Setup ADC Function											 */
+/*****************************************************************************/
+int setUpAdcValue(uint8_t setup)
+{
+    i2cCommBuffer[0] = setup;
+    if (write(i2c_fd, i2cCommBuffer, 1) != 1)
+    {
+        perror("write error!");
+        close(i2c_fd);
+        return -1;
+    }
+    return 0;
+}
 
+/*****************************************************************************/
+/* Read adc value Function											 */
+/*****************************************************************************/
+int readAdcValue()
+{
+    if (read(i2c_fd, i2cCommBuffer, 1) != 1)
+    {
+        perror("read error");
+        close(i2c_fd);
+        return -1;
+    }
+    uint8_t value = i2cCommBuffer[0];
+    return value;
+}
+/*****************************************************************************/
+/* GPIO and I2C clean up Function											 */
+/*****************************************************************************/
 void cleanupRelease(void)
 {
+    close(i2c_fd);
     ret0 = close(req0.fd);
     if (ret0 == -1)
     {
@@ -296,65 +387,131 @@ void cleanupRelease(void)
         ret3 = -errno;
     }
 }
-
-void *readInputThreadFunction(void *arg)
+/*****************************************************************************/
+/* Read Inputs Function											 */
+/*****************************************************************************/
+/*Reads the gpio inputs, outputs a varible inputState in hexa, binary code represents inputs value
+b7  |b6  |b5  |b4  |b3| b2 | b1 | b0
+S400|S401|S402|S403|up|down|left|right
+TODO: add range for joystic input
+*/
+uint8_t readADCInputs()
 {
-    bool isReading = true;
-    while (isReading == true)
+    uint8_t adcValue;
+    int8_t inputState = 0x00;
+
+    // add value by default: joystick shouldnt be 247->0 when unused
+    if (setUpAdcValue(JOYSTICK_A_UP_DOWN) < 0)
     {
-        if (setUpAdcValue(JOYSTICK_A_LEFT_RIGHT) < 0)
-        {
-            printf("Failed to configure ADC");
-            perror("Setup ADC");
-            // isReading = false;
-        }
-        adcValue = readAdcValue();
-        printf("L/R Value: %d\n", adcValue);
-        sleep_ms(20);
-        if (setUpAdcValue(JOYSTICK_A_UP_DOWN) < 0)
-        {
-            printf("Failed to configure ADC");
-            perror("Setup ADC");
-            // isReading = false;
-        }
-        adcValue = readAdcValue();
-        printf("U/D Value: %d\n", adcValue);
-        sleep_ms(20);
-
-        if (!readSwitch(retS0, reqS0))
-        {
-            printf("Switch S400 active\n");
-        }
-        if (!readSwitch(retS1, reqS1))
-        {
-
-            printf("Switch S401 active\n");
-        }
-        if (!readSwitch(retS2, reqS2))
-        {
-
-            printf("Switch S402 active\n");
-        }
-        if (!readSwitch(retS3, reqS3))
-        {
-            printf("Switch S403 active\n");
-        }
+        printf("Failed to configure ADC");
+        perror("Setup ADC");
+        return errorCode;
+        // isReading = false;
     }
-    return NULL;
+    adcValue = readAdcValue();
+    printf("U/D Value: %d\n", adcValue);
+
+    if (adcValue >= joystickUpReading)
+    {
+        inputState |= joystickUp;
+    }
+    if (adcValue <= joystickDownReading)
+    {
+        inputState |= joystickDown;
+    }
+
+    sleep_ms(20);
+    if (setUpAdcValue(JOYSTICK_A_LEFT_RIGHT) < 0)
+    {
+        printf("Failed to configure ADC");
+        perror("Setup ADC");
+        // isReading = false;
+        return errorCode;
+    }
+    adcValue = readAdcValue();
+    printf("L/R Value: %d\n", adcValue);
+
+    if (adcValue >= joystickRightReading)
+    {
+        inputState |= joystickRight;
+    }
+    if (adcValue <= joystickLeftReading)
+    {
+        inputState |= joystickLeft;
+    }
+    sleep_ms(10);
+    return inputState;
 }
 
+/*****************************************************************************/
+/* Read switches Function											 */
+/*****************************************************************************/
 int readSwitch(int retSwitch, struct gpiohandle_request reqSwitch)
 {
     int value_switch = 0;
-    retSwitch = ioctl(reqSwitch.fd, GPIOHANDLE_GET_LINE_VALUES_IOCTL, &value_switch);
-    if (retSwitch == -1)
+
+    if (reqSwitch.fd != -1)
     {
-        retSwitch = -errno;
-        fprintf(stderr, "Failed to get line values for S (%d)\n", retSwitch);
+        retSwitch = ioctl(reqSwitch.fd, GPIOHANDLE_GET_LINE_VALUES_IOCTL, &value_switch);
+
+        if (retSwitch == -1)
+        {
+            retSwitch = -errno;
+            fprintf(stderr, "Failed to get line values for S (%d)\n", retSwitch);
+        }
     }
+    else
+    {
+        fprintf(stderr, "Invalid file descriptor for S\n");
+    }
+
     return value_switch;
 }
 
+/*****************************************************************************/
+/* Pulse a led for 10ms											 */
+/*****************************************************************************/
+void turnLedOn(int ledIndice)
+{
+    // Turn on the specified LED
+    ledOnOff[ledIndice] = 1;
+    ret0 = ioctl(req0.fd, GPIOHANDLE_SET_LINE_VALUES_IOCTL, &ledOnOff[0]);
+    ret1 = ioctl(req1.fd, GPIOHANDLE_SET_LINE_VALUES_IOCTL, &ledOnOff[1]);
+    ret2 = ioctl(req2.fd, GPIOHANDLE_SET_LINE_VALUES_IOCTL, &ledOnOff[2]);
+    ret3 = ioctl(req3.fd, GPIOHANDLE_SET_LINE_VALUES_IOCTL, &ledOnOff[3]);
+}
+void turnLedOff(int ledIndice)
+{
+
+    // Turn off the specified LED
+    ledOnOff[ledIndice] = 0;
+    ret0 = ioctl(req0.fd, GPIOHANDLE_SET_LINE_VALUES_IOCTL, &ledOnOff[0]);
+    ret1 = ioctl(req1.fd, GPIOHANDLE_SET_LINE_VALUES_IOCTL, &ledOnOff[1]);
+    ret2 = ioctl(req2.fd, GPIOHANDLE_SET_LINE_VALUES_IOCTL, &ledOnOff[2]);
+    ret3 = ioctl(req3.fd, GPIOHANDLE_SET_LINE_VALUES_IOCTL, &ledOnOff[3]);
+}
+
+// status should be 0 or 1
+void updateLedStatus(int ledIndice, int status)
+{
+    if ((status != 0) && (status != 1))
+    {
+        printf("Error setting led status, status  is not 0 or 1.\n");
+    }
+    else
+    {
+        // Turn off the specified LED
+        ledOnOff[ledIndice] = status;
+        ret0 = ioctl(req0.fd, GPIOHANDLE_SET_LINE_VALUES_IOCTL, &ledOnOff[0]);
+        ret1 = ioctl(req1.fd, GPIOHANDLE_SET_LINE_VALUES_IOCTL, &ledOnOff[1]);
+        ret2 = ioctl(req2.fd, GPIOHANDLE_SET_LINE_VALUES_IOCTL, &ledOnOff[2]);
+        ret3 = ioctl(req3.fd, GPIOHANDLE_SET_LINE_VALUES_IOCTL, &ledOnOff[3]);
+    }
+}
+
+/*****************************************************************************/
+/* Sleep in ms Function											 */
+/*****************************************************************************/
 void sleep_ms(int milliseconds)
 {
     usleep(milliseconds * 1000);

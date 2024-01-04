@@ -1,0 +1,9 @@
+/home/colin/Documents/flask_api_embedded_linux/screenRock5b/build/CMakeFiles/screenTest.dir
+/home/colin/Documents/flask_api_embedded_linux/screenRock5b/build/CMakeFiles/apidoc.dir
+/home/colin/Documents/flask_api_embedded_linux/screenRock5b/build/CMakeFiles/apidoc_forced.dir
+/home/colin/Documents/flask_api_embedded_linux/screenRock5b/build/CMakeFiles/edit_cache.dir
+/home/colin/Documents/flask_api_embedded_linux/screenRock5b/build/CMakeFiles/rebuild_cache.dir
+/home/colin/Documents/flask_api_embedded_linux/screenRock5b/build/CMakeFiles/list_install_components.dir
+/home/colin/Documents/flask_api_embedded_linux/screenRock5b/build/CMakeFiles/install.dir
+/home/colin/Documents/flask_api_embedded_linux/screenRock5b/build/CMakeFiles/install/local.dir
+/home/colin/Documents/flask_api_embedded_linux/screenRock5b/build/CMakeFiles/install/strip.dir
