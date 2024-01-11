@@ -198,6 +198,9 @@ int main(int argc, char *argv[])
       }
     }
   }
+  else{
+    printf("Not correctly configured");
+  }
 
   /* Cleanup */
   free(pfb_rgb);
