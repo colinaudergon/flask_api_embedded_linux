@@ -94,18 +94,19 @@ class ImageProcessor():
         subprocess.run(['./frameBufferHandler', *arg_list])
 
 
-import pygetwindow as gw
 
-# fontSize = 18
-# improc=ImageProcessor(fontSize)
+
+fontSize = 18
+improc=ImageProcessor(fontSize)
 
 # #Should IP finder be here?
-# ip = improc.IpFinder()
+ip = improc.IpFinder()
 
 # text= f"IP ADDRESS: {ip}\n"
 
 # # ~980 character max
-# (display,displayArr) = improc.createImage(text,640,480,fontSize,10,10)
+(display,displayArr) = improc.createImage(ip,640,480,fontSize,10,10)
+improc.transmitArrayToCframeBufferHandler(displayArr)
 # display.save("ipaddress.png")
 # print(displayArr.ndim)
 
