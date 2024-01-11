@@ -1,9 +1,13 @@
 #!/bin/bash
 # Replace absolute path with the true application location 
 #include dependency
-cd Documents/flask_api_embedded_linux
+cd ..
 current_dir=$(pwd)
 echo "Current directory: $current_dir"
+
+cmd="git pull"
+echo cmd
+cd "imageProc"
 
 pathToPythonScript="imageProc.py"
 pathToCprogram="mainWithArg.c"
