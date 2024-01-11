@@ -198,7 +198,8 @@ int main(int argc, char *argv[])
       }
     }
   }
-  else{
+  else
+  {
     printf("Not correctly configured");
   }
 
