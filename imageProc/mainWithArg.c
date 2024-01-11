@@ -156,44 +156,46 @@ int main(int argc, char *argv[])
     perror("Error: failed to map 32-BPP framebuffer device to memory");
     exit(errno);
   }
-
-  /* Fill the screen with 32 bpp, do it for all [x,y] pixel with desired color */
-  for (h = 0; h < fbVarScreenInfo.yres; h++)
+  if (fbVarScreenInfo.bits_per_pixel == BPP32)
   {
-    for (w = 0; w < fbVarScreenInfo.xres; w++)
+    /* Fill the screen with 32 bpp, do it for all [x,y] pixel with desired color */
+    for (h = 0; h < fbVarScreenInfo.yres; h++)
     {
-      pfb32[w + h * fbVarScreenInfo.xres] = BLUE;
-    }
-  }
-
-  for (int y = 0; y < height; y++)
-  {
-    for (int x = 0; x < width; x++)
-    {
-      struct RGB_COLOR rgbValue;
-      if (fscanf(inputFile, "%hhu %hhu %hhu", &rgbValue.r, &rgbValue.g, &rgbValue.b) != 3)
+      for (w = 0; w < fbVarScreenInfo.xres; w++)
       {
-        fprintf(stderr, "Error reading RGB values from input file\n");
-        fclose(inputFile);
-        free(pfb_rgb);
-        return 1;
+        pfb32[w + h * fbVarScreenInfo.xres] = BLUE;
       }
-      // Calculate the pixel position in the framebuffer
-      uint32_t pixel_pos = x + y * fbVarScreenInfo.xres_virtual;
+    }
 
-      // Assuming 24-bit framebuffer, pack RGB values into a single 32-bit pixel
-      uint32_t pixel = (rgbValue.r << 16) | (rgbValue.g << 8) | rgbValue.b;
+    for (int y = 0; y < height; y++)
+    {
+      for (int x = 0; x < width; x++)
+      {
+        struct RGB_COLOR rgbValue;
+        if (fscanf(inputFile, "%hhu %hhu %hhu", &rgbValue.r, &rgbValue.g, &rgbValue.b) != 3)
+        {
+          fprintf(stderr, "Error reading RGB values from input file\n");
+          fclose(inputFile);
+          free(pfb_rgb);
+          return 1;
+        }
+        // Calculate the pixel position in the framebuffer
+        uint32_t pixel_pos = x + y * fbVarScreenInfo.xres_virtual;
 
-      // Copy pixel to the framebuffer
-      pfb_rgb[pixel_pos].r = rgbValue.r;
-      pfb_rgb[pixel_pos].g = rgbValue.g;
-      pfb_rgb[pixel_pos].b = rgbValue.b;
+        // Assuming 24-bit framebuffer, pack RGB values into a single 32-bit pixel
+        uint32_t pixel = (rgbValue.r << 16) | (rgbValue.g << 8) | rgbValue.b;
 
-      // Assuming 24-bit framebuffer, pack RGB values into a single 32-bit pixel for pfb32
-      pixel = (rgbValue.r << 16) | (rgbValue.g << 8) | rgbValue.b;
+        // Copy pixel to the framebuffer
+        pfb_rgb[pixel_pos].r = rgbValue.r;
+        pfb_rgb[pixel_pos].g = rgbValue.g;
+        pfb_rgb[pixel_pos].b = rgbValue.b;
 
-      // Copy pixel to the framebuffer
-      pfb32[pixel_pos] = pixel;
+        // Assuming 24-bit framebuffer, pack RGB values into a single 32-bit pixel for pfb32
+        pixel = (rgbValue.r << 16) | (rgbValue.g << 8) | rgbValue.b;
+
+        // Copy pixel to the framebuffer
+        pfb32[pixel_pos] = pixel;
+      }
     }
   }
 
