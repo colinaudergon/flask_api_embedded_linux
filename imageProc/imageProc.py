@@ -108,7 +108,7 @@ ip = improc.IpFinder()
 
 # # ~980 character max
 (display,displayArr) = improc.createImage(ip,640,480,fontSize,10,10)
-# improc.transmitArrayToCframeBufferHandler(displayArr)
+improc.transmitArrayToCframeBufferHandler(displayArr)
 # display.save("ipaddress.png")
 print(displayArr.ndim)
 

@@ -31,4 +31,5 @@ fi
 # Add your command for installing Python dependencies here
 
 # Run Python program
+echo "Running python script."
 python $pathToPythonScript
