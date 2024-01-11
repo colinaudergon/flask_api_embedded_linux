@@ -6,7 +6,7 @@ current_dir=$(pwd)
 echo "Current directory: $current_dir"
 
 cmd="git pull"
-echo cmd
+echo $cmd
 cd "imageProc"
 
 pathToPythonScript="imageProc.py"
