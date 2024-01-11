@@ -166,9 +166,9 @@ int main(int argc, char *argv[])
       }
     }
 
-  for (y = 0; y < height; y++)
+  for (int y = 0; y < height; y++)
 {
-    for (x = 0; x < width; x++)
+    for (int x = 0; x < width; x++)
     {
         // Access RGB values from the file
         struct RGB_COLOR rgbValue;
