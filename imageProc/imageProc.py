@@ -92,13 +92,13 @@ class ImageProcessor():
         flat_array = imageArray.reshape(-1)
 
         # Convert the flat array to a string with newline characters
-        rgb_str = '\n'.join(map(str, flat_array))
+        rgb_str = ' '.join(map(str, flat_array))
 
         # Combine height, width, and RGB values into the final input string
-        input_str = f"{height} {width}\n{rgb_str}\n"
+        input_str = f"{height} {width} {rgb_str}"
 
         # Call the C executable using subprocess
-        subprocess.run(['./frameBufferHandler'], input=input_str, text=True)
+        subprocess.run(['./frameBufferHandler', input_str], text=True)
 
 
 
