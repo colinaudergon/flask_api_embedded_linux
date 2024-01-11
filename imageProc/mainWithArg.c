@@ -186,9 +186,10 @@ int main(int argc, char *argv[])
         // uint32_t pixel = (rgbValue.r << 16) | (rgbValue.g << 8) | rgbValue.b;
 
         // Copy pixel to the framebuffer
-        pfb_rgb[pixel_pos].r = rgbValue.r;
-        pfb_rgb[pixel_pos].g = rgbValue.g;
-        pfb_rgb[pixel_pos].b = rgbValue.b;
+         pfb32[w + h * fbVarScreenInfo.xres] = RED;
+        // pfb_rgb[pixel_pos].r = rgbValue.r;
+        // pfb_rgb[pixel_pos].g = rgbValue.g;
+        // pfb_rgb[pixel_pos].b = rgbValue.b;
       }
     }
     }
