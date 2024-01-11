@@ -164,7 +164,7 @@ int main(int argc, char *argv[])
       for (w = 0; w < fbVarScreenInfo.xres; w++)
       {
         pfb32[w + h * fbVarScreenInfo.xres] = BLACK;
-        printf("pixel position: %d\n", w + h * fbVarScreenInfo.xres);
+        printf("pixel position HV: %d\n", w + h * fbVarScreenInfo.xres);
       }
     }
     uint32_t pixel_pos = 0;
