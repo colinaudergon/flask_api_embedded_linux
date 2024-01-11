@@ -1,6 +1,7 @@
 {
     "files.associations": {
-        "string.h": "c"
+        "string.h": "c",
+        "errno.h": "c"
     },
     "cmake.sourceDirectory": "/home/colin/Documents/flask_api_embedded_linux/readingInputsProto",
     "cmake.configureOnOpen": false

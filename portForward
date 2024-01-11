@@ -1,0 +1,5 @@
+connect rock5b to internet:
+
+sudo iptables --table nat --append POSTROUTING --out-interface wlp0s20f3 -j MASQUERADE
+
+sudo iptables --append FORWARD --in-interface enx08beac2656a8 -j ACCEPT

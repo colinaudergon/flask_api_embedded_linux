@@ -4,6 +4,7 @@ import struct
 import subprocess
 
 error_code=255
+
 def unix_socket_server(eventCallback):
     print("Currently in the unix socket thread")
     # Create a new Unix domain socket

@@ -23,23 +23,23 @@ struct \textbf{ RGB\+\_\+\+COLOR}
 \doxysubsection*{Macros}
 \begin{DoxyCompactItemize}
 \item 
-\#define \textbf{ CONVERT\+\_\+\+RGB24}(red,  green,  blue)~     ((red$<$$<$16) $\vert$ (green$<$$<$8) $\vert$ (blue))
+\#define \textbf{ CONVERT\+\_\+\+RGB24}(red,  green,  blue)~  ((red $<$$<$ 16) $\vert$ (green $<$$<$ 8) $\vert$ (blue))
 \item 
 \#define \textbf{ BPP32}~32
 \item 
-\#define \textbf{ BLACK}~\textbf{ CONVERT\+\_\+\+RGB24}(  0,   0,   0)
+\#define \textbf{ BLACK}~\textbf{ CONVERT\+\_\+\+RGB24}(0, 0, 0)
 \item 
-\#define \textbf{ RED}~\textbf{ CONVERT\+\_\+\+RGB24}(255,   0,   0)
+\#define \textbf{ RED}~\textbf{ CONVERT\+\_\+\+RGB24}(255, 0, 0)
 \item 
-\#define \textbf{ GREEN}~\textbf{ CONVERT\+\_\+\+RGB24}(  0, 255,   0)
+\#define \textbf{ GREEN}~\textbf{ CONVERT\+\_\+\+RGB24}(0, 255, 0)
 \item 
-\#define \textbf{ YELLOW}~\textbf{ CONVERT\+\_\+\+RGB24}(255, 255,   0)
+\#define \textbf{ YELLOW}~\textbf{ CONVERT\+\_\+\+RGB24}(255, 255, 0)
 \item 
-\#define \textbf{ BLUE}~\textbf{ CONVERT\+\_\+\+RGB24}(  0,   0, 255)
+\#define \textbf{ BLUE}~\textbf{ CONVERT\+\_\+\+RGB24}(0, 0, 255)
 \item 
-\#define \textbf{ MAGENTA}~\textbf{ CONVERT\+\_\+\+RGB24}(255,   0, 255)
+\#define \textbf{ MAGENTA}~\textbf{ CONVERT\+\_\+\+RGB24}(255, 0, 255)
 \item 
-\#define \textbf{ CYAN}~\textbf{ CONVERT\+\_\+\+RGB24}(  0, 255, 255)
+\#define \textbf{ CYAN}~\textbf{ CONVERT\+\_\+\+RGB24}(0, 255, 255)
 \item 
 \#define \textbf{ GREY}~\textbf{ CONVERT\+\_\+\+RGB24}(192, 192, 192)
 \item 
@@ -70,7 +70,7 @@ static int32\+\_\+t $\ast$ \textbf{ pfb32}
 \index{main.c@{main.c}!BLACK@{BLACK}}
 \index{BLACK@{BLACK}!main.c@{main.c}}
 \doxysubsubsection{BLACK}
-{\footnotesize\ttfamily \#define BLACK~\textbf{ CONVERT\+\_\+\+RGB24}(  0,   0,   0)}
+{\footnotesize\ttfamily \#define BLACK~\textbf{ CONVERT\+\_\+\+RGB24}(0, 0, 0)}
 
 
 
@@ -80,7 +80,7 @@ Definition at line 76 of file main.\+c.
 \index{main.c@{main.c}!BLUE@{BLUE}}
 \index{BLUE@{BLUE}!main.c@{main.c}}
 \doxysubsubsection{BLUE}
-{\footnotesize\ttfamily \#define BLUE~\textbf{ CONVERT\+\_\+\+RGB24}(  0,   0, 255)}
+{\footnotesize\ttfamily \#define BLUE~\textbf{ CONVERT\+\_\+\+RGB24}(0, 0, 255)}
 
 
 
@@ -100,7 +100,7 @@ Definition at line 70 of file main.\+c.
 \index{main.c@{main.c}!CONVERT\_RGB24@{CONVERT\_RGB24}}
 \index{CONVERT\_RGB24@{CONVERT\_RGB24}!main.c@{main.c}}
 \doxysubsubsection{CONVERT\_RGB24}
-{\footnotesize\ttfamily \#define CONVERT\+\_\+\+RGB24(\begin{DoxyParamCaption}\item[{}]{red,  }\item[{}]{green,  }\item[{}]{blue }\end{DoxyParamCaption})~     ((red$<$$<$16) $\vert$ (green$<$$<$8) $\vert$ (blue))}
+{\footnotesize\ttfamily \#define CONVERT\+\_\+\+RGB24(\begin{DoxyParamCaption}\item[{}]{red,  }\item[{}]{green,  }\item[{}]{blue }\end{DoxyParamCaption})~  ((red $<$$<$ 16) $\vert$ (green $<$$<$ 8) $\vert$ (blue))}
 
 
 
@@ -110,7 +110,7 @@ Definition at line 63 of file main.\+c.
 \index{main.c@{main.c}!CYAN@{CYAN}}
 \index{CYAN@{CYAN}!main.c@{main.c}}
 \doxysubsubsection{CYAN}
-{\footnotesize\ttfamily \#define CYAN~\textbf{ CONVERT\+\_\+\+RGB24}(  0, 255, 255)}
+{\footnotesize\ttfamily \#define CYAN~\textbf{ CONVERT\+\_\+\+RGB24}(0, 255, 255)}
 
 
 
@@ -130,7 +130,7 @@ Definition at line 86 of file main.\+c.
 \index{main.c@{main.c}!GREEN@{GREEN}}
 \index{GREEN@{GREEN}!main.c@{main.c}}
 \doxysubsubsection{GREEN}
-{\footnotesize\ttfamily \#define GREEN~\textbf{ CONVERT\+\_\+\+RGB24}(  0, 255,   0)}
+{\footnotesize\ttfamily \#define GREEN~\textbf{ CONVERT\+\_\+\+RGB24}(0, 255, 0)}
 
 
 
@@ -150,7 +150,7 @@ Definition at line 83 of file main.\+c.
 \index{main.c@{main.c}!MAGENTA@{MAGENTA}}
 \index{MAGENTA@{MAGENTA}!main.c@{main.c}}
 \doxysubsubsection{MAGENTA}
-{\footnotesize\ttfamily \#define MAGENTA~\textbf{ CONVERT\+\_\+\+RGB24}(255,   0, 255)}
+{\footnotesize\ttfamily \#define MAGENTA~\textbf{ CONVERT\+\_\+\+RGB24}(255, 0, 255)}
 
 
 
@@ -160,7 +160,7 @@ Definition at line 81 of file main.\+c.
 \index{main.c@{main.c}!RED@{RED}}
 \index{RED@{RED}!main.c@{main.c}}
 \doxysubsubsection{RED}
-{\footnotesize\ttfamily \#define RED~\textbf{ CONVERT\+\_\+\+RGB24}(255,   0,   0)}
+{\footnotesize\ttfamily \#define RED~\textbf{ CONVERT\+\_\+\+RGB24}(255, 0, 0)}
 
 
 
@@ -180,7 +180,7 @@ Definition at line 84 of file main.\+c.
 \index{main.c@{main.c}!YELLOW@{YELLOW}}
 \index{YELLOW@{YELLOW}!main.c@{main.c}}
 \doxysubsubsection{YELLOW}
-{\footnotesize\ttfamily \#define YELLOW~\textbf{ CONVERT\+\_\+\+RGB24}(255, 255,   0)}
+{\footnotesize\ttfamily \#define YELLOW~\textbf{ CONVERT\+\_\+\+RGB24}(255, 255, 0)}
 
 
 
@@ -201,7 +201,7 @@ Definition at line 121 of file main.\+c.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{122  \{}
+\DoxyCodeLine{122 \{}
 \DoxyCodeLine{123   int32\_t fb\_fd = 0;}
 \DoxyCodeLine{124   int32\_t screensize = 0;}
 \DoxyCodeLine{125 }
@@ -210,54 +210,53 @@ Definition at line 121 of file main.\+c.
 \DoxyCodeLine{128 \textcolor{comment}{   */}}
 \DoxyCodeLine{129   fb\_fd = open(\textcolor{stringliteral}{"{}/dev/fb0"{}}, O\_RDWR);}
 \DoxyCodeLine{130   \textcolor{keywordflow}{if} (fb\_fd == -\/1)}
-\DoxyCodeLine{131    \{}
+\DoxyCodeLine{131   \{}
 \DoxyCodeLine{132     perror(\textcolor{stringliteral}{"{}Error: cannot open framebuffer device"{}});}
 \DoxyCodeLine{133     exit(errno);}
-\DoxyCodeLine{134    \}}
+\DoxyCodeLine{134   \}}
 \DoxyCodeLine{135   printf(\textcolor{stringliteral}{"{}The framebuffer device fb0 was opened successfully.\(\backslash\)n"{}});}
 \DoxyCodeLine{136 }
 \DoxyCodeLine{137   \textcolor{comment}{/*}}
 \DoxyCodeLine{138 \textcolor{comment}{   * Get variable screen information}}
 \DoxyCodeLine{139 \textcolor{comment}{   */}}
 \DoxyCodeLine{140   \textcolor{keywordflow}{if} (ioctl(fb\_fd, FBIOGET\_VSCREENINFO, \&fbVarScreenInfo) == -\/1)}
-\DoxyCodeLine{141    \{}
+\DoxyCodeLine{141   \{}
 \DoxyCodeLine{142     perror(\textcolor{stringliteral}{"{}Error reading variable information"{}});}
 \DoxyCodeLine{143     close(fb\_fd);}
 \DoxyCodeLine{144     exit(errno);}
-\DoxyCodeLine{145    \}}
+\DoxyCodeLine{145   \}}
 \DoxyCodeLine{146 }
 \DoxyCodeLine{147   \textcolor{comment}{/* Figure out the size of the screen in bytes */}}
 \DoxyCodeLine{148   screensize = (fbVarScreenInfo.xres * fbVarScreenInfo.yres * fbVarScreenInfo.bits\_per\_pixel) / 8;}
-\DoxyCodeLine{149 }
+\DoxyCodeLine{149   printf(\textcolor{stringliteral}{"{}Screensize: \%d\(\backslash\)n"{}},screensize);}
 \DoxyCodeLine{150   \textcolor{comment}{/*}}
 \DoxyCodeLine{151 \textcolor{comment}{   * Map the frame buffer device memory to user space.}}
 \DoxyCodeLine{152 \textcolor{comment}{   * Starting address in user space is pfb32.}}
 \DoxyCodeLine{153 \textcolor{comment}{   */}}
-\DoxyCodeLine{154    \textcolor{keywordflow}{if} (fbVarScreenInfo.bits\_per\_pixel == BPP32)}
-\DoxyCodeLine{155     \{}
-\DoxyCodeLine{156      pfb32 = (int32\_t*) mmap(0, screensize, PROT\_READ | PROT\_WRITE, MAP\_SHARED, fb\_fd, 0);}
-\DoxyCodeLine{157      \textcolor{keywordflow}{if} (pfb32 == (int32\_t*) -\/1)}
-\DoxyCodeLine{158       \{}
-\DoxyCodeLine{159        perror(\textcolor{stringliteral}{"{}Error: failed to map 32-\/BPP framebuffer device to memory"{}});}
-\DoxyCodeLine{160        exit(errno);}
-\DoxyCodeLine{161       \}}
+\DoxyCodeLine{154   \textcolor{keywordflow}{if} (fbVarScreenInfo.bits\_per\_pixel == BPP32)}
+\DoxyCodeLine{155   \{}
+\DoxyCodeLine{156     pfb32 = (int32\_t *)mmap(0, screensize, PROT\_READ | PROT\_WRITE, MAP\_SHARED, fb\_fd, 0);}
+\DoxyCodeLine{157     \textcolor{keywordflow}{if} (pfb32 == (int32\_t *)-\/1)}
+\DoxyCodeLine{158     \{}
+\DoxyCodeLine{159       perror(\textcolor{stringliteral}{"{}Error: failed to map 32-\/BPP framebuffer device to memory"{}});}
+\DoxyCodeLine{160       exit(errno);}
+\DoxyCodeLine{161     \}}
 \DoxyCodeLine{162 }
-\DoxyCodeLine{163      \textcolor{comment}{/* Fill the screen with 32 bpp, do it for all [x,y] pixel with desired color */}}
-\DoxyCodeLine{164      \textcolor{keywordflow}{for} (y=0; y<fbVarScreenInfo.yres; y++)}
-\DoxyCodeLine{165       \{}
-\DoxyCodeLine{166          sleep(1);}
-\DoxyCodeLine{167        \textcolor{keywordflow}{for} (x=0; x<fbVarScreenInfo.xres; x++)}
-\DoxyCodeLine{168         \{}
-\DoxyCodeLine{169          pfb32[x + y * fbVarScreenInfo.xres]  = BLUE;}
-\DoxyCodeLine{170         \}}
-\DoxyCodeLine{171       \}}
-\DoxyCodeLine{172 }
-\DoxyCodeLine{173      \textcolor{comment}{/* Cleanup */}}
-\DoxyCodeLine{174      munmap(pfb32, screensize);}
-\DoxyCodeLine{175      close(fb\_fd);}
-\DoxyCodeLine{176    \}}
-\DoxyCodeLine{177   \textcolor{keywordflow}{return} EXIT\_SUCCESS;}
-\DoxyCodeLine{178  \}}
+\DoxyCodeLine{163     \textcolor{comment}{/* Fill the screen with 32 bpp, do it for all [x,y] pixel with desired color */}}
+\DoxyCodeLine{164     \textcolor{keywordflow}{for} (y = 0; y < fbVarScreenInfo.yres; y++)}
+\DoxyCodeLine{165     \{}
+\DoxyCodeLine{166       \textcolor{keywordflow}{for} (x = 0; x < fbVarScreenInfo.xres; x++)}
+\DoxyCodeLine{167       \{}
+\DoxyCodeLine{168         pfb32[x + y * fbVarScreenInfo.xres] = BLUE;}
+\DoxyCodeLine{169       \}}
+\DoxyCodeLine{170     \}}
+\DoxyCodeLine{171 }
+\DoxyCodeLine{172     \textcolor{comment}{/* Cleanup */}}
+\DoxyCodeLine{173     munmap(pfb32, screensize);}
+\DoxyCodeLine{174     close(fb\_fd);}
+\DoxyCodeLine{175   \}}
+\DoxyCodeLine{176   \textcolor{keywordflow}{return} EXIT\_SUCCESS;}
+\DoxyCodeLine{177 \}}
 
 \end{DoxyCode}
 

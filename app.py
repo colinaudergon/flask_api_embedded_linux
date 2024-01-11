@@ -1,8 +1,12 @@
+from unix_socket_server import unix_socket_server
 from flask import Flask, send_from_directory
 from flask_socketio import SocketIO
 import time
 import threading
-from unix_socket_server import unix_socket_server
+import subprocess
+
+#include dependency
+
 
 # import gpioController
 
@@ -30,6 +34,7 @@ def serve_static(filename):
         app.logger.error(f"Error serving static file {filename}: {e}")
         raise
 
+#TODO: Correct data input
 def send_data_to_client(value_received):
     global gameIsRunning
     start_code = 0x80
@@ -132,6 +137,8 @@ if __name__ == "__main__":
     if externalAccesGranted:
         # app.run(debug=True,host="0.0.0.0")
         socketio.run(app, debug=True, host="0.0.0.0")
+        # Run the display something on the screen
+        # subprocess.Popen(["./app_executable"])
     else:
         # app.run(debug=True)
         socketio.run(app, debug=True)

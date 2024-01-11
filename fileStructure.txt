@@ -9,3 +9,15 @@ rock5b webBoy
     - CMakeLists.txt
     - build
     - src
+
+Dependency:
+python:
+    server:
+        flask:
+        flask_socketio:
+    UI Image processing:
+    Pillow:
+        python3 -m pip install --upgrade Pillow
+    Numpy:
+        pip install numpy
+    

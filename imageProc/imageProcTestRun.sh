@@ -5,13 +5,13 @@ cd Documents/flask_api_embedded_linux
 current_dir=$(pwd)
 echo "Current directory: $current_dir"
 
-pathToPythonScript="app.py"
-pathToCprogram="app.c"
+pathToPythonScript="imageProc.py"
+pathToCprogram="mainWithArg.c"
 # Add correct path to screen proogramm
 # pathToScreenProgram="app.c"
 
 # Compile C program
-gcc $pathToCprogram -o app_executable
+gcc $pathToCprogram -o frameBufferHandler
 if [ $? -ne 0 ]; then
     echo "Error: Compilation of C program failed."
     exit 1
