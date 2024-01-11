@@ -2,6 +2,8 @@ import subprocess
 from PIL import Image,ImageDraw,ImageFont
 import numpy as np
 import math
+import tempfile
+import os
 
 class ImageProcessor():
     
@@ -91,15 +93,18 @@ class ImageProcessor():
         # Flatten the RGB values into a 1D array
         flat_array = imageArray.reshape(-1)
 
-        # Convert the flat array to a string with newline characters
-        rgb_str = ' '.join(map(str, flat_array))
+        # Create a temporary file to store the RGB values
+        with tempfile.NamedTemporaryFile(mode='w+', delete=False) as temp_file:
+            # Write height, width, and RGB values to the file
+            temp_file.write(f"{height} {width}\n")
+            temp_file.write(' '.join(map(str, flat_array)))
 
-        # Combine height, width, and RGB values into the final input string
-        input_str = f"{height} {width} {rgb_str}"
-
-        # Call the C executable using subprocess
-        subprocess.run(['./frameBufferHandler', input_str], text=True)
-
+        try:
+            # Call the C executable using subprocess with the file path as an argument
+            subprocess.run(['./frameBufferHandler', temp_file.name], text=True)
+        finally:
+            # Clean up: Remove the temporary file
+            os.remove(temp_file.name)
 
 
 
