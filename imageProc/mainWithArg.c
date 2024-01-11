@@ -167,7 +167,6 @@ int main(int argc, char *argv[])
       }
     }
 
-    uint32_t pixel_pos = 0;
     for (h = 0; h < fbVarScreenInfo.yres; h++)
     {
       for (w = 0; w < fbVarScreenInfo.xres; w++)
@@ -181,10 +180,10 @@ int main(int argc, char *argv[])
           return 1;
         }
         // Calculate the pixel position in the framebuffer
-        pixel_pos = w + h * fbVarScreenInfo.xres;
+        uint32_t pixel_pos = h + w * fbVarScreenInfo.xres;
         // printf("pixel position: %d\n", pixel_pos);
         // Assuming 24-bit framebuffer, pack RGB values into a single 32-bit pixel
-        uint32_t pixel = (rgbValue.r << 16) | (rgbValue.g << 8) | rgbValue.b;
+        // uint32_t pixel = (rgbValue.r << 16) | (rgbValue.g << 8) | rgbValue.b;
 
         // Copy pixel to the framebuffer
         pfb_rgb[pixel_pos].r = rgbValue.r;
