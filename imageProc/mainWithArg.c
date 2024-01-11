@@ -149,7 +149,7 @@ int main(int argc, char *argv[])
   }
   int32_t screensize = (fbVarScreenInfo.yres_virtual * fbVarScreenInfo.xres_virtual * fbVarScreenInfo.bits_per_pixel) / 8;
   int32_t *pfb32 = (int32_t *)mmap(0, screensize, PROT_READ | PROT_WRITE, MAP_SHARED, fb_fd, 0);
-  printf("Screensize: %d\npfb32: %p\n",screensize, temp);
+  // printf("Screensize: %d\npfb32: %p\n",screensize, temp);
   if (pfb32 == (int32_t *)-1)
   {
     perror("Error: failed to map 32-BPP framebuffer device to memory");
