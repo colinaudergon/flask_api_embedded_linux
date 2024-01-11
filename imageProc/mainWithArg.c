@@ -181,7 +181,7 @@ int main(int argc, char *argv[])
       }
 
       // Swap x and y for 90 degrees clockwise rotation
-      uint32_t pixel_pos = y + x * fbVarScreenInfo.xres_virtual;
+      uint32_t pixel_pos = x + y * fbVarScreenInfo.xres_virtual;
 
       // Assuming 24-bit framebuffer, pack RGB values into a single 32-bit pixel
       uint32_t pixel = (rgbValue.r << 16) | (rgbValue.g << 8) | rgbValue.b;
