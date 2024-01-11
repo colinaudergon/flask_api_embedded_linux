@@ -7,7 +7,8 @@ class ImageProcessor():
     
     def __init__(self,fontSize):
         self.letterHeight=24
-        self.font = ImageFont.load_default(fontSize)
+        self.fontSize = fontSize
+        self.font = ImageFont.load_default(size=self.fontSize)
 
     def IpFinder(self):
         cmd = ['hostname','-I']
@@ -106,8 +107,8 @@ ip = improc.IpFinder()
 
 # # ~980 character max
 (display,displayArr) = improc.createImage(ip,640,480,fontSize,10,10)
-improc.transmitArrayToCframeBufferHandler(displayArr)
+# improc.transmitArrayToCframeBufferHandler(displayArr)
 # display.save("ipaddress.png")
-# print(displayArr.ndim)
+print(displayArr.ndim)
 
 
