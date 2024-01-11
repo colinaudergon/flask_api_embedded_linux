@@ -82,18 +82,18 @@ class ImageProcessor():
         imageArray = np.array(image)
         return image,imageArray
 
-    def transmitArrayToCframeBufferHandler(self,imageArray):
-        # Assume imageArray is a 3D NumPy array with shape (height, width, 3)
-        height, width, _ = imageArray.shape
+def transmitArrayToCframeBufferHandler(self, imageArray):
+    # Assume imageArray is a 3D NumPy array with shape (height, width, 3)
+    height, width, _ = imageArray.shape
 
-        # Flatten the array for passing as command-line arguments
-        flat_array = imageArray.flatten()
+    # Flatten the array for passing as command-line arguments
+    flat_array = imageArray.flatten()
 
-        # Convert the flat array to a list of strings
-        arg_list = [str(height), str(width)] + list(map(str, flat_array))
+    # Convert the flat array to a string with newline characters
+    input_str = f"{height}\n{width}\n{' '.join(map(str, flat_array))}\n"
 
-        # Call the C executable using subprocess
-        subprocess.run(['./frameBufferHandler', *arg_list])
+    # Call the C executable using subprocess
+    subprocess.run(['./frameBufferHandler'], input=input_str, text=True)
 
 
 
