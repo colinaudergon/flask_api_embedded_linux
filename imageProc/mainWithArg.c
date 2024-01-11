@@ -78,7 +78,8 @@ struct RGB_COLOR
 /******************************************************************************/
 /* Static Variables							      */
 /******************************************************************************/
-
+static uint16_t h;
+static uint16_t w;
 /* Screen Info */
 static struct fb_var_screeninfo fbVarScreenInfo;
 
@@ -156,6 +157,15 @@ int main(int argc, char *argv[])
     perror("Error: failed to map 32-BPP framebuffer device to memory");
     exit(errno);
   }
+
+  /* Fill the screen with 32 bpp, do it for all [x,y] pixel with desired color */
+    for (h = 0; h < fbVarScreenInfo.yres; h++)
+    {
+      for (w = 0; w < fbVarScreenInfo.xres; w++)
+      {
+        pfb32[w + h * fbVarScreenInfo.xres] = BLACK;
+      }
+    }
 
   for (int y = 0; y < height; y++)
   {
