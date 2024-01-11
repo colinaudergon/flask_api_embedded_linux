@@ -167,9 +167,9 @@ int main(int argc, char *argv[])
       }
     }
 
-    for (h = 0; h < fbVarScreenInfo.yres; h++)
+    for (h = 0; h < height; h++)
     {
-      for (w = 0; w < fbVarScreenInfo.xres; w++)
+      for (w = 0; w < width; w++)
       {
         struct RGB_COLOR rgbValue;
         if (fscanf(inputFile, "%hhu %hhu %hhu", &rgbValue.r, &rgbValue.g, &rgbValue.b) != 3)
@@ -179,17 +179,8 @@ int main(int argc, char *argv[])
           free(pfb_rgb);
           return 1;
         }
-        // Calculate the pixel position in the framebuffer
-        uint32_t pixel_pos = h + w * fbVarScreenInfo.xres;
-        // printf("pixel position: %d\n", pixel_pos);
-        // Assuming 24-bit framebuffer, pack RGB values into a single 32-bit pixel
-        // uint32_t pixel = (rgbValue.r << 16) | (rgbValue.g << 8) | rgbValue.b;
-
-        // Copy pixel to the framebuffer
-        //  pfb32[w + h * fbVarScreenInfo.xres]. = RED;
         pfb32[w + h * fbVarScreenInfo.xres] = CONVERT_RGB24( rgbValue.r,rgbValue.g,rgbValue.b);
-        // pfb_rgb[pixel_pos].g = rgbValue.g;
-        // pfb_rgb[pixel_pos].b = rgbValue.b;
+
       }
     }
     }
