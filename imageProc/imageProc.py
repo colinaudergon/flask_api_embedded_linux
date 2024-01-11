@@ -8,7 +8,7 @@ class ImageProcessor():
     def __init__(self,fontSize):
         self.letterHeight=24
         self.fontSize = fontSize
-        self.font = ImageFont.load_default(size=self.fontSize)
+        self.font = ImageFont.load_default(self.fontSize)
 
     def IpFinder(self):
         cmd = ['hostname','-I']
