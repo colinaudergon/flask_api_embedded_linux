@@ -179,7 +179,7 @@ int main(int argc, char *argv[])
           free(pfb_rgb);
           return 1;
         }
-        pfb32[w + h * fbVarScreenInfo.xres] = CONVERT_RGB24( rgbValue.r,rgbValue.g,rgbValue.b);
+        pfb32[h + w * fbVarScreenInfo.xres] = CONVERT_RGB24( rgbValue.r,rgbValue.g,rgbValue.b);
 
       }
     }
