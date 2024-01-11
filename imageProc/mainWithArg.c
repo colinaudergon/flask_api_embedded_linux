@@ -162,7 +162,7 @@ int main(int argc, char *argv[])
   {
     for (w = 0; w < fbVarScreenInfo.xres; w++)
     {
-      pfb32[w + h * fbVarScreenInfo.xres] = BLACK;
+      pfb32[w + h * fbVarScreenInfo.xres] = BLUE;
     }
   }
 
