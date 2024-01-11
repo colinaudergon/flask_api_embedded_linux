@@ -4,12 +4,12 @@
  *	        Fill the screen on the Linux frame buffer device with a color.
  *	        Not optimized and only a minimal error handling is implemented.
  * \file    AppFramefufferShapes.c
- * \version 1.0
- * \date    28.10.2013
- * \author  Martin Aebersold
+ * \version 1.1
+ * \date    24/01/2011
+ * \author  Colin Audergon (audec2@bfh.ch)
  *
  * \remark  Last Modifications:
- * \remark  V1.1, 11/01/24 (DD/MM/YY) Colin Audergon (audec2@bfh.ch)
+ * \remark  V1.1, 24/01/2011 (DD/MM/YY) Colin Audergon (audec2@bfh.ch)
  *  \remark add argument input to display array of
  ***************************************************************************
  *
@@ -19,17 +19,54 @@
  ******************************************************************************
  */
 
-#include <stdio.h>
-#include <stdlib.h>
+/* Declare the function prototypes headers */
 #include <stdint.h>
-#include <fcntl.h>
+#include <stdlib.h>
+#include <stdio.h>
 #include <unistd.h>
+#include <fcntl.h>
+#include <signal.h>
+#include <string.h>
+#include <stdbool.h>
 #include <errno.h>
-#include <sys/ioctl.h>
+
+#include <linux/fb.h>
+
 #include <sys/mman.h>
+#include <sys/ioctl.h>
 #include <sys/types.h>
 #include <sys/stat.h>
-#include <linux/fb.h>
+
+/******************************************************************************/
+/* Macros								      */
+/******************************************************************************/
+
+#define CONVERT_RGB24(red, green, blue) \
+  ((red << 16) | (green << 8) | (blue))
+
+/******************************************************************************/
+/* Define some constants						      */
+/******************************************************************************/
+
+#define BPP32 32
+
+/*
+ * Color definitions   	        R    G    B
+ */
+
+#define BLACK CONVERT_RGB24(0, 0, 0)
+#define RED CONVERT_RGB24(255, 0, 0)
+#define GREEN CONVERT_RGB24(0, 255, 0)
+#define YELLOW CONVERT_RGB24(255, 255, 0)
+#define BLUE CONVERT_RGB24(0, 0, 255)
+#define MAGENTA CONVERT_RGB24(255, 0, 255)
+#define CYAN CONVERT_RGB24(0, 255, 255)
+#define GREY CONVERT_RGB24(192, 192, 192)
+#define WHITE CONVERT_RGB24(255, 255, 255)
+
+/******************************************************************************/
+/* Define some data types						      */
+/******************************************************************************/
 
 struct RGB_COLOR
 {
@@ -38,17 +75,28 @@ struct RGB_COLOR
   uint8_t b;
 };
 
-static struct RGB_COLOR *pfb_rgb;
-static uint16_t y, x;
-static struct fb_var_screeninfo fbVarScreenInfo;
-static int32_t *pfb32;
-static int32_t screensize;
+/******************************************************************************/
+/* Static Variables							      */
+/******************************************************************************/
 
-int validateImageArray(uint8_t ***imageArray, int height, int width);
+/* Screen Info */
+static struct fb_var_screeninfo fbVarScreenInfo;
+
+static struct RGB_COLOR *pfb_rgb; // Updated to use RGB_COLOR structure
+
+/******************************************************************************/
+/* Function prototypes						      */
+/******************************************************************************/
+int validateImageArray(struct RGB_COLOR *rgbValues, int height, int width);
+
+/*
+ ******************************************************************************
+ * main
+ ******************************************************************************
+ */
 
 int main(int argc, char *argv[])
 {
-  printf("In the main!\n");
   if (argc != 2)
   {
     fprintf(stderr, "Usage: %s <input_file>\n", argv[0]);
@@ -71,7 +119,7 @@ int main(int argc, char *argv[])
   }
 
   // Allocate memory for pfb_rgb
-  pfb_rgb = malloc(height * width * sizeof(struct RGB_COLOR));
+  pfb_rgb = malloc(fbVarScreenInfo.yres_virtual * fbVarScreenInfo.xres_virtual * sizeof(struct RGB_COLOR));
   if (pfb_rgb == NULL)
   {
     perror("Error: failed to allocate memory for pfb_rgb");
@@ -79,65 +127,90 @@ int main(int argc, char *argv[])
     return 1;
   }
 
-  int fb_fd = open("/dev/fb0", O_RDWR);
+  /* Figure out the size of the screen in bytes */
+  int32_t screensize = (fbVarScreenInfo.xres * fbVarScreenInfo.yres * fbVarScreenInfo.bits_per_pixel) / 8;
+
+  /*
+   * Map the frame buffer device memory to user space.
+   */
+  int32_t fb_fd = open("/dev/fb0", O_RDWR);
   if (fb_fd == -1)
   {
     perror("Error: cannot open framebuffer device");
-    fclose(inputFile);
-    free(pfb_rgb);
-    return 1;
+    exit(errno);
   }
 
   if (ioctl(fb_fd, FBIOGET_VSCREENINFO, &fbVarScreenInfo) == -1)
   {
     perror("Error reading variable information");
     close(fb_fd);
-    fclose(inputFile);
-    free(pfb_rgb);
-    return 1;
+    exit(errno);
   }
 
-  screensize = (fbVarScreenInfo.xres_virtual * fbVarScreenInfo.yres_virtual * fbVarScreenInfo.bits_per_pixel) / 8;
-
-  pfb32 = (int32_t *)mmap(0, screensize, PROT_READ | PROT_WRITE, MAP_SHARED, fb_fd, 0);
+  int32_t *pfb32 = (int32_t *)mmap(0, screensize, PROT_READ | PROT_WRITE, MAP_SHARED, fb_fd, 0);
   if (pfb32 == (int32_t *)-1)
   {
     perror("Error: failed to map 32-BPP framebuffer device to memory");
-    close(fb_fd);
-    fclose(inputFile);
-    free(pfb_rgb);
-    return 1;
+    exit(errno);
   }
 
-  for (y = 0; y < height; y++)
+  for (int y = 0; y < height; y++)
   {
-    for (x = 0; x < width; x++)
+    for (int x = 0; x < width; x++)
     {
       struct RGB_COLOR rgbValue;
       if (fscanf(inputFile, "%hhu %hhu %hhu", &rgbValue.r, &rgbValue.g, &rgbValue.b) != 3)
       {
         fprintf(stderr, "Error reading RGB values from input file\n");
         fclose(inputFile);
-        munmap(pfb32, screensize);
-        close(fb_fd);
         free(pfb_rgb);
         return 1;
       }
 
+      // Calculate the pixel position in the
+      // Calculate the pixel position in the framebuffer
       uint32_t pixel_pos = x + y * fbVarScreenInfo.xres_virtual;
+
+      // Assuming 24-bit framebuffer, pack RGB values into a single 32-bit pixel
       uint32_t pixel = (rgbValue.r << 16) | (rgbValue.g << 8) | rgbValue.b;
 
+      // Copy pixel to the framebuffer
       pfb_rgb[pixel_pos].r = rgbValue.r;
       pfb_rgb[pixel_pos].g = rgbValue.g;
       pfb_rgb[pixel_pos].b = rgbValue.b;
+
+      // Assuming 24-bit framebuffer, pack RGB values into a single 32-bit pixel for pfb32
+      pixel = (rgbValue.r << 16) | (rgbValue.g << 8) | rgbValue.b;
+
+      // Copy pixel to the framebuffer
+      pfb32[pixel_pos] = pixel;
     }
   }
 
-  fclose(inputFile);
+  /* Cleanup */
+  free(pfb_rgb);
   munmap(pfb32, screensize);
   close(fb_fd);
-  free(pfb_rgb);
+  fclose(inputFile);
 
   return EXIT_SUCCESS;
 }
 
+// Function to check if rgbValues is a valid array with expected length
+int validateImageArray(struct RGB_COLOR *rgbValues, int height, int width)
+{
+  if (rgbValues == NULL)
+  {
+    fprintf(stderr, "Error: rgbValues is NULL\n");
+    return 0;
+  }
+
+  int expectedLength = height * width;
+  if (expectedLength <= 0)
+  {
+    fprintf(stderr, "Error: Invalid height or width\n");
+    return 0;
+  }
+
+  return 1; // rgbValues is valid
+}
