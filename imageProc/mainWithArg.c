@@ -158,14 +158,14 @@ int main(int argc, char *argv[])
   }
   if (fbVarScreenInfo.bits_per_pixel == BPP32)
   {
-    /* Fill the screen with 32 bpp, do it for all [x,y] pixel with desired color */
-    for (h = 0; h < fbVarScreenInfo.yres; h++)
-    {
-      for (w = 0; w < fbVarScreenInfo.xres; w++)
-      {
-        pfb32[w + h * fbVarScreenInfo.xres] = BLACK;
-      }
-    }
+    // /* Fill the screen with 32 bpp, do it for all [x,y] pixel with desired color */
+    // for (h = 0; h < fbVarScreenInfo.yres; h++)
+    // {
+    //   for (w = 0; w < fbVarScreenInfo.xres; w++)
+    //   {
+    //     pfb32[w + h * fbVarScreenInfo.xres] = BLACK;
+    //   }
+    // }
 
     for (int y = 0; y < height; y++)
     {
