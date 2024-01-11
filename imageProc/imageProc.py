@@ -124,7 +124,7 @@ ip = improc.IpFinder()
 # # ~980 character max
 fb_width = 1920  # Set this to your framebuffer width
 fb_height = 1080  # Set this to your framebuffer height
-(display,displayArr) = improc.createImage(ip,fb_width,fb_height,fontSize,10,10)
+(display,displayArr) = improc.createImage(ip,fb_width,fb_height,fontSize,fb_width/2,fb_height/2)
 improc.transmitArrayToCframeBufferHandler(displayArr)
 # display.save("ipaddress.png")
 print(displayArr.ndim)
