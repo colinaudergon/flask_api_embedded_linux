@@ -107,6 +107,7 @@ int validateImageArray(uint8_t ***imageArray, int height, int width);
 
 int main(int argc, char *argv[])
 {
+  printf("In the main!\n");
   if (argc < 3)
   {
     fprintf(stderr, "Usage: %s <height> <width> <r1> <g1> <b1> ... <rn> <gn> <bn>\n", argv[0]);
