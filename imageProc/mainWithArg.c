@@ -151,7 +151,6 @@ int main(int argc, char *argv[])
   int32_t *pfb32 = (int32_t *)mmap(0, screensize, PROT_READ | PROT_WRITE, MAP_SHARED, fb_fd, 0);
   void *temp = (void *)pfb32;
   printf("Screensize: %d\npfb32: %p\n", screensize, temp);
-  // int32_t *pfb32 = (int32_t *)mmap(0, screensize, PROT_READ | PROT_WRITE, MAP_SHARED, fb_fd, 0);
   if (pfb32 == (int32_t *)-1)
   {
     perror("Error: failed to map 32-BPP framebuffer device to memory");
@@ -182,7 +181,7 @@ int main(int argc, char *argv[])
 
       // Calculate the pixel position in the
       // Calculate the pixel position in the framebuffer
-      uint32_t pixel_pos = x + y * fbVarScreenInfo.xres_virtual;
+      uint32_t pixel_pos = y + x * fbVarScreenInfo.xres_virtual;
 
       // Assuming 24-bit framebuffer, pack RGB values into a single 32-bit pixel
       uint32_t pixel = (rgbValue.r << 16) | (rgbValue.g << 8) | rgbValue.b;
