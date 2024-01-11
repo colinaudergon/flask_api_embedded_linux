@@ -48,6 +48,7 @@ int validateImageArray(uint8_t ***imageArray, int height, int width);
 
 int main(int argc, char *argv[])
 {
+  printf("In the main!\n");
   if (argc != 2)
   {
     fprintf(stderr, "Usage: %s <input_file>\n", argv[0]);
