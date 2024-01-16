@@ -171,9 +171,9 @@ int main(int argc, char *argv[])
     //   }
     // }
 
-    for (w = 0; w < width; w++)
+    for (h = 0; h < height; h++)
     {
-      for (h = 0; h < height; h++)
+      for (w = 0; w < width; w++)
       {
         struct RGB_COLOR rgbValue;
         if (fscanf(inputFile, "%hhu %hhu %hhu", &rgbValue.r, &rgbValue.g, &rgbValue.b) != 3)
@@ -183,7 +183,7 @@ int main(int argc, char *argv[])
           free(pfb_rgb);
           return 1;
         }
-        pfb32[h + w * fbVarScreenInfo.xres] = CONVERT_RGB24(rgbValue.r, rgbValue.g, rgbValue.b);
+        pfb32[w + h * fbVarScreenInfo.xres] = CONVERT_RGB24(rgbValue.r, rgbValue.g, rgbValue.b);
       }
       // int32_t pos = h + w * fbVarScreenInfo.xres;
       // printf("PosX: %d; PosY: %d\nPosTot\n\n: %d", w, h, pos);
