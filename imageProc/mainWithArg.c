@@ -152,6 +152,7 @@ int main(int argc, char *argv[])
   // int32_t screensize = (fbVarScreenInfo.yres_virtual * fbVarScreenInfo.xres_virtual * fbVarScreenInfo.bits_per_pixel) / 8;
   int32_t screensize = (fbVarScreenInfo.xres * fbVarScreenInfo.yres * fbVarScreenInfo.bits_per_pixel) / 8;
   int32_t *pfb32 = (int32_t *)mmap(0, screensize, PROT_READ | PROT_WRITE, MAP_SHARED, fb_fd, 0);
+  printf("X pixels: %d; Y pixels: %d\n", fbVarScreenInfo.xres, fbVarScreenInfo.yres);
   // printf("Screensize: %d\npfb32: %p\n",screensize, temp);
   if (pfb32 == (int32_t *)-1)
   {
@@ -182,10 +183,10 @@ int main(int argc, char *argv[])
           free(pfb_rgb);
           return 1;
         }
-        int32_t pos = h + w * fbVarScreenInfo.xres;
-        printf("PosX: %d; PosY: %d\nPosTot: %d", w, h, pos);
         pfb32[h + w * fbVarScreenInfo.xres] = CONVERT_RGB24(rgbValue.r, rgbValue.g, rgbValue.b);
       }
+      int32_t pos = h + w * fbVarScreenInfo.xres;
+      printf("PosX: %d; PosY: %d\nPosTot\n\n: %d", w, h, pos);
     }
     // // Set the rotation
     // fbVarScreenInfo.rotate = FB_ROTATE_CW; // Adjust this line based on your specific rotation value
