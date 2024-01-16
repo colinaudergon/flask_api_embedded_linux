@@ -108,7 +108,7 @@ async function updateUI() {
                     const canvasClickHandler = (gameName,gameCover) => {
                         console.log(`Canvas clicked for game: ${gameName}`);
                         launchGame(gameName);
-                        emitImageData(gameName, gameCover);
+                        emitImageData(gameCover);
                     };
 
                     // Handle mouseenter event
