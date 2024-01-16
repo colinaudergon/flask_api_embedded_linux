@@ -144,9 +144,10 @@ def displayStuff():
     
 if __name__ == "__main__":
     externalAccesGranted = True
-    display_thread=threading.Thread(target=displayStuff)
-    display_thread.start()
+    # display_thread=threading.Thread(target=displayStuff)
+    # display_thread.start()
     if externalAccesGranted:
+        displayStuff()
         # app.run(debug=True,host="0.0.0.0")
         socketio.run(app, debug=True, host="0.0.0.0")
         # Run the display something on the screen
