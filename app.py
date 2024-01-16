@@ -149,7 +149,8 @@ def displayImage(gameName):
     ip = improc.IpFinder()
     text= f"IP ADDRESS WITH IMAGE:\n{ip}\n"
     imgPath = f"images/{gameName}.png"
-    img=improc.imageProcessor(imgPath)
+    # print(type(im))
+    img,imgArr=improc.imageProcessor(imgPath)
     (display,displayArr) = improc.createImageOverlay(text,20,20,img)
     improc.transmitArrayToCframeBufferHandler(displayArr)
     
