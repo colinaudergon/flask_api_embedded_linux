@@ -39,7 +39,6 @@
 // Socket
 #define UNIX_PATH_MAX 108 // UNIX LIKE SOCKET (unused atm)
 #define PORT 5050
-// #define SOCKET_READY 0xFF
 
 /*****************************************************************************/
 /* Global Variables						             						 */
@@ -49,15 +48,31 @@
 int ret0, ret1, ret2, ret3;
 int retS0, retS1, retS2, retS3;
 
-pthread_t readInputThread;
+uint8_t joystickUpReading = 0xFA;    // 250
+uint8_t joystickDownReading = 0xF4;  // 244
+uint8_t joystickRightReading = 0xFA; // 252
+uint8_t joystickLeftReading = 0xF4;  // 244
+
+uint8_t joystickUp = 0x08;
+uint8_t joystickDown = 0x04;
+uint8_t joystickRight = 0x02;
+uint8_t joystickLeft = 0x01;
+
+uint8_t startPressed = 0x80;
+uint8_t selectPressed = 0x40;
+uint8_t aPressed = 0x20;
+uint8_t bPressed = 0x10;
+uint8_t errorCode = 0xFF;
 
 unsigned int led_lines[] = {DS400, DS401, DS402, DS403};
 unsigned int ledOnOff[] = {0, 0, 0, 0};
 int num_leds = sizeof(led_lines) / sizeof(led_lines[0]);
+
 // Socket
 struct sockaddr_un address;
 int socket_fd;
 bool runSocket = true;
+
 
 /*****************************************************************************/
 /* Static Variables (Module variable)				             	         */
@@ -101,19 +116,20 @@ static int fd;
 // GPIO reading
 int initialize_gpio_output(const char *gpio_chip, unsigned int gpio_line, int ret);
 int initialize_gpio_input(const char *gpio_chip, unsigned int gpio_line, int ret);
-void turnOnLed(int ledIndice);
-void turnOffLed(int ledIndice);
+
+void turnLedOn(int ledIndice);
+void turnLedOff(int ledIndice);
+void updateLedStatus(int ledIndice, int status);
+
 void cleanupRelease(void);
 
 int setUpAdcValue(uint8_t setup);
 int readAdcValue();
 
-uint8_t readInputs();
+uint8_t readADCInputs();
 int readSwitch(int retSwitch, struct gpiohandle_request reqSwitch);
-void pulseLed(int ledIndice);
 
 void sleep_ms(int milliseconds);
-
 // Socket
 bool establishConnection();
 
@@ -129,6 +145,12 @@ int main(int argc, char **argv)
     ret2 = initialize_gpio_output(GPIO_BANK3, DS402, ret2);
     ret3 = initialize_gpio_output(GPIO_BANK3, DS403, ret3);
 
+    // led status
+    int statDS400 = 0;
+    int statDS401 = 0;
+    int statDS402 = 0;
+    int statDS403 = 0;
+
     // Switch init
     retS0 = initialize_gpio_input(GPIO_BANK1, S400, retS0);
     retS1 = initialize_gpio_input(GPIO_BANK1, S401, retS1);
@@ -143,16 +165,13 @@ int main(int argc, char **argv)
         printf("No such device found!\n");
         return -1;
     }
-
     /* Set the I2C slave address for all subsequent I2C device transfers */
     if (ioctl(i2c_fd, I2C_SLAVE_FORCE, JOYSTICK_ADDR) < 0)
     {
         perror("i2cSetAddress");
         return -1;
     }
-
-    // Socket
-    // Specify the socket file path for real application
+// Specify the socket file path for real application
     const char *socket_path = "/tmp/socket";
     memset(&address, 0, sizeof(address));
     address.sun_family = AF_UNIX;
@@ -170,21 +189,59 @@ int main(int argc, char **argv)
     {
         runSocket = true;
     }
-
     while (1)
     {
-        inputState = readInputs();
-        // Send 8-bit integer
-        n = write(socket_fd, &inputState, sizeof(inputState));
-        if (n < 0)
+        inputState = readADCInputs();
+        if (!readSwitch(retS0, reqS0))
         {
-            perror("ERROR writing to socket");
-            return 1;
+            inputState |= startPressed;
+            statDS403 = 1;
+            printf("Switch S400 active\n");
         }
-        printf("input state: 0x%02X", inputState);
-        sleep(1);
-    }
+        else
+        {
+            statDS403 = 0;
+        }
+        if (!readSwitch(retS1, reqS1))
+        {
+            inputState |= selectPressed;
+            statDS402 = 1;
+            printf("Switch S401 active\n");
+        }
+        else
+        {
+            statDS402 = 0;
+        }
 
+        if (!readSwitch(retS2, reqS2))
+        {
+            statDS401 = 1;
+            printf("Switch S402 active\n");
+        }
+
+        else
+        {
+            statDS401 = 0;
+        }
+        if (!readSwitch(retS3, reqS3))
+        {
+            inputState |= bPressed;
+            statDS400 = 1;
+            printf("Switch S403 active\n");
+        }
+
+        else
+        {
+            statDS400 = 0;
+        }
+
+        printf("input state: 0x%02X\n", inputState);
+
+        updateLedStatus(0, statDS400);
+        updateLedStatus(1, statDS401);
+        updateLedStatus(2, statDS402);
+        updateLedStatus(3, statDS403);
+    }
     cleanupRelease();
     return 0;
 }
@@ -248,7 +305,6 @@ int initialize_gpio_output(const char *gpio_chip, unsigned int gpio_line, int re
 /*****************************************************************************/
 int initialize_gpio_input(const char *gpio_chip, unsigned int gpio_line, int ret)
 {
-
     // Known working Input init:
     // Open GPIO device
     strcpy(chrdev_name, gpio_chip);
@@ -261,7 +317,7 @@ int initialize_gpio_input(const char *gpio_chip, unsigned int gpio_line, int ret
     }
 
     // Setup variables for a request
-    // struct gpiohandle_request req;
+    struct gpiohandle_request req;
     req.lineoffsets[0] = gpio_line;
     req.flags = GPIOHANDLE_REQUEST_INPUT;
     snprintf(req.consumer_label, sizeof(req.consumer_label), "btn_%u", gpio_line);
@@ -366,29 +422,12 @@ b7  |b6  |b5  |b4  |b3| b2 | b1 | b0
 S400|S401|S402|S403|up|down|left|right
 TODO: add range for joystic input
 */
-
-//Use readingInputs, works without overflow
-uint8_t readInputs()
+uint8_t readADCInputs()
 {
     uint8_t adcValue;
     int8_t inputState = 0x00;
 
-    uint8_t joystickUpReading = 0xFC;    // 252
-    uint8_t joystickDownReading = 0xF1;  // 241
-    uint8_t joystickRightReading = 0xFC; // 252
-    uint8_t joystickLeftReading = 0xF2;  // 242
-
-    uint8_t joystickUp = 0x08;
-    uint8_t joystickDown = 0x04;
-    uint8_t joystickRight = 0x02;
-    uint8_t joystickLeft = 0x01;
-
-    uint8_t startPressed = 0x80;
-    uint8_t selectPressed = 0x40;
-    uint8_t aPressed = 0x20;
-    uint8_t bPressed = 0x10;
-    uint8_t errorCode = 0xFF;
-
+    // add value by default: joystick shouldnt be 247->0 when unused
     if (setUpAdcValue(JOYSTICK_A_UP_DOWN) < 0)
     {
         printf("Failed to configure ADC");
@@ -399,11 +438,11 @@ uint8_t readInputs()
     adcValue = readAdcValue();
     printf("U/D Value: %d\n", adcValue);
 
-    if (adcValue == joystickUpReading)
+    if (adcValue >= joystickUpReading)
     {
         inputState |= joystickUp;
     }
-    if (adcValue == joystickLeftReading)
+    if (adcValue <= joystickDownReading)
     {
         inputState |= joystickDown;
     }
@@ -419,64 +458,47 @@ uint8_t readInputs()
     adcValue = readAdcValue();
     printf("L/R Value: %d\n", adcValue);
 
-    if (adcValue == joystickRightReading)
+    if (adcValue >= joystickRightReading)
     {
         inputState |= joystickRight;
     }
-    if (adcValue == joystickLeftReading)
+    if (adcValue <= joystickLeftReading)
     {
         inputState |= joystickLeft;
     }
-
-//SMACK STASH HERE SOMEWHERE
-//prob led pulse?
-    // if (!readSwitch(retS0, reqS0))
-    // {
-    //     inputState |= startPressed;
-    //     pulseLed(0);
-    //     printf("Switch S400 active\n");
-    // }
-    // if (!readSwitch(retS1, reqS1))
-    // {
-    //     inputState |= selectPressed;
-    //     pulseLed(1);
-    //     printf("Switch S401 active\n");
-    // }
-    // if (!readSwitch(retS2, reqS2))
-    // {
-    //     inputState |= aPressed;
-    //     pulseLed(2);
-    //     printf("Switch S402 active\n");
-    // }
-    // if (!readSwitch(retS3, reqS3))
-    // {
-    //     inputState |= bPressed;
-    //     pulseLed(3);
-    //     printf("Switch S403 active\n");
-    // }
     sleep_ms(10);
-    printf("Inputs state: 0x%02X\n", inputState);
     return inputState;
 }
+
 /*****************************************************************************/
 /* Read switches Function											 */
 /*****************************************************************************/
 int readSwitch(int retSwitch, struct gpiohandle_request reqSwitch)
 {
     int value_switch = 0;
-    retSwitch = ioctl(reqSwitch.fd, GPIOHANDLE_GET_LINE_VALUES_IOCTL, &value_switch);
-    if (retSwitch == -1)
+
+    if (reqSwitch.fd != -1)
     {
-        retSwitch = -errno;
-        fprintf(stderr, "Failed to get line values for S (%d)\n", retSwitch);
+        retSwitch = ioctl(reqSwitch.fd, GPIOHANDLE_GET_LINE_VALUES_IOCTL, &value_switch);
+
+        if (retSwitch == -1)
+        {
+            retSwitch = -errno;
+            fprintf(stderr, "Failed to get line values for S (%d)\n", retSwitch);
+        }
     }
+    else
+    {
+        fprintf(stderr, "Invalid file descriptor for S\n");
+    }
+
     return value_switch;
 }
 
 /*****************************************************************************/
 /* Pulse a led for 10ms											 */
 /*****************************************************************************/
-void pulseLed(int ledIndice)
+void turnLedOn(int ledIndice)
 {
     // Turn on the specified LED
     ledOnOff[ledIndice] = 1;
@@ -484,8 +506,9 @@ void pulseLed(int ledIndice)
     ret1 = ioctl(req1.fd, GPIOHANDLE_SET_LINE_VALUES_IOCTL, &ledOnOff[1]);
     ret2 = ioctl(req2.fd, GPIOHANDLE_SET_LINE_VALUES_IOCTL, &ledOnOff[2]);
     ret3 = ioctl(req3.fd, GPIOHANDLE_SET_LINE_VALUES_IOCTL, &ledOnOff[3]);
-
-    sleep_ms(10); // Wait for a short duration
+}
+void turnLedOff(int ledIndice)
+{
 
     // Turn off the specified LED
     ledOnOff[ledIndice] = 0;
@@ -495,6 +518,24 @@ void pulseLed(int ledIndice)
     ret3 = ioctl(req3.fd, GPIOHANDLE_SET_LINE_VALUES_IOCTL, &ledOnOff[3]);
 }
 
+// status should be 0 or 1
+void updateLedStatus(int ledIndice, int status)
+{
+    if ((status != 0) && (status != 1))
+    {
+        printf("Error setting led status, status  is not 0 or 1.\n");
+    }
+    else
+    {
+        // Turn off the specified LED
+        ledOnOff[ledIndice] = status;
+        ret0 = ioctl(req0.fd, GPIOHANDLE_SET_LINE_VALUES_IOCTL, &ledOnOff[0]);
+        ret1 = ioctl(req1.fd, GPIOHANDLE_SET_LINE_VALUES_IOCTL, &ledOnOff[1]);
+        ret2 = ioctl(req2.fd, GPIOHANDLE_SET_LINE_VALUES_IOCTL, &ledOnOff[2]);
+        ret3 = ioctl(req3.fd, GPIOHANDLE_SET_LINE_VALUES_IOCTL, &ledOnOff[3]);
+    }
+}
+
 /*****************************************************************************/
 /* Sleep in ms Function											 */
 /*****************************************************************************/
@@ -502,7 +543,6 @@ void sleep_ms(int milliseconds)
 {
     usleep(milliseconds * 1000);
 }
-
 /*****************************************************************************/
 /* Socket establishment Function											 */
 /*****************************************************************************/
