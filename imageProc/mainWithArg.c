@@ -161,18 +161,18 @@ int main(int argc, char *argv[])
   if (fbVarScreenInfo.bits_per_pixel == BPP32)
   {
     /* Fill the screen with 32 bpp, do it for all [x,y] pixel with desired color */
-    for (w = 0; w < fbVarScreenInfo.xres; w++)
-    {
-      for (h = 0; h < fbVarScreenInfo.yres; h++)
-      {
-        pfb32[w + h * fbVarScreenInfo.xres] = BLACK;
-        // printf("pixel position HV: %d\n", w + h * fbVarScreenInfo.xres);
-      }
-    }
+    //   for (h = 0; h < fbVarScreenInfo.yres; h++)
+    // {
+    // for (w = 0; w < fbVarScreenInfo.xres; w++)
+    //   {
+    //     pfb32[w +  h* fbVarScreenInfo.xres] = BLACK;
+    //     // printf("pixel position HV: %d\n", w + h * fbVarScreenInfo.xres);
+    //   }
+    // }
 
-    for (h = 0; h < height; h++)
+    for (w = 0; w < width; w++)
     {
-      for (w = 0; w < width; w++)
+      for (h = 0; h < height; h++)
       {
         struct RGB_COLOR rgbValue;
         if (fscanf(inputFile, "%hhu %hhu %hhu", &rgbValue.r, &rgbValue.g, &rgbValue.b) != 3)
