@@ -34,31 +34,48 @@ class ImageProcessor():
             return ipAdd
 
 
-    def imageProcessor(self,path):
+    # def imageProcessor(self,path):
+    #     im = Image.open(path)
+    #     im_w,im_h=im.size
+        
+    #     ratio=self.fb_height/im_h
+    #     resized_im_w =int(im_w*ratio)
+    #     resized_im = im.resize((resized_im_w,  self.fb_height))
+    #     resized_im_w,resized_im_h = resized_im.size
+              
+    #     iar = np.asarray(resized_im)
+        
+    #     # Convert to RGB
+    #     rgbOnly = iar[:, :, :3]
+    #     newImage = Image.fromarray(rgbOnly, 'RGB')
+    #     imageArray = np.array(newImage)
+        
+    #     return imageArray
+    
+    def imageProcessor(self, path):
         im = Image.open(path)
-        im_w,im_h=im.size
-        
-        
-        ratio=self.fb_height/im_h
-        resized_im_w =int(im_w*ratio)
-        resized_im = im.resize((resized_im_w,  self.fb_height))
-        resized_im_w,resized_im_h = resized_im.size
-        
-        print(im_w)
-        print(im_h)
-        print(resized_im_w)
-        print(resized_im_h)
-        print("\n"+str(ratio))
-        
-        
-        iar = np.asarray(resized_im)
-        # Convert to RGB
-        rgbOnly = iar[:, :, :3]
-        newImage = Image.fromarray(rgbOnly, 'RGB')
-        imageArray = np.array(newImage)
+        im_w, im_h = im.size
+
+        ratio = self.fb_height / im_h
+        resized_im_w = int(im_w * ratio)
+        resized_im = im.resize((resized_im_w, self.fb_height))
+        resized_im_w, resized_im_h = resized_im.size
+
+        # Create a new blank image with black background
+        background = Image.new('RGB', (self.fb_width, self.fb_height), 'black')
+
+        # Calculate the position to center the resized image
+        x_offset = (self.fb_width - resized_im_w) // 2
+        y_offset = (self.fb_height - resized_im_h) // 2
+
+        # Paste the resized image onto the black background
+        background.paste(resized_im, (x_offset, y_offset))
+
+        # Convert the result to a NumPy array
+        imageArray = np.array(background)
+
         return imageArray
     
-
     def createLetterImage(self,letter):
         spacing=4
         letterWidth=  math.floor(self.font.getlength(letter))
@@ -146,6 +163,7 @@ text= f"IP ADDRESS: {ip}\n"
 
 # impath="imageProc/yasu.jpeg"
 # displayArr=improc.imageProcessor(impath)
+
 displayArr=improc.imageProcessor("yasu.jpeg")
 
 # (display,displayArr) = improc.createImage(text,fontSize,20,20)
