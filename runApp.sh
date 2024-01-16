@@ -1,9 +1,9 @@
 #!/bin/bash
 # Replace absolute path with the true application location 
 #include dependency
-cd Documents/flask_api_embedded_linux
-current_dir=$(pwd)
-echo "Current directory: $current_dir"
+# cd Documents/flask_api_embedded_linux
+# current_dir=$(pwd)
+# echo "Current directory: $current_dir"
 
 pathToPythonScript="app.py"
 pathToCprogram="app.c"

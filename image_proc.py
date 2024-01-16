@@ -174,6 +174,7 @@ class ImageProcessor():
 
 # # img,arr=improc.imageProcessor()
 
-# (display,displayArr) = improc.createImage(text,20,20,img)
+# (display,displayArr) = improc.createImageOverlay(text,20,20,img)
+# (display,displayArr) = improc.createImage(text,20,20)
 # # display.save("imageProc/truc.jpeg")
 # improc.transmitArrayToCframeBufferHandler(displayArr)

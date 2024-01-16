@@ -120,7 +120,6 @@ int main(int argc, char *argv[])
   }
 
   // Allocate memory for pfb_rgb
-  // pfb_rgb = malloc(fbVarScreenInfo.yres_virtual * fbVarScreenInfo.xres_virtual * sizeof(struct RGB_COLOR));
   pfb_rgb = malloc(fbVarScreenInfo.yres * fbVarScreenInfo.xres * sizeof(struct RGB_COLOR));
   if (pfb_rgb == NULL)
   {
@@ -129,8 +128,6 @@ int main(int argc, char *argv[])
     return 1;
   }
 
-  /* Figure out the size of the screen in bytes */
-  // int32_t screensize = (fbVarScreenInfo.xres * fbVarScreenInfo.yres * fbVarScreenInfo.bits_per_pixel) / 8;
 
   /*
    * Map the frame buffer device memory to user space.
@@ -149,11 +146,9 @@ int main(int argc, char *argv[])
     exit(errno);
   }
 
-  // int32_t screensize = (fbVarScreenInfo.yres_virtual * fbVarScreenInfo.xres_virtual * fbVarScreenInfo.bits_per_pixel) / 8;
   int32_t screensize = (fbVarScreenInfo.xres * fbVarScreenInfo.yres * fbVarScreenInfo.bits_per_pixel) / 8;
   int32_t *pfb32 = (int32_t *)mmap(0, screensize, PROT_READ | PROT_WRITE, MAP_SHARED, fb_fd, 0);
-  printf("X pixels: %d; Y pixels: %d\n", fbVarScreenInfo.xres, fbVarScreenInfo.yres);
-  // printf("Screensize: %d\npfb32: %p\n",screensize, temp);
+
   if (pfb32 == (int32_t *)-1)
   {
     perror("Error: failed to map 32-BPP framebuffer device to memory");
@@ -185,19 +180,8 @@ int main(int argc, char *argv[])
         }
         pfb32[w + h * fbVarScreenInfo.xres] = CONVERT_RGB24(rgbValue.r, rgbValue.g, rgbValue.b);
       }
-      // int32_t pos = h + w * fbVarScreenInfo.xres;
-      // printf("PosX: %d; PosY: %d\nPosTot\n\n: %d", w, h, pos);
     }
-    // // Set the rotation
-    // fbVarScreenInfo.rotate = FB_ROTATE_CW; // Adjust this line based on your specific rotation value
 
-    // // Write back the updated information
-    // if (ioctl(fb_fd, FBIOPUT_VSCREENINFO, &fbVarScreenInfo) == -1)
-    // {
-    //   perror("Error setting rotation");
-    //   close(fb_fd);
-    //   exit(errno);
-    // }
   }
   else
   {

@@ -121,6 +121,7 @@ def handle_game_launched(data):
     global gameIsRunning
     game_name = data["gameName"]
     print(f"Game {game_name} has been launched!")
+
     gameIsRunning = True 
     global socket_server_thread
     print("About to create thread")
@@ -136,10 +137,22 @@ def handle_game_closed(data):
     socketio.emit("command_input", data)
 
 
-def displayStuff():
+def displayHome():
     ip = improc.IpFinder()
-    text= f"IP ADDRESS prout:\n{ip}\n"
+    text= f"IP ADDRESS:\n{ip}\n"
     (display,displayArr) = improc.createImage(text,20,20)
+    improc.transmitArrayToCframeBufferHandler(displayArr)
+
+@socketio.on("imageData")
+def handle_image_data(data):
+    game_name = data["gameName"]
+    image_data = data["imageData"]
+    imgPath="images/gameImg.png"
+    with open(imgPath, "wb") as file:
+        file.write(image_data)
+    ip = improc.IpFinder()
+    text= f"IP ADDRESS WITH IMAGE:\n{ip}\n"
+    (display,displayArr) = improc.createImageOverlay(text,20,20,imgPath)
     improc.transmitArrayToCframeBufferHandler(displayArr)
     
 if __name__ == "__main__":
@@ -147,7 +160,7 @@ if __name__ == "__main__":
     # display_thread=threading.Thread(target=displayStuff)
     # display_thread.start()
     if externalAccesGranted:
-        displayStuff()
+        displayHome()
         # app.run(debug=True,host="0.0.0.0")
         socketio.run(app, debug=True, host="0.0.0.0")
         # Run the display something on the screen

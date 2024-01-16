@@ -104,7 +104,7 @@ async function updateUI() {
                     const canvasClickHandler = (gameName) => {
                         console.log(`Canvas clicked for game: ${gameName}`);
                         launchGame(gameName);
-                        // Call your custom function or perform any desired action with gameName
+                        emitImageData(gameName, imageArray);
                     };
 
                     // Handle mouseenter event
@@ -263,11 +263,17 @@ async function launchGame(gametoRun) {
 
         // Send a message to the server indicating that the game is launched
         socket.emit('gameLaunched', { gameName: gametoRun });
+        //Send the image to the server
         console.log("trying to run the game!");
 
     } catch (error) {
         console.error('Error launching the game:', error);
     }
+}
+
+function emitImageData(gameName, imageData) {
+    // Assuming you have a socket instance connected to the server
+    socket.emit('imageData', { gameName, imageData });
 }
 
 socket.on('connect', function () {
