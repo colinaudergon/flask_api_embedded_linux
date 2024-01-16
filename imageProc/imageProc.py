@@ -120,7 +120,7 @@ class ImageProcessor():
         print(f"Rotated image size - height:{height}, width: {width}, channels: {_}")
 
         # Flatten the RGB values into a 1D array
-        flat_array = rotated_imageArray2.reshape(-1)
+        flat_array = rotated_imageArray1.reshape(-1)
         print(f"Flat array: {flat_array}")
 
         # Create a temporary file to store the RGB values
