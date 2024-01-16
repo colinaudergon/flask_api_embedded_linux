@@ -10,10 +10,12 @@ class ImageProcessor():
     def __init__(self,fontSize):
         self.letterHeight=24
         self.fontSize = fontSize
+        #Do not touch these values
         self.fb_width = 1280
         self.fb_height = 800
+        self.maxChar = 950
         # self.font = ImageFont.load_default(self.fontSize)
-        self.font = ImageFont.truetype("arial.ttf", self.fontSize)
+        # self.font = ImageFont.truetype("arial.ttf", self.fontSize)
 
     def IpFinder(self):
         cmd = ['hostname','-I']
@@ -34,7 +36,21 @@ class ImageProcessor():
 
     def imageProcessor(self,path):
         im = Image.open(path)
-        resized_im = im.resize((self.fb_width,  self.fb_height))
+        im_w,im_h=im.size
+        
+        
+        ratio=self.fb_height/im_h
+        resized_im_w =int(im_w*ratio)
+        resized_im = im.resize((resized_im_w,  self.fb_height))
+        resized_im_w,resized_im_h = resized_im.size
+        
+        print(im_w)
+        print(im_h)
+        print(resized_im_w)
+        print(resized_im_h)
+        print("\n"+str(ratio))
+        
+        
         iar = np.asarray(resized_im)
         # Convert to RGB
         rgbOnly = iar[:, :, :3]
@@ -128,15 +144,11 @@ ip = improc.IpFinder()
 
 text= f"IP ADDRESS: {ip}\n"
 
-
-# # ~980 character max
-#Do not touch these values
-fb_width = 1280  # Set this to your framebuffer width
-fb_height = 800  # Set this to your framebuffer height
-
-displayArr=improc.imageProcessor("yasu.jpeg")
+impath="imageProc/yasu.jpeg"
+displayArr=improc.imageProcessor(impath)
+# displayArr=improc.imageProcessor("yasu.jpeg")
 
 # (display,displayArr) = improc.createImage(text,fontSize,20,20)
-improc.transmitArrayToCframeBufferHandler(displayArr)
+# improc.transmitArrayToCframeBufferHandler(displayArr)
 
 
