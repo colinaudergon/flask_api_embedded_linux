@@ -183,7 +183,8 @@ int main(int argc, char *argv[])
           free(pfb_rgb);
           return 1;
         }
-        pfb32[w + h * fbVarScreenInfo.xres] = CONVERT_RGB24(rgbValue.r, rgbValue.g, rgbValue.b);
+        // pfb32[w + h * fbVarScreenInfo.xres] = CONVERT_RGB24(rgbValue.r, rgbValue.g, rgbValue.b);
+        pfb32[w + h * fbVarScreenInfo.xres] = CONVERT_RGB24(w, h, 0);
       }
       // int32_t pos = h + w * fbVarScreenInfo.xres;
       // printf("PosX: %d; PosY: %d\nPosTot\n\n: %d", w, h, pos);
