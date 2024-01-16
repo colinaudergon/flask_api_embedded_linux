@@ -14,7 +14,7 @@ class ImageProcessor():
         self.fb_width = 1280
         self.fb_height = 800
         self.maxChar = 950
-        # self.font = ImageFont.load_default(self.fontSize)
+        self.font = ImageFont.load_default(self.fontSize)
         # self.font = ImageFont.truetype("arial.ttf", self.fontSize)
 
     def IpFinder(self):
@@ -73,28 +73,27 @@ class ImageProcessor():
 
         # Convert the result to a NumPy array
         imageArray = np.array(background)
-
-        return imageArray
+        rgbOnly = imageArray[:, :, :3]
+        newImage = Image.fromarray(rgbOnly, 'RGB')
+        return (newImage,imageArray)
     
     def createLetterImage(self,letter):
         spacing=4
         letterWidth=  math.floor(self.font.getlength(letter))
         letterXSpacing= letterWidth + spacing
-        
-        
+
         # Create a blank image for the letter (40x80)
         letter_image = Image.new("RGB", (letterWidth, self.letterHeight), "black")
         draw = ImageDraw.Draw(letter_image)
         
         # Draw the letter in white
         draw.text((0, 0), letter, fill="white", spacing=spacing,font=self.font)
-        
 
         return letter_image, letterWidth,letterXSpacing
 
-    def createImage(self,word,fontSize,xInitPos,yInitPos):
+    def createImage(self,word,xInitPos,yInitPos,image):
         
-        image = Image.new("RGB", (self.fb_width, self.fb_height), "black")
+        # image = Image.new("RGB", (self.fb_width, self.fb_height), "black")
         draw = ImageDraw.Draw(image)
         x_position = xInitPos
         y_position = yInitPos
@@ -153,20 +152,23 @@ class ImageProcessor():
 
 
 
-fontSize = 18
+
+
+fontSize = 22
 improc=ImageProcessor(fontSize)
 
 # #Should IP finder be here?
 ip = improc.IpFinder()
 
-text= f"IP ADDRESS: {ip}\n"
+text= f"IP ADDRESS:\n{ip}\n"
 
+# impath="imageProc/images/yasu.jpeg"
 # impath="imageProc/yasu.jpeg"
-# displayArr=improc.imageProcessor(impath)
+impath="yasu.jpeg"
+img,arr=improc.imageProcessor(impath)
 
-displayArr=improc.imageProcessor("yasu.jpeg")
+# img,arr=improc.imageProcessor()
 
-# (display,displayArr) = improc.createImage(text,fontSize,20,20)
+(display,displayArr) = improc.createImage(text,20,20,img)
+# display.save("imageProc/truc.jpeg")
 improc.transmitArrayToCframeBufferHandler(displayArr)
-
-
