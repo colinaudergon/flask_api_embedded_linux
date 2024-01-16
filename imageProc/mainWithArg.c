@@ -170,9 +170,9 @@ int main(int argc, char *argv[])
       }
     }
 
-    for (h = 0; h < height; h++)
+    for (w = 0; w < width; w++)
     {
-      for (w = 0; w < width; w++)
+      for (h = 0; h < height; h++)
       {
         struct RGB_COLOR rgbValue;
         if (fscanf(inputFile, "%hhu %hhu %hhu", &rgbValue.r, &rgbValue.g, &rgbValue.b) != 3)
@@ -185,16 +185,16 @@ int main(int argc, char *argv[])
         pfb32[w + h * fbVarScreenInfo.xres] = CONVERT_RGB24(rgbValue.r, rgbValue.g, rgbValue.b);
       }
     }
-    // Set the rotation
-    fbVarScreenInfo.rotate = FB_ROTATE_CW; // Adjust this line based on your specific rotation value
+    // // Set the rotation
+    // fbVarScreenInfo.rotate = FB_ROTATE_CW; // Adjust this line based on your specific rotation value
 
-    // Write back the updated information
-    if (ioctl(fb_fd, FBIOPUT_VSCREENINFO, &fbVarScreenInfo) == -1)
-    {
-      perror("Error setting rotation");
-      close(fb_fd);
-      exit(errno);
-    }
+    // // Write back the updated information
+    // if (ioctl(fb_fd, FBIOPUT_VSCREENINFO, &fbVarScreenInfo) == -1)
+    // {
+    //   perror("Error setting rotation");
+    //   close(fb_fd);
+    //   exit(errno);
+    // }
   }
   else
   {
