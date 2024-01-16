@@ -10,6 +10,8 @@ class ImageProcessor():
     def __init__(self,fontSize):
         self.letterHeight=24
         self.fontSize = fontSize
+        self.fb_width = 1280
+        self.fb_height = 800
         # self.font = ImageFont.load_default(self.fontSize)
         self.font = ImageFont.truetype("arial.ttf", self.fontSize)
 
@@ -30,14 +32,15 @@ class ImageProcessor():
             return ipAdd
 
 
-    def imageProcessor(path):
-        i = Image.open(path)
-        iar = np.asarray(i)
+    def imageProcessor(self,path):
+        im = Image.open(path)
+        resized_im = im.resize((self.fb_width,  self.fb_height))
+        iar = np.asarray(resized_im)
         # Convert to RGB
         rgbOnly = iar[:, :, :3]
         newImage = Image.fromarray(rgbOnly, 'RGB')
         return newImage
-
+    
 
     def createLetterImage(self,letter):
         spacing=4
@@ -55,12 +58,9 @@ class ImageProcessor():
 
         return letter_image, letterWidth,letterXSpacing
 
-    def createImage(self,word,width,height,fontSize,xInitPos,yInitPos):
+    def createImage(self,word,fontSize,xInitPos,yInitPos):
         
-        # global letterHeight
-        # font = ImageFont.load_default(fontSize)
-        
-        image = Image.new("RGB", (width, height), "black")
+        image = Image.new("RGB", (self.fb_width, self.fb_height), "black")
         draw = ImageDraw.Draw(image)
         x_position = xInitPos
         y_position = yInitPos
@@ -72,38 +72,18 @@ class ImageProcessor():
 
             for letter in line:
                 #  Check if the next line would go beyond the specified height
-                if (y_position + self.letterHeight) >= height - yInitPos:
+                if (y_position + self.letterHeight) >= self.fb_height - yInitPos:
                     break
                 else:
                     letter_image, letterWidth,letterXSpacing= self.createLetterImage(letter)
                     image.paste(letter_image, (x_position, y_position))
                     x_position += letterXSpacing  # Move to the next letter position
-                    if((x_position + letterWidth) >=  width-xInitPos):
+                    if((x_position + letterWidth) >=  self.fb_width-xInitPos):
                         y_position += self.letterHeight
                         x_position=xInitPos
         imageArray = np.array(image)
         return image,imageArray
     
-
-    # def transmitArrayToCframeBufferHandler(self, imageArray):
-    #     # Assume imageArray is a 3D NumPy array with shape (height, width, 3)
-    #     height, width, _ = imageArray.shape
-    #     print(f"height:{height}, width: {width}, unknow: {_}")
-    #     # Flatten the RGB values into a 1D array
-    #     flat_array = imageArray.reshape(-1)
-    #     print(f"Flat array: {flat_array}")
-    #     # Create a temporary file to store the RGB values
-    #     with tempfile.NamedTemporaryFile(mode='w+', delete=False) as temp_file:
-    #         # Write height, width, and RGB values to the file
-    #         temp_file.write(f"{height} {width}\n")
-    #         temp_file.write(' '.join(map(str, flat_array)))
-
-    #     try:
-    #         # Call the C executable using subprocess with the file path as an argument
-    #         subprocess.run(['./frameBufferHandler', temp_file.name], text=True)
-    #     finally:
-    #         # Clean up: Remove the temporary file
-    #         os.remove(temp_file.name)
     def transmitArrayToCframeBufferHandler(self, imageArray):
         # Assume imageArray is a 3D NumPy array with shape (height, width, 3)
         height, width, _ = imageArray.shape
@@ -147,12 +127,13 @@ ip = improc.IpFinder()
 
 text= f"IP ADDRESS: {ip}\n"
 
+
 # # ~980 character max
+#Do not touch these values
 fb_width = 1280  # Set this to your framebuffer width
 fb_height = 800  # Set this to your framebuffer height
-(display,displayArr) = improc.createImage(text,fb_width,fb_height,fontSize,200,200)
+
+(display,displayArr) = improc.createImage(text,fontSize,20,20)
 improc.transmitArrayToCframeBufferHandler(displayArr)
-# display.save("ipaddress.png")
-# print(displayArr.ndim)
 
 
