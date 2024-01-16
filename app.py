@@ -93,15 +93,6 @@ def send_data_to_client(value_received):
             command="right"
             data = {"command": command}
             socketio.emit("command_input", data)
-        # Print the results
-        print("Joystick Up:", joystick_up)
-        print("Joystick Down:", joystick_down)
-        print("Joystick Right:", joystick_right)
-        print("Joystick Left:", joystick_left)
-        print("Start Pressed:", start_pressed)
-        print("Select Pressed:", select_pressed)
-        print("A Pressed:", a_pressed)
-        print("B Pressed:", b_pressed)
 
 
 @socketio.on('start_game')
@@ -112,7 +103,6 @@ def handle_start_game():
 @socketio.on("connect")
 def handle_connect():
     print("Client connected")
-    # socketio.start_background_task(target=send_data_to_client)
 
 @socketio.on("my event")
 def handle_message(data):
@@ -147,7 +137,7 @@ def displayHome():
 
 def displayImage(gameName):        
     ip = improc.IpFinder()
-    text= f"IP ADDRESS WITH IMAGE:\n{ip}\n"
+    text= f"IP ADDRESS:\n{ip}\n"
     imgPath = f"images/{gameName}.png"
     # print(type(im))
     img,imgArr=improc.imageProcessor(imgPath)
@@ -156,14 +146,8 @@ def displayImage(gameName):
     
 if __name__ == "__main__":
     externalAccesGranted = True
-    # display_thread=threading.Thread(target=displayStuff)
-    # display_thread.start()
     if externalAccesGranted:
         displayHome()
-        # socket_server_thread = threading.Thread(target=unixSocketServer(eventCallback=send_data_to_client))
-        # socket_server_thread.start()
-        # app.run(debug=True,host="0.0.0.0")
-        
         #commented for debugging
         socketio.run(app, debug=True, host="0.0.0.0")
 

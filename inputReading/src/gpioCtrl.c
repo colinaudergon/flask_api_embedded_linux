@@ -312,7 +312,6 @@ int main(void)
             }
             swVal = 1;
 
-            printf("ready to write");
             if (inputState != 0x00)
             {
                 n = write(socket_fd, &inputState, sizeof(inputState));
