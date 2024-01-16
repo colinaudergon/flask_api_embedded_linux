@@ -15,6 +15,7 @@ CLIENT_PAGES_PATH = "client/"
 
 gameIsRunning = False
 socket_server_thread = None
+display_thread=None
 
 fontSize = 22
 improc=ImageProcessor(fontSize,True)
@@ -134,12 +135,17 @@ def handle_game_closed(data):
     gameIsRunning = False
     socketio.emit("command_input", data)
 
-if __name__ == "__main__":
-    externalAccesGranted = True
+
+def displayStuff():
     ip = improc.IpFinder()
     text= f"IP ADDRESS prout:\n{ip}\n"
     (display,displayArr) = improc.createImage(text,20,20)
     improc.transmitArrayToCframeBufferHandler(displayArr)
+    
+if __name__ == "__main__":
+    externalAccesGranted = True
+    display_thread=threading.Thread(target=displayStuff)
+    display_thread.start()
     if externalAccesGranted:
         # app.run(debug=True,host="0.0.0.0")
         socketio.run(app, debug=True, host="0.0.0.0")
