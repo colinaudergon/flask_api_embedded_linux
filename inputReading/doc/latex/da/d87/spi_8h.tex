@@ -32,49 +32,49 @@ enum \textbf{ spi\+\_\+bit\+\_\+order} \{ \textbf{ MSB\+\_\+\+FIRST}
 \item 
 \textbf{ spi\+\_\+t} $\ast$ \textbf{ spi\+\_\+new} (void)
 \item 
-int \textbf{ spi\+\_\+open} (\textbf{ spi\+\_\+t} $\ast$\textbf{ spi}, const char $\ast$path, unsigned int mode, uint32\+\_\+t max\+\_\+speed)
+int \textbf{ spi\+\_\+open} (\textbf{ spi\+\_\+t} $\ast$spi, const char $\ast$path, unsigned int mode, uint32\+\_\+t max\+\_\+speed)
 \item 
-int \textbf{ spi\+\_\+open\+\_\+advanced} (\textbf{ spi\+\_\+t} $\ast$\textbf{ spi}, const char $\ast$path, unsigned int mode, uint32\+\_\+t max\+\_\+speed, \textbf{ spi\+\_\+bit\+\_\+order\+\_\+t} bit\+\_\+order, uint8\+\_\+t bits\+\_\+per\+\_\+word, uint8\+\_\+t extra\+\_\+flags)
+int \textbf{ spi\+\_\+open\+\_\+advanced} (\textbf{ spi\+\_\+t} $\ast$spi, const char $\ast$path, unsigned int mode, uint32\+\_\+t max\+\_\+speed, \textbf{ spi\+\_\+bit\+\_\+order\+\_\+t} bit\+\_\+order, uint8\+\_\+t bits\+\_\+per\+\_\+word, uint8\+\_\+t extra\+\_\+flags)
 \item 
-int \textbf{ spi\+\_\+open\+\_\+advanced2} (\textbf{ spi\+\_\+t} $\ast$\textbf{ spi}, const char $\ast$path, unsigned int mode, uint32\+\_\+t max\+\_\+speed, \textbf{ spi\+\_\+bit\+\_\+order\+\_\+t} bit\+\_\+order, uint8\+\_\+t bits\+\_\+per\+\_\+word, uint32\+\_\+t extra\+\_\+flags)
+int \textbf{ spi\+\_\+open\+\_\+advanced2} (\textbf{ spi\+\_\+t} $\ast$spi, const char $\ast$path, unsigned int mode, uint32\+\_\+t max\+\_\+speed, \textbf{ spi\+\_\+bit\+\_\+order\+\_\+t} bit\+\_\+order, uint8\+\_\+t bits\+\_\+per\+\_\+word, uint32\+\_\+t extra\+\_\+flags)
 \item 
-int \textbf{ spi\+\_\+transfer} (\textbf{ spi\+\_\+t} $\ast$\textbf{ spi}, const uint8\+\_\+t $\ast$txbuf, uint8\+\_\+t $\ast$rxbuf, size\+\_\+t len)
+int \textbf{ spi\+\_\+transfer} (\textbf{ spi\+\_\+t} $\ast$spi, const uint8\+\_\+t $\ast$txbuf, uint8\+\_\+t $\ast$rxbuf, size\+\_\+t len)
 \item 
-int \textbf{ spi\+\_\+close} (\textbf{ spi\+\_\+t} $\ast$\textbf{ spi})
+int \textbf{ spi\+\_\+close} (\textbf{ spi\+\_\+t} $\ast$spi)
 \item 
-void \textbf{ spi\+\_\+free} (\textbf{ spi\+\_\+t} $\ast$\textbf{ spi})
+void \textbf{ spi\+\_\+free} (\textbf{ spi\+\_\+t} $\ast$spi)
 \item 
-int \textbf{ spi\+\_\+get\+\_\+mode} (\textbf{ spi\+\_\+t} $\ast$\textbf{ spi}, unsigned int $\ast$mode)
+int \textbf{ spi\+\_\+get\+\_\+mode} (\textbf{ spi\+\_\+t} $\ast$spi, unsigned int $\ast$mode)
 \item 
-int \textbf{ spi\+\_\+get\+\_\+max\+\_\+speed} (\textbf{ spi\+\_\+t} $\ast$\textbf{ spi}, uint32\+\_\+t $\ast$max\+\_\+speed)
+int \textbf{ spi\+\_\+get\+\_\+max\+\_\+speed} (\textbf{ spi\+\_\+t} $\ast$spi, uint32\+\_\+t $\ast$max\+\_\+speed)
 \item 
-int \textbf{ spi\+\_\+get\+\_\+bit\+\_\+order} (\textbf{ spi\+\_\+t} $\ast$\textbf{ spi}, \textbf{ spi\+\_\+bit\+\_\+order\+\_\+t} $\ast$bit\+\_\+order)
+int \textbf{ spi\+\_\+get\+\_\+bit\+\_\+order} (\textbf{ spi\+\_\+t} $\ast$spi, \textbf{ spi\+\_\+bit\+\_\+order\+\_\+t} $\ast$bit\+\_\+order)
 \item 
-int \textbf{ spi\+\_\+get\+\_\+bits\+\_\+per\+\_\+word} (\textbf{ spi\+\_\+t} $\ast$\textbf{ spi}, uint8\+\_\+t $\ast$bits\+\_\+per\+\_\+word)
+int \textbf{ spi\+\_\+get\+\_\+bits\+\_\+per\+\_\+word} (\textbf{ spi\+\_\+t} $\ast$spi, uint8\+\_\+t $\ast$bits\+\_\+per\+\_\+word)
 \item 
-int \textbf{ spi\+\_\+get\+\_\+extra\+\_\+flags} (\textbf{ spi\+\_\+t} $\ast$\textbf{ spi}, uint8\+\_\+t $\ast$extra\+\_\+flags)
+int \textbf{ spi\+\_\+get\+\_\+extra\+\_\+flags} (\textbf{ spi\+\_\+t} $\ast$spi, uint8\+\_\+t $\ast$extra\+\_\+flags)
 \item 
-int \textbf{ spi\+\_\+get\+\_\+extra\+\_\+flags32} (\textbf{ spi\+\_\+t} $\ast$\textbf{ spi}, uint32\+\_\+t $\ast$extra\+\_\+flags)
+int \textbf{ spi\+\_\+get\+\_\+extra\+\_\+flags32} (\textbf{ spi\+\_\+t} $\ast$spi, uint32\+\_\+t $\ast$extra\+\_\+flags)
 \item 
-int \textbf{ spi\+\_\+set\+\_\+mode} (\textbf{ spi\+\_\+t} $\ast$\textbf{ spi}, unsigned int mode)
+int \textbf{ spi\+\_\+set\+\_\+mode} (\textbf{ spi\+\_\+t} $\ast$spi, unsigned int mode)
 \item 
-int \textbf{ spi\+\_\+set\+\_\+max\+\_\+speed} (\textbf{ spi\+\_\+t} $\ast$\textbf{ spi}, uint32\+\_\+t max\+\_\+speed)
+int \textbf{ spi\+\_\+set\+\_\+max\+\_\+speed} (\textbf{ spi\+\_\+t} $\ast$spi, uint32\+\_\+t max\+\_\+speed)
 \item 
-int \textbf{ spi\+\_\+set\+\_\+bit\+\_\+order} (\textbf{ spi\+\_\+t} $\ast$\textbf{ spi}, \textbf{ spi\+\_\+bit\+\_\+order\+\_\+t} bit\+\_\+order)
+int \textbf{ spi\+\_\+set\+\_\+bit\+\_\+order} (\textbf{ spi\+\_\+t} $\ast$spi, \textbf{ spi\+\_\+bit\+\_\+order\+\_\+t} bit\+\_\+order)
 \item 
-int \textbf{ spi\+\_\+set\+\_\+bits\+\_\+per\+\_\+word} (\textbf{ spi\+\_\+t} $\ast$\textbf{ spi}, uint8\+\_\+t bits\+\_\+per\+\_\+word)
+int \textbf{ spi\+\_\+set\+\_\+bits\+\_\+per\+\_\+word} (\textbf{ spi\+\_\+t} $\ast$spi, uint8\+\_\+t bits\+\_\+per\+\_\+word)
 \item 
-int \textbf{ spi\+\_\+set\+\_\+extra\+\_\+flags} (\textbf{ spi\+\_\+t} $\ast$\textbf{ spi}, uint8\+\_\+t extra\+\_\+flags)
+int \textbf{ spi\+\_\+set\+\_\+extra\+\_\+flags} (\textbf{ spi\+\_\+t} $\ast$spi, uint8\+\_\+t extra\+\_\+flags)
 \item 
-int \textbf{ spi\+\_\+set\+\_\+extra\+\_\+flags32} (\textbf{ spi\+\_\+t} $\ast$\textbf{ spi}, uint32\+\_\+t extra\+\_\+flags)
+int \textbf{ spi\+\_\+set\+\_\+extra\+\_\+flags32} (\textbf{ spi\+\_\+t} $\ast$spi, uint32\+\_\+t extra\+\_\+flags)
 \item 
-int \textbf{ spi\+\_\+fd} (\textbf{ spi\+\_\+t} $\ast$\textbf{ spi})
+int \textbf{ spi\+\_\+fd} (\textbf{ spi\+\_\+t} $\ast$spi)
 \item 
-int \textbf{ spi\+\_\+tostring} (\textbf{ spi\+\_\+t} $\ast$\textbf{ spi}, char $\ast$str, size\+\_\+t len)
+int \textbf{ spi\+\_\+tostring} (\textbf{ spi\+\_\+t} $\ast$spi, char $\ast$str, size\+\_\+t len)
 \item 
-int \textbf{ spi\+\_\+errno} (\textbf{ spi\+\_\+t} $\ast$\textbf{ spi})
+int \textbf{ spi\+\_\+errno} (\textbf{ spi\+\_\+t} $\ast$spi)
 \item 
-const char $\ast$ \textbf{ spi\+\_\+errmsg} (\textbf{ spi\+\_\+t} $\ast$\textbf{ spi})
+const char $\ast$ \textbf{ spi\+\_\+errmsg} (\textbf{ spi\+\_\+t} $\ast$spi)
 \end{DoxyCompactItemize}
 
 

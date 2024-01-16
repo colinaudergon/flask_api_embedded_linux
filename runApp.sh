@@ -4,18 +4,9 @@
 # cd Documents/flask_api_embedded_linux
 
 pathToPythonScript="app.py"
-pathToInputReading="inputReading/src/gpioCtrl.c"
+# pathToInputReading="inputReading/src/gpioCtrl.c"
 pathToFrameBufferHandler="frameBufferHandler.c"
 
-# Compile C program
-cd inputReading
-mkdir build
-cd build
-cmake .. -DCMAKE_TOOLCHAIN_FILE=../arm-none-linux-aarch64-gcc.cmake
-make
-mv inputReading ../..
-current_dir=$(pwd)
-echo "Current directory: $current_dir"
 
 # gcc $pathToInputReading -o inputReading
 # if [ $? -ne 0 ]; then

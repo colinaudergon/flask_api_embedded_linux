@@ -8,7 +8,7 @@ set(CMAKE_SYSTEM_VERSION 1)
 cmake_minimum_required(VERSION 3.7)
 
 # Name your project here
-project(TEST_LINUX)
+project(inputReading)
 
 # Project-wide compilation options.
 add_compile_options(-Wall -Wextra -Wpedantic -Werror -Wno-unused-parameter $<$<COMPILE_LANGUAGE:C>:-std=c17> $<$<COMPILE_LANGUAGE:CXX>:-std=c++20>)

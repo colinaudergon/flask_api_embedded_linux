@@ -1,9 +1,0 @@
-/home/colin/Documents/exe_linux/prepTestLinux/build/CMakeFiles/TEST_LINUX.dir
-/home/colin/Documents/exe_linux/prepTestLinux/build/CMakeFiles/apidoc.dir
-/home/colin/Documents/exe_linux/prepTestLinux/build/CMakeFiles/apidoc_forced.dir
-/home/colin/Documents/exe_linux/prepTestLinux/build/CMakeFiles/edit_cache.dir
-/home/colin/Documents/exe_linux/prepTestLinux/build/CMakeFiles/rebuild_cache.dir
-/home/colin/Documents/exe_linux/prepTestLinux/build/CMakeFiles/list_install_components.dir
-/home/colin/Documents/exe_linux/prepTestLinux/build/CMakeFiles/install.dir
-/home/colin/Documents/exe_linux/prepTestLinux/build/CMakeFiles/install/local.dir
-/home/colin/Documents/exe_linux/prepTestLinux/build/CMakeFiles/install/strip.dir
