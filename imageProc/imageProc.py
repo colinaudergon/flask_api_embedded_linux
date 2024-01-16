@@ -111,6 +111,10 @@ class ImageProcessor():
 
         # Rotate the imageArray 90° clockwise
         rotated_imageArray = np.rot90(imageArray, k=-1, axes=(0, 1))
+        # Rotate the imageArray 90° clockwise
+        rotated_imageArray = np.rot90(imageArray, k=-1, axes=(0, 1))
+        # Rotate the imageArray 90° clockwise
+        rotated_imageArray = np.rot90(imageArray, k=-1, axes=(0, 1))
         height, width, _ = rotated_imageArray.shape
         print(f"Rotated image size - height:{height}, width: {width}, channels: {_}")
 
