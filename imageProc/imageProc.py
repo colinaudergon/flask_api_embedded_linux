@@ -158,7 +158,7 @@ class ImageProcessor():
 
 
 fontSize = 22
-improc=ImageProcessor(fontSize,isOnTarget=True)
+improc=ImageProcessor(fontSize,True)
 
 # #Should IP finder be here?
 ip = improc.IpFinder()
