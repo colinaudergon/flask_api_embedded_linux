@@ -255,9 +255,7 @@ int main(void)
     {
 
         valueToSend = readInputs(s400, s401, s402, s403, ds400, ds401, ds402, ds403);
-        // swval = readBtn(s400);
-        // controlGpioOut(ds403, swval);
-
+        printf("ready to write");
         n = write(socket_fd, &valueToSend, sizeof(valueToSend));
         if (n < 0)
         {
@@ -330,7 +328,6 @@ struct gpio_desc initGpioOutput(const char *gpio_chip, unsigned int gpio_line)
     // /*  Open gpio device: gpiochipX */
     strcpy(chrdev_name, gpio_chip);
     fd = open(chrdev_name, 0);
-    printf("prout0\n");
     if (fd == -1)
     {
         ret = -errno;
@@ -339,7 +336,6 @@ struct gpio_desc initGpioOutput(const char *gpio_chip, unsigned int gpio_line)
     }
     else
     {
-        printf("prout1\n");
         /* Setup variables for a request */
         req.lineoffsets[0] = gpio_line;
         req.flags = GPIOHANDLE_REQUEST_OUTPUT;
@@ -349,7 +345,6 @@ struct gpio_desc initGpioOutput(const char *gpio_chip, unsigned int gpio_line)
 
         /* Request GPIO line: GPIO_H_11 --> LED-DS400 */
         ret = ioctl(fd, GPIO_GET_LINEHANDLE_IOCTL, &req);
-        printf("prout2\n");
         if (ret == -1)
         {
             ret = -errno;
@@ -357,14 +352,13 @@ struct gpio_desc initGpioOutput(const char *gpio_chip, unsigned int gpio_line)
             fprintf(stderr, "Failed to issue GET LINEHANDLE IOCTL (%d)\n",
                     ret);
         }
-        printf("prout3\n");
         if (close(fd) == -1)
         {
             perror("Failed to close GPIO character device file");
             status = -1;
         }
     }
-    printf("prout4!\n");
+    // printf("prout4!\n");
     struct gpio_desc gpio;
     strcpy(gpio.gpiobank, gpio_chip);
     gpio.direction = 1;
@@ -390,7 +384,7 @@ int readBtn(struct gpio_desc gpio)
         gpio.ret = -errno;
         fprintf(stderr, "Failed to get line values(%d)\n", gpio.ret);
     }
-    printf("Value: %d\n", value_switch);
+    // printf("Value: %d\n", value_switch);
     return value_switch;
 }
 
@@ -528,7 +522,7 @@ uint8_t readInputs(struct gpio_desc s400, struct gpio_desc s401, struct gpio_des
     }
     swVal = 1;
     sleep_ms(100);
-    // printf("Inputs state: 0x%02X\n", inputStates);
+    printf("Inputs state: 0x%02X\n", inputState);
     return inputState;
 }
 
