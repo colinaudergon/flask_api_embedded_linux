@@ -1,4 +1,4 @@
-CMakeFiles/inputReading.dir/src/gpioCtrl.c.o: \
+CMakeFiles/inputReader.dir/src/gpioCtrl.c.o: \
  /home/colin/Documents/flask_api_embedded_linux/inputReading/src/gpioCtrl.c \
  /opt/embedded/sysroot/arm-64/ubuntu-22.04-arm64/usr/include/stdc-predef.h \
  /opt/embedded/sysroot/arm-64/ubuntu-22.04-arm64/usr/include/stdlib.h \

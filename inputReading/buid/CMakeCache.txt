@@ -115,7 +115,7 @@ CMAKE_PROJECT_DESCRIPTION:STATIC=
 CMAKE_PROJECT_HOMEPAGE_URL:STATIC=
 
 //Value Computed by CMake
-CMAKE_PROJECT_NAME:STATIC=inputReading
+CMAKE_PROJECT_NAME:STATIC=inputReader
 
 //Path to a program.
 CMAKE_READELF:FILEPATH=/opt/embedded/crosstools/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/aarch64-none-linux-gnu-readelf
@@ -190,6 +190,15 @@ TEST_LINUX_IS_TOP_LEVEL:STATIC=ON
 
 //Value Computed by CMake
 TEST_LINUX_SOURCE_DIR:STATIC=/home/colin/Documents/flask_api_embedded_linux/inputReading
+
+//Value Computed by CMake
+inputReader_BINARY_DIR:STATIC=/home/colin/Documents/flask_api_embedded_linux/inputReading/buid
+
+//Value Computed by CMake
+inputReader_IS_TOP_LEVEL:STATIC=ON
+
+//Value Computed by CMake
+inputReader_SOURCE_DIR:STATIC=/home/colin/Documents/flask_api_embedded_linux/inputReading
 
 //Value Computed by CMake
 inputReading_BINARY_DIR:STATIC=/home/colin/Documents/flask_api_embedded_linux/inputReading/buid

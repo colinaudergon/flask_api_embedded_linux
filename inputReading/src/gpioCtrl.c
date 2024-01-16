@@ -22,7 +22,6 @@
 #include <string.h>
 #include <errno.h>
 
-
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <sys/ioctl.h>
@@ -36,7 +35,10 @@
 #include "spi.h"
 #include "gpiolib.h"
 
-
+#include <sys/socket.h>
+#include <sys/un.h>
+#include <netinet/in.h>
+#include <sys/types.h>
 
 /******************************************************************************/
 /* Defines and Typedefs							      						  */
@@ -73,6 +75,9 @@
 
 #define JOYSTICK_A_LEFT_RIGHT 0x25
 #define JOYSTICK_A_UP_DOWN 0x27
+#define UNIX_PATH_MAX 108
+#define SOCKET_READY 0xFF
+
 /*****************************************************************************/
 /* Global Variables						             						 */
 /*****************************************************************************/
@@ -97,7 +102,6 @@ uint8_t errorCode = 0xFF;
 /******************************************************************************/
 
 /* Seven Segment Table Index */
-
 
 static bool running = true;
 
@@ -153,7 +157,14 @@ int setUpAdcValue(uint8_t setup);
 int readAdcValue();
 
 void signal_callback_handler(int signum);
-void exitProgramm();
+// void exitProgramm();
+bool establishConnection(void);
+
+
+bool runSocket = true;
+
+struct sockaddr_un address;
+int socket_fd;
 /******************************************************************************/
 /* main()																      */
 /******************************************************************************/
@@ -163,8 +174,7 @@ int main(void)
     /* Register signal and signal handler */
     signal(SIGINT, signal_callback_handler);
 
-
-// I2c init
+    // I2c init
     i2c_fd = open(I2C_DEVICE, O_RDWR);
     if (i2c_fd < 0)
     {
@@ -208,6 +218,27 @@ int main(void)
         printf("Error init ds400");
     }
 
+    // Specify the socket file path
+    const char *socket_path = "/tmp/socket";
+    memset(&address, 0, sizeof(address));
+    address.sun_family = AF_UNIX;
+    strncpy(address.sun_path, socket_path, UNIX_PATH_MAX - 1);
+
+    char buffer[256];
+    int n;
+    uint8_t valueToSend;
+
+    if (!establishConnection())
+    {
+        // Handle the failure appropriately
+        // cleanupRelease();
+        return 1;
+    }
+    else
+    {
+        runSocket = true;
+        valueToSend = SOCKET_READY;
+    }
     int swval = 1;
     while (running)
     {
@@ -215,11 +246,15 @@ int main(void)
         swval = readBtn(s400);
         controlGpioOut(ds403, swval);
 
-        
-
+        n = write(socket_fd, &swval, sizeof(valueToSend));
+        if (n < 0)
+        {
+            perror("ERROR writing to socket");
+            return 1;
+        }
+        printf("input state: 0x%02X\n", swval);
     }
 
-   
     close(adc_fd);
     return EXIT_SUCCESS;
 }
@@ -353,6 +388,7 @@ void signal_callback_handler(int signum)
     running = false;
     printf("\nProgram terminated by Ctrl-C!\n\n");
 }
+
 /*****************************************************************************/
 /*Setup ADC Function											 */
 /*****************************************************************************/
@@ -368,7 +404,6 @@ int setUpAdcValue(uint8_t setup)
     return 0;
 }
 
-
 /*****************************************************************************/
 /* Read adc value Function											 */
 /*****************************************************************************/
@@ -382,4 +417,40 @@ int readAdcValue()
     }
     uint8_t value = i2cCommBuffer[0];
     return value;
+}
+
+/*****************************************************************************/
+/* Socket establishment Function											 */
+/*****************************************************************************/
+bool establishConnection(void)
+{
+    int max_connection_attempts = 10;
+    socket_fd = socket(AF_UNIX, SOCK_STREAM, 0);
+    if (socket_fd == -1)
+    {
+        perror("Error creating socket");
+        return false;
+    }
+
+    while (max_connection_attempts > 0)
+    {
+        if (connect(socket_fd, (struct sockaddr *)&address, sizeof(address)) == 0)
+        {
+            printf("Connected to the server\n");
+            return true; // Exit the function with success
+        }
+        else
+        {
+            perror("Error connecting to the server");
+            max_connection_attempts--;
+
+            // Wait for a short duration before retrying
+            sleep(1);
+        }
+    }
+
+    // Connection attempts exhausted, handle the error as needed
+    fprintf(stderr, "Failed to establish a connection\n");
+    close(socket_fd); // Close the socket if connection fails
+    return false;     // Exit the function with failure
 }

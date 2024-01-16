@@ -1,4 +1,4 @@
-/home/colin/Documents/flask_api_embedded_linux/inputReading/buid/CMakeFiles/inputReading.dir
+/home/colin/Documents/flask_api_embedded_linux/inputReading/buid/CMakeFiles/inputReader.dir
 /home/colin/Documents/flask_api_embedded_linux/inputReading/buid/CMakeFiles/apidoc.dir
 /home/colin/Documents/flask_api_embedded_linux/inputReading/buid/CMakeFiles/apidoc_forced.dir
 /home/colin/Documents/flask_api_embedded_linux/inputReading/buid/CMakeFiles/edit_cache.dir

@@ -162,17 +162,17 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named inputReading
+# Target rules for targets named inputReader
 
 # Build rule for target.
-inputReading: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 inputReading
-.PHONY : inputReading
+inputReader: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 inputReader
+.PHONY : inputReader
 
 # fast build rule for target.
-inputReading/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/inputReading.dir/build.make CMakeFiles/inputReading.dir/build
-.PHONY : inputReading/fast
+inputReader/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/inputReader.dir/build.make CMakeFiles/inputReader.dir/build
+.PHONY : inputReader/fast
 
 #=============================================================================
 # Target rules for targets named apidoc
@@ -205,7 +205,7 @@ src/gpioCtrl.o: src/gpioCtrl.c.o
 
 # target to build an object file
 src/gpioCtrl.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/inputReading.dir/build.make CMakeFiles/inputReading.dir/src/gpioCtrl.c.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/inputReader.dir/build.make CMakeFiles/inputReader.dir/src/gpioCtrl.c.o
 .PHONY : src/gpioCtrl.c.o
 
 src/gpioCtrl.i: src/gpioCtrl.c.i
@@ -213,7 +213,7 @@ src/gpioCtrl.i: src/gpioCtrl.c.i
 
 # target to preprocess a source file
 src/gpioCtrl.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/inputReading.dir/build.make CMakeFiles/inputReading.dir/src/gpioCtrl.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/inputReader.dir/build.make CMakeFiles/inputReader.dir/src/gpioCtrl.c.i
 .PHONY : src/gpioCtrl.c.i
 
 src/gpioCtrl.s: src/gpioCtrl.c.s
@@ -221,7 +221,7 @@ src/gpioCtrl.s: src/gpioCtrl.c.s
 
 # target to generate assembly for a file
 src/gpioCtrl.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/inputReading.dir/build.make CMakeFiles/inputReading.dir/src/gpioCtrl.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/inputReader.dir/build.make CMakeFiles/inputReader.dir/src/gpioCtrl.c.s
 .PHONY : src/gpioCtrl.c.s
 
 src/gpiolib.o: src/gpiolib.c.o
@@ -229,7 +229,7 @@ src/gpiolib.o: src/gpiolib.c.o
 
 # target to build an object file
 src/gpiolib.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/inputReading.dir/build.make CMakeFiles/inputReading.dir/src/gpiolib.c.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/inputReader.dir/build.make CMakeFiles/inputReader.dir/src/gpiolib.c.o
 .PHONY : src/gpiolib.c.o
 
 src/gpiolib.i: src/gpiolib.c.i
@@ -237,7 +237,7 @@ src/gpiolib.i: src/gpiolib.c.i
 
 # target to preprocess a source file
 src/gpiolib.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/inputReading.dir/build.make CMakeFiles/inputReading.dir/src/gpiolib.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/inputReader.dir/build.make CMakeFiles/inputReader.dir/src/gpiolib.c.i
 .PHONY : src/gpiolib.c.i
 
 src/gpiolib.s: src/gpiolib.c.s
@@ -245,7 +245,7 @@ src/gpiolib.s: src/gpiolib.c.s
 
 # target to generate assembly for a file
 src/gpiolib.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/inputReading.dir/build.make CMakeFiles/inputReading.dir/src/gpiolib.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/inputReader.dir/build.make CMakeFiles/inputReader.dir/src/gpiolib.c.s
 .PHONY : src/gpiolib.c.s
 
 # Help Target
@@ -262,7 +262,7 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... apidoc"
 	@echo "... apidoc_forced"
-	@echo "... inputReading"
+	@echo "... inputReader"
 	@echo "... src/gpioCtrl.o"
 	@echo "... src/gpioCtrl.i"
 	@echo "... src/gpioCtrl.s"

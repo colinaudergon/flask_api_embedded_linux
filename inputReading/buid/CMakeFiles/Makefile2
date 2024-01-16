@@ -63,7 +63,7 @@ CMAKE_BINARY_DIR = /home/colin/Documents/flask_api_embedded_linux/inputReading/b
 # Directory level rules for the build root directory
 
 # The main recursive "all" target.
-all: CMakeFiles/inputReading.dir/all
+all: CMakeFiles/inputReader.dir/all
 all: CMakeFiles/apidoc.dir/all
 .PHONY : all
 
@@ -72,36 +72,36 @@ preinstall:
 .PHONY : preinstall
 
 # The main recursive "clean" target.
-clean: CMakeFiles/inputReading.dir/clean
+clean: CMakeFiles/inputReader.dir/clean
 clean: CMakeFiles/apidoc.dir/clean
 clean: CMakeFiles/apidoc_forced.dir/clean
 .PHONY : clean
 
 #=============================================================================
-# Target rules for target CMakeFiles/inputReading.dir
+# Target rules for target CMakeFiles/inputReader.dir
 
 # All Build rule for target.
-CMakeFiles/inputReading.dir/all:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/inputReading.dir/build.make CMakeFiles/inputReading.dir/depend
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/inputReading.dir/build.make CMakeFiles/inputReading.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/colin/Documents/flask_api_embedded_linux/inputReading/buid/CMakeFiles --progress-num=2,3,4 "Built target inputReading"
-.PHONY : CMakeFiles/inputReading.dir/all
+CMakeFiles/inputReader.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/inputReader.dir/build.make CMakeFiles/inputReader.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/inputReader.dir/build.make CMakeFiles/inputReader.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/colin/Documents/flask_api_embedded_linux/inputReading/buid/CMakeFiles --progress-num=2,3,4 "Built target inputReader"
+.PHONY : CMakeFiles/inputReader.dir/all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/inputReading.dir/rule: cmake_check_build_system
+CMakeFiles/inputReader.dir/rule: cmake_check_build_system
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/colin/Documents/flask_api_embedded_linux/inputReading/buid/CMakeFiles 3
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/inputReading.dir/all
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/inputReader.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/colin/Documents/flask_api_embedded_linux/inputReading/buid/CMakeFiles 0
-.PHONY : CMakeFiles/inputReading.dir/rule
+.PHONY : CMakeFiles/inputReader.dir/rule
 
 # Convenience name for target.
-inputReading: CMakeFiles/inputReading.dir/rule
-.PHONY : inputReading
+inputReader: CMakeFiles/inputReader.dir/rule
+.PHONY : inputReader
 
 # clean rule for target.
-CMakeFiles/inputReading.dir/clean:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/inputReading.dir/build.make CMakeFiles/inputReading.dir/clean
-.PHONY : CMakeFiles/inputReading.dir/clean
+CMakeFiles/inputReader.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/inputReader.dir/build.make CMakeFiles/inputReader.dir/clean
+.PHONY : CMakeFiles/inputReader.dir/clean
 
 #=============================================================================
 # Target rules for target CMakeFiles/apidoc.dir
