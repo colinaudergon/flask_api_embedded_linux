@@ -147,7 +147,7 @@ def displayHome():
 def handle_image_data(data):
     game_name = data["gameName"]
     image_data = data["imageData"]
-    imgPath="images/gameImg.png"
+    imgPath=f"{game_name}_image.png"
     with open(imgPath, "wb") as file:
         file.write(image_data)
     ip = improc.IpFinder()
