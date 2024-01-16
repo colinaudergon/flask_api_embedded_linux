@@ -429,41 +429,41 @@ Definition at line 425 of file gpio\+Ctrl.\+c.
 
 
 
-Definition at line 586 of file gpio\+Ctrl.\+c.
+Definition at line 532 of file gpio\+Ctrl.\+c.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{587 \{}
-\DoxyCodeLine{588     \textcolor{keywordtype}{int} max\_connection\_attempts = 10;}
-\DoxyCodeLine{589     socket\_fd = socket(AF\_UNIX, SOCK\_STREAM, 0);}
-\DoxyCodeLine{590     \textcolor{keywordflow}{if} (socket\_fd == -\/1)}
-\DoxyCodeLine{591     \{}
-\DoxyCodeLine{592         perror(\textcolor{stringliteral}{"{}Error creating socket"{}});}
-\DoxyCodeLine{593         \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
-\DoxyCodeLine{594     \}}
-\DoxyCodeLine{595 }
-\DoxyCodeLine{596     \textcolor{keywordflow}{while} (max\_connection\_attempts > 0)}
-\DoxyCodeLine{597     \{}
-\DoxyCodeLine{598         \textcolor{keywordflow}{if} (connect(socket\_fd, (\textcolor{keyword}{struct} sockaddr *)\&address, \textcolor{keyword}{sizeof}(address)) == 0)}
-\DoxyCodeLine{599         \{}
-\DoxyCodeLine{600             printf(\textcolor{stringliteral}{"{}Connected to the server\(\backslash\)n"{}});}
-\DoxyCodeLine{601             \textcolor{keywordflow}{return} \textcolor{keyword}{true}; \textcolor{comment}{// Exit the function with success}}
-\DoxyCodeLine{602         \}}
-\DoxyCodeLine{603         \textcolor{keywordflow}{else}}
-\DoxyCodeLine{604         \{}
-\DoxyCodeLine{605             perror(\textcolor{stringliteral}{"{}Error connecting to the server"{}});}
-\DoxyCodeLine{606             max\_connection\_attempts-\/-\/;}
-\DoxyCodeLine{607 }
-\DoxyCodeLine{608             \textcolor{comment}{// Wait for a short duration before retrying}}
-\DoxyCodeLine{609             sleep(1);}
-\DoxyCodeLine{610         \}}
-\DoxyCodeLine{611     \}}
-\DoxyCodeLine{612 }
-\DoxyCodeLine{613     \textcolor{comment}{// Connection attempts exhausted, handle the error as needed}}
-\DoxyCodeLine{614     fprintf(stderr, \textcolor{stringliteral}{"{}Failed to establish a connection\(\backslash\)n"{}});}
-\DoxyCodeLine{615     close(socket\_fd); \textcolor{comment}{// Close the socket if connection fails}}
-\DoxyCodeLine{616     \textcolor{keywordflow}{return} \textcolor{keyword}{false};     \textcolor{comment}{// Exit the function with failure}}
-\DoxyCodeLine{617 \}}
+\DoxyCodeLine{533 \{}
+\DoxyCodeLine{534     \textcolor{keywordtype}{int} max\_connection\_attempts = 10;}
+\DoxyCodeLine{535     socket\_fd = socket(AF\_UNIX, SOCK\_STREAM, 0);}
+\DoxyCodeLine{536     \textcolor{keywordflow}{if} (socket\_fd == -\/1)}
+\DoxyCodeLine{537     \{}
+\DoxyCodeLine{538         perror(\textcolor{stringliteral}{"{}Error creating socket"{}});}
+\DoxyCodeLine{539         \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{540     \}}
+\DoxyCodeLine{541 }
+\DoxyCodeLine{542     \textcolor{keywordflow}{while} (max\_connection\_attempts > 0)}
+\DoxyCodeLine{543     \{}
+\DoxyCodeLine{544         \textcolor{keywordflow}{if} (connect(socket\_fd, (\textcolor{keyword}{struct} sockaddr *)\&address, \textcolor{keyword}{sizeof}(address)) == 0)}
+\DoxyCodeLine{545         \{}
+\DoxyCodeLine{546             printf(\textcolor{stringliteral}{"{}Connected to the server\(\backslash\)n"{}});}
+\DoxyCodeLine{547             \textcolor{keywordflow}{return} \textcolor{keyword}{true}; \textcolor{comment}{// Exit the function with success}}
+\DoxyCodeLine{548         \}}
+\DoxyCodeLine{549         \textcolor{keywordflow}{else}}
+\DoxyCodeLine{550         \{}
+\DoxyCodeLine{551             perror(\textcolor{stringliteral}{"{}Error connecting to the server"{}});}
+\DoxyCodeLine{552             max\_connection\_attempts-\/-\/;}
+\DoxyCodeLine{553 }
+\DoxyCodeLine{554             \textcolor{comment}{// Wait for a short duration before retrying}}
+\DoxyCodeLine{555             sleep(1);}
+\DoxyCodeLine{556         \}}
+\DoxyCodeLine{557     \}}
+\DoxyCodeLine{558 }
+\DoxyCodeLine{559     \textcolor{comment}{// Connection attempts exhausted, handle the error as needed}}
+\DoxyCodeLine{560     fprintf(stderr, \textcolor{stringliteral}{"{}Failed to establish a connection\(\backslash\)n"{}});}
+\DoxyCodeLine{561     close(socket\_fd); \textcolor{comment}{// Close the socket if connection fails}}
+\DoxyCodeLine{562     \textcolor{keywordflow}{return} \textcolor{keyword}{false};     \textcolor{comment}{// Exit the function with failure}}
+\DoxyCodeLine{563 \}}
 
 \end{DoxyCode}
 \mbox{\label{gpioCtrl_8c_a31173f5f870f1b86f88276179013adad}} 
@@ -710,7 +710,7 @@ Definition at line 170 of file gpio\+Ctrl.\+c.
 \DoxyCodeLine{277         \textcolor{keywordflow}{if} (swVal == 0)}
 \DoxyCodeLine{278         \{}
 \DoxyCodeLine{279             inputState |= selectPressed;}
-\DoxyCodeLine{280             printf(\textcolor{stringliteral}{"{}Switch S401 active\(\backslash\)n"{}});}
+\DoxyCodeLine{280             \textcolor{comment}{// printf("{}Switch S401 active\(\backslash\)n"{});}}
 \DoxyCodeLine{281         \}}
 \DoxyCodeLine{282         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (swVal < 0)}
 \DoxyCodeLine{283         \{}
@@ -722,7 +722,7 @@ Definition at line 170 of file gpio\+Ctrl.\+c.
 \DoxyCodeLine{289         \textcolor{keywordflow}{if} (swVal == 0)}
 \DoxyCodeLine{290         \{}
 \DoxyCodeLine{291             inputState |= aPressed;}
-\DoxyCodeLine{292             printf(\textcolor{stringliteral}{"{}Switch S402 active\(\backslash\)n"{}});}
+\DoxyCodeLine{292             \textcolor{comment}{// printf("{}Switch S402 active\(\backslash\)n"{});}}
 \DoxyCodeLine{293         \}}
 \DoxyCodeLine{294         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (swVal < 0)}
 \DoxyCodeLine{295         \{}
@@ -734,7 +734,7 @@ Definition at line 170 of file gpio\+Ctrl.\+c.
 \DoxyCodeLine{301         \textcolor{keywordflow}{if} (swVal == 0)}
 \DoxyCodeLine{302         \{}
 \DoxyCodeLine{303             inputState |= bPressed;}
-\DoxyCodeLine{304             printf(\textcolor{stringliteral}{"{}Switch S403 active\(\backslash\)n"{}});}
+\DoxyCodeLine{304             \textcolor{comment}{// printf("{}Switch S403 active\(\backslash\)n"{});}}
 \DoxyCodeLine{305         \}}
 \DoxyCodeLine{306         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (swVal < 0)}
 \DoxyCodeLine{307         \{}
@@ -746,7 +746,7 @@ Definition at line 170 of file gpio\+Ctrl.\+c.
 \DoxyCodeLine{313         n = write(socket\_fd, \&inputState, \textcolor{keyword}{sizeof}(inputState));}
 \DoxyCodeLine{314         \textcolor{keywordflow}{if} (n < 0)}
 \DoxyCodeLine{315         \{}
-\DoxyCodeLine{316             perror(\textcolor{stringliteral}{"{}ERROR writing to socket"{}});}
+\DoxyCodeLine{316             \textcolor{comment}{// perror("{}ERROR writing to socket"{});}}
 \DoxyCodeLine{317             \textcolor{keywordflow}{return} 1;}
 \DoxyCodeLine{318         \}}
 \DoxyCodeLine{319         printf(\textcolor{stringliteral}{"{}input state: 0x\%02X\(\backslash\)n"{}}, inputState);}
@@ -775,98 +775,44 @@ Definition at line 483 of file gpio\+Ctrl.\+c.
 \DoxyCodeLine{487 }
 \DoxyCodeLine{488     \textcolor{keywordflow}{if} (setUpAdcValue(JOYSTICK\_A\_UP\_DOWN) < 0)}
 \DoxyCodeLine{489     \{}
-\DoxyCodeLine{490         printf(\textcolor{stringliteral}{"{}Failed to configure ADC"{}});}
-\DoxyCodeLine{491         perror(\textcolor{stringliteral}{"{}Setup ADC"{}});}
-\DoxyCodeLine{492         \textcolor{keywordflow}{return} errorCode;}
-\DoxyCodeLine{493         \textcolor{comment}{// isReading = false;}}
-\DoxyCodeLine{494     \}}
-\DoxyCodeLine{495     adcValue = readAdcValue();}
-\DoxyCodeLine{496     printf(\textcolor{stringliteral}{"{}U/D Value: \%d\(\backslash\)n"{}}, adcValue);}
-\DoxyCodeLine{497 }
-\DoxyCodeLine{498     \textcolor{keywordflow}{if} (adcValue == joystickUpReading)}
-\DoxyCodeLine{499     \{}
-\DoxyCodeLine{500         adcState |= joystickUp;}
-\DoxyCodeLine{501     \}}
-\DoxyCodeLine{502     \textcolor{keywordflow}{if} (adcValue == joystickLeftReading)}
-\DoxyCodeLine{503     \{}
-\DoxyCodeLine{504         adcState |= joystickDown;}
-\DoxyCodeLine{505     \}}
-\DoxyCodeLine{506 }
-\DoxyCodeLine{507     sleep\_ms(20);}
-\DoxyCodeLine{508     \textcolor{keywordflow}{if} (setUpAdcValue(JOYSTICK\_A\_LEFT\_RIGHT) < 0)}
-\DoxyCodeLine{509     \{}
-\DoxyCodeLine{510         printf(\textcolor{stringliteral}{"{}Failed to configure ADC"{}});}
-\DoxyCodeLine{511         perror(\textcolor{stringliteral}{"{}Setup ADC"{}});}
-\DoxyCodeLine{512         \textcolor{comment}{// isReading = false;}}
-\DoxyCodeLine{513         \textcolor{keywordflow}{return} errorCode;}
-\DoxyCodeLine{514     \}}
-\DoxyCodeLine{515 }
-\DoxyCodeLine{516     adcValue = readAdcValue();}
-\DoxyCodeLine{517     \textcolor{keywordflow}{if} (adcValue == joystickRightReading)}
-\DoxyCodeLine{518     \{}
-\DoxyCodeLine{519         adcState |= joystickRight;}
-\DoxyCodeLine{520     \}}
-\DoxyCodeLine{521     \textcolor{keywordflow}{if} (adcValue == joystickLeftReading)}
-\DoxyCodeLine{522     \{}
-\DoxyCodeLine{523         adcState |= joystickLeft;}
-\DoxyCodeLine{524     \}}
-\DoxyCodeLine{525     printf(\textcolor{stringliteral}{"{}L/R Value: \%d\(\backslash\)n"{}}, adcValue);}
-\DoxyCodeLine{526 }
-\DoxyCodeLine{527     sleep\_ms(10);}
-\DoxyCodeLine{528     \textcolor{comment}{// int swVal = 1;}}
-\DoxyCodeLine{529     \textcolor{comment}{// swVal = readBtn(s400);}}
-\DoxyCodeLine{530     \textcolor{comment}{// controlGpioOut(ds403, swVal);}}
-\DoxyCodeLine{531     \textcolor{comment}{// if (swVal == 0)}}
-\DoxyCodeLine{532     \textcolor{comment}{// \{}}
-\DoxyCodeLine{533     \textcolor{comment}{//     inputState |= startPressed;}}
-\DoxyCodeLine{534     \textcolor{comment}{//     printf("{}Switch S400 active\(\backslash\)n"{});}}
-\DoxyCodeLine{535     \textcolor{comment}{// \}}}
-\DoxyCodeLine{536     \textcolor{comment}{// else if (swVal < 0)}}
-\DoxyCodeLine{537     \textcolor{comment}{// \{}}
-\DoxyCodeLine{538     \textcolor{comment}{//     printf("{}Error"{});}}
-\DoxyCodeLine{539     \textcolor{comment}{// \}}}
-\DoxyCodeLine{540 }
-\DoxyCodeLine{541     \textcolor{comment}{// swVal = 1;}}
-\DoxyCodeLine{542     \textcolor{comment}{// swVal = readBtn(s401);}}
-\DoxyCodeLine{543     \textcolor{comment}{// controlGpioOut(ds402, swVal);}}
-\DoxyCodeLine{544     \textcolor{comment}{// if (swVal == 0)}}
-\DoxyCodeLine{545     \textcolor{comment}{// \{}}
-\DoxyCodeLine{546     \textcolor{comment}{//     inputState |= selectPressed;}}
-\DoxyCodeLine{547     \textcolor{comment}{//     printf("{}Switch S401 active\(\backslash\)n"{});}}
-\DoxyCodeLine{548     \textcolor{comment}{// \}}}
-\DoxyCodeLine{549     \textcolor{comment}{// else if (swVal < 0)}}
-\DoxyCodeLine{550     \textcolor{comment}{// \{}}
-\DoxyCodeLine{551     \textcolor{comment}{//     printf("{}Error"{});}}
-\DoxyCodeLine{552     \textcolor{comment}{// \}}}
-\DoxyCodeLine{553     \textcolor{comment}{// swVal = 1;}}
-\DoxyCodeLine{554     \textcolor{comment}{// swVal = readBtn(s402);}}
-\DoxyCodeLine{555     \textcolor{comment}{// controlGpioOut(ds401, swVal);}}
-\DoxyCodeLine{556     \textcolor{comment}{// if (swVal == 0)}}
-\DoxyCodeLine{557     \textcolor{comment}{// \{}}
-\DoxyCodeLine{558     \textcolor{comment}{//     inputState |= aPressed;}}
-\DoxyCodeLine{559     \textcolor{comment}{//     printf("{}Switch S402 active\(\backslash\)n"{});}}
-\DoxyCodeLine{560     \textcolor{comment}{// \}}}
-\DoxyCodeLine{561     \textcolor{comment}{// else if (swVal < 0)}}
-\DoxyCodeLine{562     \textcolor{comment}{// \{}}
-\DoxyCodeLine{563     \textcolor{comment}{//     printf("{}Error"{});}}
-\DoxyCodeLine{564     \textcolor{comment}{// \}}}
-\DoxyCodeLine{565     \textcolor{comment}{// swVal = 1;}}
-\DoxyCodeLine{566     \textcolor{comment}{// swVal = readBtn(s403);}}
-\DoxyCodeLine{567     \textcolor{comment}{// controlGpioOut(ds400, swVal);}}
-\DoxyCodeLine{568     \textcolor{comment}{// if (swVal == 0)}}
-\DoxyCodeLine{569     \textcolor{comment}{// \{}}
-\DoxyCodeLine{570     \textcolor{comment}{//     inputState |= bPressed;}}
-\DoxyCodeLine{571     \textcolor{comment}{//     printf("{}Switch S403 active\(\backslash\)n"{});}}
-\DoxyCodeLine{572     \textcolor{comment}{// \}}}
-\DoxyCodeLine{573     \textcolor{comment}{// else if (swVal < 0)}}
-\DoxyCodeLine{574     \textcolor{comment}{// \{}}
-\DoxyCodeLine{575     \textcolor{comment}{//     printf("{}Error"{});}}
-\DoxyCodeLine{576     \textcolor{comment}{// \}}}
-\DoxyCodeLine{577     \textcolor{comment}{// swVal = 1;}}
-\DoxyCodeLine{578     \textcolor{comment}{// sleep\_ms(100);}}
-\DoxyCodeLine{579     printf(\textcolor{stringliteral}{"{}1) adcState: 0x\%02X\(\backslash\)n"{}}, adcState);}
-\DoxyCodeLine{580     \textcolor{keywordflow}{return} adcState;}
-\DoxyCodeLine{581 \}}
+\DoxyCodeLine{490         perror(\textcolor{stringliteral}{"{}Setup ADC"{}});}
+\DoxyCodeLine{491         \textcolor{keywordflow}{return} errorCode;}
+\DoxyCodeLine{492         \textcolor{comment}{// isReading = false;}}
+\DoxyCodeLine{493     \}}
+\DoxyCodeLine{494     adcValue = readAdcValue();}
+\DoxyCodeLine{495     printf(\textcolor{stringliteral}{"{}U/D Value: \%d\(\backslash\)n"{}}, adcValue);}
+\DoxyCodeLine{496 }
+\DoxyCodeLine{497     \textcolor{keywordflow}{if} (adcValue == joystickUpReading)}
+\DoxyCodeLine{498     \{}
+\DoxyCodeLine{499         adcState |= joystickUp;}
+\DoxyCodeLine{500     \}}
+\DoxyCodeLine{501     \textcolor{keywordflow}{if} (adcValue == joystickLeftReading)}
+\DoxyCodeLine{502     \{}
+\DoxyCodeLine{503         adcState |= joystickDown;}
+\DoxyCodeLine{504     \}}
+\DoxyCodeLine{505 }
+\DoxyCodeLine{506     sleep\_ms(20);}
+\DoxyCodeLine{507     \textcolor{keywordflow}{if} (setUpAdcValue(JOYSTICK\_A\_LEFT\_RIGHT) < 0)}
+\DoxyCodeLine{508     \{}
+\DoxyCodeLine{509         perror(\textcolor{stringliteral}{"{}Setup ADC"{}});}
+\DoxyCodeLine{510         \textcolor{comment}{// isReading = false;}}
+\DoxyCodeLine{511         \textcolor{keywordflow}{return} errorCode;}
+\DoxyCodeLine{512     \}}
+\DoxyCodeLine{513 }
+\DoxyCodeLine{514     adcValue = readAdcValue();}
+\DoxyCodeLine{515     \textcolor{keywordflow}{if} (adcValue == joystickRightReading)}
+\DoxyCodeLine{516     \{}
+\DoxyCodeLine{517         adcState |= joystickRight;}
+\DoxyCodeLine{518     \}}
+\DoxyCodeLine{519     \textcolor{keywordflow}{if} (adcValue == joystickLeftReading)}
+\DoxyCodeLine{520     \{}
+\DoxyCodeLine{521         adcState |= joystickLeft;}
+\DoxyCodeLine{522     \}}
+\DoxyCodeLine{523     printf(\textcolor{stringliteral}{"{}L/R Value: \%d\(\backslash\)n"{}}, adcValue);}
+\DoxyCodeLine{524 }
+\DoxyCodeLine{525     sleep\_ms(10);}
+\DoxyCodeLine{526     \textcolor{keywordflow}{return} adcState;}
+\DoxyCodeLine{527 \}}
 
 \end{DoxyCode}
 \mbox{\label{gpioCtrl_8c_a5f42c4eb1231dcc9baaac8ff1bcc1a4e}} 
@@ -975,13 +921,13 @@ Definition at line 444 of file gpio\+Ctrl.\+c.
 
 
 
-Definition at line 621 of file gpio\+Ctrl.\+c.
+Definition at line 567 of file gpio\+Ctrl.\+c.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{622 \{}
-\DoxyCodeLine{623     usleep(milliseconds * 1000);}
-\DoxyCodeLine{624 \}}
+\DoxyCodeLine{568 \{}
+\DoxyCodeLine{569     usleep(milliseconds * 1000);}
+\DoxyCodeLine{570 \}}
 
 \end{DoxyCode}
 

@@ -277,7 +277,7 @@ int main(void)
         if (swVal == 0)
         {
             inputState |= selectPressed;
-            printf("Switch S401 active\n");
+            // printf("Switch S401 active\n");
         }
         else if (swVal < 0)
         {
@@ -289,7 +289,7 @@ int main(void)
         if (swVal == 0)
         {
             inputState |= aPressed;
-            printf("Switch S402 active\n");
+            // printf("Switch S402 active\n");
         }
         else if (swVal < 0)
         {
@@ -301,7 +301,7 @@ int main(void)
         if (swVal == 0)
         {
             inputState |= bPressed;
-            printf("Switch S403 active\n");
+            // printf("Switch S403 active\n");
         }
         else if (swVal < 0)
         {
@@ -313,7 +313,7 @@ int main(void)
         n = write(socket_fd, &inputState, sizeof(inputState));
         if (n < 0)
         {
-            perror("ERROR writing to socket");
+            // perror("ERROR writing to socket");
             return 1;
         }
         printf("input state: 0x%02X\n", inputState);
@@ -487,7 +487,6 @@ uint8_t readADCs()
 
     if (setUpAdcValue(JOYSTICK_A_UP_DOWN) < 0)
     {
-        printf("Failed to configure ADC");
         perror("Setup ADC");
         return errorCode;
         // isReading = false;
@@ -507,7 +506,6 @@ uint8_t readADCs()
     sleep_ms(20);
     if (setUpAdcValue(JOYSTICK_A_LEFT_RIGHT) < 0)
     {
-        printf("Failed to configure ADC");
         perror("Setup ADC");
         // isReading = false;
         return errorCode;
@@ -525,58 +523,6 @@ uint8_t readADCs()
     printf("L/R Value: %d\n", adcValue);
 
     sleep_ms(10);
-    // int swVal = 1;
-    // swVal = readBtn(s400);
-    // controlGpioOut(ds403, swVal);
-    // if (swVal == 0)
-    // {
-    //     inputState |= startPressed;
-    //     printf("Switch S400 active\n");
-    // }
-    // else if (swVal < 0)
-    // {
-    //     printf("Error");
-    // }
-
-    // swVal = 1;
-    // swVal = readBtn(s401);
-    // controlGpioOut(ds402, swVal);
-    // if (swVal == 0)
-    // {
-    //     inputState |= selectPressed;
-    //     printf("Switch S401 active\n");
-    // }
-    // else if (swVal < 0)
-    // {
-    //     printf("Error");
-    // }
-    // swVal = 1;
-    // swVal = readBtn(s402);
-    // controlGpioOut(ds401, swVal);
-    // if (swVal == 0)
-    // {
-    //     inputState |= aPressed;
-    //     printf("Switch S402 active\n");
-    // }
-    // else if (swVal < 0)
-    // {
-    //     printf("Error");
-    // }
-    // swVal = 1;
-    // swVal = readBtn(s403);
-    // controlGpioOut(ds400, swVal);
-    // if (swVal == 0)
-    // {
-    //     inputState |= bPressed;
-    //     printf("Switch S403 active\n");
-    // }
-    // else if (swVal < 0)
-    // {
-    //     printf("Error");
-    // }
-    // swVal = 1;
-    // sleep_ms(100);
-    printf("1) adcState: 0x%02X\n", adcState);
     return adcState;
 }
 
