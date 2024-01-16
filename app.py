@@ -137,7 +137,7 @@ def handle_game_closed(data):
 if __name__ == "__main__":
     externalAccesGranted = True
     ip = improc.IpFinder()
-    text= f"IP ADDRESS:\n{ip}\nPROUT"
+    text= f"IP ADDRESS prout:\n{ip}\n"
     (display,displayArr) = improc.createImage(text,20,20)
     improc.transmitArrayToCframeBufferHandler(displayArr)
     if externalAccesGranted:
