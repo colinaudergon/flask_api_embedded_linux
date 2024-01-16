@@ -162,30 +162,30 @@ int main(int argc, char *argv[])
   if (fbVarScreenInfo.bits_per_pixel == BPP32)
   {
     /* Fill the screen with 32 bpp, do it for all [x,y] pixel with desired color */
-    //   for (h = 0; h < fbVarScreenInfo.yres; h++)
-    // {
-    // for (w = 0; w < fbVarScreenInfo.xres; w++)
-    //   {
-    //     pfb32[w +  h* fbVarScreenInfo.xres] = BLACK;
-    //     // printf("pixel position HV: %d\n", w + h * fbVarScreenInfo.xres);
-    //   }
-    // }
-
-    for (h = 0; h < height; h++)
+      for (h = 0; h < fbVarScreenInfo.yres; h++)
     {
-      for (w = 0; w < width; w++)
+    for (w = 0; w < fbVarScreenInfo.xres; w++)
       {
-        struct RGB_COLOR rgbValue;
-        if (fscanf(inputFile, "%hhu %hhu %hhu", &rgbValue.r, &rgbValue.g, &rgbValue.b) != 3)
-        {
-          fprintf(stderr, "Error reading RGB values from input file\n");
-          fclose(inputFile);
-          free(pfb_rgb);
-          return 1;
-        }
-        // pfb32[w + h * fbVarScreenInfo.xres] = CONVERT_RGB24(rgbValue.r, rgbValue.g, rgbValue.b);
         pfb32[w + h * fbVarScreenInfo.xres] = CONVERT_RGB24(w, h, 0);
+        // printf("pixel position HV: %d\n", w + h * fbVarScreenInfo.xres);
       }
+    }
+
+    // for (h = 0; h < height; h++)
+    // {
+    //   for (w = 0; w < width; w++)
+    //   {
+    //     struct RGB_COLOR rgbValue;
+    //     if (fscanf(inputFile, "%hhu %hhu %hhu", &rgbValue.r, &rgbValue.g, &rgbValue.b) != 3)
+    //     {
+    //       fprintf(stderr, "Error reading RGB values from input file\n");
+    //       fclose(inputFile);
+    //       free(pfb_rgb);
+    //       return 1;
+    //     }
+    //     // pfb32[w + h * fbVarScreenInfo.xres] = CONVERT_RGB24(rgbValue.r, rgbValue.g, rgbValue.b);
+    //     pfb32[w + h * fbVarScreenInfo.xres] = CONVERT_RGB24(w, h, 0);
+    //   }
       // int32_t pos = h + w * fbVarScreenInfo.xres;
       // printf("PosX: %d; PosY: %d\nPosTot\n\n: %d", w, h, pos);
     }
