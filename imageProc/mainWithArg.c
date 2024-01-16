@@ -120,7 +120,8 @@ int main(int argc, char *argv[])
   }
 
   // Allocate memory for pfb_rgb
-  pfb_rgb = malloc(fbVarScreenInfo.yres_virtual * fbVarScreenInfo.xres_virtual * sizeof(struct RGB_COLOR));
+  // pfb_rgb = malloc(fbVarScreenInfo.yres_virtual * fbVarScreenInfo.xres_virtual * sizeof(struct RGB_COLOR));
+  pfb_rgb = malloc(fbVarScreenInfo.yres * fbVarScreenInfo.xres * sizeof(struct RGB_COLOR));
   if (pfb_rgb == NULL)
   {
     perror("Error: failed to allocate memory for pfb_rgb");
@@ -147,6 +148,18 @@ int main(int argc, char *argv[])
     close(fb_fd);
     exit(errno);
   }
+
+  // Set the rotation
+  fbVarScreenInfo.rotate = FB_ROTATE_CW; // Adjust this line based on your specific rotation value
+
+  // Write back the updated information
+  if (ioctl(fb_fd, FBIOPUT_VSCREENINFO, &fbVarScreenInfo) == -1)
+  {
+    perror("Error setting rotation");
+    close(fb_fd);
+    exit(errno);
+  }
+
   // int32_t screensize = (fbVarScreenInfo.yres_virtual * fbVarScreenInfo.xres_virtual * fbVarScreenInfo.bits_per_pixel) / 8;
   int32_t screensize = (fbVarScreenInfo.xres * fbVarScreenInfo.yres * fbVarScreenInfo.bits_per_pixel) / 8;
   int32_t *pfb32 = (int32_t *)mmap(0, screensize, PROT_READ | PROT_WRITE, MAP_SHARED, fb_fd, 0);
