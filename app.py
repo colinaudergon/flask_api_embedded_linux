@@ -136,13 +136,13 @@ def handle_game_closed(data):
 
 if __name__ == "__main__":
     externalAccesGranted = True
+    ip = improc.IpFinder()
+    text= f"IP ADDRESS:\n{ip}\n"
+    (display,displayArr) = improc.createImage(text,20,20)
+    improc.transmitArrayToCframeBufferHandler(displayArr)
     if externalAccesGranted:
         # app.run(debug=True,host="0.0.0.0")
         socketio.run(app, debug=True, host="0.0.0.0")
-        ip = improc.IpFinder()
-        text= f"IP ADDRESS:\n{ip}\n"
-        (display,displayArr) = improc.createImage(text,20,20)
-        improc.transmitArrayToCframeBufferHandler(displayArr)
         # Run the display something on the screen
         # subprocess.Popen(["./app_executable"])
     else:
