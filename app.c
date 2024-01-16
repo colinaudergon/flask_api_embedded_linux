@@ -36,9 +36,7 @@
 #define JOYSTICK_A_LEFT_RIGHT 0x25
 #define JOYSTICK_A_UP_DOWN 0x27
 
-// Socket
-#define UNIX_PATH_MAX 108 // UNIX LIKE SOCKET (unused atm)
-#define PORT 5050
+// #define SOCKET_READY 0xFF
 
 /*****************************************************************************/
 /* Global Variables						             						 */
@@ -67,12 +65,6 @@ uint8_t errorCode = 0xFF;
 unsigned int led_lines[] = {DS400, DS401, DS402, DS403};
 unsigned int ledOnOff[] = {0, 0, 0, 0};
 int num_leds = sizeof(led_lines) / sizeof(led_lines[0]);
-
-// Socket
-struct sockaddr_un address;
-int socket_fd;
-bool runSocket = true;
-
 
 /*****************************************************************************/
 /* Static Variables (Module variable)				             	         */
@@ -130,8 +122,6 @@ uint8_t readADCInputs();
 int readSwitch(int retSwitch, struct gpiohandle_request reqSwitch);
 
 void sleep_ms(int milliseconds);
-// Socket
-bool establishConnection();
 
 int main(int argc, char **argv)
 {
@@ -171,24 +161,7 @@ int main(int argc, char **argv)
         perror("i2cSetAddress");
         return -1;
     }
-// // Specify the socket file path for real application
-//     const char *socket_path = "/tmp/socket";
-//     memset(&address, 0, sizeof(address));
-//     address.sun_family = AF_UNIX;
-//     strncpy(address.sun_path, socket_path, UNIX_PATH_MAX - 1);
 
-//     int n;
-//     // Call the function to establish the connection
-//     if (!establishConnection())
-//     {
-//         // Handle the failure appropriately
-//         cleanupRelease();
-//         return 1;
-//     }
-//     else
-//     {
-//         runSocket = true;
-//     }
     while (1)
     {
         inputState = readADCInputs();
@@ -542,42 +515,4 @@ void updateLedStatus(int ledIndice, int status)
 void sleep_ms(int milliseconds)
 {
     usleep(milliseconds * 1000);
-}
-/*****************************************************************************/
-/* Socket establishment Function											 */
-/*****************************************************************************/
-// connect(socket_fd, (struct sockaddr *)&address, sizeof(struct sockaddr_un)) != 0
-// connect(socket_fd, (struct sockaddr *)&address, sizeof(address))
-// if (connect(socket_fd, (struct sockaddr *)&address, sizeof(struct sockaddr_un)) == 0)
-bool establishConnection()
-{
-    int max_connection_attempts = 10;
-    socket_fd = socket(AF_UNIX, SOCK_STREAM, 0);
-    if (socket_fd == -1)
-    {
-        perror("Error creating socket");
-        return false;
-    }
-
-    while (max_connection_attempts > 0)
-    {
-        if (connect(socket_fd, (struct sockaddr *)&address, sizeof(address)) == 0)
-        {
-            printf("Connected to the server\n");
-            return true; // Exit the function with success
-        }
-        else
-        {
-            perror("Error connecting to the server");
-            max_connection_attempts--;
-
-            // Wait for a short duration before retrying
-            sleep(1);
-        }
-    }
-
-    // Connection attempts exhausted, handle the error as needed
-    fprintf(stderr, "Failed to establish a connection\n");
-    close(socket_fd); // Close the socket if connection fails
-    return false;     // Exit the function with failure
 }
