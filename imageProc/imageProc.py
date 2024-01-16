@@ -7,15 +7,18 @@ import os
 
 class ImageProcessor():
     
-    def __init__(self,fontSize):
+    def __init__(self,fontSize,isOTarget):
         self.letterHeight=24
         self.fontSize = fontSize
+        self.isOnTarget = isOTarget
         #Do not touch these values
         self.fb_width = 1280
         self.fb_height = 800
         self.maxChar = 950
-        self.font = ImageFont.load_default(self.fontSize)
-        # self.font = ImageFont.truetype("arial.ttf", self.fontSize)
+        if(self.isOTarget):
+            self.font = ImageFont.truetype("arial.ttf", self.fontSize)
+        else:
+            self.font = ImageFont.load_default(self.fontSize)
 
     def IpFinder(self):
         cmd = ['hostname','-I']
@@ -155,7 +158,7 @@ class ImageProcessor():
 
 
 fontSize = 22
-improc=ImageProcessor(fontSize)
+improc=ImageProcessor(fontSize,isOTarget=True)
 
 # #Should IP finder be here?
 ip = improc.IpFinder()
