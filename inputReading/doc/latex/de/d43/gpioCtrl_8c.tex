@@ -796,56 +796,56 @@ Definition at line 426 of file gpio\+Ctrl.\+c.
 \DoxyCodeLine{485     printf(\textcolor{stringliteral}{"{}L/R Value: \%d\(\backslash\)n"{}}, adcValue);}
 \DoxyCodeLine{486 }
 \DoxyCodeLine{487     sleep\_ms(10);}
-\DoxyCodeLine{488     \textcolor{keywordtype}{int} swVal = 1;}
-\DoxyCodeLine{489     swVal = readBtn(s400);}
-\DoxyCodeLine{490     controlGpioOut(ds403, swVal);}
-\DoxyCodeLine{491     \textcolor{keywordflow}{if} (swVal == 0)}
-\DoxyCodeLine{492     \{}
-\DoxyCodeLine{493         inputState |= startPressed;}
-\DoxyCodeLine{494         printf(\textcolor{stringliteral}{"{}Switch S400 active\(\backslash\)n"{}});}
-\DoxyCodeLine{495     \}}
-\DoxyCodeLine{496     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (swVal < 0)}
-\DoxyCodeLine{497     \{}
-\DoxyCodeLine{498         printf(\textcolor{stringliteral}{"{}Error"{}});}
-\DoxyCodeLine{499     \}}
+\DoxyCodeLine{488     \textcolor{comment}{// int swVal = 1;}}
+\DoxyCodeLine{489     \textcolor{comment}{// swVal = readBtn(s400);}}
+\DoxyCodeLine{490     \textcolor{comment}{// controlGpioOut(ds403, swVal);}}
+\DoxyCodeLine{491     \textcolor{comment}{// if (swVal == 0)}}
+\DoxyCodeLine{492     \textcolor{comment}{// \{}}
+\DoxyCodeLine{493     \textcolor{comment}{//     inputState |= startPressed;}}
+\DoxyCodeLine{494     \textcolor{comment}{//     printf("{}Switch S400 active\(\backslash\)n"{});}}
+\DoxyCodeLine{495     \textcolor{comment}{// \}}}
+\DoxyCodeLine{496     \textcolor{comment}{// else if (swVal < 0)}}
+\DoxyCodeLine{497     \textcolor{comment}{// \{}}
+\DoxyCodeLine{498     \textcolor{comment}{//     printf("{}Error"{});}}
+\DoxyCodeLine{499     \textcolor{comment}{// \}}}
 \DoxyCodeLine{500 }
-\DoxyCodeLine{501     swVal = 1;}
-\DoxyCodeLine{502     swVal = readBtn(s401);}
-\DoxyCodeLine{503     controlGpioOut(ds402, swVal);}
-\DoxyCodeLine{504     \textcolor{keywordflow}{if} (swVal == 0)}
-\DoxyCodeLine{505     \{}
-\DoxyCodeLine{506         inputState |= selectPressed;}
-\DoxyCodeLine{507         printf(\textcolor{stringliteral}{"{}Switch S401 active\(\backslash\)n"{}});}
-\DoxyCodeLine{508     \}}
-\DoxyCodeLine{509     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (swVal < 0)}
-\DoxyCodeLine{510     \{}
-\DoxyCodeLine{511         printf(\textcolor{stringliteral}{"{}Error"{}});}
-\DoxyCodeLine{512     \}}
-\DoxyCodeLine{513     swVal = 1;}
-\DoxyCodeLine{514     swVal = readBtn(s402);}
-\DoxyCodeLine{515     controlGpioOut(ds401, swVal);}
-\DoxyCodeLine{516     \textcolor{keywordflow}{if} (swVal == 0)}
-\DoxyCodeLine{517     \{}
-\DoxyCodeLine{518         inputState |= aPressed;}
-\DoxyCodeLine{519         printf(\textcolor{stringliteral}{"{}Switch S402 active\(\backslash\)n"{}});}
-\DoxyCodeLine{520     \}}
-\DoxyCodeLine{521     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (swVal < 0)}
-\DoxyCodeLine{522     \{}
-\DoxyCodeLine{523         printf(\textcolor{stringliteral}{"{}Error"{}});}
-\DoxyCodeLine{524     \}}
-\DoxyCodeLine{525     swVal = 1;}
-\DoxyCodeLine{526     swVal = readBtn(s403);}
-\DoxyCodeLine{527     controlGpioOut(ds400, swVal);}
-\DoxyCodeLine{528     \textcolor{keywordflow}{if} (swVal == 0)}
-\DoxyCodeLine{529     \{}
-\DoxyCodeLine{530         inputState |= bPressed;}
-\DoxyCodeLine{531         printf(\textcolor{stringliteral}{"{}Switch S403 active\(\backslash\)n"{}});}
-\DoxyCodeLine{532     \}}
-\DoxyCodeLine{533     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (swVal < 0)}
-\DoxyCodeLine{534     \{}
-\DoxyCodeLine{535         printf(\textcolor{stringliteral}{"{}Error"{}});}
-\DoxyCodeLine{536     \}}
-\DoxyCodeLine{537     swVal = 1;}
+\DoxyCodeLine{501     \textcolor{comment}{// swVal = 1;}}
+\DoxyCodeLine{502     \textcolor{comment}{// swVal = readBtn(s401);}}
+\DoxyCodeLine{503     \textcolor{comment}{// controlGpioOut(ds402, swVal);}}
+\DoxyCodeLine{504     \textcolor{comment}{// if (swVal == 0)}}
+\DoxyCodeLine{505     \textcolor{comment}{// \{}}
+\DoxyCodeLine{506     \textcolor{comment}{//     inputState |= selectPressed;}}
+\DoxyCodeLine{507     \textcolor{comment}{//     printf("{}Switch S401 active\(\backslash\)n"{});}}
+\DoxyCodeLine{508     \textcolor{comment}{// \}}}
+\DoxyCodeLine{509     \textcolor{comment}{// else if (swVal < 0)}}
+\DoxyCodeLine{510     \textcolor{comment}{// \{}}
+\DoxyCodeLine{511     \textcolor{comment}{//     printf("{}Error"{});}}
+\DoxyCodeLine{512     \textcolor{comment}{// \}}}
+\DoxyCodeLine{513     \textcolor{comment}{// swVal = 1;}}
+\DoxyCodeLine{514     \textcolor{comment}{// swVal = readBtn(s402);}}
+\DoxyCodeLine{515     \textcolor{comment}{// controlGpioOut(ds401, swVal);}}
+\DoxyCodeLine{516     \textcolor{comment}{// if (swVal == 0)}}
+\DoxyCodeLine{517     \textcolor{comment}{// \{}}
+\DoxyCodeLine{518     \textcolor{comment}{//     inputState |= aPressed;}}
+\DoxyCodeLine{519     \textcolor{comment}{//     printf("{}Switch S402 active\(\backslash\)n"{});}}
+\DoxyCodeLine{520     \textcolor{comment}{// \}}}
+\DoxyCodeLine{521     \textcolor{comment}{// else if (swVal < 0)}}
+\DoxyCodeLine{522     \textcolor{comment}{// \{}}
+\DoxyCodeLine{523     \textcolor{comment}{//     printf("{}Error"{});}}
+\DoxyCodeLine{524     \textcolor{comment}{// \}}}
+\DoxyCodeLine{525     \textcolor{comment}{// swVal = 1;}}
+\DoxyCodeLine{526     \textcolor{comment}{// swVal = readBtn(s403);}}
+\DoxyCodeLine{527     \textcolor{comment}{// controlGpioOut(ds400, swVal);}}
+\DoxyCodeLine{528     \textcolor{comment}{// if (swVal == 0)}}
+\DoxyCodeLine{529     \textcolor{comment}{// \{}}
+\DoxyCodeLine{530     \textcolor{comment}{//     inputState |= bPressed;}}
+\DoxyCodeLine{531     \textcolor{comment}{//     printf("{}Switch S403 active\(\backslash\)n"{});}}
+\DoxyCodeLine{532     \textcolor{comment}{// \}}}
+\DoxyCodeLine{533     \textcolor{comment}{// else if (swVal < 0)}}
+\DoxyCodeLine{534     \textcolor{comment}{// \{}}
+\DoxyCodeLine{535     \textcolor{comment}{//     printf("{}Error"{});}}
+\DoxyCodeLine{536     \textcolor{comment}{// \}}}
+\DoxyCodeLine{537     \textcolor{comment}{// swVal = 1;}}
 \DoxyCodeLine{538     \textcolor{comment}{// sleep\_ms(100);}}
 \DoxyCodeLine{539     printf(\textcolor{stringliteral}{"{}1) Inputs state: 0x\%02X\(\backslash\)n"{}}, inputState);}
 \DoxyCodeLine{540     \textcolor{keywordflow}{return} inputState;}
