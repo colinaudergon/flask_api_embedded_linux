@@ -170,9 +170,9 @@ int main(int argc, char *argv[])
       }
     }
 
-    for (w = 0; w < width; w++)
+    for (h = 0; h < height; h++)
     {
-      for (h = 0; h < height; h++)
+      for (w = 0; w < width; w++)
       {
         struct RGB_COLOR rgbValue;
         if (fscanf(inputFile, "%hhu %hhu %hhu", &rgbValue.r, &rgbValue.g, &rgbValue.b) != 3)
@@ -183,7 +183,7 @@ int main(int argc, char *argv[])
           return 1;
         }
         usleep(100);
-        pfb32[w + h * fbVarScreenInfo.xres] = CONVERT_RGB24(rgbValue.r, rgbValue.g, rgbValue.b);
+        pfb32[h + w * fbVarScreenInfo.xres] = CONVERT_RGB24(rgbValue.r, rgbValue.g, rgbValue.b);
       }
     }
     // // Set the rotation
