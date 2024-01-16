@@ -281,12 +281,12 @@ async function launchGame(gametoRun) {
 //     socket.emit('imageData', { gameName, imageData });
 // }
 
-function emitImageData(gameName, imageData) {
+function emitImageData(imageData) {
     // Convert the image data to base64
     const uintImageData = imageDataToUint8Array(imageData);
 
     // Assuming you have a socket instance connected to the server
-    socket.emit('imageData', { gameName, uintImageData });
+    socket.emit('imageData', {uintImageData});
 }
 
 socket.on('connect', function () {
