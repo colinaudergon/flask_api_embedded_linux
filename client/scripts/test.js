@@ -276,9 +276,17 @@ async function launchGame(gametoRun) {
     }
 }
 
+// function emitImageData(gameName, imageData) {
+//     // Assuming you have a socket instance connected to the server
+//     socket.emit('imageData', { gameName, imageData });
+// }
+
 function emitImageData(gameName, imageData) {
+    // Convert the image data to base64
+    const base64ImageData = imageDataToBase64(imageData);
+
     // Assuming you have a socket instance connected to the server
-    socket.emit('imageData', { gameName, imageData });
+    socket.emit('imageData', { gameName, imageData: base64ImageData });
 }
 
 socket.on('connect', function () {
@@ -336,4 +344,11 @@ async function handleCommandInput(data) {
 
         }
     }
+}
+
+function imageDataToBase64(imageData) {
+    // Convert the array buffer to a base64-encoded string
+    const uint8Array = new Uint8Array(imageData);
+    const binaryString = uint8Array.reduce((acc, byte) => acc + String.fromCharCode(byte), '');
+    return btoa(binaryString);
 }
