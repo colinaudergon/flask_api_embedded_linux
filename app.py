@@ -160,12 +160,12 @@ if __name__ == "__main__":
     # display_thread.start()
     if externalAccesGranted:
         displayHome()
-        # socket_server_thread = threading.Thread(target=unixSocketServer(eventCallback=send_data_to_client))
-        # socket_server_thread.start()
+        socket_server_thread = threading.Thread(target=unixSocketServer(eventCallback=send_data_to_client))
+        socket_server_thread.start()
         # app.run(debug=True,host="0.0.0.0")
         
         #commented for debugging
-        socketio.run(app, debug=True, host="0.0.0.0")
+        #socketio.run(app, debug=True, host="0.0.0.0")
 
     else:
         # app.run(debug=True)
