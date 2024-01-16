@@ -6,11 +6,11 @@
 # echo "Current directory: $current_dir"
 
 pathToPythonScript="app.py"
-pathToCprogram="app.c"
+pathToInputReading="inputReading.c"
 pathToFrameBufferHandler="frameBufferHandler.c"
 
 # Compile C program
-gcc $pathToCprogram -o app_executable
+gcc $pathToInputReading -o inputReading
 if [ $? -ne 0 ]; then
     echo "Error: Compilation of C program failed."
     exit 1

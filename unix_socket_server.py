@@ -30,7 +30,7 @@ def unixSocketServer(eventCallback):
         print(f"Failed to bind socket: {e}")
         # Handle the error appropriately, possibly by exiting the script
     # Listen for incoming connections
-    c_program_process = subprocess.Popen(["./app_executable"])
+    c_program_process = subprocess.Popen(["./inputReading"])
     s.listen(5)
     print("Server listening on", s)
 
