@@ -118,7 +118,7 @@ text= f"IP ADDRESS: {ip}\n"
 # # ~980 character max
 fb_width = 800  # Set this to your framebuffer width
 fb_height = 1279  # Set this to your framebuffer height
-(display,displayArr) = improc.createImage(text,fb_width,fb_height,fontSize,200,200)
+(display,displayArr) = improc.createImage(text,fb_height,fb_width,fontSize,200,200)
 improc.transmitArrayToCframeBufferHandler(displayArr)
 # display.save("ipaddress.png")
 print(displayArr.ndim)
