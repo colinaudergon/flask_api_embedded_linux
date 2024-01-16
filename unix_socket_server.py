@@ -45,7 +45,6 @@ def unixSocketServer(eventCallback):
             value_received = struct.unpack('B', data)[0]
             print("Received data:", value_received)# Test each bit
             
-
             if eventCallback is not None:
                 eventCallback(value_received)
 

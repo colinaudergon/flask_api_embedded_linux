@@ -142,7 +142,6 @@ char adcBuffer[BUFFER_SIZE];
 /* Function prototype							      						  */
 /******************************************************************************/
 
-
 struct gpio_desc initGpioInput(const char *gpio_chip, unsigned int gpio_line);
 struct gpio_desc initGpioOutput(const char *gpio_chip, unsigned int gpio_line);
 int readBtn(struct gpio_desc gpio);
@@ -250,7 +249,7 @@ int main(void)
         runSocket = true;
         valueToSend = SOCKET_READY;
     }
-    int swval = 1;
+    // int swval = 1;
     while (running)
     {
 
@@ -376,15 +375,14 @@ int controlGpioOut(struct gpio_desc gpio, int value)
 
 int readBtn(struct gpio_desc gpio)
 {
-
     int value_switch = 0;
     gpio.ret = ioctl(gpio.req.fd, GPIOHANDLE_GET_LINE_VALUES_IOCTL, &value_switch);
     if (gpio.ret == -1)
     {
         gpio.ret = -errno;
+        value_switch = -1;
         fprintf(stderr, "Failed to get line values(%d)\n", gpio.ret);
     }
-    // printf("Value: %d\n", value_switch);
     return value_switch;
 }
 
@@ -474,7 +472,6 @@ uint8_t readInputs(struct gpio_desc s400, struct gpio_desc s401, struct gpio_des
         // isReading = false;
         return errorCode;
     }
-    printf("L/R Value: %d\n", adcValue);
 
     adcValue = readAdcValue();
     if (adcValue == joystickRightReading)
@@ -485,8 +482,8 @@ uint8_t readInputs(struct gpio_desc s400, struct gpio_desc s401, struct gpio_des
     {
         inputState |= joystickLeft;
     }
+    printf("L/R Value: %d\n", adcValue);
 
-    printf("U/D Value: %d\n", adcValue);
     sleep_ms(10);
     int swVal = 1;
     swVal = readBtn(s400);
@@ -496,6 +493,11 @@ uint8_t readInputs(struct gpio_desc s400, struct gpio_desc s401, struct gpio_des
         inputState |= startPressed;
         printf("Switch S400 active\n");
     }
+    else if (swVal < 0)
+    {
+        printf("Error");
+    }
+
     swVal = 1;
     swVal = readBtn(s401);
     controlGpioOut(ds402, swVal);
@@ -503,6 +505,10 @@ uint8_t readInputs(struct gpio_desc s400, struct gpio_desc s401, struct gpio_des
     {
         inputState |= selectPressed;
         printf("Switch S401 active\n");
+    }
+    else if (swVal < 0)
+    {
+        printf("Error");
     }
     swVal = 1;
     swVal = readBtn(s402);
@@ -512,6 +518,10 @@ uint8_t readInputs(struct gpio_desc s400, struct gpio_desc s401, struct gpio_des
         inputState |= aPressed;
         printf("Switch S402 active\n");
     }
+    else if (swVal < 0)
+    {
+        printf("Error");
+    }
     swVal = 1;
     swVal = readBtn(s403);
     controlGpioOut(ds400, swVal);
@@ -520,9 +530,13 @@ uint8_t readInputs(struct gpio_desc s400, struct gpio_desc s401, struct gpio_des
         inputState |= bPressed;
         printf("Switch S403 active\n");
     }
+    else if (swVal < 0)
+    {
+        printf("Error");
+    }
     swVal = 1;
-    sleep_ms(100);
-    printf("Inputs state: 0x%02X\n", inputState);
+    // sleep_ms(100);
+    printf("1) Inputs state: 0x%02X\n", inputState);
     return inputState;
 }
 
