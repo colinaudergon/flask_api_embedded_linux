@@ -1,5 +1,6 @@
 from unix_socket_server import unixSocketServer
 from image_proc import ImageProcessor
+from image_fetcher import imageFetcher
 from flask import Flask, send_from_directory
 from flask_socketio import SocketIO
 import time
@@ -122,7 +123,7 @@ def handle_game_launched(data):
     global gameIsRunning
     game_name = data["gameName"]
     print(f"Game {game_name} has been launched!")
-
+    displayImage(game_name)
     gameIsRunning = True 
     global socket_server_thread
     print("About to create thread")
@@ -144,23 +145,12 @@ def displayHome():
     (display,displayArr) = improc.createImage(text,20,20)
     improc.transmitArrayToCframeBufferHandler(displayArr)
 
-@socketio.on("imageData")
-def handle_image_data(data):
-    # game_name = data["gameName"]
-    # image_data = data
-    base64_image_data = data.get("imageData")
-    print(type(base64_image_data))
-    print(base64_image_data)
-    # imgPath=f"image.png"
-    # image_data = base64.b64decode(base64_image_data)
-    # print(type(image_data))
-    # with open(imgPath, "wb") as file:
-    #     file.write(image_data)
-        
-    # ip = improc.IpFinder()
-    # text= f"IP ADDRESS WITH IMAGE:\n{ip}\n"
-    # (display,displayArr) = improc.createImageOverlay(text,20,20,imgPath)
-    # improc.transmitArrayToCframeBufferHandler(displayArr)
+def displayImage(gameName):        
+    ip = improc.IpFinder()
+    text= f"IP ADDRESS WITH IMAGE:\n{ip}\n"
+    imgPath = f"images/{gameName}.png"
+    (display,displayArr) = improc.createImageOverlay(text,20,20,imgPath)
+    improc.transmitArrayToCframeBufferHandler(displayArr)
     
 if __name__ == "__main__":
     externalAccesGranted = True

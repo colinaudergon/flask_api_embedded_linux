@@ -108,7 +108,6 @@ async function updateUI() {
                     const canvasClickHandler = (gameName,gameCover) => {
                         console.log(`Canvas clicked for game: ${gameName}`);
                         launchGame(gameName);
-                        emitImageData(gameCover);
                     };
 
                     // Handle mouseenter event
@@ -276,18 +275,6 @@ async function launchGame(gametoRun) {
     }
 }
 
-// function emitImageData(gameName, imageData) {
-//     // Assuming you have a socket instance connected to the server
-//     socket.emit('imageData', { gameName, imageData });
-// }
-
-function emitImageData(imageData) {
-    // Convert the image data to base64
-    // const uintImageData = imageDataToUint8Array(imageData);
-
-    // Assuming you have a socket instance connected to the server
-    socket.emit('imageData', {"imageData":imageData});
-}
 
 socket.on('connect', function () {
     socket.emit('my event', { data: 'I\'m connected!' });
