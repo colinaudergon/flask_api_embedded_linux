@@ -5,6 +5,7 @@ from flask_socketio import SocketIO
 import time
 import threading
 import subprocess
+import base64
 
 #include dependency
 # import gpioController
@@ -146,10 +147,13 @@ def displayHome():
 @socketio.on("imageData")
 def handle_image_data(data):
     game_name = data["gameName"]
-    image_data = data["imageData"]
+    base64_image_data = data["imageData"]
     imgPath=f"{game_name}_image.png"
+    image_data = base64.b64decode(base64_image_data)
+    
     with open(imgPath, "wb") as file:
         file.write(image_data)
+        
     ip = improc.IpFinder()
     text= f"IP ADDRESS WITH IMAGE:\n{ip}\n"
     (display,displayArr) = improc.createImageOverlay(text,20,20,imgPath)
