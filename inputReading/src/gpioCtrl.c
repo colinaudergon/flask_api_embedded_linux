@@ -259,64 +259,74 @@ int main(void)
         int swVal = 1;
 
         inputState = readADCs();
-        swVal = readBtn(s400);
-        controlGpioOut(ds403, swVal);
-        if (swVal == 0)
+        if (inputState != errorCode)
         {
-            inputState |= startPressed;
-            printf("Switch S400 active\n");
-        }
-        else if (swVal < 0)
-        {
-            printf("Error");
-        }
 
-        swVal = 1;
-        swVal = readBtn(s401);
-        controlGpioOut(ds402, swVal);
-        if (swVal == 0)
-        {
-            inputState |= selectPressed;
-            // printf("Switch S401 active\n");
-        }
-        else if (swVal < 0)
-        {
-            printf("Error");
-        }
-        swVal = 1;
-        swVal = readBtn(s402);
-        controlGpioOut(ds401, swVal);
-        if (swVal == 0)
-        {
-            inputState |= aPressed;
-            // printf("Switch S402 active\n");
-        }
-        else if (swVal < 0)
-        {
-            printf("Error");
-        }
-        swVal = 1;
-        swVal = readBtn(s403);
-        controlGpioOut(ds400, swVal);
-        if (swVal == 0)
-        {
-            inputState |= bPressed;
-            // printf("Switch S403 active\n");
-        }
-        else if (swVal < 0)
-        {
-            printf("Error");
-        }
-        swVal = 1;
+            swVal = readBtn(s400);
+            controlGpioOut(ds403, swVal);
+            if (swVal == 0)
+            {
+                inputState |= startPressed;
+                printf("Switch S400 active\n");
+            }
+            else if (swVal < 0)
+            {
+                printf("Error");
+            }
 
-        printf("ready to write");
-        n = write(socket_fd, &inputState, sizeof(inputState));
-        if (n < 0)
-        {
-            // perror("ERROR writing to socket");
-            return 1;
+            swVal = 1;
+            swVal = readBtn(s401);
+            controlGpioOut(ds402, swVal);
+            if (swVal == 0)
+            {
+                inputState |= selectPressed;
+                // printf("Switch S401 active\n");
+            }
+            else if (swVal < 0)
+            {
+                printf("Error");
+            }
+            swVal = 1;
+            swVal = readBtn(s402);
+            controlGpioOut(ds401, swVal);
+            if (swVal == 0)
+            {
+                inputState |= aPressed;
+                // printf("Switch S402 active\n");
+            }
+            else if (swVal < 0)
+            {
+                printf("Error");
+            }
+            swVal = 1;
+            swVal = readBtn(s403);
+            controlGpioOut(ds400, swVal);
+            if (swVal == 0)
+            {
+                inputState |= bPressed;
+                // printf("Switch S403 active\n");
+            }
+            else if (swVal < 0)
+            {
+                printf("Error");
+            }
+            swVal = 1;
+
+            printf("ready to write");
+            if (inputState != 0x00)
+            {
+                n = write(socket_fd, &inputState, sizeof(inputState));
+                if (n < 0)
+                {
+                    // perror("ERROR writing to socket");
+                    return 1;
+                }
+            }
         }
-        printf("input state: 0x%02X\n", inputState);
+        else
+        {
+            printf("Error");
+        }
     }
 
     close(adc_fd);
@@ -489,11 +499,8 @@ uint8_t readADCs()
     {
         perror("Setup ADC");
         return errorCode;
-        // isReading = false;
     }
     adcValue = readAdcValue();
-    printf("U/D Value: %d\n", adcValue);
-
     if (adcValue >= joystickUpReading)
     {
         adcState |= joystickUp;
@@ -503,7 +510,7 @@ uint8_t readADCs()
         adcState |= joystickDown;
     }
 
-    sleep_ms(20);
+    // sleep_ms(20);
     if (setUpAdcValue(JOYSTICK_A_LEFT_RIGHT) < 0)
     {
         perror("Setup ADC");
@@ -520,9 +527,7 @@ uint8_t readADCs()
     {
         adcState |= joystickLeft;
     }
-    printf("L/R Value: %d\n", adcValue);
-
-    sleep_ms(10);
+    // sleep_ms(10);
     return adcState;
 }
 
