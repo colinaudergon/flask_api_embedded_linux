@@ -149,6 +149,6 @@ text= f"IP ADDRESS: {ip}\n"
 displayArr=improc.imageProcessor("yasu.jpeg")
 
 # (display,displayArr) = improc.createImage(text,fontSize,20,20)
-# improc.transmitArrayToCframeBufferHandler(displayArr)
+improc.transmitArrayToCframeBufferHandler(displayArr)
 
 
