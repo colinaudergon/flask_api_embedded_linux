@@ -148,17 +148,19 @@ def displayHome():
 def handle_image_data(data):
     # game_name = data["gameName"]
     # image_data = data
-    base64_image_data = data.get("imageData")
-    imgPath=f"image.png"
-    image_data = base64.b64decode(base64_image_data)
-    print(type(image_data))
-    with open(imgPath, "wb") as file:
-        file.write(image_data)
+    base64_image_data = data.get()
+    print(type(base64_image_data))
+    print(base64_image_data)
+    # imgPath=f"image.png"
+    # image_data = base64.b64decode(base64_image_data)
+    # print(type(image_data))
+    # with open(imgPath, "wb") as file:
+    #     file.write(image_data)
         
-    ip = improc.IpFinder()
-    text= f"IP ADDRESS WITH IMAGE:\n{ip}\n"
-    (display,displayArr) = improc.createImageOverlay(text,20,20,imgPath)
-    improc.transmitArrayToCframeBufferHandler(displayArr)
+    # ip = improc.IpFinder()
+    # text= f"IP ADDRESS WITH IMAGE:\n{ip}\n"
+    # (display,displayArr) = improc.createImageOverlay(text,20,20,imgPath)
+    # improc.transmitArrayToCframeBufferHandler(displayArr)
     
 if __name__ == "__main__":
     externalAccesGranted = True
