@@ -85,13 +85,39 @@ class ImageProcessor():
         return image,imageArray
     
 
+    # def transmitArrayToCframeBufferHandler(self, imageArray):
+    #     # Assume imageArray is a 3D NumPy array with shape (height, width, 3)
+    #     height, width, _ = imageArray.shape
+    #     print(f"height:{height}, width: {width}, unknow: {_}")
+    #     # Flatten the RGB values into a 1D array
+    #     flat_array = imageArray.reshape(-1)
+    #     print(f"Flat array: {flat_array}")
+    #     # Create a temporary file to store the RGB values
+    #     with tempfile.NamedTemporaryFile(mode='w+', delete=False) as temp_file:
+    #         # Write height, width, and RGB values to the file
+    #         temp_file.write(f"{height} {width}\n")
+    #         temp_file.write(' '.join(map(str, flat_array)))
+
+    #     try:
+    #         # Call the C executable using subprocess with the file path as an argument
+    #         subprocess.run(['./frameBufferHandler', temp_file.name], text=True)
+    #     finally:
+    #         # Clean up: Remove the temporary file
+    #         os.remove(temp_file.name)
     def transmitArrayToCframeBufferHandler(self, imageArray):
         # Assume imageArray is a 3D NumPy array with shape (height, width, 3)
         height, width, _ = imageArray.shape
-        print(f"height:{height}, width: {width}, unknow: {_}")
+        print(f"Original image size - height:{height}, width: {width}, channels: {_}")
+
+        # Rotate the imageArray 90° clockwise
+        rotated_imageArray = np.rot90(imageArray, k=-1, axes=(0, 1))
+        height, width, _ = rotated_imageArray.shape
+        print(f"Rotated image size - height:{height}, width: {width}, channels: {_}")
+
         # Flatten the RGB values into a 1D array
-        flat_array = imageArray.reshape(-1)
+        flat_array = rotated_imageArray.reshape(-1)
         print(f"Flat array: {flat_array}")
+
         # Create a temporary file to store the RGB values
         with tempfile.NamedTemporaryFile(mode='w+', delete=False) as temp_file:
             # Write height, width, and RGB values to the file
