@@ -142,8 +142,6 @@ char adcBuffer[BUFFER_SIZE];
 /* Function prototype							      						  */
 /******************************************************************************/
 
-int init7SegDisplay(spi_t *spi);
-void release7SegDisplay(spi_t *spi, int sevenSegEn);
 
 struct gpio_desc initGpioInput(const char *gpio_chip, unsigned int gpio_line);
 struct gpio_desc initGpioOutput(const char *gpio_chip, unsigned int gpio_line);
@@ -152,6 +150,8 @@ int controlGpioOut(struct gpio_desc gpio, int value);
 void sleep_ms(int milliseconds);
 int setUpAdcValue(uint8_t setup);
 int readAdcValue();
+uint8_t readInputs(struct gpio_desc s400, struct gpio_desc s401, struct gpio_desc s402, struct gpio_desc s403,
+                   struct gpio_desc ds400, struct gpio_desc ds401, struct gpio_desc ds402, struct gpio_desc ds403);
 
 void signal_callback_handler(int signum);
 // void exitProgramm();
@@ -208,6 +208,21 @@ int main(void)
     }
 
     // LED init
+    struct gpio_desc ds400 = initGpioOutput(GPIO_BANK1, DS400);
+    if (ds400.status < 0)
+    {
+        printf("Error init ds400");
+    }
+    struct gpio_desc ds401 = initGpioOutput(GPIO_BANK3, DS401);
+    if (ds401.status < 0)
+    {
+        printf("Error init ds400");
+    }
+    struct gpio_desc ds402 = initGpioOutput(GPIO_BANK3, DS402);
+    if (ds402.status < 0)
+    {
+        printf("Error init ds400");
+    }
     struct gpio_desc ds403 = initGpioOutput(GPIO_BANK3, DS403);
     if (ds403.status < 0)
     {
@@ -239,16 +254,17 @@ int main(void)
     while (running)
     {
 
-        swval = readBtn(s400);
-        controlGpioOut(ds403, swval);
+        valueToSend = readInputs(s400, s401, s402, s403, ds400, ds401, ds402, ds403);
+        // swval = readBtn(s400);
+        // controlGpioOut(ds403, swval);
 
-        n = write(socket_fd, &swval, sizeof(valueToSend));
+        n = write(socket_fd, &valueToSend, sizeof(valueToSend));
         if (n < 0)
         {
             perror("ERROR writing to socket");
             return 1;
         }
-        printf("input state: 0x%02X\n", swval);
+        printf("input state: 0x%02X\n", valueToSend);
     }
 
     close(adc_fd);
