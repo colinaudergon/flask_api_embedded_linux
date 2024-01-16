@@ -411,14 +411,14 @@ Definition at line 78 of file gpio\+Ctrl.\+c.
 
 
 
-Definition at line 435 of file gpio\+Ctrl.\+c.
+Definition at line 434 of file gpio\+Ctrl.\+c.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{436 \{}
-\DoxyCodeLine{437     gpio.ret = ioctl(gpio.req.fd, GPIOHANDLE\_SET\_LINE\_VALUES\_IOCTL, \&value);}
-\DoxyCodeLine{438     \textcolor{keywordflow}{return} gpio.ret;}
-\DoxyCodeLine{439 \}}
+\DoxyCodeLine{435 \{}
+\DoxyCodeLine{436     gpio.ret = ioctl(gpio.req.fd, GPIOHANDLE\_SET\_LINE\_VALUES\_IOCTL, \&value);}
+\DoxyCodeLine{437     \textcolor{keywordflow}{return} gpio.ret;}
+\DoxyCodeLine{438 \}}
 
 \end{DoxyCode}
 \mbox{\label{gpioCtrl_8c_a33b91e7c15fb1e5f6ff9a36cfefcb84d}} 
@@ -429,41 +429,41 @@ Definition at line 435 of file gpio\+Ctrl.\+c.
 
 
 
-Definition at line 537 of file gpio\+Ctrl.\+c.
+Definition at line 536 of file gpio\+Ctrl.\+c.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{538 \{}
-\DoxyCodeLine{539     \textcolor{keywordtype}{int} max\_connection\_attempts = 10;}
-\DoxyCodeLine{540     socket\_fd = socket(AF\_UNIX, SOCK\_STREAM, 0);}
-\DoxyCodeLine{541     \textcolor{keywordflow}{if} (socket\_fd == -\/1)}
-\DoxyCodeLine{542     \{}
-\DoxyCodeLine{543         perror(\textcolor{stringliteral}{"{}Error creating socket"{}});}
-\DoxyCodeLine{544         \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
-\DoxyCodeLine{545     \}}
-\DoxyCodeLine{546 }
-\DoxyCodeLine{547     \textcolor{keywordflow}{while} (max\_connection\_attempts > 0)}
-\DoxyCodeLine{548     \{}
-\DoxyCodeLine{549         \textcolor{keywordflow}{if} (connect(socket\_fd, (\textcolor{keyword}{struct} sockaddr *)\&address, \textcolor{keyword}{sizeof}(address)) == 0)}
-\DoxyCodeLine{550         \{}
-\DoxyCodeLine{551             printf(\textcolor{stringliteral}{"{}Connected to the server\(\backslash\)n"{}});}
-\DoxyCodeLine{552             \textcolor{keywordflow}{return} \textcolor{keyword}{true}; \textcolor{comment}{// Exit the function with success}}
-\DoxyCodeLine{553         \}}
-\DoxyCodeLine{554         \textcolor{keywordflow}{else}}
-\DoxyCodeLine{555         \{}
-\DoxyCodeLine{556             perror(\textcolor{stringliteral}{"{}Error connecting to the server"{}});}
-\DoxyCodeLine{557             max\_connection\_attempts-\/-\/;}
-\DoxyCodeLine{558 }
-\DoxyCodeLine{559             \textcolor{comment}{// Wait for a short duration before retrying}}
-\DoxyCodeLine{560             sleep(1);}
-\DoxyCodeLine{561         \}}
-\DoxyCodeLine{562     \}}
-\DoxyCodeLine{563 }
-\DoxyCodeLine{564     \textcolor{comment}{// Connection attempts exhausted, handle the error as needed}}
-\DoxyCodeLine{565     fprintf(stderr, \textcolor{stringliteral}{"{}Failed to establish a connection\(\backslash\)n"{}});}
-\DoxyCodeLine{566     close(socket\_fd); \textcolor{comment}{// Close the socket if connection fails}}
-\DoxyCodeLine{567     \textcolor{keywordflow}{return} \textcolor{keyword}{false};     \textcolor{comment}{// Exit the function with failure}}
-\DoxyCodeLine{568 \}}
+\DoxyCodeLine{537 \{}
+\DoxyCodeLine{538     \textcolor{keywordtype}{int} max\_connection\_attempts = 10;}
+\DoxyCodeLine{539     socket\_fd = socket(AF\_UNIX, SOCK\_STREAM, 0);}
+\DoxyCodeLine{540     \textcolor{keywordflow}{if} (socket\_fd == -\/1)}
+\DoxyCodeLine{541     \{}
+\DoxyCodeLine{542         perror(\textcolor{stringliteral}{"{}Error creating socket"{}});}
+\DoxyCodeLine{543         \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{544     \}}
+\DoxyCodeLine{545 }
+\DoxyCodeLine{546     \textcolor{keywordflow}{while} (max\_connection\_attempts > 0)}
+\DoxyCodeLine{547     \{}
+\DoxyCodeLine{548         \textcolor{keywordflow}{if} (connect(socket\_fd, (\textcolor{keyword}{struct} sockaddr *)\&address, \textcolor{keyword}{sizeof}(address)) == 0)}
+\DoxyCodeLine{549         \{}
+\DoxyCodeLine{550             printf(\textcolor{stringliteral}{"{}Connected to the server\(\backslash\)n"{}});}
+\DoxyCodeLine{551             \textcolor{keywordflow}{return} \textcolor{keyword}{true}; \textcolor{comment}{// Exit the function with success}}
+\DoxyCodeLine{552         \}}
+\DoxyCodeLine{553         \textcolor{keywordflow}{else}}
+\DoxyCodeLine{554         \{}
+\DoxyCodeLine{555             perror(\textcolor{stringliteral}{"{}Error connecting to the server"{}});}
+\DoxyCodeLine{556             max\_connection\_attempts-\/-\/;}
+\DoxyCodeLine{557 }
+\DoxyCodeLine{558             \textcolor{comment}{// Wait for a short duration before retrying}}
+\DoxyCodeLine{559             sleep(1);}
+\DoxyCodeLine{560         \}}
+\DoxyCodeLine{561     \}}
+\DoxyCodeLine{562 }
+\DoxyCodeLine{563     \textcolor{comment}{// Connection attempts exhausted, handle the error as needed}}
+\DoxyCodeLine{564     fprintf(stderr, \textcolor{stringliteral}{"{}Failed to establish a connection\(\backslash\)n"{}});}
+\DoxyCodeLine{565     close(socket\_fd); \textcolor{comment}{// Close the socket if connection fails}}
+\DoxyCodeLine{566     \textcolor{keywordflow}{return} \textcolor{keyword}{false};     \textcolor{comment}{// Exit the function with failure}}
+\DoxyCodeLine{567 \}}
 
 \end{DoxyCode}
 \mbox{\label{gpioCtrl_8c_a31173f5f870f1b86f88276179013adad}} 
@@ -478,53 +478,53 @@ Definition at line 170 of file gpio\+Ctrl.\+c.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{337 \{}
-\DoxyCodeLine{338     \textcolor{keywordtype}{int} ret;}
-\DoxyCodeLine{339     \textcolor{keywordtype}{int} status;}
-\DoxyCodeLine{340     \textcolor{keyword}{struct }gpiohandle\_request req;}
-\DoxyCodeLine{341     strcpy(chrdev\_name, gpio\_chip);}
-\DoxyCodeLine{342     fd = open(chrdev\_name, 0);}
-\DoxyCodeLine{343     \textcolor{keywordflow}{if} (fd == -\/1)}
-\DoxyCodeLine{344     \{}
-\DoxyCodeLine{345         ret = -\/errno;}
-\DoxyCodeLine{346         fprintf(stderr, \textcolor{stringliteral}{"{}Failed to open \%s\(\backslash\)n"{}}, chrdev\_name);}
-\DoxyCodeLine{347 }
-\DoxyCodeLine{348         status = -\/1;}
-\DoxyCodeLine{349     \}}
-\DoxyCodeLine{350     \textcolor{keywordflow}{else}}
-\DoxyCodeLine{351     \{}
-\DoxyCodeLine{352         req.lineoffsets[0] = gpio\_line;}
-\DoxyCodeLine{353         req.flags = GPIOHANDLE\_REQUEST\_INPUT;}
-\DoxyCodeLine{354         snprintf(req.consumer\_label, \textcolor{keyword}{sizeof}(req.consumer\_label), \textcolor{stringliteral}{"{}btn\_\%u"{}}, gpio\_line);}
-\DoxyCodeLine{355         req.lines = 1;}
-\DoxyCodeLine{356 }
-\DoxyCodeLine{357         \textcolor{comment}{// Request GPIO line}}
-\DoxyCodeLine{358         ret = ioctl(fd, GPIO\_GET\_LINEHANDLE\_IOCTL, \&req);}
-\DoxyCodeLine{359         \textcolor{keywordflow}{if} (ret == -\/1)}
-\DoxyCodeLine{360         \{}
-\DoxyCodeLine{361             ret = -\/errno;}
-\DoxyCodeLine{362             fprintf(stderr, \textcolor{stringliteral}{"{}Failed to issue GET LINEHANDLE IOCTL (\%d)\(\backslash\)n"{}}, ret);}
-\DoxyCodeLine{363             status = -\/1;}
-\DoxyCodeLine{364         \}}
-\DoxyCodeLine{365         \textcolor{comment}{// Close GPIO device (not needed after acquiring the line handle)}}
-\DoxyCodeLine{366         \textcolor{keywordflow}{if} (close(fd) == -\/1)}
-\DoxyCodeLine{367         \{}
-\DoxyCodeLine{368             perror(\textcolor{stringliteral}{"{}Failed to close GPIO character device file"{}});}
-\DoxyCodeLine{369             status = -\/1;}
-\DoxyCodeLine{370         \}}
-\DoxyCodeLine{371         \textcolor{keywordflow}{else}}
-\DoxyCodeLine{372         \{}
-\DoxyCodeLine{373             status = 0;}
-\DoxyCodeLine{374         \}}
-\DoxyCodeLine{375     \}}
-\DoxyCodeLine{376     \textcolor{keyword}{struct }gpio\_desc gpio;}
-\DoxyCodeLine{377     strcpy(gpio.gpiobank, gpio\_chip);}
-\DoxyCodeLine{378     gpio.direction = 0;}
-\DoxyCodeLine{379     gpio.req = req;}
-\DoxyCodeLine{380     gpio.ret = ret;}
-\DoxyCodeLine{381     gpio.status = status;}
-\DoxyCodeLine{382     \textcolor{keywordflow}{return} gpio;}
-\DoxyCodeLine{383 \}}
+\DoxyCodeLine{336 \{}
+\DoxyCodeLine{337     \textcolor{keywordtype}{int} ret;}
+\DoxyCodeLine{338     \textcolor{keywordtype}{int} status;}
+\DoxyCodeLine{339     \textcolor{keyword}{struct }gpiohandle\_request req;}
+\DoxyCodeLine{340     strcpy(chrdev\_name, gpio\_chip);}
+\DoxyCodeLine{341     fd = open(chrdev\_name, 0);}
+\DoxyCodeLine{342     \textcolor{keywordflow}{if} (fd == -\/1)}
+\DoxyCodeLine{343     \{}
+\DoxyCodeLine{344         ret = -\/errno;}
+\DoxyCodeLine{345         fprintf(stderr, \textcolor{stringliteral}{"{}Failed to open \%s\(\backslash\)n"{}}, chrdev\_name);}
+\DoxyCodeLine{346 }
+\DoxyCodeLine{347         status = -\/1;}
+\DoxyCodeLine{348     \}}
+\DoxyCodeLine{349     \textcolor{keywordflow}{else}}
+\DoxyCodeLine{350     \{}
+\DoxyCodeLine{351         req.lineoffsets[0] = gpio\_line;}
+\DoxyCodeLine{352         req.flags = GPIOHANDLE\_REQUEST\_INPUT;}
+\DoxyCodeLine{353         snprintf(req.consumer\_label, \textcolor{keyword}{sizeof}(req.consumer\_label), \textcolor{stringliteral}{"{}btn\_\%u"{}}, gpio\_line);}
+\DoxyCodeLine{354         req.lines = 1;}
+\DoxyCodeLine{355 }
+\DoxyCodeLine{356         \textcolor{comment}{// Request GPIO line}}
+\DoxyCodeLine{357         ret = ioctl(fd, GPIO\_GET\_LINEHANDLE\_IOCTL, \&req);}
+\DoxyCodeLine{358         \textcolor{keywordflow}{if} (ret == -\/1)}
+\DoxyCodeLine{359         \{}
+\DoxyCodeLine{360             ret = -\/errno;}
+\DoxyCodeLine{361             fprintf(stderr, \textcolor{stringliteral}{"{}Failed to issue GET LINEHANDLE IOCTL (\%d)\(\backslash\)n"{}}, ret);}
+\DoxyCodeLine{362             status = -\/1;}
+\DoxyCodeLine{363         \}}
+\DoxyCodeLine{364         \textcolor{comment}{// Close GPIO device (not needed after acquiring the line handle)}}
+\DoxyCodeLine{365         \textcolor{keywordflow}{if} (close(fd) == -\/1)}
+\DoxyCodeLine{366         \{}
+\DoxyCodeLine{367             perror(\textcolor{stringliteral}{"{}Failed to close GPIO character device file"{}});}
+\DoxyCodeLine{368             status = -\/1;}
+\DoxyCodeLine{369         \}}
+\DoxyCodeLine{370         \textcolor{keywordflow}{else}}
+\DoxyCodeLine{371         \{}
+\DoxyCodeLine{372             status = 0;}
+\DoxyCodeLine{373         \}}
+\DoxyCodeLine{374     \}}
+\DoxyCodeLine{375     \textcolor{keyword}{struct }gpio\_desc gpio;}
+\DoxyCodeLine{376     strcpy(gpio.gpiobank, gpio\_chip);}
+\DoxyCodeLine{377     gpio.direction = 0;}
+\DoxyCodeLine{378     gpio.req = req;}
+\DoxyCodeLine{379     gpio.ret = ret;}
+\DoxyCodeLine{380     gpio.status = status;}
+\DoxyCodeLine{381     \textcolor{keywordflow}{return} gpio;}
+\DoxyCodeLine{382 \}}
 
 \end{DoxyCode}
 \mbox{\label{gpioCtrl_8c_af59cbef0dd16bd0827fa9e20cf254fe6}} 
@@ -539,54 +539,54 @@ Definition at line 170 of file gpio\+Ctrl.\+c.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{386 \{}
-\DoxyCodeLine{387     \textcolor{keywordtype}{int} ret;}
-\DoxyCodeLine{388     \textcolor{keywordtype}{int} status;}
-\DoxyCodeLine{389     \textcolor{keyword}{struct }gpiohandle\_request req;}
-\DoxyCodeLine{390     \textcolor{keyword}{static} \textcolor{keyword}{struct }gpiohandle\_data data;}
-\DoxyCodeLine{391 }
-\DoxyCodeLine{392     \textcolor{comment}{// /*  Open gpio device: gpiochipX */}}
-\DoxyCodeLine{393     strcpy(chrdev\_name, gpio\_chip);}
-\DoxyCodeLine{394     fd = open(chrdev\_name, 0);}
-\DoxyCodeLine{395     \textcolor{keywordflow}{if} (fd == -\/1)}
-\DoxyCodeLine{396     \{}
-\DoxyCodeLine{397         ret = -\/errno;}
-\DoxyCodeLine{398         fprintf(stderr, \textcolor{stringliteral}{"{}Failed to open \%s\(\backslash\)n"{}}, chrdev\_name);}
-\DoxyCodeLine{399         status = -\/1;}
-\DoxyCodeLine{400     \}}
-\DoxyCodeLine{401     \textcolor{keywordflow}{else}}
-\DoxyCodeLine{402     \{}
-\DoxyCodeLine{403         \textcolor{comment}{/* Setup variables for a request */}}
-\DoxyCodeLine{404         req.lineoffsets[0] = gpio\_line;}
-\DoxyCodeLine{405         req.flags = GPIOHANDLE\_REQUEST\_OUTPUT;}
-\DoxyCodeLine{406         memcpy(req.default\_values, \&data, \textcolor{keyword}{sizeof}(req.default\_values));}
-\DoxyCodeLine{407         snprintf(req.consumer\_label, \textcolor{keyword}{sizeof}(req.consumer\_label), \textcolor{stringliteral}{"{}led\_\%u"{}}, gpio\_line);}
-\DoxyCodeLine{408         req.lines = 1;}
-\DoxyCodeLine{409 }
-\DoxyCodeLine{410         \textcolor{comment}{/* Request GPIO line: GPIO\_H\_11 -\/-\/> LED-\/DS400 */}}
-\DoxyCodeLine{411         ret = ioctl(fd, GPIO\_GET\_LINEHANDLE\_IOCTL, \&req);}
-\DoxyCodeLine{412         \textcolor{keywordflow}{if} (ret == -\/1)}
-\DoxyCodeLine{413         \{}
-\DoxyCodeLine{414             ret = -\/errno;}
-\DoxyCodeLine{415             status = -\/1;}
-\DoxyCodeLine{416             fprintf(stderr, \textcolor{stringliteral}{"{}Failed to issue GET LINEHANDLE IOCTL (\%d)\(\backslash\)n"{}},}
-\DoxyCodeLine{417                     ret);}
-\DoxyCodeLine{418         \}}
-\DoxyCodeLine{419         \textcolor{keywordflow}{if} (close(fd) == -\/1)}
-\DoxyCodeLine{420         \{}
-\DoxyCodeLine{421             perror(\textcolor{stringliteral}{"{}Failed to close GPIO character device file"{}});}
-\DoxyCodeLine{422             status = -\/1;}
-\DoxyCodeLine{423         \}}
-\DoxyCodeLine{424     \}}
-\DoxyCodeLine{425     \textcolor{comment}{// printf("{}prout4!\(\backslash\)n"{});}}
-\DoxyCodeLine{426     \textcolor{keyword}{struct }gpio\_desc gpio;}
-\DoxyCodeLine{427     strcpy(gpio.gpiobank, gpio\_chip);}
-\DoxyCodeLine{428     gpio.direction = 1;}
-\DoxyCodeLine{429     gpio.req = req;}
-\DoxyCodeLine{430     gpio.ret = ret;}
-\DoxyCodeLine{431     gpio.status = status;}
-\DoxyCodeLine{432     \textcolor{keywordflow}{return} gpio;}
-\DoxyCodeLine{433 \}}
+\DoxyCodeLine{385 \{}
+\DoxyCodeLine{386     \textcolor{keywordtype}{int} ret;}
+\DoxyCodeLine{387     \textcolor{keywordtype}{int} status;}
+\DoxyCodeLine{388     \textcolor{keyword}{struct }gpiohandle\_request req;}
+\DoxyCodeLine{389     \textcolor{keyword}{static} \textcolor{keyword}{struct }gpiohandle\_data data;}
+\DoxyCodeLine{390 }
+\DoxyCodeLine{391     \textcolor{comment}{// /*  Open gpio device: gpiochipX */}}
+\DoxyCodeLine{392     strcpy(chrdev\_name, gpio\_chip);}
+\DoxyCodeLine{393     fd = open(chrdev\_name, 0);}
+\DoxyCodeLine{394     \textcolor{keywordflow}{if} (fd == -\/1)}
+\DoxyCodeLine{395     \{}
+\DoxyCodeLine{396         ret = -\/errno;}
+\DoxyCodeLine{397         fprintf(stderr, \textcolor{stringliteral}{"{}Failed to open \%s\(\backslash\)n"{}}, chrdev\_name);}
+\DoxyCodeLine{398         status = -\/1;}
+\DoxyCodeLine{399     \}}
+\DoxyCodeLine{400     \textcolor{keywordflow}{else}}
+\DoxyCodeLine{401     \{}
+\DoxyCodeLine{402         \textcolor{comment}{/* Setup variables for a request */}}
+\DoxyCodeLine{403         req.lineoffsets[0] = gpio\_line;}
+\DoxyCodeLine{404         req.flags = GPIOHANDLE\_REQUEST\_OUTPUT;}
+\DoxyCodeLine{405         memcpy(req.default\_values, \&data, \textcolor{keyword}{sizeof}(req.default\_values));}
+\DoxyCodeLine{406         snprintf(req.consumer\_label, \textcolor{keyword}{sizeof}(req.consumer\_label), \textcolor{stringliteral}{"{}led\_\%u"{}}, gpio\_line);}
+\DoxyCodeLine{407         req.lines = 1;}
+\DoxyCodeLine{408 }
+\DoxyCodeLine{409         \textcolor{comment}{/* Request GPIO line: GPIO\_H\_11 -\/-\/> LED-\/DS400 */}}
+\DoxyCodeLine{410         ret = ioctl(fd, GPIO\_GET\_LINEHANDLE\_IOCTL, \&req);}
+\DoxyCodeLine{411         \textcolor{keywordflow}{if} (ret == -\/1)}
+\DoxyCodeLine{412         \{}
+\DoxyCodeLine{413             ret = -\/errno;}
+\DoxyCodeLine{414             status = -\/1;}
+\DoxyCodeLine{415             fprintf(stderr, \textcolor{stringliteral}{"{}Failed to issue GET LINEHANDLE IOCTL (\%d)\(\backslash\)n"{}},}
+\DoxyCodeLine{416                     ret);}
+\DoxyCodeLine{417         \}}
+\DoxyCodeLine{418         \textcolor{keywordflow}{if} (close(fd) == -\/1)}
+\DoxyCodeLine{419         \{}
+\DoxyCodeLine{420             perror(\textcolor{stringliteral}{"{}Failed to close GPIO character device file"{}});}
+\DoxyCodeLine{421             status = -\/1;}
+\DoxyCodeLine{422         \}}
+\DoxyCodeLine{423     \}}
+\DoxyCodeLine{424     \textcolor{comment}{// printf("{}prout4!\(\backslash\)n"{});}}
+\DoxyCodeLine{425     \textcolor{keyword}{struct }gpio\_desc gpio;}
+\DoxyCodeLine{426     strcpy(gpio.gpiobank, gpio\_chip);}
+\DoxyCodeLine{427     gpio.direction = 1;}
+\DoxyCodeLine{428     gpio.req = req;}
+\DoxyCodeLine{429     gpio.ret = ret;}
+\DoxyCodeLine{430     gpio.status = status;}
+\DoxyCodeLine{431     \textcolor{keywordflow}{return} gpio;}
+\DoxyCodeLine{432 \}}
 
 \end{DoxyCode}
 \mbox{\label{gpioCtrl_8c_a840291bc02cba5474a4cb46a9b9566fe}} 
@@ -745,26 +745,25 @@ Definition at line 170 of file gpio\+Ctrl.\+c.
 \DoxyCodeLine{312             \}}
 \DoxyCodeLine{313             swVal = 1;}
 \DoxyCodeLine{314 }
-\DoxyCodeLine{315             printf(\textcolor{stringliteral}{"{}ready to write"{}});}
-\DoxyCodeLine{316             \textcolor{keywordflow}{if} (inputState != 0x00)}
-\DoxyCodeLine{317             \{}
-\DoxyCodeLine{318                 n = write(socket\_fd, \&inputState, \textcolor{keyword}{sizeof}(inputState));}
-\DoxyCodeLine{319                 \textcolor{keywordflow}{if} (n < 0)}
-\DoxyCodeLine{320                 \{}
-\DoxyCodeLine{321                     \textcolor{comment}{// perror("{}ERROR writing to socket"{});}}
-\DoxyCodeLine{322                     \textcolor{keywordflow}{return} 1;}
-\DoxyCodeLine{323                 \}}
-\DoxyCodeLine{324             \}}
-\DoxyCodeLine{325         \}}
-\DoxyCodeLine{326         \textcolor{keywordflow}{else}}
-\DoxyCodeLine{327         \{}
-\DoxyCodeLine{328             printf(\textcolor{stringliteral}{"{}Error"{}});}
-\DoxyCodeLine{329         \}}
-\DoxyCodeLine{330     \}}
-\DoxyCodeLine{331 }
-\DoxyCodeLine{332     close(adc\_fd);}
-\DoxyCodeLine{333     \textcolor{keywordflow}{return} EXIT\_SUCCESS;}
-\DoxyCodeLine{334 \}}
+\DoxyCodeLine{315             \textcolor{keywordflow}{if} (inputState != 0x00)}
+\DoxyCodeLine{316             \{}
+\DoxyCodeLine{317                 n = write(socket\_fd, \&inputState, \textcolor{keyword}{sizeof}(inputState));}
+\DoxyCodeLine{318                 \textcolor{keywordflow}{if} (n < 0)}
+\DoxyCodeLine{319                 \{}
+\DoxyCodeLine{320                     \textcolor{comment}{// perror("{}ERROR writing to socket"{});}}
+\DoxyCodeLine{321                     \textcolor{keywordflow}{return} 1;}
+\DoxyCodeLine{322                 \}}
+\DoxyCodeLine{323             \}}
+\DoxyCodeLine{324         \}}
+\DoxyCodeLine{325         \textcolor{keywordflow}{else}}
+\DoxyCodeLine{326         \{}
+\DoxyCodeLine{327             printf(\textcolor{stringliteral}{"{}Error"{}});}
+\DoxyCodeLine{328         \}}
+\DoxyCodeLine{329     \}}
+\DoxyCodeLine{330 }
+\DoxyCodeLine{331     close(adc\_fd);}
+\DoxyCodeLine{332     \textcolor{keywordflow}{return} EXIT\_SUCCESS;}
+\DoxyCodeLine{333 \}}
 
 \end{DoxyCode}
 \mbox{\label{gpioCtrl_8c_a0d90c79933c0330321baf50da77b6973}} 
@@ -775,49 +774,49 @@ Definition at line 170 of file gpio\+Ctrl.\+c.
 
 
 
-Definition at line 493 of file gpio\+Ctrl.\+c.
+Definition at line 492 of file gpio\+Ctrl.\+c.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{494 \{}
-\DoxyCodeLine{495     uint8\_t adcValue;}
-\DoxyCodeLine{496     uint8\_t adcState = 0x00;}
-\DoxyCodeLine{497 }
-\DoxyCodeLine{498     \textcolor{keywordflow}{if} (setUpAdcValue(JOYSTICK\_A\_UP\_DOWN) < 0)}
-\DoxyCodeLine{499     \{}
-\DoxyCodeLine{500         perror(\textcolor{stringliteral}{"{}Setup ADC"{}});}
-\DoxyCodeLine{501         \textcolor{keywordflow}{return} errorCode;}
-\DoxyCodeLine{502     \}}
-\DoxyCodeLine{503     adcValue = readAdcValue();}
-\DoxyCodeLine{504     \textcolor{keywordflow}{if} (adcValue >= joystickUpReading)}
-\DoxyCodeLine{505     \{}
-\DoxyCodeLine{506         adcState |= joystickUp;}
-\DoxyCodeLine{507     \}}
-\DoxyCodeLine{508     \textcolor{keywordflow}{if} (adcValue <= joystickLeftReading)}
-\DoxyCodeLine{509     \{}
-\DoxyCodeLine{510         adcState |= joystickDown;}
-\DoxyCodeLine{511     \}}
-\DoxyCodeLine{512 }
-\DoxyCodeLine{513     \textcolor{comment}{// sleep\_ms(20);}}
-\DoxyCodeLine{514     \textcolor{keywordflow}{if} (setUpAdcValue(JOYSTICK\_A\_LEFT\_RIGHT) < 0)}
-\DoxyCodeLine{515     \{}
-\DoxyCodeLine{516         perror(\textcolor{stringliteral}{"{}Setup ADC"{}});}
-\DoxyCodeLine{517         \textcolor{comment}{// isReading = false;}}
-\DoxyCodeLine{518         \textcolor{keywordflow}{return} errorCode;}
-\DoxyCodeLine{519     \}}
-\DoxyCodeLine{520 }
-\DoxyCodeLine{521     adcValue = readAdcValue();}
-\DoxyCodeLine{522     \textcolor{keywordflow}{if} (adcValue >= joystickRightReading)}
-\DoxyCodeLine{523     \{}
-\DoxyCodeLine{524         adcState |= joystickRight;}
-\DoxyCodeLine{525     \}}
-\DoxyCodeLine{526     \textcolor{keywordflow}{if} (adcValue <= joystickLeftReading)}
-\DoxyCodeLine{527     \{}
-\DoxyCodeLine{528         adcState |= joystickLeft;}
-\DoxyCodeLine{529     \}}
-\DoxyCodeLine{530     \textcolor{comment}{// sleep\_ms(10);}}
-\DoxyCodeLine{531     \textcolor{keywordflow}{return} adcState;}
-\DoxyCodeLine{532 \}}
+\DoxyCodeLine{493 \{}
+\DoxyCodeLine{494     uint8\_t adcValue;}
+\DoxyCodeLine{495     uint8\_t adcState = 0x00;}
+\DoxyCodeLine{496 }
+\DoxyCodeLine{497     \textcolor{keywordflow}{if} (setUpAdcValue(JOYSTICK\_A\_UP\_DOWN) < 0)}
+\DoxyCodeLine{498     \{}
+\DoxyCodeLine{499         perror(\textcolor{stringliteral}{"{}Setup ADC"{}});}
+\DoxyCodeLine{500         \textcolor{keywordflow}{return} errorCode;}
+\DoxyCodeLine{501     \}}
+\DoxyCodeLine{502     adcValue = readAdcValue();}
+\DoxyCodeLine{503     \textcolor{keywordflow}{if} (adcValue >= joystickUpReading)}
+\DoxyCodeLine{504     \{}
+\DoxyCodeLine{505         adcState |= joystickUp;}
+\DoxyCodeLine{506     \}}
+\DoxyCodeLine{507     \textcolor{keywordflow}{if} (adcValue <= joystickLeftReading)}
+\DoxyCodeLine{508     \{}
+\DoxyCodeLine{509         adcState |= joystickDown;}
+\DoxyCodeLine{510     \}}
+\DoxyCodeLine{511 }
+\DoxyCodeLine{512     \textcolor{comment}{// sleep\_ms(20);}}
+\DoxyCodeLine{513     \textcolor{keywordflow}{if} (setUpAdcValue(JOYSTICK\_A\_LEFT\_RIGHT) < 0)}
+\DoxyCodeLine{514     \{}
+\DoxyCodeLine{515         perror(\textcolor{stringliteral}{"{}Setup ADC"{}});}
+\DoxyCodeLine{516         \textcolor{comment}{// isReading = false;}}
+\DoxyCodeLine{517         \textcolor{keywordflow}{return} errorCode;}
+\DoxyCodeLine{518     \}}
+\DoxyCodeLine{519 }
+\DoxyCodeLine{520     adcValue = readAdcValue();}
+\DoxyCodeLine{521     \textcolor{keywordflow}{if} (adcValue >= joystickRightReading)}
+\DoxyCodeLine{522     \{}
+\DoxyCodeLine{523         adcState |= joystickRight;}
+\DoxyCodeLine{524     \}}
+\DoxyCodeLine{525     \textcolor{keywordflow}{if} (adcValue <= joystickLeftReading)}
+\DoxyCodeLine{526     \{}
+\DoxyCodeLine{527         adcState |= joystickLeft;}
+\DoxyCodeLine{528     \}}
+\DoxyCodeLine{529     \textcolor{comment}{// sleep\_ms(10);}}
+\DoxyCodeLine{530     \textcolor{keywordflow}{return} adcState;}
+\DoxyCodeLine{531 \}}
 
 \end{DoxyCode}
 \mbox{\label{gpioCtrl_8c_a5f42c4eb1231dcc9baaac8ff1bcc1a4e}} 
@@ -828,20 +827,20 @@ Definition at line 493 of file gpio\+Ctrl.\+c.
 
 
 
-Definition at line 479 of file gpio\+Ctrl.\+c.
+Definition at line 478 of file gpio\+Ctrl.\+c.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{480 \{}
-\DoxyCodeLine{481     \textcolor{keywordflow}{if} (read(i2c\_fd, i2cCommBuffer, 1) != 1)}
-\DoxyCodeLine{482     \{}
-\DoxyCodeLine{483         perror(\textcolor{stringliteral}{"{}read error"{}});}
-\DoxyCodeLine{484         close(i2c\_fd);}
-\DoxyCodeLine{485         \textcolor{keywordflow}{return} -\/1;}
-\DoxyCodeLine{486     \}}
-\DoxyCodeLine{487     uint8\_t value = i2cCommBuffer[0];}
-\DoxyCodeLine{488     \textcolor{keywordflow}{return} value;}
-\DoxyCodeLine{489 \}}
+\DoxyCodeLine{479 \{}
+\DoxyCodeLine{480     \textcolor{keywordflow}{if} (read(i2c\_fd, i2cCommBuffer, 1) != 1)}
+\DoxyCodeLine{481     \{}
+\DoxyCodeLine{482         perror(\textcolor{stringliteral}{"{}read error"{}});}
+\DoxyCodeLine{483         close(i2c\_fd);}
+\DoxyCodeLine{484         \textcolor{keywordflow}{return} -\/1;}
+\DoxyCodeLine{485     \}}
+\DoxyCodeLine{486     uint8\_t value = i2cCommBuffer[0];}
+\DoxyCodeLine{487     \textcolor{keywordflow}{return} value;}
+\DoxyCodeLine{488 \}}
 
 \end{DoxyCode}
 \mbox{\label{gpioCtrl_8c_a53a992b5641394991e05700195915939}} 
@@ -852,21 +851,21 @@ Definition at line 479 of file gpio\+Ctrl.\+c.
 
 
 
-Definition at line 441 of file gpio\+Ctrl.\+c.
+Definition at line 440 of file gpio\+Ctrl.\+c.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{442 \{}
-\DoxyCodeLine{443     \textcolor{keywordtype}{int} value\_switch = 0;}
-\DoxyCodeLine{444     gpio.ret = ioctl(gpio.req.fd, GPIOHANDLE\_GET\_LINE\_VALUES\_IOCTL, \&value\_switch);}
-\DoxyCodeLine{445     \textcolor{keywordflow}{if} (gpio.ret == -\/1)}
-\DoxyCodeLine{446     \{}
-\DoxyCodeLine{447         gpio.ret = -\/errno;}
-\DoxyCodeLine{448         value\_switch = -\/1;}
-\DoxyCodeLine{449         fprintf(stderr, \textcolor{stringliteral}{"{}Failed to get line values(\%d)\(\backslash\)n"{}}, gpio.ret);}
-\DoxyCodeLine{450     \}}
-\DoxyCodeLine{451     \textcolor{keywordflow}{return} value\_switch;}
-\DoxyCodeLine{452 \}}
+\DoxyCodeLine{441 \{}
+\DoxyCodeLine{442     \textcolor{keywordtype}{int} value\_switch = 0;}
+\DoxyCodeLine{443     gpio.ret = ioctl(gpio.req.fd, GPIOHANDLE\_GET\_LINE\_VALUES\_IOCTL, \&value\_switch);}
+\DoxyCodeLine{444     \textcolor{keywordflow}{if} (gpio.ret == -\/1)}
+\DoxyCodeLine{445     \{}
+\DoxyCodeLine{446         gpio.ret = -\/errno;}
+\DoxyCodeLine{447         value\_switch = -\/1;}
+\DoxyCodeLine{448         fprintf(stderr, \textcolor{stringliteral}{"{}Failed to get line values(\%d)\(\backslash\)n"{}}, gpio.ret);}
+\DoxyCodeLine{449     \}}
+\DoxyCodeLine{450     \textcolor{keywordflow}{return} value\_switch;}
+\DoxyCodeLine{451 \}}
 
 \end{DoxyCode}
 \mbox{\label{gpioCtrl_8c_ada37e8090ffec652b5d0b32718c7d400}} 
@@ -883,20 +882,20 @@ Definition at line 441 of file gpio\+Ctrl.\+c.
 
 
 
-Definition at line 464 of file gpio\+Ctrl.\+c.
+Definition at line 463 of file gpio\+Ctrl.\+c.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{465 \{}
-\DoxyCodeLine{466     i2cCommBuffer[0] = setup;}
-\DoxyCodeLine{467     \textcolor{keywordflow}{if} (write(i2c\_fd, i2cCommBuffer, 1) != 1)}
-\DoxyCodeLine{468     \{}
-\DoxyCodeLine{469         perror(\textcolor{stringliteral}{"{}write error!"{}});}
-\DoxyCodeLine{470         close(i2c\_fd);}
-\DoxyCodeLine{471         \textcolor{keywordflow}{return} -\/1;}
-\DoxyCodeLine{472     \}}
-\DoxyCodeLine{473     \textcolor{keywordflow}{return} 0;}
-\DoxyCodeLine{474 \}}
+\DoxyCodeLine{464 \{}
+\DoxyCodeLine{465     i2cCommBuffer[0] = setup;}
+\DoxyCodeLine{466     \textcolor{keywordflow}{if} (write(i2c\_fd, i2cCommBuffer, 1) != 1)}
+\DoxyCodeLine{467     \{}
+\DoxyCodeLine{468         perror(\textcolor{stringliteral}{"{}write error!"{}});}
+\DoxyCodeLine{469         close(i2c\_fd);}
+\DoxyCodeLine{470         \textcolor{keywordflow}{return} -\/1;}
+\DoxyCodeLine{471     \}}
+\DoxyCodeLine{472     \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{473 \}}
 
 \end{DoxyCode}
 \mbox{\label{gpioCtrl_8c_a89a8322bea357674e81ba9cbdefe0378}} 
@@ -907,15 +906,15 @@ Definition at line 464 of file gpio\+Ctrl.\+c.
 
 
 
-Definition at line 454 of file gpio\+Ctrl.\+c.
+Definition at line 453 of file gpio\+Ctrl.\+c.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{455 \{}
-\DoxyCodeLine{456     \textcolor{comment}{/* Set termination flag */}}
-\DoxyCodeLine{457     running = \textcolor{keyword}{false};}
-\DoxyCodeLine{458     printf(\textcolor{stringliteral}{"{}\(\backslash\)nProgram terminated by Ctrl-\/C!\(\backslash\)n\(\backslash\)n"{}});}
-\DoxyCodeLine{459 \}}
+\DoxyCodeLine{454 \{}
+\DoxyCodeLine{455     \textcolor{comment}{/* Set termination flag */}}
+\DoxyCodeLine{456     running = \textcolor{keyword}{false};}
+\DoxyCodeLine{457     printf(\textcolor{stringliteral}{"{}\(\backslash\)nProgram terminated by Ctrl-\/C!\(\backslash\)n\(\backslash\)n"{}});}
+\DoxyCodeLine{458 \}}
 
 \end{DoxyCode}
 \mbox{\label{gpioCtrl_8c_a73a8d7e98be85f67961ca682c291033a}} 
@@ -926,13 +925,13 @@ Definition at line 454 of file gpio\+Ctrl.\+c.
 
 
 
-Definition at line 572 of file gpio\+Ctrl.\+c.
+Definition at line 571 of file gpio\+Ctrl.\+c.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{573 \{}
-\DoxyCodeLine{574     usleep(milliseconds * 1000);}
-\DoxyCodeLine{575 \}}
+\DoxyCodeLine{572 \{}
+\DoxyCodeLine{573     usleep(milliseconds * 1000);}
+\DoxyCodeLine{574 \}}
 
 \end{DoxyCode}
 
