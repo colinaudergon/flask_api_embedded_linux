@@ -7,15 +7,15 @@ import os
 
 class ImageProcessor():
     
-    def __init__(self,fontSize,isOTarget):
+    def __init__(self,fontSize,isOnTarget):
         self.letterHeight=24
         self.fontSize = fontSize
-        self.isOnTarget = isOTarget
+        self.isOnTarget = isOnTarget
         #Do not touch these values
         self.fb_width = 1280
         self.fb_height = 800
         self.maxChar = 950
-        if(self.isOTarget):
+        if(self.isOnTarget):
             self.font = ImageFont.truetype("arial.ttf", self.fontSize)
         else:
             self.font = ImageFont.load_default(self.fontSize)
