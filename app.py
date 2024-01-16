@@ -125,8 +125,8 @@ def handle_game_launched(data):
     gameIsRunning = True 
     global socket_server_thread
     print("About to create thread")
-    socket_server_thread = threading.Thread(target=unixSocketServer(eventCallback=send_data_to_client))
-    socket_server_thread.start()
+    # socket_server_thread = threading.Thread(target=unixSocketServer(eventCallback=send_data_to_client))
+    # socket_server_thread.start()
     # displayImage()
 
 @socketio.on("gameClose")
