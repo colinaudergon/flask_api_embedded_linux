@@ -185,8 +185,8 @@ int main(int argc, char *argv[])
         }
         pfb32[w + h * fbVarScreenInfo.xres] = CONVERT_RGB24(rgbValue.r, rgbValue.g, rgbValue.b);
       }
-      int32_t pos = h + w * fbVarScreenInfo.xres;
-      printf("PosX: %d; PosY: %d\nPosTot\n\n: %d", w, h, pos);
+      // int32_t pos = h + w * fbVarScreenInfo.xres;
+      // printf("PosX: %d; PosY: %d\nPosTot\n\n: %d", w, h, pos);
     }
     // // Set the rotation
     // fbVarScreenInfo.rotate = FB_ROTATE_CW; // Adjust this line based on your specific rotation value
