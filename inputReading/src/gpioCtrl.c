@@ -82,21 +82,23 @@
 /* Global Variables						             						 */
 /*****************************************************************************/
 
-// uint8_t joystickUpReading = 0xFA;    // 250
-// uint8_t joystickDownReading = 0xF4;  // 244
-// uint8_t joystickRightReading = 0xFA; // 252
-// uint8_t joystickLeftReading = 0xF4;  // 244
+int8_t inputState = 0x00;
 
-// uint8_t joystickUp = 0x08;
-// uint8_t joystickDown = 0x04;
-// uint8_t joystickRight = 0x02;
-// uint8_t joystickLeft = 0x01;
+uint8_t joystickUpReading = 0xFC;    // 252
+uint8_t joystickDownReading = 0xF1;  // 241
+uint8_t joystickRightReading = 0xFC; // 252
+uint8_t joystickLeftReading = 0xF2;  // 242
 
-// uint8_t startPressed = 0x80;
-// uint8_t selectPressed = 0x40;
-// uint8_t aPressed = 0x20;
-// uint8_t bPressed = 0x10;
-// uint8_t errorCode = 0xFF;
+uint8_t joystickUp = 0x08;
+uint8_t joystickDown = 0x04;
+uint8_t joystickRight = 0x02;
+uint8_t joystickLeft = 0x01;
+
+uint8_t startPressed = 0x80;
+uint8_t selectPressed = 0x40;
+uint8_t aPressed = 0x20;
+uint8_t bPressed = 0x10;
+uint8_t errorCode = 0xFF;
 
 /******************************************************************************/
 /* Static variables																  */
@@ -149,6 +151,7 @@ int controlGpioOut(struct gpio_desc gpio, int value);
 void sleep_ms(int milliseconds);
 int setUpAdcValue(uint8_t setup);
 int readAdcValue();
+uint8_t readADCs();
 uint8_t readInputs(struct gpio_desc s400, struct gpio_desc s401, struct gpio_desc s402, struct gpio_desc s403,
                    struct gpio_desc ds400, struct gpio_desc ds401, struct gpio_desc ds402, struct gpio_desc ds403);
 
@@ -247,21 +250,73 @@ int main(void)
     else
     {
         runSocket = true;
-        valueToSend = SOCKET_READY;
+        // valueToSend = SOCKET_READY;
     }
-    // int swval = 1;
+
     while (running)
     {
+        inputState = 0x00;
+        int swVal = 1;
 
-        valueToSend = readInputs(s400, s401, s402, s403, ds400, ds401, ds402, ds403);
+        inputState = readADCs();
+        swVal = readBtn(s400);
+        controlGpioOut(ds403, swVal);
+        if (swVal == 0)
+        {
+            inputState |= startPressed;
+            printf("Switch S400 active\n");
+        }
+        else if (swVal < 0)
+        {
+            printf("Error");
+        }
+
+        swVal = 1;
+        swVal = readBtn(s401);
+        controlGpioOut(ds402, swVal);
+        if (swVal == 0)
+        {
+            inputState |= selectPressed;
+            printf("Switch S401 active\n");
+        }
+        else if (swVal < 0)
+        {
+            printf("Error");
+        }
+        swVal = 1;
+        swVal = readBtn(s402);
+        controlGpioOut(ds401, swVal);
+        if (swVal == 0)
+        {
+            inputState |= aPressed;
+            printf("Switch S402 active\n");
+        }
+        else if (swVal < 0)
+        {
+            printf("Error");
+        }
+        swVal = 1;
+        swVal = readBtn(s403);
+        controlGpioOut(ds400, swVal);
+        if (swVal == 0)
+        {
+            inputState |= bPressed;
+            printf("Switch S403 active\n");
+        }
+        else if (swVal < 0)
+        {
+            printf("Error");
+        }
+        swVal = 1;
+
         printf("ready to write");
-        n = write(socket_fd, &valueToSend, sizeof(valueToSend));
+        n = write(socket_fd, &inputState, sizeof(inputState));
         if (n < 0)
         {
             perror("ERROR writing to socket");
             return 1;
         }
-        printf("input state: 0x%02X\n", valueToSend);
+        printf("input state: 0x%02X\n", inputState);
     }
 
     close(adc_fd);
@@ -423,27 +478,12 @@ int readAdcValue()
     return value;
 }
 
-uint8_t readInputs(struct gpio_desc s400, struct gpio_desc s401, struct gpio_desc s402, struct gpio_desc s403,
-                   struct gpio_desc ds400, struct gpio_desc ds401, struct gpio_desc ds402, struct gpio_desc ds403)
+// uint8_t readInputs(struct gpio_desc s400, struct gpio_desc s401, struct gpio_desc s402, struct gpio_desc s403,
+//                    struct gpio_desc ds400, struct gpio_desc ds401, struct gpio_desc ds402, struct gpio_desc ds403)
+uint8_t readADCs()
 {
     uint8_t adcValue;
-    int8_t inputState = 0x00;
-
-    uint8_t joystickUpReading = 0xFC;    // 252
-    uint8_t joystickDownReading = 0xF1;  // 241
-    uint8_t joystickRightReading = 0xFC; // 252
-    uint8_t joystickLeftReading = 0xF2;  // 242
-
-    uint8_t joystickUp = 0x08;
-    uint8_t joystickDown = 0x04;
-    uint8_t joystickRight = 0x02;
-    uint8_t joystickLeft = 0x01;
-
-    uint8_t startPressed = 0x80;
-    uint8_t selectPressed = 0x40;
-    uint8_t aPressed = 0x20;
-    uint8_t bPressed = 0x10;
-    uint8_t errorCode = 0xFF;
+    uint8_t adcState = 0x00;
 
     if (setUpAdcValue(JOYSTICK_A_UP_DOWN) < 0)
     {
@@ -457,11 +497,11 @@ uint8_t readInputs(struct gpio_desc s400, struct gpio_desc s401, struct gpio_des
 
     if (adcValue == joystickUpReading)
     {
-        inputState |= joystickUp;
+        adcState |= joystickUp;
     }
     if (adcValue == joystickLeftReading)
     {
-        inputState |= joystickDown;
+        adcState |= joystickDown;
     }
 
     sleep_ms(20);
@@ -476,11 +516,11 @@ uint8_t readInputs(struct gpio_desc s400, struct gpio_desc s401, struct gpio_des
     adcValue = readAdcValue();
     if (adcValue == joystickRightReading)
     {
-        inputState |= joystickRight;
+        adcState |= joystickRight;
     }
     if (adcValue == joystickLeftReading)
     {
-        inputState |= joystickLeft;
+        adcState |= joystickLeft;
     }
     printf("L/R Value: %d\n", adcValue);
 
@@ -536,8 +576,8 @@ uint8_t readInputs(struct gpio_desc s400, struct gpio_desc s401, struct gpio_des
     // }
     // swVal = 1;
     // sleep_ms(100);
-    printf("1) Inputs state: 0x%02X\n", inputState);
-    return inputState;
+    printf("1) adcState: 0x%02X\n", adcState);
+    return adcState;
 }
 
 /*****************************************************************************/
