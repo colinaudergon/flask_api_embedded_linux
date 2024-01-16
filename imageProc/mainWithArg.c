@@ -170,7 +170,7 @@ int main(int argc, char *argv[])
         // printf("pixel position HV: %d\n", w + h * fbVarScreenInfo.xres);
       }
     }
-
+  }
     // for (h = 0; h < height; h++)
     // {
     //   for (w = 0; w < width; w++)
