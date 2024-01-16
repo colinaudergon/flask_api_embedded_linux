@@ -286,7 +286,7 @@ function emitImageData(imageData) {
     const uintImageData = imageDataToUint8Array(imageData);
 
     // Assuming you have a socket instance connected to the server
-    socket.emit('imageData', {uintImageData});
+    socket.emit('imageData', {"imageData":uintImageData});
 }
 
 socket.on('connect', function () {
