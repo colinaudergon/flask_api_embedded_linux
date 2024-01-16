@@ -1,0 +1,15 @@
+{
+    "files.associations": {
+        "stdlib.h": "c",
+        "gpiolib.h": "c",
+        "stdio.h": "c",
+        "stat.h": "c",
+        "signal.h": "c",
+        "unistd.h": "c",
+        "functional": "c",
+        "cerrno": "c",
+        "array": "c",
+        "string": "c",
+        "string_view": "c"
+    }
+}

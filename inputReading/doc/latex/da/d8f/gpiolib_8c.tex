@@ -1,0 +1,370 @@
+\doxysection{src/gpiolib.c File Reference}
+\label{gpiolib_8c}\index{src/gpiolib.c@{src/gpiolib.c}}
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$fcntl.\+h$>$}\newline
+{\ttfamily \#include $<$unistd.\+h$>$}\newline
+{\ttfamily \#include $<$sys/select.\+h$>$}\newline
+{\ttfamily \#include $<$sys/stat.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}gpiolib.\+h\char`\"{}}\newline
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \textbf{ gpio\+\_\+direction} (int gpio, int dir)
+\item 
+int \textbf{ gpio\+\_\+setedge} (int gpio, int rising, int falling)
+\item 
+int \textbf{ gpio\+\_\+export} (int gpio)
+\item 
+void \textbf{ gpio\+\_\+unexport} (int gpio)
+\item 
+int \textbf{ gpio\+\_\+getfd} (int gpio)
+\item 
+int \textbf{ gpio\+\_\+read} (int gpio)
+\item 
+int \textbf{ gpio\+\_\+write} (int gpio, int val)
+\item 
+int \textbf{ gpio\+\_\+select} (int gpio)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\label{gpiolib_8c_aa6bde9300b77eb5ae76db204b6d111cf}} 
+\index{gpiolib.c@{gpiolib.c}!gpio\_direction@{gpio\_direction}}
+\index{gpio\_direction@{gpio\_direction}!gpiolib.c@{gpiolib.c}}
+\doxysubsubsection{gpio\_direction()}
+{\footnotesize\ttfamily int gpio\+\_\+direction (\begin{DoxyParamCaption}\item[{int}]{gpio,  }\item[{int}]{dir }\end{DoxyParamCaption})}
+
+
+
+Definition at line 14 of file gpiolib.\+c.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{15 \{}
+\DoxyCodeLine{16         \textcolor{keywordtype}{int} ret = 0;}
+\DoxyCodeLine{17         \textcolor{keywordtype}{char} buf[50];}
+\DoxyCodeLine{18         sprintf(buf, \textcolor{stringliteral}{"{}/sys/class/gpio/gpio\%d/direction"{}}, gpio);}
+\DoxyCodeLine{19         \textcolor{keywordtype}{int} gpiofd = open(buf, O\_WRONLY);}
+\DoxyCodeLine{20         \textcolor{keywordflow}{if} (gpiofd < 0)}
+\DoxyCodeLine{21         \{}
+\DoxyCodeLine{22                 perror(\textcolor{stringliteral}{"{}Couldn't open IRQ file"{}});}
+\DoxyCodeLine{23                 ret = -\/1;}
+\DoxyCodeLine{24         \}}
+\DoxyCodeLine{25 }
+\DoxyCodeLine{26         \textcolor{keywordflow}{if} (dir == 2 \&\& gpiofd)}
+\DoxyCodeLine{27         \{}
+\DoxyCodeLine{28                 \textcolor{keywordflow}{if} (3 != write(gpiofd, \textcolor{stringliteral}{"{}high"{}}, 3))}
+\DoxyCodeLine{29                 \{}
+\DoxyCodeLine{30                         perror(\textcolor{stringliteral}{"{}Couldn't set GPIO direction to out"{}});}
+\DoxyCodeLine{31                         ret = -\/2;}
+\DoxyCodeLine{32                 \}}
+\DoxyCodeLine{33         \}}
+\DoxyCodeLine{34 }
+\DoxyCodeLine{35         \textcolor{keywordflow}{if} (dir == 1 \&\& gpiofd)}
+\DoxyCodeLine{36         \{}
+\DoxyCodeLine{37                 \textcolor{keywordflow}{if} (3 != write(gpiofd, \textcolor{stringliteral}{"{}out"{}}, 3))}
+\DoxyCodeLine{38                 \{}
+\DoxyCodeLine{39                         perror(\textcolor{stringliteral}{"{}Couldn't set GPIO direction to out"{}});}
+\DoxyCodeLine{40                         ret = -\/3;}
+\DoxyCodeLine{41                 \}}
+\DoxyCodeLine{42         \}}
+\DoxyCodeLine{43         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (gpiofd)}
+\DoxyCodeLine{44         \{}
+\DoxyCodeLine{45                 \textcolor{keywordflow}{if} (2 != write(gpiofd, \textcolor{stringliteral}{"{}in"{}}, 2))}
+\DoxyCodeLine{46                 \{}
+\DoxyCodeLine{47                         perror(\textcolor{stringliteral}{"{}Couldn't set GPIO directio to in"{}});}
+\DoxyCodeLine{48                         ret = -\/4;}
+\DoxyCodeLine{49                 \}}
+\DoxyCodeLine{50         \}}
+\DoxyCodeLine{51 }
+\DoxyCodeLine{52         close(gpiofd);}
+\DoxyCodeLine{53         \textcolor{keywordflow}{return} ret;}
+\DoxyCodeLine{54 \}}
+
+\end{DoxyCode}
+\mbox{\label{gpiolib_8c_a8e1809d736572520045bc3e19ea7c18b}} 
+\index{gpiolib.c@{gpiolib.c}!gpio\_export@{gpio\_export}}
+\index{gpio\_export@{gpio\_export}!gpiolib.c@{gpiolib.c}}
+\doxysubsubsection{gpio\_export()}
+{\footnotesize\ttfamily int gpio\+\_\+export (\begin{DoxyParamCaption}\item[{int}]{gpio }\end{DoxyParamCaption})}
+
+
+
+Definition at line 101 of file gpiolib.\+c.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{102 \{}
+\DoxyCodeLine{103         \textcolor{keywordtype}{int} efd;}
+\DoxyCodeLine{104         \textcolor{keywordtype}{char} buf[50];}
+\DoxyCodeLine{105         \textcolor{keywordtype}{int} gpiofd, ret;}
+\DoxyCodeLine{106 }
+\DoxyCodeLine{107         \textcolor{comment}{/* Quick test if it has already been exported */}}
+\DoxyCodeLine{108         sprintf(buf, \textcolor{stringliteral}{"{}/sys/class/gpio/gpio\%d/value"{}}, gpio);}
+\DoxyCodeLine{109         efd = open(buf, O\_WRONLY);}
+\DoxyCodeLine{110         \textcolor{keywordflow}{if} (efd != -\/1)}
+\DoxyCodeLine{111         \{}
+\DoxyCodeLine{112                 close(efd);}
+\DoxyCodeLine{113                 \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{114         \}}
+\DoxyCodeLine{115 }
+\DoxyCodeLine{116         efd = open(\textcolor{stringliteral}{"{}/sys/class/gpio/export"{}}, O\_WRONLY);}
+\DoxyCodeLine{117 }
+\DoxyCodeLine{118         \textcolor{keywordflow}{if} (efd != -\/1)}
+\DoxyCodeLine{119         \{}
+\DoxyCodeLine{120                 sprintf(buf, \textcolor{stringliteral}{"{}\%d"{}}, gpio);}
+\DoxyCodeLine{121                 ret = write(efd, buf, strlen(buf));}
+\DoxyCodeLine{122                 \textcolor{keywordflow}{if} (ret < 0)}
+\DoxyCodeLine{123                 \{}
+\DoxyCodeLine{124                         perror(\textcolor{stringliteral}{"{}Export failed"{}});}
+\DoxyCodeLine{125                         \textcolor{keywordflow}{return} -\/2;}
+\DoxyCodeLine{126                 \}}
+\DoxyCodeLine{127                 close(efd);}
+\DoxyCodeLine{128         \}}
+\DoxyCodeLine{129         \textcolor{keywordflow}{else}}
+\DoxyCodeLine{130         \{}
+\DoxyCodeLine{131                 \textcolor{comment}{// If we can't open the export file, we probably}}
+\DoxyCodeLine{132                 \textcolor{comment}{// dont have any gpio permissions}}
+\DoxyCodeLine{133                 \textcolor{keywordflow}{return} -\/1;}
+\DoxyCodeLine{134         \}}
+\DoxyCodeLine{135         \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{136 \}}
+
+\end{DoxyCode}
+\mbox{\label{gpiolib_8c_a9c4f2678767f1f308fd68f19585c0a91}} 
+\index{gpiolib.c@{gpiolib.c}!gpio\_getfd@{gpio\_getfd}}
+\index{gpio\_getfd@{gpio\_getfd}!gpiolib.c@{gpiolib.c}}
+\doxysubsubsection{gpio\_getfd()}
+{\footnotesize\ttfamily int gpio\+\_\+getfd (\begin{DoxyParamCaption}\item[{int}]{gpio }\end{DoxyParamCaption})}
+
+
+
+Definition at line 153 of file gpiolib.\+c.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{154 \{}
+\DoxyCodeLine{155         \textcolor{keywordtype}{char} in[3] = \{0, 0, 0\};}
+\DoxyCodeLine{156         \textcolor{keywordtype}{char} buf[50];}
+\DoxyCodeLine{157         \textcolor{keywordtype}{int} gpiofd;}
+\DoxyCodeLine{158         sprintf(buf, \textcolor{stringliteral}{"{}/sys/class/gpio/gpio\%d/value"{}}, gpio);}
+\DoxyCodeLine{159         gpiofd = open(buf, O\_RDWR);}
+\DoxyCodeLine{160         \textcolor{keywordflow}{if} (gpiofd < 0)}
+\DoxyCodeLine{161         \{}
+\DoxyCodeLine{162                 fprintf(stderr, \textcolor{stringliteral}{"{}Failed to open gpio \%d value\(\backslash\)n"{}}, gpio);}
+\DoxyCodeLine{163                 perror(\textcolor{stringliteral}{"{}gpio failed"{}});}
+\DoxyCodeLine{164         \}}
+\DoxyCodeLine{165 }
+\DoxyCodeLine{166         \textcolor{keywordflow}{return} gpiofd;}
+\DoxyCodeLine{167 \}}
+
+\end{DoxyCode}
+\mbox{\label{gpiolib_8c_aa7eeb652c0bf43575e6edcef40eb20bb}} 
+\index{gpiolib.c@{gpiolib.c}!gpio\_read@{gpio\_read}}
+\index{gpio\_read@{gpio\_read}!gpiolib.c@{gpiolib.c}}
+\doxysubsubsection{gpio\_read()}
+{\footnotesize\ttfamily int gpio\+\_\+read (\begin{DoxyParamCaption}\item[{int}]{gpio }\end{DoxyParamCaption})}
+
+
+
+Definition at line 169 of file gpiolib.\+c.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{170 \{}
+\DoxyCodeLine{171         \textcolor{keywordtype}{char} in[3] = \{0, 0, 0\};}
+\DoxyCodeLine{172         \textcolor{keywordtype}{char} buf[50];}
+\DoxyCodeLine{173         \textcolor{keywordtype}{int} nread, gpiofd;}
+\DoxyCodeLine{174         sprintf(buf, \textcolor{stringliteral}{"{}/sys/class/gpio/gpio\%d/value"{}}, gpio);}
+\DoxyCodeLine{175         gpiofd = open(buf, O\_RDWR);}
+\DoxyCodeLine{176         \textcolor{keywordflow}{if} (gpiofd < 0)}
+\DoxyCodeLine{177         \{}
+\DoxyCodeLine{178                 fprintf(stderr, \textcolor{stringliteral}{"{}Failed to open gpio \%d value\(\backslash\)n"{}}, gpio);}
+\DoxyCodeLine{179                 perror(\textcolor{stringliteral}{"{}gpio failed"{}});}
+\DoxyCodeLine{180         \}}
+\DoxyCodeLine{181 }
+\DoxyCodeLine{182         \textcolor{keywordflow}{do}}
+\DoxyCodeLine{183         \{}
+\DoxyCodeLine{184                 nread = read(gpiofd, in, 1);}
+\DoxyCodeLine{185         \} \textcolor{keywordflow}{while} (nread == 0);}
+\DoxyCodeLine{186         \textcolor{keywordflow}{if} (nread == -\/1)}
+\DoxyCodeLine{187         \{}
+\DoxyCodeLine{188                 perror(\textcolor{stringliteral}{"{}GPIO Read failed"{}});}
+\DoxyCodeLine{189                 \textcolor{keywordflow}{return} -\/1;}
+\DoxyCodeLine{190         \}}
+\DoxyCodeLine{191 }
+\DoxyCodeLine{192         close(gpiofd);}
+\DoxyCodeLine{193         \textcolor{keywordflow}{return} atoi(in);}
+\DoxyCodeLine{194 \}}
+
+\end{DoxyCode}
+\mbox{\label{gpiolib_8c_a63ec3697e358bd0f6af1fd6d85724585}} 
+\index{gpiolib.c@{gpiolib.c}!gpio\_select@{gpio\_select}}
+\index{gpio\_select@{gpio\_select}!gpiolib.c@{gpiolib.c}}
+\doxysubsubsection{gpio\_select()}
+{\footnotesize\ttfamily int gpio\+\_\+select (\begin{DoxyParamCaption}\item[{int}]{gpio }\end{DoxyParamCaption})}
+
+
+
+Definition at line 219 of file gpiolib.\+c.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{220 \{}
+\DoxyCodeLine{221         \textcolor{keywordtype}{char} gpio\_irq[64];}
+\DoxyCodeLine{222         \textcolor{keywordtype}{int} ret = 0, buf, irqfd;}
+\DoxyCodeLine{223         fd\_set fds;}
+\DoxyCodeLine{224         FD\_ZERO(\&fds);}
+\DoxyCodeLine{225 }
+\DoxyCodeLine{226         snprintf(gpio\_irq, \textcolor{keyword}{sizeof}(gpio\_irq), \textcolor{stringliteral}{"{}/sys/class/gpio/gpio\%d/value"{}}, gpio);}
+\DoxyCodeLine{227         \textcolor{comment}{// irqfd = open(gpio\_irq, O\_RDONLY, S\_IREAD);}}
+\DoxyCodeLine{228         irqfd = open(gpio\_irq, O\_RDONLY, S\_IRUSR);}
+\DoxyCodeLine{229         \textcolor{keywordflow}{if} (irqfd < 1)}
+\DoxyCodeLine{230         \{}
+\DoxyCodeLine{231                 perror(\textcolor{stringliteral}{"{}Couldn't open the value file"{}});}
+\DoxyCodeLine{232                 \textcolor{keywordflow}{return} -\/1;}
+\DoxyCodeLine{233         \}}
+\DoxyCodeLine{234 }
+\DoxyCodeLine{235         \textcolor{comment}{// Read first since there is always an initial status}}
+\DoxyCodeLine{236         ret = read(irqfd, \&buf, \textcolor{keyword}{sizeof}(buf));}
+\DoxyCodeLine{237         \textcolor{keywordflow}{if} (ret < 0)}
+\DoxyCodeLine{238         \{}
+\DoxyCodeLine{239                 perror(\textcolor{stringliteral}{"{}failed to read"{}});}
+\DoxyCodeLine{240                 \textcolor{keywordflow}{return} -\/1;}
+\DoxyCodeLine{241         \}}
+\DoxyCodeLine{242         \textcolor{keywordflow}{while} (1)}
+\DoxyCodeLine{243         \{}
+\DoxyCodeLine{244                 FD\_SET(irqfd, \&fds);}
+\DoxyCodeLine{245                 ret = select(irqfd + 1, NULL, NULL, \&fds, NULL);}
+\DoxyCodeLine{246                 \textcolor{keywordflow}{if} (FD\_ISSET(irqfd, \&fds))}
+\DoxyCodeLine{247                 \{}
+\DoxyCodeLine{248                         FD\_CLR(irqfd, \&fds); \textcolor{comment}{// Remove the filedes from set}}
+\DoxyCodeLine{249                         \textcolor{comment}{// Clear the junk data in the IRQ file}}
+\DoxyCodeLine{250                         ret = read(irqfd, \&buf, \textcolor{keyword}{sizeof}(buf));}
+\DoxyCodeLine{251                         \textcolor{keywordflow}{return} 1;}
+\DoxyCodeLine{252                 \}}
+\DoxyCodeLine{253         \}}
+\DoxyCodeLine{254 \}}
+
+\end{DoxyCode}
+\mbox{\label{gpiolib_8c_a405a262f0c20dbcaaecd57a0937ced39}} 
+\index{gpiolib.c@{gpiolib.c}!gpio\_setedge@{gpio\_setedge}}
+\index{gpio\_setedge@{gpio\_setedge}!gpiolib.c@{gpiolib.c}}
+\doxysubsubsection{gpio\_setedge()}
+{\footnotesize\ttfamily int gpio\+\_\+setedge (\begin{DoxyParamCaption}\item[{int}]{gpio,  }\item[{int}]{rising,  }\item[{int}]{falling }\end{DoxyParamCaption})}
+
+
+
+Definition at line 56 of file gpiolib.\+c.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{57 \{}
+\DoxyCodeLine{58         \textcolor{keywordtype}{int} ret = 0;}
+\DoxyCodeLine{59         \textcolor{keywordtype}{char} buf[50];}
+\DoxyCodeLine{60         sprintf(buf, \textcolor{stringliteral}{"{}/sys/class/gpio/gpio\%d/edge"{}}, gpio);}
+\DoxyCodeLine{61         \textcolor{keywordtype}{int} gpiofd = open(buf, O\_WRONLY);}
+\DoxyCodeLine{62         \textcolor{keywordflow}{if} (gpiofd < 0)}
+\DoxyCodeLine{63         \{}
+\DoxyCodeLine{64                 perror(\textcolor{stringliteral}{"{}Couldn't open IRQ file"{}});}
+\DoxyCodeLine{65                 ret = -\/1;}
+\DoxyCodeLine{66         \}}
+\DoxyCodeLine{67 }
+\DoxyCodeLine{68         \textcolor{keywordflow}{if} (gpiofd \&\& rising \&\& falling)}
+\DoxyCodeLine{69         \{}
+\DoxyCodeLine{70                 \textcolor{keywordflow}{if} (4 != write(gpiofd, \textcolor{stringliteral}{"{}both"{}}, 4))}
+\DoxyCodeLine{71                 \{}
+\DoxyCodeLine{72                         perror(\textcolor{stringliteral}{"{}Failed to set IRQ to both falling \& rising"{}});}
+\DoxyCodeLine{73                         ret = -\/2;}
+\DoxyCodeLine{74                 \}}
+\DoxyCodeLine{75         \}}
+\DoxyCodeLine{76         \textcolor{keywordflow}{else}}
+\DoxyCodeLine{77         \{}
+\DoxyCodeLine{78                 \textcolor{keywordflow}{if} (rising \&\& gpiofd)}
+\DoxyCodeLine{79                 \{}
+\DoxyCodeLine{80                         \textcolor{keywordflow}{if} (6 != write(gpiofd, \textcolor{stringliteral}{"{}rising"{}}, 6))}
+\DoxyCodeLine{81                         \{}
+\DoxyCodeLine{82                                 perror(\textcolor{stringliteral}{"{}Failed to set IRQ to rising"{}});}
+\DoxyCodeLine{83                                 ret = -\/2;}
+\DoxyCodeLine{84                         \}}
+\DoxyCodeLine{85                 \}}
+\DoxyCodeLine{86                 \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (falling \&\& gpiofd)}
+\DoxyCodeLine{87                 \{}
+\DoxyCodeLine{88                         \textcolor{keywordflow}{if} (7 != write(gpiofd, \textcolor{stringliteral}{"{}falling"{}}, 7))}
+\DoxyCodeLine{89                         \{}
+\DoxyCodeLine{90                                 perror(\textcolor{stringliteral}{"{}Failed to set IRQ to falling"{}});}
+\DoxyCodeLine{91                                 ret = -\/3;}
+\DoxyCodeLine{92                         \}}
+\DoxyCodeLine{93                 \}}
+\DoxyCodeLine{94         \}}
+\DoxyCodeLine{95 }
+\DoxyCodeLine{96         close(gpiofd);}
+\DoxyCodeLine{97 }
+\DoxyCodeLine{98         \textcolor{keywordflow}{return} ret;}
+\DoxyCodeLine{99 \}}
+
+\end{DoxyCode}
+\mbox{\label{gpiolib_8c_a60c98b4c62bc8ea7ae8d4f48b99d2414}} 
+\index{gpiolib.c@{gpiolib.c}!gpio\_unexport@{gpio\_unexport}}
+\index{gpio\_unexport@{gpio\_unexport}!gpiolib.c@{gpiolib.c}}
+\doxysubsubsection{gpio\_unexport()}
+{\footnotesize\ttfamily void gpio\+\_\+unexport (\begin{DoxyParamCaption}\item[{int}]{gpio }\end{DoxyParamCaption})}
+
+
+
+Definition at line 138 of file gpiolib.\+c.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{139 \{}
+\DoxyCodeLine{140         \textcolor{keywordtype}{int} gpiofd;}
+\DoxyCodeLine{141         \textcolor{keywordtype}{int} ret = 0;}
+\DoxyCodeLine{142         \textcolor{keywordtype}{char} buf[50];}
+\DoxyCodeLine{143         gpiofd = open(\textcolor{stringliteral}{"{}/sys/class/gpio/unexport"{}}, O\_WRONLY);}
+\DoxyCodeLine{144         sprintf(buf, \textcolor{stringliteral}{"{}\%d"{}}, gpio);}
+\DoxyCodeLine{145         ret = write(gpiofd, buf, strlen(buf));}
+\DoxyCodeLine{146         \textcolor{keywordflow}{if} (ret < 0)}
+\DoxyCodeLine{147         \{}
+\DoxyCodeLine{148                 perror(\textcolor{stringliteral}{"{}failed to read"{}});}
+\DoxyCodeLine{149         \}}
+\DoxyCodeLine{150         close(gpiofd);}
+\DoxyCodeLine{151 \}}
+
+\end{DoxyCode}
+\mbox{\label{gpiolib_8c_a30aae30f0ccd928e5172a6c03167279b}} 
+\index{gpiolib.c@{gpiolib.c}!gpio\_write@{gpio\_write}}
+\index{gpio\_write@{gpio\_write}!gpiolib.c@{gpiolib.c}}
+\doxysubsubsection{gpio\_write()}
+{\footnotesize\ttfamily int gpio\+\_\+write (\begin{DoxyParamCaption}\item[{int}]{gpio,  }\item[{int}]{val }\end{DoxyParamCaption})}
+
+
+
+Definition at line 196 of file gpiolib.\+c.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{197 \{}
+\DoxyCodeLine{198         \textcolor{keywordtype}{char} buf[50];}
+\DoxyCodeLine{199         \textcolor{keywordtype}{int} nread, ret, gpiofd;}
+\DoxyCodeLine{200         sprintf(buf, \textcolor{stringliteral}{"{}/sys/class/gpio/gpio\%d/value"{}}, gpio);}
+\DoxyCodeLine{201         gpiofd = open(buf, O\_RDWR);}
+\DoxyCodeLine{202         \textcolor{keywordflow}{if} (gpiofd > 0)}
+\DoxyCodeLine{203         \{}
+\DoxyCodeLine{204                 snprintf(buf, 2, \textcolor{stringliteral}{"{}\%d"{}}, val);}
+\DoxyCodeLine{205                 ret = write(gpiofd, buf, 2);}
+\DoxyCodeLine{206                 \textcolor{keywordflow}{if} (ret < 0)}
+\DoxyCodeLine{207                 \{}
+\DoxyCodeLine{208                         perror(\textcolor{stringliteral}{"{}failed to set gpio"{}});}
+\DoxyCodeLine{209                         \textcolor{keywordflow}{return} 1;}
+\DoxyCodeLine{210                 \}}
+\DoxyCodeLine{211 }
+\DoxyCodeLine{212                 close(gpiofd);}
+\DoxyCodeLine{213                 \textcolor{keywordflow}{if} (ret == 2)}
+\DoxyCodeLine{214                         \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{215         \}}
+\DoxyCodeLine{216         \textcolor{keywordflow}{return} 1;}
+\DoxyCodeLine{217 \}}
+
+\end{DoxyCode}

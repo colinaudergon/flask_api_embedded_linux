@@ -6,17 +6,23 @@
 # echo "Current directory: $current_dir"
 
 pathToPythonScript="app.py"
-pathToInputReading="inputReading.c"
+pathToInputReading="inputReading/src/gpioCtrl.c"
 pathToFrameBufferHandler="frameBufferHandler.c"
 
 # Compile C program
-gcc $pathToInputReading -o inputReading
-if [ $? -ne 0 ]; then
-    echo "Error: Compilation of C program failed."
-    exit 1
-else
-    echo "C program compiled successfully."
-fi
+mkdir build
+cd build
+cmake .. -DCMAKE_TOOLCHAIN_FILE=../arm-none-linux-aarch64-gcc.cmake
+make
+mv inputReading ../..
+
+# gcc $pathToInputReading -o inputReading
+# if [ $? -ne 0 ]; then
+#     echo "Error: Compilation of C program failed."
+#     exit 1
+# else
+#     echo "C program compiled successfully."
+# fi
 
 # Compile C frameBufferHandler programm
 gcc $pathToFrameBufferHandler -o frameBufferHandler

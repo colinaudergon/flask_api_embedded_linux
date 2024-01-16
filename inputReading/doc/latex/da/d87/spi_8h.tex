@@ -1,0 +1,322 @@
+\doxysection{src/spi.h File Reference}
+\label{spi_8h}\index{src/spi.h@{src/spi.h}}
+{\ttfamily \#include $<$stddef.\+h$>$}\newline
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef enum \textbf{ spi\+\_\+bit\+\_\+order} \textbf{ spi\+\_\+bit\+\_\+order\+\_\+t}
+\item 
+typedef struct spi\+\_\+handle \textbf{ spi\+\_\+t}
+\end{DoxyCompactItemize}
+\doxysubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \textbf{ spi\+\_\+error\+\_\+code} \{ \newline
+\textbf{ SPI\+\_\+\+ERROR\+\_\+\+ARG} = -\/1
+, \textbf{ SPI\+\_\+\+ERROR\+\_\+\+OPEN} = -\/2
+, \textbf{ SPI\+\_\+\+ERROR\+\_\+\+QUERY} = -\/3
+, \textbf{ SPI\+\_\+\+ERROR\+\_\+\+CONFIGURE} = -\/4
+, \newline
+\textbf{ SPI\+\_\+\+ERROR\+\_\+\+TRANSFER} = -\/5
+, \textbf{ SPI\+\_\+\+ERROR\+\_\+\+CLOSE} = -\/6
+, \textbf{ SPI\+\_\+\+ERROR\+\_\+\+UNSUPPORTED} = -\/7
+ \}
+\item 
+enum \textbf{ spi\+\_\+bit\+\_\+order} \{ \textbf{ MSB\+\_\+\+FIRST}
+, \textbf{ LSB\+\_\+\+FIRST}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\textbf{ spi\+\_\+t} $\ast$ \textbf{ spi\+\_\+new} (void)
+\item 
+int \textbf{ spi\+\_\+open} (\textbf{ spi\+\_\+t} $\ast$\textbf{ spi}, const char $\ast$path, unsigned int mode, uint32\+\_\+t max\+\_\+speed)
+\item 
+int \textbf{ spi\+\_\+open\+\_\+advanced} (\textbf{ spi\+\_\+t} $\ast$\textbf{ spi}, const char $\ast$path, unsigned int mode, uint32\+\_\+t max\+\_\+speed, \textbf{ spi\+\_\+bit\+\_\+order\+\_\+t} bit\+\_\+order, uint8\+\_\+t bits\+\_\+per\+\_\+word, uint8\+\_\+t extra\+\_\+flags)
+\item 
+int \textbf{ spi\+\_\+open\+\_\+advanced2} (\textbf{ spi\+\_\+t} $\ast$\textbf{ spi}, const char $\ast$path, unsigned int mode, uint32\+\_\+t max\+\_\+speed, \textbf{ spi\+\_\+bit\+\_\+order\+\_\+t} bit\+\_\+order, uint8\+\_\+t bits\+\_\+per\+\_\+word, uint32\+\_\+t extra\+\_\+flags)
+\item 
+int \textbf{ spi\+\_\+transfer} (\textbf{ spi\+\_\+t} $\ast$\textbf{ spi}, const uint8\+\_\+t $\ast$txbuf, uint8\+\_\+t $\ast$rxbuf, size\+\_\+t len)
+\item 
+int \textbf{ spi\+\_\+close} (\textbf{ spi\+\_\+t} $\ast$\textbf{ spi})
+\item 
+void \textbf{ spi\+\_\+free} (\textbf{ spi\+\_\+t} $\ast$\textbf{ spi})
+\item 
+int \textbf{ spi\+\_\+get\+\_\+mode} (\textbf{ spi\+\_\+t} $\ast$\textbf{ spi}, unsigned int $\ast$mode)
+\item 
+int \textbf{ spi\+\_\+get\+\_\+max\+\_\+speed} (\textbf{ spi\+\_\+t} $\ast$\textbf{ spi}, uint32\+\_\+t $\ast$max\+\_\+speed)
+\item 
+int \textbf{ spi\+\_\+get\+\_\+bit\+\_\+order} (\textbf{ spi\+\_\+t} $\ast$\textbf{ spi}, \textbf{ spi\+\_\+bit\+\_\+order\+\_\+t} $\ast$bit\+\_\+order)
+\item 
+int \textbf{ spi\+\_\+get\+\_\+bits\+\_\+per\+\_\+word} (\textbf{ spi\+\_\+t} $\ast$\textbf{ spi}, uint8\+\_\+t $\ast$bits\+\_\+per\+\_\+word)
+\item 
+int \textbf{ spi\+\_\+get\+\_\+extra\+\_\+flags} (\textbf{ spi\+\_\+t} $\ast$\textbf{ spi}, uint8\+\_\+t $\ast$extra\+\_\+flags)
+\item 
+int \textbf{ spi\+\_\+get\+\_\+extra\+\_\+flags32} (\textbf{ spi\+\_\+t} $\ast$\textbf{ spi}, uint32\+\_\+t $\ast$extra\+\_\+flags)
+\item 
+int \textbf{ spi\+\_\+set\+\_\+mode} (\textbf{ spi\+\_\+t} $\ast$\textbf{ spi}, unsigned int mode)
+\item 
+int \textbf{ spi\+\_\+set\+\_\+max\+\_\+speed} (\textbf{ spi\+\_\+t} $\ast$\textbf{ spi}, uint32\+\_\+t max\+\_\+speed)
+\item 
+int \textbf{ spi\+\_\+set\+\_\+bit\+\_\+order} (\textbf{ spi\+\_\+t} $\ast$\textbf{ spi}, \textbf{ spi\+\_\+bit\+\_\+order\+\_\+t} bit\+\_\+order)
+\item 
+int \textbf{ spi\+\_\+set\+\_\+bits\+\_\+per\+\_\+word} (\textbf{ spi\+\_\+t} $\ast$\textbf{ spi}, uint8\+\_\+t bits\+\_\+per\+\_\+word)
+\item 
+int \textbf{ spi\+\_\+set\+\_\+extra\+\_\+flags} (\textbf{ spi\+\_\+t} $\ast$\textbf{ spi}, uint8\+\_\+t extra\+\_\+flags)
+\item 
+int \textbf{ spi\+\_\+set\+\_\+extra\+\_\+flags32} (\textbf{ spi\+\_\+t} $\ast$\textbf{ spi}, uint32\+\_\+t extra\+\_\+flags)
+\item 
+int \textbf{ spi\+\_\+fd} (\textbf{ spi\+\_\+t} $\ast$\textbf{ spi})
+\item 
+int \textbf{ spi\+\_\+tostring} (\textbf{ spi\+\_\+t} $\ast$\textbf{ spi}, char $\ast$str, size\+\_\+t len)
+\item 
+int \textbf{ spi\+\_\+errno} (\textbf{ spi\+\_\+t} $\ast$\textbf{ spi})
+\item 
+const char $\ast$ \textbf{ spi\+\_\+errmsg} (\textbf{ spi\+\_\+t} $\ast$\textbf{ spi})
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Typedef Documentation}
+\mbox{\label{spi_8h_a0de90b276d4908d157783fb29197245e}} 
+\index{spi.h@{spi.h}!spi\_bit\_order\_t@{spi\_bit\_order\_t}}
+\index{spi\_bit\_order\_t@{spi\_bit\_order\_t}!spi.h@{spi.h}}
+\doxysubsubsection{spi\_bit\_order\_t}
+{\footnotesize\ttfamily typedef enum \textbf{ spi\+\_\+bit\+\_\+order} \textbf{ spi\+\_\+bit\+\_\+order\+\_\+t}}
+
+\mbox{\label{spi_8h_aec4073e531e9e91d66b8017341346afd}} 
+\index{spi.h@{spi.h}!spi\_t@{spi\_t}}
+\index{spi\_t@{spi\_t}!spi.h@{spi.h}}
+\doxysubsubsection{spi\_t}
+{\footnotesize\ttfamily typedef struct spi\+\_\+handle \textbf{ spi\+\_\+t}}
+
+
+
+Definition at line 1 of file spi.\+h.
+
+
+
+\doxysubsection{Enumeration Type Documentation}
+\mbox{\label{spi_8h_ab2539b9f5c33d6af92133489c31526a0}} 
+\index{spi.h@{spi.h}!spi\_bit\_order@{spi\_bit\_order}}
+\index{spi\_bit\_order@{spi\_bit\_order}!spi.h@{spi.h}}
+\doxysubsubsection{spi\_bit\_order}
+{\footnotesize\ttfamily enum \textbf{ spi\+\_\+bit\+\_\+order}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{MSB\_FIRST@{MSB\_FIRST}!spi.h@{spi.h}}\index{spi.h@{spi.h}!MSB\_FIRST@{MSB\_FIRST}}}\mbox{\label{spi_8h_ab2539b9f5c33d6af92133489c31526a0a89da3ebae748913c4ea84ed340c20aec}} 
+MSB\+\_\+\+FIRST&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{LSB\_FIRST@{LSB\_FIRST}!spi.h@{spi.h}}\index{spi.h@{spi.h}!LSB\_FIRST@{LSB\_FIRST}}}\mbox{\label{spi_8h_ab2539b9f5c33d6af92133489c31526a0aa7a58f44a10c5b3ff637d315043f1767}} 
+LSB\+\_\+\+FIRST&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line 27 of file spi.\+h.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{27                            \{}
+\DoxyCodeLine{28     MSB\_FIRST,}
+\DoxyCodeLine{29     LSB\_FIRST,}
+\DoxyCodeLine{30 \} spi\_bit\_order\_t;}
+
+\end{DoxyCode}
+\mbox{\label{spi_8h_a93dc7350c89a8d4ed77f3aa93a9433b3}} 
+\index{spi.h@{spi.h}!spi\_error\_code@{spi\_error\_code}}
+\index{spi\_error\_code@{spi\_error\_code}!spi.h@{spi.h}}
+\doxysubsubsection{spi\_error\_code}
+{\footnotesize\ttfamily enum \textbf{ spi\+\_\+error\+\_\+code}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{SPI\_ERROR\_ARG@{SPI\_ERROR\_ARG}!spi.h@{spi.h}}\index{spi.h@{spi.h}!SPI\_ERROR\_ARG@{SPI\_ERROR\_ARG}}}\mbox{\label{spi_8h_a93dc7350c89a8d4ed77f3aa93a9433b3ad66648691246e5bad748bf5ffd2867af}} 
+SPI\+\_\+\+ERROR\+\_\+\+ARG&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{SPI\_ERROR\_OPEN@{SPI\_ERROR\_OPEN}!spi.h@{spi.h}}\index{spi.h@{spi.h}!SPI\_ERROR\_OPEN@{SPI\_ERROR\_OPEN}}}\mbox{\label{spi_8h_a93dc7350c89a8d4ed77f3aa93a9433b3ae704766cc02f878df3bd1bf66561f09e}} 
+SPI\+\_\+\+ERROR\+\_\+\+OPEN&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{SPI\_ERROR\_QUERY@{SPI\_ERROR\_QUERY}!spi.h@{spi.h}}\index{spi.h@{spi.h}!SPI\_ERROR\_QUERY@{SPI\_ERROR\_QUERY}}}\mbox{\label{spi_8h_a93dc7350c89a8d4ed77f3aa93a9433b3a0bc6b0919e822c5831fe184a09e6d18c}} 
+SPI\+\_\+\+ERROR\+\_\+\+QUERY&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{SPI\_ERROR\_CONFIGURE@{SPI\_ERROR\_CONFIGURE}!spi.h@{spi.h}}\index{spi.h@{spi.h}!SPI\_ERROR\_CONFIGURE@{SPI\_ERROR\_CONFIGURE}}}\mbox{\label{spi_8h_a93dc7350c89a8d4ed77f3aa93a9433b3ada7afc431b58c90a863abccb74ab9381}} 
+SPI\+\_\+\+ERROR\+\_\+\+CONFIGURE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{SPI\_ERROR\_TRANSFER@{SPI\_ERROR\_TRANSFER}!spi.h@{spi.h}}\index{spi.h@{spi.h}!SPI\_ERROR\_TRANSFER@{SPI\_ERROR\_TRANSFER}}}\mbox{\label{spi_8h_a93dc7350c89a8d4ed77f3aa93a9433b3af7eb08d0bccf57169da449f866a6c961}} 
+SPI\+\_\+\+ERROR\+\_\+\+TRANSFER&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{SPI\_ERROR\_CLOSE@{SPI\_ERROR\_CLOSE}!spi.h@{spi.h}}\index{spi.h@{spi.h}!SPI\_ERROR\_CLOSE@{SPI\_ERROR\_CLOSE}}}\mbox{\label{spi_8h_a93dc7350c89a8d4ed77f3aa93a9433b3a7ab9b569b09479bbc709ce65765b79c7}} 
+SPI\+\_\+\+ERROR\+\_\+\+CLOSE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{SPI\_ERROR\_UNSUPPORTED@{SPI\_ERROR\_UNSUPPORTED}!spi.h@{spi.h}}\index{spi.h@{spi.h}!SPI\_ERROR\_UNSUPPORTED@{SPI\_ERROR\_UNSUPPORTED}}}\mbox{\label{spi_8h_a93dc7350c89a8d4ed77f3aa93a9433b3a895253f1da38101a67db6bccd12d3de1}} 
+SPI\+\_\+\+ERROR\+\_\+\+UNSUPPORTED&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line 17 of file spi.\+h.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{17                     \{}
+\DoxyCodeLine{18     SPI\_ERROR\_ARG           = -\/1, \textcolor{comment}{/* Invalid arguments */}}
+\DoxyCodeLine{19     SPI\_ERROR\_OPEN          = -\/2, \textcolor{comment}{/* Opening SPI device */}}
+\DoxyCodeLine{20     SPI\_ERROR\_QUERY         = -\/3, \textcolor{comment}{/* Querying SPI device attributes */}}
+\DoxyCodeLine{21     SPI\_ERROR\_CONFIGURE     = -\/4, \textcolor{comment}{/* Configuring SPI device attributes */}}
+\DoxyCodeLine{22     SPI\_ERROR\_TRANSFER      = -\/5, \textcolor{comment}{/* SPI transfer */}}
+\DoxyCodeLine{23     SPI\_ERROR\_CLOSE         = -\/6, \textcolor{comment}{/* Closing SPI device */}}
+\DoxyCodeLine{24     SPI\_ERROR\_UNSUPPORTED   = -\/7, \textcolor{comment}{/* Unsupported attribute or operation */}}
+\DoxyCodeLine{25 \};}
+
+\end{DoxyCode}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\label{spi_8h_a7bab43470845d4ef41e1f6c6a65deb41}} 
+\index{spi.h@{spi.h}!spi\_close@{spi\_close}}
+\index{spi\_close@{spi\_close}!spi.h@{spi.h}}
+\doxysubsubsection{spi\_close()}
+{\footnotesize\ttfamily int spi\+\_\+close (\begin{DoxyParamCaption}\item[{\textbf{ spi\+\_\+t} $\ast$}]{spi }\end{DoxyParamCaption})}
+
+\mbox{\label{spi_8h_aabf74c8e4591f0aec14d8cda708fb39c}} 
+\index{spi.h@{spi.h}!spi\_errmsg@{spi\_errmsg}}
+\index{spi\_errmsg@{spi\_errmsg}!spi.h@{spi.h}}
+\doxysubsubsection{spi\_errmsg()}
+{\footnotesize\ttfamily const char$\ast$ spi\+\_\+errmsg (\begin{DoxyParamCaption}\item[{\textbf{ spi\+\_\+t} $\ast$}]{spi }\end{DoxyParamCaption})}
+
+\mbox{\label{spi_8h_a49d34131e5c3ee710f490f82e9ec01ad}} 
+\index{spi.h@{spi.h}!spi\_errno@{spi\_errno}}
+\index{spi\_errno@{spi\_errno}!spi.h@{spi.h}}
+\doxysubsubsection{spi\_errno()}
+{\footnotesize\ttfamily int spi\+\_\+errno (\begin{DoxyParamCaption}\item[{\textbf{ spi\+\_\+t} $\ast$}]{spi }\end{DoxyParamCaption})}
+
+\mbox{\label{spi_8h_a14102d66625c7eff204966276436d10e}} 
+\index{spi.h@{spi.h}!spi\_fd@{spi\_fd}}
+\index{spi\_fd@{spi\_fd}!spi.h@{spi.h}}
+\doxysubsubsection{spi\_fd()}
+{\footnotesize\ttfamily int spi\+\_\+fd (\begin{DoxyParamCaption}\item[{\textbf{ spi\+\_\+t} $\ast$}]{spi }\end{DoxyParamCaption})}
+
+\mbox{\label{spi_8h_a782c8f153c1187e3af47597180bfda4e}} 
+\index{spi.h@{spi.h}!spi\_free@{spi\_free}}
+\index{spi\_free@{spi\_free}!spi.h@{spi.h}}
+\doxysubsubsection{spi\_free()}
+{\footnotesize\ttfamily void spi\+\_\+free (\begin{DoxyParamCaption}\item[{\textbf{ spi\+\_\+t} $\ast$}]{spi }\end{DoxyParamCaption})}
+
+\mbox{\label{spi_8h_ae16d1a5e63ab3d28152f7b5e57e56eb7}} 
+\index{spi.h@{spi.h}!spi\_get\_bit\_order@{spi\_get\_bit\_order}}
+\index{spi\_get\_bit\_order@{spi\_get\_bit\_order}!spi.h@{spi.h}}
+\doxysubsubsection{spi\_get\_bit\_order()}
+{\footnotesize\ttfamily int spi\+\_\+get\+\_\+bit\+\_\+order (\begin{DoxyParamCaption}\item[{\textbf{ spi\+\_\+t} $\ast$}]{spi,  }\item[{\textbf{ spi\+\_\+bit\+\_\+order\+\_\+t} $\ast$}]{bit\+\_\+order }\end{DoxyParamCaption})}
+
+\mbox{\label{spi_8h_a8de9dab47b8d0aa12c64ee954cb9c4c4}} 
+\index{spi.h@{spi.h}!spi\_get\_bits\_per\_word@{spi\_get\_bits\_per\_word}}
+\index{spi\_get\_bits\_per\_word@{spi\_get\_bits\_per\_word}!spi.h@{spi.h}}
+\doxysubsubsection{spi\_get\_bits\_per\_word()}
+{\footnotesize\ttfamily int spi\+\_\+get\+\_\+bits\+\_\+per\+\_\+word (\begin{DoxyParamCaption}\item[{\textbf{ spi\+\_\+t} $\ast$}]{spi,  }\item[{uint8\+\_\+t $\ast$}]{bits\+\_\+per\+\_\+word }\end{DoxyParamCaption})}
+
+\mbox{\label{spi_8h_a0c7c8088c0823294a753250997f69696}} 
+\index{spi.h@{spi.h}!spi\_get\_extra\_flags@{spi\_get\_extra\_flags}}
+\index{spi\_get\_extra\_flags@{spi\_get\_extra\_flags}!spi.h@{spi.h}}
+\doxysubsubsection{spi\_get\_extra\_flags()}
+{\footnotesize\ttfamily int spi\+\_\+get\+\_\+extra\+\_\+flags (\begin{DoxyParamCaption}\item[{\textbf{ spi\+\_\+t} $\ast$}]{spi,  }\item[{uint8\+\_\+t $\ast$}]{extra\+\_\+flags }\end{DoxyParamCaption})}
+
+\mbox{\label{spi_8h_ae9fc405219578fa4a10537d83dfe4a5e}} 
+\index{spi.h@{spi.h}!spi\_get\_extra\_flags32@{spi\_get\_extra\_flags32}}
+\index{spi\_get\_extra\_flags32@{spi\_get\_extra\_flags32}!spi.h@{spi.h}}
+\doxysubsubsection{spi\_get\_extra\_flags32()}
+{\footnotesize\ttfamily int spi\+\_\+get\+\_\+extra\+\_\+flags32 (\begin{DoxyParamCaption}\item[{\textbf{ spi\+\_\+t} $\ast$}]{spi,  }\item[{uint32\+\_\+t $\ast$}]{extra\+\_\+flags }\end{DoxyParamCaption})}
+
+\mbox{\label{spi_8h_a008b293e0be1e9be84e2c09fb4d7f26d}} 
+\index{spi.h@{spi.h}!spi\_get\_max\_speed@{spi\_get\_max\_speed}}
+\index{spi\_get\_max\_speed@{spi\_get\_max\_speed}!spi.h@{spi.h}}
+\doxysubsubsection{spi\_get\_max\_speed()}
+{\footnotesize\ttfamily int spi\+\_\+get\+\_\+max\+\_\+speed (\begin{DoxyParamCaption}\item[{\textbf{ spi\+\_\+t} $\ast$}]{spi,  }\item[{uint32\+\_\+t $\ast$}]{max\+\_\+speed }\end{DoxyParamCaption})}
+
+\mbox{\label{spi_8h_ae57b0f39c561878c73c8ec2edcf657db}} 
+\index{spi.h@{spi.h}!spi\_get\_mode@{spi\_get\_mode}}
+\index{spi\_get\_mode@{spi\_get\_mode}!spi.h@{spi.h}}
+\doxysubsubsection{spi\_get\_mode()}
+{\footnotesize\ttfamily int spi\+\_\+get\+\_\+mode (\begin{DoxyParamCaption}\item[{\textbf{ spi\+\_\+t} $\ast$}]{spi,  }\item[{unsigned int $\ast$}]{mode }\end{DoxyParamCaption})}
+
+\mbox{\label{spi_8h_adee3dd4baeadf142cc2a964e03ed9a59}} 
+\index{spi.h@{spi.h}!spi\_new@{spi\_new}}
+\index{spi\_new@{spi\_new}!spi.h@{spi.h}}
+\doxysubsubsection{spi\_new()}
+{\footnotesize\ttfamily \textbf{ spi\+\_\+t}$\ast$ spi\+\_\+new (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+\mbox{\label{spi_8h_a7b8c623b148d2cb7e322aee39402bb01}} 
+\index{spi.h@{spi.h}!spi\_open@{spi\_open}}
+\index{spi\_open@{spi\_open}!spi.h@{spi.h}}
+\doxysubsubsection{spi\_open()}
+{\footnotesize\ttfamily int spi\+\_\+open (\begin{DoxyParamCaption}\item[{\textbf{ spi\+\_\+t} $\ast$}]{spi,  }\item[{const char $\ast$}]{path,  }\item[{unsigned int}]{mode,  }\item[{uint32\+\_\+t}]{max\+\_\+speed }\end{DoxyParamCaption})}
+
+\mbox{\label{spi_8h_a2ec480dce31b386dcb2c9aa53204f7c1}} 
+\index{spi.h@{spi.h}!spi\_open\_advanced@{spi\_open\_advanced}}
+\index{spi\_open\_advanced@{spi\_open\_advanced}!spi.h@{spi.h}}
+\doxysubsubsection{spi\_open\_advanced()}
+{\footnotesize\ttfamily int spi\+\_\+open\+\_\+advanced (\begin{DoxyParamCaption}\item[{\textbf{ spi\+\_\+t} $\ast$}]{spi,  }\item[{const char $\ast$}]{path,  }\item[{unsigned int}]{mode,  }\item[{uint32\+\_\+t}]{max\+\_\+speed,  }\item[{\textbf{ spi\+\_\+bit\+\_\+order\+\_\+t}}]{bit\+\_\+order,  }\item[{uint8\+\_\+t}]{bits\+\_\+per\+\_\+word,  }\item[{uint8\+\_\+t}]{extra\+\_\+flags }\end{DoxyParamCaption})}
+
+\mbox{\label{spi_8h_aa47c0b12f31fbd6394ff07ce77ed4054}} 
+\index{spi.h@{spi.h}!spi\_open\_advanced2@{spi\_open\_advanced2}}
+\index{spi\_open\_advanced2@{spi\_open\_advanced2}!spi.h@{spi.h}}
+\doxysubsubsection{spi\_open\_advanced2()}
+{\footnotesize\ttfamily int spi\+\_\+open\+\_\+advanced2 (\begin{DoxyParamCaption}\item[{\textbf{ spi\+\_\+t} $\ast$}]{spi,  }\item[{const char $\ast$}]{path,  }\item[{unsigned int}]{mode,  }\item[{uint32\+\_\+t}]{max\+\_\+speed,  }\item[{\textbf{ spi\+\_\+bit\+\_\+order\+\_\+t}}]{bit\+\_\+order,  }\item[{uint8\+\_\+t}]{bits\+\_\+per\+\_\+word,  }\item[{uint32\+\_\+t}]{extra\+\_\+flags }\end{DoxyParamCaption})}
+
+\mbox{\label{spi_8h_a8b25165722fa55b2ee09cbdf41b5d6da}} 
+\index{spi.h@{spi.h}!spi\_set\_bit\_order@{spi\_set\_bit\_order}}
+\index{spi\_set\_bit\_order@{spi\_set\_bit\_order}!spi.h@{spi.h}}
+\doxysubsubsection{spi\_set\_bit\_order()}
+{\footnotesize\ttfamily int spi\+\_\+set\+\_\+bit\+\_\+order (\begin{DoxyParamCaption}\item[{\textbf{ spi\+\_\+t} $\ast$}]{spi,  }\item[{\textbf{ spi\+\_\+bit\+\_\+order\+\_\+t}}]{bit\+\_\+order }\end{DoxyParamCaption})}
+
+\mbox{\label{spi_8h_a0ab00389018b89c18879669615a926e9}} 
+\index{spi.h@{spi.h}!spi\_set\_bits\_per\_word@{spi\_set\_bits\_per\_word}}
+\index{spi\_set\_bits\_per\_word@{spi\_set\_bits\_per\_word}!spi.h@{spi.h}}
+\doxysubsubsection{spi\_set\_bits\_per\_word()}
+{\footnotesize\ttfamily int spi\+\_\+set\+\_\+bits\+\_\+per\+\_\+word (\begin{DoxyParamCaption}\item[{\textbf{ spi\+\_\+t} $\ast$}]{spi,  }\item[{uint8\+\_\+t}]{bits\+\_\+per\+\_\+word }\end{DoxyParamCaption})}
+
+\mbox{\label{spi_8h_abdf9f6a146730641a42ee04b4893ca8e}} 
+\index{spi.h@{spi.h}!spi\_set\_extra\_flags@{spi\_set\_extra\_flags}}
+\index{spi\_set\_extra\_flags@{spi\_set\_extra\_flags}!spi.h@{spi.h}}
+\doxysubsubsection{spi\_set\_extra\_flags()}
+{\footnotesize\ttfamily int spi\+\_\+set\+\_\+extra\+\_\+flags (\begin{DoxyParamCaption}\item[{\textbf{ spi\+\_\+t} $\ast$}]{spi,  }\item[{uint8\+\_\+t}]{extra\+\_\+flags }\end{DoxyParamCaption})}
+
+\mbox{\label{spi_8h_a5bb0948658dadff005e90ddf9c1856e3}} 
+\index{spi.h@{spi.h}!spi\_set\_extra\_flags32@{spi\_set\_extra\_flags32}}
+\index{spi\_set\_extra\_flags32@{spi\_set\_extra\_flags32}!spi.h@{spi.h}}
+\doxysubsubsection{spi\_set\_extra\_flags32()}
+{\footnotesize\ttfamily int spi\+\_\+set\+\_\+extra\+\_\+flags32 (\begin{DoxyParamCaption}\item[{\textbf{ spi\+\_\+t} $\ast$}]{spi,  }\item[{uint32\+\_\+t}]{extra\+\_\+flags }\end{DoxyParamCaption})}
+
+\mbox{\label{spi_8h_a6e15d65857f29da2fca55031c2285b65}} 
+\index{spi.h@{spi.h}!spi\_set\_max\_speed@{spi\_set\_max\_speed}}
+\index{spi\_set\_max\_speed@{spi\_set\_max\_speed}!spi.h@{spi.h}}
+\doxysubsubsection{spi\_set\_max\_speed()}
+{\footnotesize\ttfamily int spi\+\_\+set\+\_\+max\+\_\+speed (\begin{DoxyParamCaption}\item[{\textbf{ spi\+\_\+t} $\ast$}]{spi,  }\item[{uint32\+\_\+t}]{max\+\_\+speed }\end{DoxyParamCaption})}
+
+\mbox{\label{spi_8h_a80a621b873eec86352c4a77d35185cbc}} 
+\index{spi.h@{spi.h}!spi\_set\_mode@{spi\_set\_mode}}
+\index{spi\_set\_mode@{spi\_set\_mode}!spi.h@{spi.h}}
+\doxysubsubsection{spi\_set\_mode()}
+{\footnotesize\ttfamily int spi\+\_\+set\+\_\+mode (\begin{DoxyParamCaption}\item[{\textbf{ spi\+\_\+t} $\ast$}]{spi,  }\item[{unsigned int}]{mode }\end{DoxyParamCaption})}
+
+\mbox{\label{spi_8h_a77a415b8b9d29ecb13c632d31b2c013a}} 
+\index{spi.h@{spi.h}!spi\_tostring@{spi\_tostring}}
+\index{spi\_tostring@{spi\_tostring}!spi.h@{spi.h}}
+\doxysubsubsection{spi\_tostring()}
+{\footnotesize\ttfamily int spi\+\_\+tostring (\begin{DoxyParamCaption}\item[{\textbf{ spi\+\_\+t} $\ast$}]{spi,  }\item[{char $\ast$}]{str,  }\item[{size\+\_\+t}]{len }\end{DoxyParamCaption})}
+
+\mbox{\label{spi_8h_ad45509e2bf9fe41786981cf278768a3c}} 
+\index{spi.h@{spi.h}!spi\_transfer@{spi\_transfer}}
+\index{spi\_transfer@{spi\_transfer}!spi.h@{spi.h}}
+\doxysubsubsection{spi\_transfer()}
+{\footnotesize\ttfamily int spi\+\_\+transfer (\begin{DoxyParamCaption}\item[{\textbf{ spi\+\_\+t} $\ast$}]{spi,  }\item[{const uint8\+\_\+t $\ast$}]{txbuf,  }\item[{uint8\+\_\+t $\ast$}]{rxbuf,  }\item[{size\+\_\+t}]{len }\end{DoxyParamCaption})}
+
