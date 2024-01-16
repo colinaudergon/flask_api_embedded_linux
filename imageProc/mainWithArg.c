@@ -171,9 +171,9 @@ int main(int argc, char *argv[])
     //   }
     // }
 
-    for (h = 0; h < height; h++)
+    for (w = 0; w < width; w++)
     {
-      for (w = 0; w < width; w++)
+      for (h = 0; h < height; h++)
       {
         struct RGB_COLOR rgbValue;
         if (fscanf(inputFile, "%hhu %hhu %hhu", &rgbValue.r, &rgbValue.g, &rgbValue.b) != 3)
