@@ -144,9 +144,9 @@ ip = improc.IpFinder()
 
 text= f"IP ADDRESS: {ip}\n"
 
-impath="imageProc/yasu.jpeg"
-displayArr=improc.imageProcessor(impath)
-# displayArr=improc.imageProcessor("yasu.jpeg")
+# impath="imageProc/yasu.jpeg"
+# displayArr=improc.imageProcessor(impath)
+displayArr=improc.imageProcessor("yasu.jpeg")
 
 # (display,displayArr) = improc.createImage(text,fontSize,20,20)
 # improc.transmitArrayToCframeBufferHandler(displayArr)
