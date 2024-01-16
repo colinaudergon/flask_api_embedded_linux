@@ -171,24 +171,24 @@ int main(int argc, char **argv)
         perror("i2cSetAddress");
         return -1;
     }
-// Specify the socket file path for real application
-    const char *socket_path = "/tmp/socket";
-    memset(&address, 0, sizeof(address));
-    address.sun_family = AF_UNIX;
-    strncpy(address.sun_path, socket_path, UNIX_PATH_MAX - 1);
+// // Specify the socket file path for real application
+//     const char *socket_path = "/tmp/socket";
+//     memset(&address, 0, sizeof(address));
+//     address.sun_family = AF_UNIX;
+//     strncpy(address.sun_path, socket_path, UNIX_PATH_MAX - 1);
 
-    int n;
-    // Call the function to establish the connection
-    if (!establishConnection())
-    {
-        // Handle the failure appropriately
-        cleanupRelease();
-        return 1;
-    }
-    else
-    {
-        runSocket = true;
-    }
+//     int n;
+//     // Call the function to establish the connection
+//     if (!establishConnection())
+//     {
+//         // Handle the failure appropriately
+//         cleanupRelease();
+//         return 1;
+//     }
+//     else
+//     {
+//         runSocket = true;
+//     }
     while (1)
     {
         inputState = readADCInputs();
