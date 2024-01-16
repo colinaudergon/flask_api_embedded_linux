@@ -65,6 +65,11 @@ async function updateUI() {
             imageElement.src = game.gameCover;
             imageElement.alt = `${game.gameName} Cover`;
 
+            const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
+
+            // Convert to a flat array
+            game.imageArray = Array.from(imageData);
+
             // Wrap image loading in a promise
             const imageLoadPromise = new Promise((resolve, reject) => {
                 imageElement.onload = () => {
@@ -104,13 +109,6 @@ async function updateUI() {
                     const canvasClickHandler = (gameName) => {
                         console.log(`Canvas clicked for game: ${gameName}`);
                         launchGame(gameName);
-                        const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
-
-                        // Convert to a flat array
-                        const flatArray = Array.from(imageData);
-
-                        // Assign to imageArray
-                        imageArray = flatArray;
                         emitImageData(gameName, imageArray);
                     };
 
@@ -165,6 +163,7 @@ class Game {
         this.gameUrl = url;
         this.gameDescription = description;
         this.gameCover = cover;
+        this.imageArray;
     }
 }
 
