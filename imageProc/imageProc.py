@@ -60,7 +60,7 @@ class ImageProcessor():
         # global letterHeight
         # font = ImageFont.load_default(fontSize)
         
-        image = Image.new("RGB", (width, height), "black")
+        image = Image.new("RGB", (1270, 800), "black")
         draw = ImageDraw.Draw(image)
         x_position = xInitPos
         y_position = yInitPos
