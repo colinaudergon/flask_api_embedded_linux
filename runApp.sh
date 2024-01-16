@@ -8,6 +8,7 @@ pathToInputReading="inputReading/src/gpioCtrl.c"
 pathToFrameBufferHandler="frameBufferHandler.c"
 
 # Compile C program
+cd inputReading
 mkdir build
 cd build
 cmake .. -DCMAKE_TOOLCHAIN_FILE=../arm-none-linux-aarch64-gcc.cmake
