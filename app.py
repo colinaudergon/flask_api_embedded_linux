@@ -147,9 +147,9 @@ def displayHome():
 @socketio.on("imageData")
 def handle_image_data(data):
     game_name = data["gameName"]
-    base64_image_data = data["imageData"]
+    image_data = data["imageData"]
     imgPath=f"{game_name}_image.png"
-    image_data = base64.b64decode(base64_image_data)
+    # image_data = base64.b64decode(base64_image_data)
     print(type(image_data))
     with open(imgPath, "wb") as file:
         file.write(image_data)
