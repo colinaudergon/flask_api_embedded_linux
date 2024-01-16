@@ -116,7 +116,7 @@ class ImageProcessor():
         # # Rotate the imageArray 90° clockwise
         rotated_imageArray2 = np.rot90(rotated_imageArray1, k=-1, axes=(0, 1))
         # rotated_imageArray2 = np.rot90(rotated_imageArray1, k=-1, axes=(0, 1))
-        height, width, _ = rotated_imageArray.shape
+        height, width, _ = rotated_imageArray1.shape
         print(f"Rotated image size - height:{height}, width: {width}, channels: {_}")
 
         # Flatten the RGB values into a 1D array
