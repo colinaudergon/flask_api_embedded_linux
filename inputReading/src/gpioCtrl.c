@@ -263,7 +263,7 @@ int main(void)
         {
 
             swVal = readBtn(s400);
-            controlGpioOut(ds403, swVal);
+            controlGpioOut(ds403, !swVal);
             if (swVal == 0)
             {
                 inputState |= startPressed;
@@ -276,7 +276,7 @@ int main(void)
 
             swVal = 1;
             swVal = readBtn(s401);
-            controlGpioOut(ds402, swVal);
+            controlGpioOut(ds402, !swVal);
             if (swVal == 0)
             {
                 inputState |= selectPressed;
@@ -288,7 +288,7 @@ int main(void)
             }
             swVal = 1;
             swVal = readBtn(s402);
-            controlGpioOut(ds401, swVal);
+            controlGpioOut(ds401, !swVal);
             if (swVal == 0)
             {
                 inputState |= aPressed;
@@ -300,7 +300,7 @@ int main(void)
             }
             swVal = 1;
             swVal = readBtn(s403);
-            controlGpioOut(ds400, swVal);
+            controlGpioOut(ds400, !swVal);
             if (swVal == 0)
             {
                 inputState |= bPressed;

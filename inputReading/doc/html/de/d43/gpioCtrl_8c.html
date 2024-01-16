@@ -953,7 +953,7 @@ Variables</h2></td></tr>
 <div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;        {</div>
 <div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160; </div>
 <div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;            swVal = <a class="code" href="../../de/d43/gpioCtrl_8c.html#a53a992b5641394991e05700195915939">readBtn</a>(s400);</div>
-<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;            <a class="code" href="../../de/d43/gpioCtrl_8c.html#a354d299da9fc7fd6d7e4a623db14e733">controlGpioOut</a>(ds403, swVal);</div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;            <a class="code" href="../../de/d43/gpioCtrl_8c.html#a354d299da9fc7fd6d7e4a623db14e733">controlGpioOut</a>(ds403, !swVal);</div>
 <div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;            <span class="keywordflow">if</span> (swVal == 0)</div>
 <div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;            {</div>
 <div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;                <a class="code" href="../../de/d43/gpioCtrl_8c.html#ad4d162deca5410aa3053fb53d45b9a0c">inputState</a> |= <a class="code" href="../../de/d43/gpioCtrl_8c.html#a60fbc4a50ab1f188bedb335c1985f752">startPressed</a>;</div>
@@ -966,7 +966,7 @@ Variables</h2></td></tr>
 <div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160; </div>
 <div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;            swVal = 1;</div>
 <div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;            swVal = <a class="code" href="../../de/d43/gpioCtrl_8c.html#a53a992b5641394991e05700195915939">readBtn</a>(s401);</div>
-<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;            <a class="code" href="../../de/d43/gpioCtrl_8c.html#a354d299da9fc7fd6d7e4a623db14e733">controlGpioOut</a>(ds402, swVal);</div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;            <a class="code" href="../../de/d43/gpioCtrl_8c.html#a354d299da9fc7fd6d7e4a623db14e733">controlGpioOut</a>(ds402, !swVal);</div>
 <div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;            <span class="keywordflow">if</span> (swVal == 0)</div>
 <div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;            {</div>
 <div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;                <a class="code" href="../../de/d43/gpioCtrl_8c.html#ad4d162deca5410aa3053fb53d45b9a0c">inputState</a> |= <a class="code" href="../../de/d43/gpioCtrl_8c.html#af1f465210789fcff6b93dfdb9733a908">selectPressed</a>;</div>
@@ -978,7 +978,7 @@ Variables</h2></td></tr>
 <div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;            }</div>
 <div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;            swVal = 1;</div>
 <div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;            swVal = <a class="code" href="../../de/d43/gpioCtrl_8c.html#a53a992b5641394991e05700195915939">readBtn</a>(s402);</div>
-<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;            <a class="code" href="../../de/d43/gpioCtrl_8c.html#a354d299da9fc7fd6d7e4a623db14e733">controlGpioOut</a>(ds401, swVal);</div>
+<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;            <a class="code" href="../../de/d43/gpioCtrl_8c.html#a354d299da9fc7fd6d7e4a623db14e733">controlGpioOut</a>(ds401, !swVal);</div>
 <div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;            <span class="keywordflow">if</span> (swVal == 0)</div>
 <div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;            {</div>
 <div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;                <a class="code" href="../../de/d43/gpioCtrl_8c.html#ad4d162deca5410aa3053fb53d45b9a0c">inputState</a> |= <a class="code" href="../../de/d43/gpioCtrl_8c.html#aadbe3f46cb9fda2f51397694a26e107e">aPressed</a>;</div>
@@ -990,7 +990,7 @@ Variables</h2></td></tr>
 <div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;            }</div>
 <div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;            swVal = 1;</div>
 <div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;            swVal = <a class="code" href="../../de/d43/gpioCtrl_8c.html#a53a992b5641394991e05700195915939">readBtn</a>(s403);</div>
-<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;            <a class="code" href="../../de/d43/gpioCtrl_8c.html#a354d299da9fc7fd6d7e4a623db14e733">controlGpioOut</a>(ds400, swVal);</div>
+<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;            <a class="code" href="../../de/d43/gpioCtrl_8c.html#a354d299da9fc7fd6d7e4a623db14e733">controlGpioOut</a>(ds400, !swVal);</div>
 <div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;            <span class="keywordflow">if</span> (swVal == 0)</div>
 <div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;            {</div>
 <div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;                <a class="code" href="../../de/d43/gpioCtrl_8c.html#ad4d162deca5410aa3053fb53d45b9a0c">inputState</a> |= <a class="code" href="../../de/d43/gpioCtrl_8c.html#a09b0b4db4917dceaf779bdfa0d4c5b42">bPressed</a>;</div>

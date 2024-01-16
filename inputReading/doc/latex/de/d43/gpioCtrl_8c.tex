@@ -696,7 +696,7 @@ Definition at line 170 of file gpio\+Ctrl.\+c.
 \DoxyCodeLine{263         \{}
 \DoxyCodeLine{264 }
 \DoxyCodeLine{265             swVal = readBtn(s400);}
-\DoxyCodeLine{266             controlGpioOut(ds403, swVal);}
+\DoxyCodeLine{266             controlGpioOut(ds403, !swVal);}
 \DoxyCodeLine{267             \textcolor{keywordflow}{if} (swVal == 0)}
 \DoxyCodeLine{268             \{}
 \DoxyCodeLine{269                 inputState |= startPressed;}
@@ -709,7 +709,7 @@ Definition at line 170 of file gpio\+Ctrl.\+c.
 \DoxyCodeLine{276 }
 \DoxyCodeLine{277             swVal = 1;}
 \DoxyCodeLine{278             swVal = readBtn(s401);}
-\DoxyCodeLine{279             controlGpioOut(ds402, swVal);}
+\DoxyCodeLine{279             controlGpioOut(ds402, !swVal);}
 \DoxyCodeLine{280             \textcolor{keywordflow}{if} (swVal == 0)}
 \DoxyCodeLine{281             \{}
 \DoxyCodeLine{282                 inputState |= selectPressed;}
@@ -721,7 +721,7 @@ Definition at line 170 of file gpio\+Ctrl.\+c.
 \DoxyCodeLine{288             \}}
 \DoxyCodeLine{289             swVal = 1;}
 \DoxyCodeLine{290             swVal = readBtn(s402);}
-\DoxyCodeLine{291             controlGpioOut(ds401, swVal);}
+\DoxyCodeLine{291             controlGpioOut(ds401, !swVal);}
 \DoxyCodeLine{292             \textcolor{keywordflow}{if} (swVal == 0)}
 \DoxyCodeLine{293             \{}
 \DoxyCodeLine{294                 inputState |= aPressed;}
@@ -733,7 +733,7 @@ Definition at line 170 of file gpio\+Ctrl.\+c.
 \DoxyCodeLine{300             \}}
 \DoxyCodeLine{301             swVal = 1;}
 \DoxyCodeLine{302             swVal = readBtn(s403);}
-\DoxyCodeLine{303             controlGpioOut(ds400, swVal);}
+\DoxyCodeLine{303             controlGpioOut(ds400, !swVal);}
 \DoxyCodeLine{304             \textcolor{keywordflow}{if} (swVal == 0)}
 \DoxyCodeLine{305             \{}
 \DoxyCodeLine{306                 inputState |= bPressed;}
