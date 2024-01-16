@@ -65,10 +65,9 @@ async function updateUI() {
             imageElement.src = game.gameCover;
             imageElement.alt = `${game.gameName} Cover`;
 
-            const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
-
+            //create image from source here
             // Convert to a flat array
-            game.imageArray = Array.from(imageData);
+            // game.imageArray = Array.from(imageData);
 
             // Wrap image loading in a promise
             const imageLoadPromise = new Promise((resolve, reject) => {
@@ -106,10 +105,10 @@ async function updateUI() {
                         ctx.drawImage(imageElement, 0, 0, canvas.width, canvas.height);
                     };
 
-                    const canvasClickHandler = (gameName) => {
+                    const canvasClickHandler = (gameName,gameCover) => {
                         console.log(`Canvas clicked for game: ${gameName}`);
                         launchGame(gameName);
-                        emitImageData(gameName, imageArray);
+                        emitImageData(gameName, gameCover);
                     };
 
                     // Handle mouseenter event
