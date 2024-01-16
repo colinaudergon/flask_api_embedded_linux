@@ -39,7 +39,8 @@ class ImageProcessor():
         # Convert to RGB
         rgbOnly = iar[:, :, :3]
         newImage = Image.fromarray(rgbOnly, 'RGB')
-        return newImage
+        imageArray = np.array(newImage)
+        return imageArray
     
 
     def createLetterImage(self,letter):
@@ -133,7 +134,9 @@ text= f"IP ADDRESS: {ip}\n"
 fb_width = 1280  # Set this to your framebuffer width
 fb_height = 800  # Set this to your framebuffer height
 
-(display,displayArr) = improc.createImage(text,fontSize,20,20)
+displayArr=improc.imageProcessor("yasu.jpeg")
+
+# (display,displayArr) = improc.createImage(text,fontSize,20,20)
 improc.transmitArrayToCframeBufferHandler(displayArr)
 
 
