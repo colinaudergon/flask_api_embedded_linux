@@ -188,7 +188,7 @@ int main(int argc, char *argv[])
     //   }
       // int32_t pos = h + w * fbVarScreenInfo.xres;
       // printf("PosX: %d; PosY: %d\nPosTot\n\n: %d", w, h, pos);
-    }
+    // }
     // // Set the rotation
     // fbVarScreenInfo.rotate = FB_ROTATE_CW; // Adjust this line based on your specific rotation value
 
@@ -199,12 +199,12 @@ int main(int argc, char *argv[])
     //   close(fb_fd);
     //   exit(errno);
     // }
-  }
-  else
-  {
-    printf("fbVarScreenInfo.bits_per_pixel not correctly configured");
-    return EXIT_FAILURE;
-  }
+  // }
+  // else
+  // {
+  //   printf("fbVarScreenInfo.bits_per_pixel not correctly configured");
+  //   return EXIT_FAILURE;
+  // }
 
   /* Cleanup */
   free(pfb_rgb);
