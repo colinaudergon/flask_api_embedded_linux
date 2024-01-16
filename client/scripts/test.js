@@ -104,6 +104,13 @@ async function updateUI() {
                     const canvasClickHandler = (gameName) => {
                         console.log(`Canvas clicked for game: ${gameName}`);
                         launchGame(gameName);
+                        const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
+
+                        // Convert to a flat array
+                        const flatArray = Array.from(imageData);
+
+                        // Assign to imageArray
+                        imageArray = flatArray;
                         emitImageData(gameName, imageArray);
                     };
 
@@ -324,7 +331,7 @@ async function handleCommandInput(data) {
                 await nostalgist.pause()//Add pause/resume logic
                 break;
             default:
-                if (data.command !== "cmd"){
+                if (data.command !== "cmd") {
                     await nostalgist.press(data.command);
                 }
                 break;
