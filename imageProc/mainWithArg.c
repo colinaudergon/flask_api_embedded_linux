@@ -149,17 +149,6 @@ int main(int argc, char *argv[])
     exit(errno);
   }
 
-  // Set the rotation
-  fbVarScreenInfo.rotate = FB_ROTATE_CW; // Adjust this line based on your specific rotation value
-
-  // Write back the updated information
-  if (ioctl(fb_fd, FBIOPUT_VSCREENINFO, &fbVarScreenInfo) == -1)
-  {
-    perror("Error setting rotation");
-    close(fb_fd);
-    exit(errno);
-  }
-
   // int32_t screensize = (fbVarScreenInfo.yres_virtual * fbVarScreenInfo.xres_virtual * fbVarScreenInfo.bits_per_pixel) / 8;
   int32_t screensize = (fbVarScreenInfo.xres * fbVarScreenInfo.yres * fbVarScreenInfo.bits_per_pixel) / 8;
   int32_t *pfb32 = (int32_t *)mmap(0, screensize, PROT_READ | PROT_WRITE, MAP_SHARED, fb_fd, 0);
@@ -195,6 +184,16 @@ int main(int argc, char *argv[])
         }
         pfb32[w + h * fbVarScreenInfo.xres] = CONVERT_RGB24(rgbValue.r, rgbValue.g, rgbValue.b);
       }
+    }
+    // Set the rotation
+    fbVarScreenInfo.rotate = FB_ROTATE_CW; // Adjust this line based on your specific rotation value
+
+    // Write back the updated information
+    if (ioctl(fb_fd, FBIOPUT_VSCREENINFO, &fbVarScreenInfo) == -1)
+    {
+      perror("Error setting rotation");
+      close(fb_fd);
+      exit(errno);
     }
   }
   else
