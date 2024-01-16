@@ -148,7 +148,7 @@ def displayHome():
 def handle_image_data(data):
     # game_name = data["gameName"]
     # image_data = data
-    base64_image_data = data.get()
+    base64_image_data = data.get("imageData")
     print(type(base64_image_data))
     print(base64_image_data)
     # imgPath=f"image.png"
