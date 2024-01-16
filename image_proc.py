@@ -75,9 +75,34 @@ class ImageProcessor():
 
         return letter_image, letterWidth,letterXSpacing
 
-    def createImage(self,word,xInitPos,yInitPos,image):
+    def createImageOverlay(self,word,xInitPos,yInitPos,image):
         
-        # image = Image.new("RGB", (self.fb_width, self.fb_height), "black")
+        draw = ImageDraw.Draw(image)
+        x_position = xInitPos
+        y_position = yInitPos
+        
+        for line in word.split('\n'):
+            
+            x_position = xInitPos  # Reset x_position for each line
+            y_position += self.letterHeight  # Move to the next line position
+
+            for letter in line:
+                #  Check if the next line would go beyond the specified height
+                if (y_position + self.letterHeight) >= self.fb_height - yInitPos:
+                    break
+                else:
+                    letter_image, letterWidth,letterXSpacing= self.createLetterImage(letter)
+                    image.paste(letter_image, (x_position, y_position))
+                    x_position += letterXSpacing  # Move to the next letter position
+                    if((x_position + letterWidth) >=  self.fb_width-xInitPos):
+                        y_position += self.letterHeight
+                        x_position=xInitPos
+        imageArray = np.array(image)
+        return image,imageArray
+    
+    def createImage(self,word,xInitPos,yInitPos):
+        
+        image = Image.new("RGB", (self.fb_width, self.fb_height), "black")
         draw = ImageDraw.Draw(image)
         x_position = xInitPos
         y_position = yInitPos
@@ -134,21 +159,21 @@ class ImageProcessor():
             # Clean up: Remove the temporary file
             os.remove(temp_file.name)
 
-fontSize = 22
-improc=ImageProcessor(fontSize,True)
+# fontSize = 22
+# improc=ImageProcessor(fontSize,True)
 
-# #Should IP finder be here?
-ip = improc.IpFinder()
+# # #Should IP finder be here?
+# ip = improc.IpFinder()
 
-text= f"IP ADDRESS:\n{ip}\n"
+# text= f"IP ADDRESS:\n{ip}\n"
 
-# impath="imageProc/images/yasu.jpeg"
-# impath="imageProc/yasu.jpeg"
-impath="yasu.jpeg"
-img,arr=improc.imageProcessor(impath)
+# # impath="imageProc/images/yasu.jpeg"
+# # impath="imageProc/yasu.jpeg"
+# impath="yasu.jpeg"
+# img,arr=improc.imageProcessor(impath)
 
-# img,arr=improc.imageProcessor()
+# # img,arr=improc.imageProcessor()
 
-(display,displayArr) = improc.createImage(text,20,20,img)
-# display.save("imageProc/truc.jpeg")
-improc.transmitArrayToCframeBufferHandler(displayArr)
+# (display,displayArr) = improc.createImage(text,20,20,img)
+# # display.save("imageProc/truc.jpeg")
+# improc.transmitArrayToCframeBufferHandler(displayArr)

@@ -1,4 +1,5 @@
-from unix_socket_server import unix_socket_server
+from unix_socket_server import unixSocketServer
+from image_proc import ImageProcessor
 from flask import Flask, send_from_directory
 from flask_socketio import SocketIO
 import time
@@ -6,8 +7,6 @@ import threading
 import subprocess
 
 #include dependency
-
-
 # import gpioController
 
 app = Flask(__name__)
@@ -16,6 +15,9 @@ CLIENT_PAGES_PATH = "client/"
 
 gameIsRunning = False
 socket_server_thread = None
+
+fontSize = 22
+improc=ImageProcessor(fontSize,True)
 
 @app.route("/")
 def index():
@@ -88,7 +90,6 @@ def send_data_to_client(value_received):
             command="right"
             data = {"command": command}
             socketio.emit("command_input", data)
-            
         # Print the results
         print("Joystick Up:", joystick_up)
         print("Joystick Down:", joystick_down)
@@ -122,8 +123,9 @@ def handle_game_launched(data):
     gameIsRunning = True 
     global socket_server_thread
     print("About to create thread")
-    socket_server_thread = threading.Thread(target=unix_socket_server(eventCallback=send_data_to_client))
+    socket_server_thread = threading.Thread(target=unixSocketServer(eventCallback=send_data_to_client))
     socket_server_thread.start()
+    # displayImage()
 
 @socketio.on("gameClose")
 def handle_game_closed(data):
@@ -137,6 +139,10 @@ if __name__ == "__main__":
     if externalAccesGranted:
         # app.run(debug=True,host="0.0.0.0")
         socketio.run(app, debug=True, host="0.0.0.0")
+        ip = improc.IpFinder()
+        text= f"IP ADDRESS:\n{ip}\n"
+        (display,displayArr) = improc.createImage(text,20,20)
+        improc.transmitArrayToCframeBufferHandler(displayArr)
         # Run the display something on the screen
         # subprocess.Popen(["./app_executable"])
     else:
