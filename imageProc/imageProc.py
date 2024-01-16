@@ -39,50 +39,48 @@ class ImageProcessor():
         return newImage
 
 
-    def createLetterImage(self,letter):
-        spacing=4
-        letterWidth=  math.floor(self.font.getlength(letter))
-        letterXSpacing= letterWidth + spacing
-        
-        
+    def createLetterImage(self, letter):
+        spacing = 4
+        letterWidth = math.floor(self.font.getlength(letter))
+        letterXSpacing = letterWidth + spacing
+
         # Create a blank image for the letter (40x80)
-        letter_image = Image.new("RGB", (letterWidth, self.letterHeight), "black")
+        letter_image = Image.new("RGB", (self.letterHeight, letterWidth), "black")
         draw = ImageDraw.Draw(letter_image)
-        
+
         # Draw the letter in white
-        draw.text((0, 0), letter, fill="white", spacing=spacing,font=self.font)
-        
+        draw.text((0, 0), letter, fill="white", spacing=spacing, font=self.font)
 
-        return letter_image, letterWidth,letterXSpacing
+        # Rotate the image 90° right
+        letter_image = letter_image.rotate(-90, expand=True)
 
-    def createImage(self,word,width,height,fontSize,xInitPos,yInitPos):
-        
-        # global letterHeight
-        # font = ImageFont.load_default(fontSize)
-        
+        return letter_image, letterWidth, letterXSpacing
+
+    def createImage(self, word, width, height, fontSize, xInitPos, yInitPos):
         image = Image.new("RGB", (width, height), "black")
         draw = ImageDraw.Draw(image)
         x_position = xInitPos
         y_position = yInitPos
-        
+
         for line in word.split('\n'):
-            
             x_position = xInitPos  # Reset x_position for each line
             y_position += self.letterHeight  # Move to the next line position
 
             for letter in line:
-                #  Check if the next line would go beyond the specified height
+                # Check if the next line would go beyond the specified height
                 if (y_position + self.letterHeight) >= height - yInitPos:
                     break
                 else:
-                    letter_image, letterWidth,letterXSpacing= self.createLetterImage(letter)
+                    letter_image, letterWidth, letterXSpacing = self.createLetterImage(letter)
                     image.paste(letter_image, (x_position, y_position))
                     x_position += letterXSpacing  # Move to the next letter position
-                    if((x_position + letterWidth) >=  width-xInitPos):
+                    if (x_position + letterWidth) >= width - xInitPos:
                         y_position += self.letterHeight
-                        x_position=xInitPos
+                        x_position = xInitPos
+
         imageArray = np.array(image)
-        return image,imageArray
+        return image, imageArray
+    
 
     def transmitArrayToCframeBufferHandler(self, imageArray):
         # Assume imageArray is a 3D NumPy array with shape (height, width, 3)
