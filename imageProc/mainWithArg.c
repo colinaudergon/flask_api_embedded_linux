@@ -147,7 +147,8 @@ int main(int argc, char *argv[])
     close(fb_fd);
     exit(errno);
   }
-  int32_t screensize = (fbVarScreenInfo.yres_virtual * fbVarScreenInfo.xres_virtual * fbVarScreenInfo.bits_per_pixel) / 8;
+  // int32_t screensize = (fbVarScreenInfo.yres_virtual * fbVarScreenInfo.xres_virtual * fbVarScreenInfo.bits_per_pixel) / 8;
+  int32_t screensize = (fbVarScreenInfo.xres * fbVarScreenInfo.yres * fbVarScreenInfo.bits_per_pixel) / 8;
   int32_t *pfb32 = (int32_t *)mmap(0, screensize, PROT_READ | PROT_WRITE, MAP_SHARED, fb_fd, 0);
   // printf("Screensize: %d\npfb32: %p\n",screensize, temp);
   if (pfb32 == (int32_t *)-1)
