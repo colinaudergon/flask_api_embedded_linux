@@ -171,9 +171,9 @@ int main(int argc, char *argv[])
     //   }
     // }
 
-    for (w = 0; w < fbVarScreenInfo.xres; w++)
+    for (h = 0; h < fbVarScreenInfo.yres; h++)
     {
-      for (h = 0; h < fbVarScreenInfo.yres; h++)
+      for (w = 0; w < fbVarScreenInfo.xres; w++)
       {
         struct RGB_COLOR rgbValue;
         if (fscanf(inputFile, "%hhu %hhu %hhu", &rgbValue.r, &rgbValue.g, &rgbValue.b) != 3)
