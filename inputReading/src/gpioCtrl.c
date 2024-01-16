@@ -82,21 +82,22 @@
 /* Global Variables						             						 */
 /*****************************************************************************/
 
-uint8_t joystickUpReading = 0xFA;    // 250
-uint8_t joystickDownReading = 0xF4;  // 244
-uint8_t joystickRightReading = 0xFA; // 252
-uint8_t joystickLeftReading = 0xF4;  // 244
+// uint8_t joystickUpReading = 0xFA;    // 250
+// uint8_t joystickDownReading = 0xF4;  // 244
+// uint8_t joystickRightReading = 0xFA; // 252
+// uint8_t joystickLeftReading = 0xF4;  // 244
 
-uint8_t joystickUp = 0x08;
-uint8_t joystickDown = 0x04;
-uint8_t joystickRight = 0x02;
-uint8_t joystickLeft = 0x01;
+// uint8_t joystickUp = 0x08;
+// uint8_t joystickDown = 0x04;
+// uint8_t joystickRight = 0x02;
+// uint8_t joystickLeft = 0x01;
 
-uint8_t startPressed = 0x80;
-uint8_t selectPressed = 0x40;
-uint8_t aPressed = 0x20;
-uint8_t bPressed = 0x10;
-uint8_t errorCode = 0xFF;
+// uint8_t startPressed = 0x80;
+// uint8_t selectPressed = 0x40;
+// uint8_t aPressed = 0x20;
+// uint8_t bPressed = 0x10;
+// uint8_t errorCode = 0xFF;
+
 /******************************************************************************/
 /* Static variables																  */
 /******************************************************************************/
@@ -144,22 +145,17 @@ char adcBuffer[BUFFER_SIZE];
 int init7SegDisplay(spi_t *spi);
 void release7SegDisplay(spi_t *spi, int sevenSegEn);
 
-int initADC(void);
-char *readADCChar(int verbose);
-int readADCInt(int verbose);
-
 struct gpio_desc initGpioInput(const char *gpio_chip, unsigned int gpio_line);
 struct gpio_desc initGpioOutput(const char *gpio_chip, unsigned int gpio_line);
 int readBtn(struct gpio_desc gpio);
 int controlGpioOut(struct gpio_desc gpio, int value);
-
+void sleep_ms(int milliseconds);
 int setUpAdcValue(uint8_t setup);
 int readAdcValue();
 
 void signal_callback_handler(int signum);
 // void exitProgramm();
 bool establishConnection(void);
-
 
 bool runSocket = true;
 
@@ -419,6 +415,107 @@ int readAdcValue()
     return value;
 }
 
+uint8_t readInputs(struct gpio_desc s400, struct gpio_desc s401, struct gpio_desc s402, struct gpio_desc s403,
+                   struct gpio_desc ds400, struct gpio_desc ds401, struct gpio_desc ds402, struct gpio_desc ds403)
+{
+    uint8_t adcValue;
+    int8_t inputState = 0x00;
+
+    uint8_t joystickUpReading = 0xFC;    // 252
+    uint8_t joystickDownReading = 0xF1;  // 241
+    uint8_t joystickRightReading = 0xFC; // 252
+    uint8_t joystickLeftReading = 0xF2;  // 242
+
+    uint8_t joystickUp = 0x08;
+    uint8_t joystickDown = 0x04;
+    uint8_t joystickRight = 0x02;
+    uint8_t joystickLeft = 0x01;
+
+    uint8_t startPressed = 0x80;
+    uint8_t selectPressed = 0x40;
+    uint8_t aPressed = 0x20;
+    uint8_t bPressed = 0x10;
+    uint8_t errorCode = 0xFF;
+
+    if (setUpAdcValue(JOYSTICK_A_UP_DOWN) < 0)
+    {
+        printf("Failed to configure ADC");
+        perror("Setup ADC");
+        return errorCode;
+        // isReading = false;
+    }
+    adcValue = readAdcValue();
+    printf("U/D Value: %d\n", adcValue);
+
+    if (adcValue == joystickUpReading)
+    {
+        inputState |= joystickUp;
+    }
+    if (adcValue == joystickLeftReading)
+    {
+        inputState |= joystickDown;
+    }
+
+    sleep_ms(20);
+    if (setUpAdcValue(JOYSTICK_A_LEFT_RIGHT) < 0)
+    {
+        printf("Failed to configure ADC");
+        perror("Setup ADC");
+        // isReading = false;
+        return errorCode;
+    }
+    printf("L/R Value: %d\n", adcValue);
+
+    adcValue = readAdcValue();
+    if (adcValue == joystickRightReading)
+    {
+        inputState |= joystickRight;
+    }
+    if (adcValue == joystickLeftReading)
+    {
+        inputState |= joystickLeft;
+    }
+
+    printf("U/D Value: %d\n", adcValue);
+    sleep_ms(10);
+    int swVal = 1;
+    swVal = readBtn(s400);
+    controlGpioOut(ds403, swVal);
+    if (swVal == 0)
+    {
+        inputState |= startPressed;
+        printf("Switch S400 active\n");
+    }
+    swVal = 1;
+    swVal = readBtn(s401);
+    controlGpioOut(ds402, swVal);
+    if (swVal == 0)
+    {
+        inputState |= selectPressed;
+        printf("Switch S401 active\n");
+    }
+    swVal = 1;
+    swVal = readBtn(s402);
+    controlGpioOut(ds401, swVal);
+    if (swVal == 0)
+    {
+        inputState |= aPressed;
+        printf("Switch S402 active\n");
+    }
+    swVal = 1;
+    swVal = readBtn(s403);
+    controlGpioOut(ds400, swVal);
+    if (swVal == 0)
+    {
+        inputState |= bPressed;
+        printf("Switch S403 active\n");
+    }
+    swVal = 1;
+    sleep_ms(100);
+    // printf("Inputs state: 0x%02X\n", inputStates);
+    return inputState;
+}
+
 /*****************************************************************************/
 /* Socket establishment Function											 */
 /*****************************************************************************/
@@ -453,4 +550,11 @@ bool establishConnection(void)
     fprintf(stderr, "Failed to establish a connection\n");
     close(socket_fd); // Close the socket if connection fails
     return false;     // Exit the function with failure
+}
+/*****************************************************************************/
+/* Sleep in ms Function											 */
+/*****************************************************************************/
+void sleep_ms(int milliseconds)
+{
+    usleep(milliseconds * 1000);
 }
