@@ -88,10 +88,10 @@ class ImageProcessor():
     def transmitArrayToCframeBufferHandler(self, imageArray):
         # Assume imageArray is a 3D NumPy array with shape (height, width, 3)
         height, width, _ = imageArray.shape
-
+        print(f"height:{height}, width: {width}, unknow: {_}")
         # Flatten the RGB values into a 1D array
         flat_array = imageArray.reshape(-1)
-
+        print(f"Flat array: {flat_array}")
         # Create a temporary file to store the RGB values
         with tempfile.NamedTemporaryFile(mode='w+', delete=False) as temp_file:
             # Write height, width, and RGB values to the file
@@ -117,10 +117,10 @@ text= f"IP ADDRESS: {ip}\n"
 
 # # ~980 character max
 fb_width = 800  # Set this to your framebuffer width
-fb_height = 1279  # Set this to your framebuffer height
-(display,displayArr) = improc.createImage(text,fb_height,fb_width,fontSize,200,200)
+fb_height = 800  # Set this to your framebuffer height
+(display,displayArr) = improc.createImage(text,fb_width,fb_height,fontSize,200,200)
 improc.transmitArrayToCframeBufferHandler(displayArr)
 # display.save("ipaddress.png")
-print(displayArr.ndim)
+# print(displayArr.ndim)
 
 
