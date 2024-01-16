@@ -110,13 +110,13 @@ int \textbf{ main} (void)
 \item 
 int8\+\_\+t \textbf{ input\+State} = 0x00
 \item 
-uint8\+\_\+t \textbf{ joystick\+Up\+Reading} = 0x\+FC
+uint8\+\_\+t \textbf{ joystick\+Up\+Reading} = 0x\+FA
 \item 
-uint8\+\_\+t \textbf{ joystick\+Down\+Reading} = 0x\+F1
+uint8\+\_\+t \textbf{ joystick\+Down\+Reading} = 0x\+F4
 \item 
-uint8\+\_\+t \textbf{ joystick\+Right\+Reading} = 0x\+FC
+uint8\+\_\+t \textbf{ joystick\+Right\+Reading} = 0x\+FA
 \item 
-uint8\+\_\+t \textbf{ joystick\+Left\+Reading} = 0x\+F2
+uint8\+\_\+t \textbf{ joystick\+Left\+Reading} = 0x\+F4
 \item 
 uint8\+\_\+t \textbf{ joystick\+Up} = 0x08
 \item 
@@ -782,11 +782,11 @@ Definition at line 483 of file gpio\+Ctrl.\+c.
 \DoxyCodeLine{494     adcValue = readAdcValue();}
 \DoxyCodeLine{495     printf(\textcolor{stringliteral}{"{}U/D Value: \%d\(\backslash\)n"{}}, adcValue);}
 \DoxyCodeLine{496 }
-\DoxyCodeLine{497     \textcolor{keywordflow}{if} (adcValue == joystickUpReading)}
+\DoxyCodeLine{497     \textcolor{keywordflow}{if} (adcValue >= joystickUpReading)}
 \DoxyCodeLine{498     \{}
 \DoxyCodeLine{499         adcState |= joystickUp;}
 \DoxyCodeLine{500     \}}
-\DoxyCodeLine{501     \textcolor{keywordflow}{if} (adcValue == joystickLeftReading)}
+\DoxyCodeLine{501     \textcolor{keywordflow}{if} (adcValue <= joystickLeftReading)}
 \DoxyCodeLine{502     \{}
 \DoxyCodeLine{503         adcState |= joystickDown;}
 \DoxyCodeLine{504     \}}
@@ -800,11 +800,11 @@ Definition at line 483 of file gpio\+Ctrl.\+c.
 \DoxyCodeLine{512     \}}
 \DoxyCodeLine{513 }
 \DoxyCodeLine{514     adcValue = readAdcValue();}
-\DoxyCodeLine{515     \textcolor{keywordflow}{if} (adcValue == joystickRightReading)}
+\DoxyCodeLine{515     \textcolor{keywordflow}{if} (adcValue >= joystickRightReading)}
 \DoxyCodeLine{516     \{}
 \DoxyCodeLine{517         adcState |= joystickRight;}
 \DoxyCodeLine{518     \}}
-\DoxyCodeLine{519     \textcolor{keywordflow}{if} (adcValue == joystickLeftReading)}
+\DoxyCodeLine{519     \textcolor{keywordflow}{if} (adcValue <= joystickLeftReading)}
 \DoxyCodeLine{520     \{}
 \DoxyCodeLine{521         adcState |= joystickLeft;}
 \DoxyCodeLine{522     \}}
@@ -1107,7 +1107,7 @@ Definition at line 93 of file gpio\+Ctrl.\+c.
 \index{gpioCtrl.c@{gpioCtrl.c}!joystickDownReading@{joystickDownReading}}
 \index{joystickDownReading@{joystickDownReading}!gpioCtrl.c@{gpioCtrl.c}}
 \doxysubsubsection{joystickDownReading}
-{\footnotesize\ttfamily uint8\+\_\+t joystick\+Down\+Reading = 0x\+F1}
+{\footnotesize\ttfamily uint8\+\_\+t joystick\+Down\+Reading = 0x\+F4}
 
 
 
@@ -1127,7 +1127,7 @@ Definition at line 95 of file gpio\+Ctrl.\+c.
 \index{gpioCtrl.c@{gpioCtrl.c}!joystickLeftReading@{joystickLeftReading}}
 \index{joystickLeftReading@{joystickLeftReading}!gpioCtrl.c@{gpioCtrl.c}}
 \doxysubsubsection{joystickLeftReading}
-{\footnotesize\ttfamily uint8\+\_\+t joystick\+Left\+Reading = 0x\+F2}
+{\footnotesize\ttfamily uint8\+\_\+t joystick\+Left\+Reading = 0x\+F4}
 
 
 
@@ -1147,7 +1147,7 @@ Definition at line 94 of file gpio\+Ctrl.\+c.
 \index{gpioCtrl.c@{gpioCtrl.c}!joystickRightReading@{joystickRightReading}}
 \index{joystickRightReading@{joystickRightReading}!gpioCtrl.c@{gpioCtrl.c}}
 \doxysubsubsection{joystickRightReading}
-{\footnotesize\ttfamily uint8\+\_\+t joystick\+Right\+Reading = 0x\+FC}
+{\footnotesize\ttfamily uint8\+\_\+t joystick\+Right\+Reading = 0x\+FA}
 
 
 
@@ -1167,7 +1167,7 @@ Definition at line 92 of file gpio\+Ctrl.\+c.
 \index{gpioCtrl.c@{gpioCtrl.c}!joystickUpReading@{joystickUpReading}}
 \index{joystickUpReading@{joystickUpReading}!gpioCtrl.c@{gpioCtrl.c}}
 \doxysubsubsection{joystickUpReading}
-{\footnotesize\ttfamily uint8\+\_\+t joystick\+Up\+Reading = 0x\+FC}
+{\footnotesize\ttfamily uint8\+\_\+t joystick\+Up\+Reading = 0x\+FA}
 
 
 

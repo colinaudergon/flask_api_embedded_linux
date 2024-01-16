@@ -165,13 +165,13 @@ Functions</h2></td></tr>
 Variables</h2></td></tr>
 <tr class="memitem:ad4d162deca5410aa3053fb53d45b9a0c"><td class="memItemLeft" align="right" valign="top">int8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d43/gpioCtrl_8c.html#ad4d162deca5410aa3053fb53d45b9a0c">inputState</a> = 0x00</td></tr>
 <tr class="separator:ad4d162deca5410aa3053fb53d45b9a0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6cc9dc8f25c91fc5ff953d988760453a"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d43/gpioCtrl_8c.html#a6cc9dc8f25c91fc5ff953d988760453a">joystickUpReading</a> = 0xFC</td></tr>
+<tr class="memitem:a6cc9dc8f25c91fc5ff953d988760453a"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d43/gpioCtrl_8c.html#a6cc9dc8f25c91fc5ff953d988760453a">joystickUpReading</a> = 0xFA</td></tr>
 <tr class="separator:a6cc9dc8f25c91fc5ff953d988760453a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3afbb588f5e18d86d49946b1e2f97ff9"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d43/gpioCtrl_8c.html#a3afbb588f5e18d86d49946b1e2f97ff9">joystickDownReading</a> = 0xF1</td></tr>
+<tr class="memitem:a3afbb588f5e18d86d49946b1e2f97ff9"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d43/gpioCtrl_8c.html#a3afbb588f5e18d86d49946b1e2f97ff9">joystickDownReading</a> = 0xF4</td></tr>
 <tr class="separator:a3afbb588f5e18d86d49946b1e2f97ff9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0844739acf749da67371af570eafb976"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d43/gpioCtrl_8c.html#a0844739acf749da67371af570eafb976">joystickRightReading</a> = 0xFC</td></tr>
+<tr class="memitem:a0844739acf749da67371af570eafb976"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d43/gpioCtrl_8c.html#a0844739acf749da67371af570eafb976">joystickRightReading</a> = 0xFA</td></tr>
 <tr class="separator:a0844739acf749da67371af570eafb976"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a15dfd856c0e55bc6b6caee2bcfe435fb"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d43/gpioCtrl_8c.html#a15dfd856c0e55bc6b6caee2bcfe435fb">joystickLeftReading</a> = 0xF2</td></tr>
+<tr class="memitem:a15dfd856c0e55bc6b6caee2bcfe435fb"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d43/gpioCtrl_8c.html#a15dfd856c0e55bc6b6caee2bcfe435fb">joystickLeftReading</a> = 0xF4</td></tr>
 <tr class="separator:a15dfd856c0e55bc6b6caee2bcfe435fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae5731b9a6287630487dc7a2508bb85d6"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d43/gpioCtrl_8c.html#ae5731b9a6287630487dc7a2508bb85d6">joystickUp</a> = 0x08</td></tr>
 <tr class="separator:ae5731b9a6287630487dc7a2508bb85d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1073,11 +1073,11 @@ Variables</h2></td></tr>
 <div class="line"><a name="l00494"></a><span class="lineno">  494</span>&#160;    adcValue = <a class="code" href="../../de/d43/gpioCtrl_8c.html#a5f42c4eb1231dcc9baaac8ff1bcc1a4e">readAdcValue</a>();</div>
 <div class="line"><a name="l00495"></a><span class="lineno">  495</span>&#160;    printf(<span class="stringliteral">&quot;U/D Value: %d\n&quot;</span>, adcValue);</div>
 <div class="line"><a name="l00496"></a><span class="lineno">  496</span>&#160; </div>
-<div class="line"><a name="l00497"></a><span class="lineno">  497</span>&#160;    <span class="keywordflow">if</span> (adcValue == <a class="code" href="../../de/d43/gpioCtrl_8c.html#a6cc9dc8f25c91fc5ff953d988760453a">joystickUpReading</a>)</div>
+<div class="line"><a name="l00497"></a><span class="lineno">  497</span>&#160;    <span class="keywordflow">if</span> (adcValue &gt;= <a class="code" href="../../de/d43/gpioCtrl_8c.html#a6cc9dc8f25c91fc5ff953d988760453a">joystickUpReading</a>)</div>
 <div class="line"><a name="l00498"></a><span class="lineno">  498</span>&#160;    {</div>
 <div class="line"><a name="l00499"></a><span class="lineno">  499</span>&#160;        adcState |= <a class="code" href="../../de/d43/gpioCtrl_8c.html#ae5731b9a6287630487dc7a2508bb85d6">joystickUp</a>;</div>
 <div class="line"><a name="l00500"></a><span class="lineno">  500</span>&#160;    }</div>
-<div class="line"><a name="l00501"></a><span class="lineno">  501</span>&#160;    <span class="keywordflow">if</span> (adcValue == <a class="code" href="../../de/d43/gpioCtrl_8c.html#a15dfd856c0e55bc6b6caee2bcfe435fb">joystickLeftReading</a>)</div>
+<div class="line"><a name="l00501"></a><span class="lineno">  501</span>&#160;    <span class="keywordflow">if</span> (adcValue &lt;= <a class="code" href="../../de/d43/gpioCtrl_8c.html#a15dfd856c0e55bc6b6caee2bcfe435fb">joystickLeftReading</a>)</div>
 <div class="line"><a name="l00502"></a><span class="lineno">  502</span>&#160;    {</div>
 <div class="line"><a name="l00503"></a><span class="lineno">  503</span>&#160;        adcState |= <a class="code" href="../../de/d43/gpioCtrl_8c.html#a1173377d274544da594ce36072ab77eb">joystickDown</a>;</div>
 <div class="line"><a name="l00504"></a><span class="lineno">  504</span>&#160;    }</div>
@@ -1091,11 +1091,11 @@ Variables</h2></td></tr>
 <div class="line"><a name="l00512"></a><span class="lineno">  512</span>&#160;    }</div>
 <div class="line"><a name="l00513"></a><span class="lineno">  513</span>&#160; </div>
 <div class="line"><a name="l00514"></a><span class="lineno">  514</span>&#160;    adcValue = <a class="code" href="../../de/d43/gpioCtrl_8c.html#a5f42c4eb1231dcc9baaac8ff1bcc1a4e">readAdcValue</a>();</div>
-<div class="line"><a name="l00515"></a><span class="lineno">  515</span>&#160;    <span class="keywordflow">if</span> (adcValue == <a class="code" href="../../de/d43/gpioCtrl_8c.html#a0844739acf749da67371af570eafb976">joystickRightReading</a>)</div>
+<div class="line"><a name="l00515"></a><span class="lineno">  515</span>&#160;    <span class="keywordflow">if</span> (adcValue &gt;= <a class="code" href="../../de/d43/gpioCtrl_8c.html#a0844739acf749da67371af570eafb976">joystickRightReading</a>)</div>
 <div class="line"><a name="l00516"></a><span class="lineno">  516</span>&#160;    {</div>
 <div class="line"><a name="l00517"></a><span class="lineno">  517</span>&#160;        adcState |= <a class="code" href="../../de/d43/gpioCtrl_8c.html#a761caf543bb231127b27a010da572042">joystickRight</a>;</div>
 <div class="line"><a name="l00518"></a><span class="lineno">  518</span>&#160;    }</div>
-<div class="line"><a name="l00519"></a><span class="lineno">  519</span>&#160;    <span class="keywordflow">if</span> (adcValue == <a class="code" href="../../de/d43/gpioCtrl_8c.html#a15dfd856c0e55bc6b6caee2bcfe435fb">joystickLeftReading</a>)</div>
+<div class="line"><a name="l00519"></a><span class="lineno">  519</span>&#160;    <span class="keywordflow">if</span> (adcValue &lt;= <a class="code" href="../../de/d43/gpioCtrl_8c.html#a15dfd856c0e55bc6b6caee2bcfe435fb">joystickLeftReading</a>)</div>
 <div class="line"><a name="l00520"></a><span class="lineno">  520</span>&#160;    {</div>
 <div class="line"><a name="l00521"></a><span class="lineno">  521</span>&#160;        adcState |= <a class="code" href="../../de/d43/gpioCtrl_8c.html#a214ecae7321fce1823d14d141aa61013">joystickLeft</a>;</div>
 <div class="line"><a name="l00522"></a><span class="lineno">  522</span>&#160;    }</div>
@@ -1659,7 +1659,7 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">uint8_t joystickDownReading = 0xF1</td>
+          <td class="memname">uint8_t joystickDownReading = 0xF4</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -1691,7 +1691,7 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">uint8_t joystickLeftReading = 0xF2</td>
+          <td class="memname">uint8_t joystickLeftReading = 0xF4</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -1723,7 +1723,7 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">uint8_t joystickRightReading = 0xFC</td>
+          <td class="memname">uint8_t joystickRightReading = 0xFA</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -1755,7 +1755,7 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">uint8_t joystickUpReading = 0xFC</td>
+          <td class="memname">uint8_t joystickUpReading = 0xFA</td>
         </tr>
       </table>
 </div><div class="memdoc">

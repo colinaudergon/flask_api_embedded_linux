@@ -84,10 +84,10 @@
 
 int8_t inputState = 0x00;
 
-uint8_t joystickUpReading = 0xFC;    // 252
-uint8_t joystickDownReading = 0xF1;  // 241
-uint8_t joystickRightReading = 0xFC; // 252
-uint8_t joystickLeftReading = 0xF2;  // 242
+uint8_t joystickUpReading = 0xFA;    // 250
+uint8_t joystickDownReading = 0xF4;  // 244
+uint8_t joystickRightReading = 0xFA; // 250
+uint8_t joystickLeftReading = 0xF4;  // 244
 
 uint8_t joystickUp = 0x08;
 uint8_t joystickDown = 0x04;
@@ -494,11 +494,11 @@ uint8_t readADCs()
     adcValue = readAdcValue();
     printf("U/D Value: %d\n", adcValue);
 
-    if (adcValue == joystickUpReading)
+    if (adcValue >= joystickUpReading)
     {
         adcState |= joystickUp;
     }
-    if (adcValue == joystickLeftReading)
+    if (adcValue <= joystickLeftReading)
     {
         adcState |= joystickDown;
     }
@@ -512,11 +512,11 @@ uint8_t readADCs()
     }
 
     adcValue = readAdcValue();
-    if (adcValue == joystickRightReading)
+    if (adcValue >= joystickRightReading)
     {
         adcState |= joystickRight;
     }
-    if (adcValue == joystickLeftReading)
+    if (adcValue <= joystickLeftReading)
     {
         adcState |= joystickLeft;
     }
